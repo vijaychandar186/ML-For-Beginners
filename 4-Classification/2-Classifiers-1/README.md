@@ -223,7 +223,7 @@ Since you are using the multiclass case, you need to choose what _scheme_ to use
     | japanese     | 0.70      | 0.75   | 0.72     | 220     |
     | korean       | 0.86      | 0.76   | 0.81     | 242     |
     | thai         | 0.79      | 0.85   | 0.82     | 254     |
-    | accuracy     | 0.80      | 1199   |          |         |
+    | accuracy     |           |        | 0.80     | 1199    |
     | macro avg    | 0.80      | 0.80   | 0.80     | 1199    |
     | weighted avg | 0.80      | 0.80   | 0.80     | 1199    |
 

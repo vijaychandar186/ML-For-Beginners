@@ -10,14 +10,14 @@
 
 ### 🌐 Podpora více jazyků
 
-#### Podporováno prostřednictvím GitHub Action (automatizováno a vždy aktuální)
+#### Podporováno prostřednictvím GitHub Action (automatické a vždy aktuální)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](./README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](./README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Khmer](../km/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 
-> **Raději klonovat lokálně?**
+> **Raději chcete klonovat lokálně?**
 >
-> Tento repozitář obsahuje překlady do více než 50 jazyků, což výrazně zvětšuje velikost ke stažení. Chcete-li klonovat bez překladů, použijte sparse checkout:
+> Tento repozitář zahrnuje více než 50 jazykových překladů, což výrazně zvětšuje velikost stahování. Pro klonování bez překladů použijte sparse checkout:
 >
 > **Bash / macOS / Linux:**
 > ```bash
@@ -33,62 +33,63 @@
 > git sparse-checkout set --no-cone "/*" "!translations" "!translated_images"
 > ```
 >
-> Tím získáte vše potřebné k dokončení kurzu s mnohem rychlejším stažením.
+> To vám poskytne vše potřebné k dokončení kurzu a mnohem rychlejší stažení.
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
-#### Přidejte se k naší komunitě
+#### Připojte se k naší komunitě
 
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-Máme probíhající Discord sérii Learn with AI, dozvíte se více a můžete se připojit na [Learn with AI Series](https://aka.ms/learnwithai/discord) od 18. do 30. září 2025. Získáte tipy a triky, jak používat GitHub Copilot pro Data Science.
+Máme probíhající sérii Learn with AI na Discordu, dozvíte se více a připojte se k nám na [Learn with AI Series](https://aka.ms/learnwithai/discord) od 18. do 30. září 2025. Získáte tipy a triky pro používání GitHub Copilot pro Data Science.
 
 ![Learn with AI series](../../translated_images/cs/3.9b58fd8d6c373c20.webp)
 
-# Strojové učení pro začátečníky - Osnova
+# Strojové učení pro začátečníky - učební plán
 
-> 🌍 Cestujte po světě, zatímco zkoumáme strojové učení prostřednictvím světových kultur 🌍
+> 🌍 Cestujte po celém světě, zatímco zkoumáme strojové učení prostřednictvím kultur světa 🌍
 
-Cloud Advocates ve společnosti Microsoft s potěšením nabízejí 12týdenní osnovu se 26 lekcemi zaměřenými na **strojové učení**. V této osnově se naučíte něco, co se někdy nazývá **klasické strojové učení**, používající především knihovnu Scikit-learn a vyhýbající se hlubokému učení, které je pokryto v našem [kurzu AI pro začátečníky](https://aka.ms/ai4beginners). Tyto lekce můžete také skvěle kombinovat s naší osnovou ['Data Science pro začátečníky'](https://aka.ms/ds4beginners)!
+Cloud Advocates ve společnosti Microsoft vám s potěšením představují 12týdenní učební plán se 26 lekcemi, které se věnují **strojovému učení**. V tomto učebním plánu se naučíte, co se někdy nazývá **klasické strojové učení**, přičemž používáme především knihovnu Scikit-learn a vyhýbáme se hlubokému učení, které je pokryto v našem [učebním plánu AI pro začátečníky](https://aka.ms/ai4beginners). Tyto lekce zkombinujte také s naším [učebním plánem Data Science pro začátečníky](https://aka.ms/ds4beginners).
 
-Cestujte s námi po světě, zatímco aplikujeme tyto klasické techniky na data z různých oblastí světa. Každá lekce zahrnuje před a po lekci testy, psané instrukce k dokončení lekce, řešení, úkol a další. Naše projektově orientovaná pedagogika umožňuje učit se při vytváření projektu, což je osvědčený způsob, jak nové dovednosti opravdu "zůstanou".
+Cestujte s námi po celém světě, když aplikujeme tyto klasické techniky na data z mnoha oblastí světa. Každá lekce obsahuje před a po lekci kvízy, písemné pokyny k dokončení lekce, řešení, úkol a další. Naše projektově orientovaná pedagogika vám umožňuje učit se při budování, což je osvědčený způsob, jak nové znalosti "ulpí".
 
-**✍️ Srdečné poděkování autorům** Jen Looper, Stephen Howell, Francesca Lazzeri, Tomomi Imura, Cassie Breviu, Dmitry Soshnikov, Chris Noring, Anirban Mukherjee, Ornella Altunyan, Ruth Yakubu a Amy Boyd
+**✍️ Srdečné díky našim autorům** Jen Looper, Stephen Howell, Francesca Lazzeri, Tomomi Imura, Cassie Breviu, Dmitry Soshnikov, Chris Noring, Anirban Mukherjee, Ornella Altunyan, Ruth Yakubu a Amy Boyd
 
-**🎨 Poděkování také našim ilustrátorům** Tomomi Imura, Dasani Madipalli a Jen Looper
+**🎨 Také díky našim ilustrátorům** Tomomi Imura, Dasani Madipalli a Jen Looper
 
-**🙏 Zvláštní poděkování 🙏 našim autorům, recenzentům a přispěvatelům obsahu ze studentského ambasádorského programu Microsoftu**, zejména Rishit Dagli, Muhammad Sakib Khan Inan, Rohan Raj, Alexandru Petrescu, Abhishek Jaiswal, Nawrin Tabassum, Ioan Samuila a Snigdha Agarwal
+**🙏 Zvláštní díky 🙏 našim autorům, recenzentům a přispěvatelům obsahu ze studentské ambasady Microsoftu**, zejména Rishit Dagli, Muhammad Sakib Khan Inan, Rohan Raj, Alexandru Petrescu, Abhishek Jaiswal, Nawrin Tabassum, Ioan Samuila a Snigdha Agarwal
 
-**🤩 Extra poděkování Microsoft Student Ambassadors Eric Wanjau, Jasleen Sondhi a Vidushi Gupta za naše lekce v R!**
+**🤩 Extra poděkování patří také ambasadorům Microsoft Student Ericu Wanjauovi, Jasleen Sondhi a Vidushi Guptě za naše lekce v jazyce R!**
 
 # Začínáme
 
-Postupujte podle těchto kroků:
+Postupujte takto:
 1. **Vytvořte Fork repozitáře**: Klikněte na tlačítko „Fork“ v pravém horním rohu této stránky.
-2. **Klonujte repozitář**: `git clone https://github.com/microsoft/ML-For-Beginners.git`
+2. **Klonujte repozitář**:   `git clone https://github.com/microsoft/ML-For-Beginners.git`
 
-> [najdete zde všechny další zdroje pro tento kurz v naší kolekci Microsoft Learn](https://learn.microsoft.com/en-us/collections/qrqzamz1nn2wx3?WT.mc_id=academic-77952-bethanycheum)
+> [najděte všechny doplňkové zdroje pro tento kurz v naší kolekci Microsoft Learn](https://learn.microsoft.com/en-us/collections/qrqzamz1nn2wx3?WT.mc_id=academic-77952-bethanycheum)
 
-> 🔧 **Potřebujete pomoc?** Podívejte se na náš [Průvodce řešením problémů](TROUBLESHOOTING.md) pro běžné problémy při instalaci, nastavení a spuštění lekcí.
+> 🔧 **Potřebujete pomoc?** Podívejte se do našeho [Průvodce řešením problémů](TROUBLESHOOTING.md) pro řešení běžných problémů s instalací, nastavením a spouštěním lekcí.
 
-**[Studenti](https://aka.ms/student-page)**, pro použití této osnovy, vytvořte fork celého repozitáře do svého GitHub účtu a vypracujte cvičení sami nebo ve skupině:
 
-- Začněte testem před lekcí.
-- Přečtěte si lekci a dokončete aktivity, při každé znalostní kontrole se zastavte a zamyslete.
-- Snažte se vytvářet projekty pochopením lekcí místo pouhého spuštění řešení; kód je však dostupný ve složce `/solution` v každé projektově orientované lekci.
-- Udělejte test po lekci.
+**[Studenti](https://aka.ms/student-page)**, pro použití tohoto učebního plánu si vytvořte fork celého repozitáře na svůj vlastní GitHub účet a cvičení dokončujte sami nebo ve skupině:
+
+- Začněte před-lecturním kvízem.
+- Přečtěte si lekci a dokončete aktivity, zastavujte se a přemýšlejte u každé kontroly znalostí.
+- Pokuste se vytvářet projekty tak, že pochopíte lekce místo pouhého spuštění řešení; zda řešení najdete v adresáři `/solution` v každé lekci orientované na projekt.
+- Udělejte post-lecturní kvíz.
 - Dokončete výzvu.
-- Dokončete zadání.
-- Po dokončení skupiny lekcí navštivte [Diskusní fórum](https://github.com/microsoft/ML-For-Beginners/discussions) a "učte se nahlas" vyplněním příslušné PAT rubricy. 'PAT' je nástroj hodnocení pokroku, který vyplníte, abyste prohloubili své učení. Můžete také reagovat na jiné PAT a učit se společně.
+- Dokončete úkol.
+- Po dokončení skupiny lekcí navštivte [Diskusní fórum](https://github.com/microsoft/ML-For-Beginners/discussions) a „učte se nahlas“ vyplněním příslušného hodnotícího formuláře PAT. 'PAT' je nástroj hodnocení pokroku, který vyplníte pro zvýšení svého učení. Můžete také reagovat na další PATy, abychom se mohli učit společně.
 
-> Pro další studium doporučujeme sledovat tyto moduly a učební cesty na [Microsoft Learn](https://docs.microsoft.com/en-us/users/jenlooper-2911/collections/k7o7tg1gp306q4?WT.mc_id=academic-77952-leestott).
+> Pro další studium doporučujeme sledovat tyto [Microsoft Learn](https://docs.microsoft.com/en-us/users/jenlooper-2911/collections/k7o7tg1gp306q4?WT.mc_id=academic-77952-leestott) moduly a vzdělávací cesty.
 
-**Učitelé**, přiložili jsme [několik doporučení](for-teachers.md), jak tuto osnovu využít.
+**Učitelé**, máme [několik doporučení](for-teachers.md) o tom, jak používat tento učební plán.
 
 ---
 
 ## Video průvodci
 
-Některé lekce jsou dostupné jako krátká videa. Všechny najdete v lekcích přímo nebo na playlistu [ML for Beginners na YouTube kanálu Microsoft Developer](https://aka.ms/ml-beginners-videos) kliknutím na obrázek níže.
+Některé lekce jsou k dispozici jako krátká videa. Najdete je přímo v lekcích nebo na [playlistu ML for Beginners na kanálu Microsoft Developer na YouTube](https://aka.ms/ml-beginners-videos) kliknutím na obrázek níže.
 
 [![ML for beginners banner](../../translated_images/cs/ml-for-beginners-video-banner.63f694a100034bc6.webp)](https://aka.ms/ml-beginners-videos)
 
@@ -100,79 +101,79 @@ Některé lekce jsou dostupné jako krátká videa. Všechny najdete v lekcích 
 
 **Gif od** [Mohit Jaisal](https://linkedin.com/in/mohitjaisal)
 
-> 🎥 Klikněte na obrázek výše pro video o projektu a lidech, kteří ho vytvořili!
+> 🎥 Klikněte na obrázek výše pro zhlédnutí videa o projektu a lidech, kteří jej vytvořili!
 
 ---
 
 ## Pedagogika
 
-Při vytváření této osnovy jsme zvolili dva pedagogické principy: zajistit, aby byla praktická a projektově orientovaná, a zároveň obsahovala časté kvízy. Navíc má tato osnova společné **téma**, které jí dodává soudržnost.
+Při budování tohoto učebního plánu jsme zvolili dva pedagogické principy: zajistit, aby byl **praktický a projektově orientovaný** a aby obsahoval **četné kvízy**. Navíc má tento učební plán společné **téma** pro soudržnost.
 
-Díky tomu, že obsah je sladěn s projekty, je proces pro studenty poutavější a zvyšuje se zapamatování konceptů. Nízkorizikový kvíz před lekcí nastavuje záměr studenta na učení tématu, zatímco druhý kvíz po lekci posiluje další zapamatování. Osnova byla navržena tak, aby byla flexibilní a zábavná, a lze ji absolvovat celou nebo po částech. Projekty začínají malé a koncem 12týdenního cyklu se stávají složitějšími. V osnově je také poscriptum o reálných aplikacích strojového učení, které může sloužit jako extra kredit nebo jako základ pro diskusi.
+Zajištěním souladu obsahu s projekty je proces pro studenty poutavější a zvyšuje se uchování konceptů. Kromě toho nízkorizikový kvíz před lekcí nastavuje studentovi úmysl učit se dané téma, zatímco druhý kvíz po lekci zajišťuje další uchování znalostí. Tento učební plán je navržen tak, aby byl flexibilní a zábavný a může být absolvován celý nebo částečně. Projekty začínají malé a ke konci 12týdenního cyklu se postupně stávají složitějšími. Tento učební plán také obsahuje poscriptum o reálných aplikacích ML, které může být použito jako extra kredit nebo jako základ pro diskusi.
 
-> Najděte naše [Kodex chování](CODE_OF_CONDUCT.md), [příspěvky](CONTRIBUTING.md), [překlady](..) a [Průvodce řešením problémů](TROUBLESHOOTING.md). Vítáme vaši konstruktivní zpětnou vazbu!
+> Najděte naše [Pravidla chování](CODE_OF_CONDUCT.md), [Příspěvky](CONTRIBUTING.md), [Překlady](..) a [Řešení problémů](TROUBLESHOOTING.md). Vítáme vaši konstruktivní zpětnou vazbu!
 
 ## Každá lekce obsahuje
 
-- volitelnou skicu (sketchnote)
+- volitelnou sketchnotu
 - volitelné doplňkové video
 - video průvodce (jen některé lekce)
-- [kvíz před lekcí](https://ff-quizzes.netlify.app/en/ml/)
-- psanou lekci
-- u projektově orientovaných lekcí podrobný návod, jak projekt vytvořit
-- znalostní kontroly
+- [před-lecturní rozcvičovací kvíz](https://ff-quizzes.netlify.app/en/ml/)
+- písemnou lekci
+- u lekcí orientovaných na projekty krok za krokem průvodce, jak projekt vytvořit
+- kontroly znalostí
 - výzvu
-- doplňující čtení
+- doplňkové čtení
 - úkol
-- [kvíz po lekci](https://ff-quizzes.netlify.app/en/ml/)
+- [post-lecturní kvíz](https://ff-quizzes.netlify.app/en/ml/)
+> **Poznámka o jazycích**: Tyto lekce jsou primárně napsané v Pythonu, ale mnoho z nich je také dostupných v R. Pro dokončení lekce v R přejděte do složky `/solution` a hledejte lekce v R. Ty mají příponu .rmd, která představuje **R Markdown** soubor, což lze jednoduše definovat jako vložení `kódových bloků` (v R nebo jiných jazycích) a `YAML záhlaví` (které určuje, jak formátovat výstupy jako PDF) v rámci `Markdown dokumentu`. Takto slouží jako příkladný autorský rámec pro datovou vědu, protože umožňuje kombinovat váš kód, jeho výstup a vaše myšlenky tím, že vám dovolí je psát v Markdownu. Navíc R Markdown dokumenty lze vyrenderovat do výstupních formátů, jako je PDF, HTML nebo Word.
 
-> **Poznámka k jazykům**: Tyto lekce jsou primárně psány v Pythonu, ale mnoho z nich je dostupných i v R. Pro dokončení lekce v R přejděte do složky `/solution` a vyhledejte lekce v R. Obsahují příponu .rmd, která představuje **R Markdown** soubor, což lze jednoduše definovat jako kombinaci `kódových bloků` (v R nebo jiných jazycích) a `YAML hlavičky` (která určuje, jak formátovat výstupy jako PDF) v `Markdown dokumentu`. Díky tomu slouží jako vzorový autorský rámec pro datovou vědu, protože umožňuje kombinovat kód, jeho výstupy a vaše poznámky psané v Markdownu. R Markdown dokumenty lze navíc převádět do výstupních formátů jako PDF, HTML nebo Word.
-> **Poznámka k kvízům**: Všechny kvízy jsou obsaženy ve složce [Quiz App](../../quiz-app), celkem 52 kvízů po třech otázkách. Jsou propojeny v lekcích, ale aplikaci kvízů lze spustit i lokálně; postupujte podle instrukcí ve složce `quiz-app`, abyste aplikaci spustili lokálně nebo nasadili na Azure.
+> **Poznámka o kvízech**: Všechny kvízy jsou obsaženy ve [složce Quiz App](../../quiz-app), dohromady 52 kvízů po třech otázkách. Jsou propojeny z lekcí, ale kvízovou aplikaci lze spustit lokálně; postupujte podle instrukcí ve složce `quiz-app` pro lokální hostování nebo nasazení na Azure.
 
-| Číslo lekce |                             Téma                              |                    Skupina lekcí                     | Vzdělávací cíle                                                                                                                |                                                              Propojená lekce                                                               |                        Autor                        |
-| :---------: | :-----------------------------------------------------------: | :-------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
-|      01     |                Úvod do strojového učení                       |      [Úvod](1-Introduction/README.md)                | Seznámení se základními koncepty strojového učení                                                                            |                                             [Lekce](1-Introduction/1-intro-to-ML/README.md)                                              |                       Muhammad                      |
-|      02     |                Historie strojového učení                      |      [Úvod](1-Introduction/README.md)                | Naučit se historii, na které toto pole stojí                                                                                  |                                            [Lekce](1-Introduction/2-history-of-ML/README.md)                                             |                    Jen a Amy                        |
-|      03     |                 Spravedlnost a strojové učení                 |      [Úvod](1-Introduction/README.md)                | Jaké jsou důležité filozofické otázky o spravedlnosti, které by studenti měli zvážit při vytváření a aplikaci modelů ML?       |                                               [Lekce](1-Introduction/3-fairness/README.md)                                                |                       Tomomi                        |
-|      04     |                Techniky pro strojové učení                     |      [Úvod](1-Introduction/README.md)                | Jaké techniky používají vědci ML pro tvorbu modelů?                                                                           |                                         [Lekce](1-Introduction/4-techniques-of-ML/README.md)                                            |                   Chris a Jen                       |
-|      05     |                   Úvod do regresních modelů                    |        [Regrese](2-Regression/README.md)              | Začít s Pythonem a Scikit-learn pro regresní modely                                                                           |         [Python](2-Regression/1-Tools/README.md) • [R](../../2-Regression/1-Tools/solution/R/lesson_1.html)         |       Jen • Eric Wanjau      |
-|      06     |                Ceny dýní v Severní Americe 🎃                  |        [Regrese](2-Regression/README.md)              | Vizualizovat a vyčistit data před ML                                                                                          |          [Python](2-Regression/2-Data/README.md) • [R](../../2-Regression/2-Data/solution/R/lesson_2.html)          |       Jen • Eric Wanjau      |
-|      07     |                Ceny dýní v Severní Americe 🎃                  |        [Regrese](2-Regression/README.md)              | Vybudovat lineární a polynomické regresní modely                                                                              |        [Python](2-Regression/3-Linear/README.md) • [R](../../2-Regression/3-Linear/solution/R/lesson_3.html)        |       Jen a Dmitry • Eric Wanjau      |
-|      08     |                Ceny dýní v Severní Americe 🎃                  |        [Regrese](2-Regression/README.md)              | Vybudovat logistický regresní model                                                                                            |     [Python](2-Regression/4-Logistic/README.md) • [R](../../2-Regression/4-Logistic/solution/R/lesson_4.html)      |       Jen • Eric Wanjau      |
-|      09     |                          Webová aplikace 🔌                     |           [Web App](3-Web-App/README.md)               | Vybudovat webovou aplikaci pro použití vašeho natrénovaného modelu                                                            |                                                 [Python](3-Web-App/1-Web-App/README.md)                                                  |                        Jen                          |
-|      10     |                 Úvod do klasifikace                            |    [Klasifikace](4-Classification/README.md)          | Vyčistit, připravit a vizualizovat data; úvod do klasifikace                                                                  | [Python](4-Classification/1-Introduction/README.md) • [R](../../4-Classification/1-Introduction/solution/R/lesson_10.html)  | Jen a Cassie • Eric Wanjau  |
-|      11     |             Lahodné asijské a indické kuchyně 🍜               |    [Klasifikace](4-Classification/README.md)          | Úvod do klasifikátorů                                                                                                          | [Python](4-Classification/2-Classifiers-1/README.md) • [R](../../4-Classification/2-Classifiers-1/solution/R/lesson_11.html) | Jen a Cassie • Eric Wanjau  |
-|      12     |             Lahodné asijské a indické kuchyně 🍜               |    [Klasifikace](4-Classification/README.md)          | Další klasifikátory                                                                                                            | [Python](4-Classification/3-Classifiers-2/README.md) • [R](../../4-Classification/3-Classifiers-2/solution/R/lesson_12.html) | Jen a Cassie • Eric Wanjau  |
-|      13     |             Lahodné asijské a indické kuchyně 🍜               |    [Klasifikace](4-Classification/README.md)          | Vybudovat doporučující webovou aplikaci pomocí vašeho modelu                                                                   |                                              [Python](4-Classification/4-Applied/README.md)                                              |                        Jen                          |
-|      14     |                   Úvod ke shlukování                           |        [Shlukování](5-Clustering/README.md)             | Vyčistit, připravit a vizualizovat data; úvod ke shlukování                                                                   |         [Python](5-Clustering/1-Visualize/README.md) • [R](../../5-Clustering/1-Visualize/solution/R/lesson_14.html)         |       Jen • Eric Wanjau      |
-|      15     |              Průzkum nigerijských hudebních chutí 🎧            |        [Shlukování](5-Clustering/README.md)             | Prozkoumat metodu shlukování K-Means                                                                                           |           [Python](5-Clustering/2-K-Means/README.md) • [R](../../5-Clustering/2-K-Means/solution/R/lesson_15.html)           |       Jen • Eric Wanjau      |
-|      16     |        Úvod do zpracování přirozeného jazyka ☕️              |   [Zpracování přirozeného jazyka](6-NLP/README.md)      | Naučit se základy NLP vytvořením jednoduchého bota                                                                             |                                             [Python](6-NLP/1-Introduction-to-NLP/README.md)                                              |                      Stephen                        |
-|      17     |                      Běžné úkoly NLP ☕️                       |   [Zpracování přirozeného jazyka](6-NLP/README.md)      | Prohloubit znalosti NLP porozuměním běžným úkolům požadovaným při práci s jazykovými strukturami                               |                                                    [Python](6-NLP/2-Tasks/README.md)                                                     |                      Stephen                        |
-|      18     |             Překlad a sentimentální analýza ♥️                 |   [Zpracování přirozeného jazyka](6-NLP/README.md)      | Překlad a sentimentální analýza s Jane Austen                                                                                  |                                            [Python](6-NLP/3-Translation-Sentiment/README.md)                                             |                      Stephen                        |
-|      19     |                  Romantické hotely Evropy ♥️                    |   [Zpracování přirozeného jazyka](6-NLP/README.md)      | Sentimentální analýza hotelových recenzí 1                                                                                     |                                               [Python](6-NLP/4-Hotel-Reviews-1/README.md)                                                |                      Stephen                        |
-|      20     |                  Romantické hotely Evropy ♥️                    |   [Zpracování přirozeného jazyka](6-NLP/README.md)      | Sentimentální analýza hotelových recenzí 2                                                                                     |                                               [Python](6-NLP/5-Hotel-Reviews-2/README.md)                                                |                      Stephen                        |
-|      21     |            Úvod do predikce časových řad                       |        [Časové řady](7-TimeSeries/README.md)            | Úvod do predikce časových řad                                                                                                 |                                             [Python](7-TimeSeries/1-Introduction/README.md)                                              |                    Francesca                        |
-|      22     | ⚡️ Světová spotřeba energie ⚡️ - predikce časových řad ARIMA  |        [Časové řady](7-TimeSeries/README.md)            | Predikce časových řad pomocí ARIMA                                                                                            |                                                 [Python](7-TimeSeries/2-ARIMA/README.md)                                                 |                    Francesca                        |
-|      23     |  ⚡️ Světová spotřeba energie ⚡️ - predikce časových řad SVR   |        [Časové řady](7-TimeSeries/README.md)            | Predikce časových řad pomocí Support Vector Regressoru                                                                        |                                                  [Python](7-TimeSeries/3-SVR/README.md)                                                  |                     Anirban                         |
-|      24     |             Úvod do posilovaného učení                         | [Posilované učení](8-Reinforcement/README.md)           | Úvod do posilovaného učení pomocí Q-Learning                                                                                   |                                             [Python](8-Reinforcement/1-QLearning/README.md)                                              |                       Dmitry                        |
-|      25     |                 Pomozte Petrovi vyhnout se vlkovi! 🐺         | [Posilované učení](8-Reinforcement/README.md)           | Posilované učení s Gym                                                                                                         |                                                [Python](8-Reinforcement/2-Gym/README.md)                                                 |                       Dmitry                        |
-|  Posloupnost  |            Skutečné scénáře a aplikace ML                      |       [ML ve světě](9-Real-World/README.md)             | Zajímavé a poučné reálné aplikace klasického ML                                                                               |                                             [Lekce](9-Real-World/1-Applications/README.md)                                              |                        Tým                           |
-|  Posloupnost  |            Ladění modelů v ML pomocí RAI dashboardu            |       [ML ve světě](9-Real-World/README.md)             | Ladění modelů v ML pomocí komponent Responsible AI dashboardu                                                                 |                                             [Lekce](9-Real-World/2-Debugging-ML-Models/README.md)                                              |                        Ruth Yakubu                     |
+| Číslo lekce |                             Téma                              |                   Skupina lekcí                    | Výukové cíle                                                                                                                  |                                                              Propojená lekce                                                               |                        Autor                        |
+| :---------: | :----------------------------------------------------------: | :------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
+|      01     |                 Úvod do strojového učení                    |       [Úvod](1-Introduction/README.md)             | Naučte se základní pojmy strojového učení                                                                                     |                                            [Lekce](1-Introduction/1-intro-to-ML/README.md)                                            |                       Muhammad                      |
+|      02     |                   Historie strojového učení                 |       [Úvod](1-Introduction/README.md)             | Seznamte se s historií tohoto oboru                                                                                            |                                           [Lekce](1-Introduction/2-history-of-ML/README.md)                                            |                    Jen a Amy                         |
+|      03     |                    Spravedlnost a strojové učení             |       [Úvod](1-Introduction/README.md)             | Jaké jsou důležité filozofické otázky kolem spravedlnosti, které by studenti měli zvážit při vytváření a aplikaci ML modelů?  |                                              [Lekce](1-Introduction/3-fairness/README.md)                                               |                       Tomomi                         |
+|      04     |                   Techniky strojového učení                 |       [Úvod](1-Introduction/README.md)             | Jaké techniky používají výzkumníci strojového učení pro stavbu ML modelů?                                                      |                                          [Lekce](1-Introduction/4-techniques-of-ML/README.md)                                          |                    Chris a Jen                       |
+|      05     |                    Úvod do regrese                           |         [Regrese](2-Regression/README.md)          | Začněte s Pythonem a Scikit-learn pro regresní modely                                                                          |        [Python](2-Regression/1-Tools/README.md) • [R](../../2-Regression/1-Tools/solution/R/lesson_1.html)         |        Jen • Eric Wanjau       |
+|      06     |                Ceny dýní v Severní Americe 🎃               |         [Regrese](2-Regression/README.md)          | Vizualizace a čištění dat pro ML                                                                                                |         [Python](2-Regression/2-Data/README.md) • [R](../../2-Regression/2-Data/solution/R/lesson_2.html)         |        Jen • Eric Wanjau       |
+|      07     |                Ceny dýní v Severní Americe 🎃               |         [Regrese](2-Regression/README.md)          | Stavba lineárních a polynomiálních regresních modelů                                                                           |       [Python](2-Regression/3-Linear/README.md) • [R](../../2-Regression/3-Linear/solution/R/lesson_3.html)        |        Jen a Dmitry • Eric Wanjau       |
+|      08     |                Ceny dýní v Severní Americe 🎃               |         [Regrese](2-Regression/README.md)          | Stavba logistického regresního modelu                                                                                          |     [Python](2-Regression/4-Logistic/README.md) • [R](../../2-Regression/4-Logistic/solution/R/lesson_4.html)      |        Jen • Eric Wanjau       |
+|      09     |                          Webová aplikace 🔌                  |          [Web App](3-Web-App/README.md)             | Vytvořte webovou aplikaci, která využívá váš vytrénovaný model                                                                 |                                               [Python](3-Web-App/1-Web-App/README.md)                                               |                         Jen                          |
+|      10     |                    Úvod do klasifikace                      |    [Klasifikace](4-Classification/README.md)       | Čištění, příprava a vizualizace dat; úvod do klasifikace                                                                        | [Python](4-Classification/1-Introduction/README.md) • [R](../../4-Classification/1-Introduction/solution/R/lesson_10.html)  | Jen a Cassie • Eric Wanjau |
+|      11     |             Lahodná asijská a indická kuchyně 🍜             |    [Klasifikace](4-Classification/README.md)       | Úvod do klasifikátorů                                                                                                          | [Python](4-Classification/2-Classifiers-1/README.md) • [R](../../4-Classification/2-Classifiers-1/solution/R/lesson_11.html) | Jen a Cassie • Eric Wanjau |
+|      12     |             Lahodná asijská a indická kuchyně 🍜             |    [Klasifikace](4-Classification/README.md)       | Další klasifikátory                                                                                                           | [Python](4-Classification/3-Classifiers-2/README.md) • [R](../../4-Classification/3-Classifiers-2/solution/R/lesson_12.html) | Jen a Cassie • Eric Wanjau |
+|      13     |             Lahodná asijská a indická kuchyně 🍜             |    [Klasifikace](4-Classification/README.md)       | Vytvoření doporučovací webové aplikace s vaším modelem                                                                         |                                              [Python](4-Classification/4-Applied/README.md)                                              |                         Jen                          |
+|      14     |                    Úvod do shlukování                        |         [Shlukování](5-Clustering/README.md)        | Čištění, příprava a vizualizace dat; úvod do shlukování                                                                         |         [Python](5-Clustering/1-Visualize/README.md) • [R](../../5-Clustering/1-Visualize/solution/R/lesson_14.html)         |        Jen • Eric Wanjau       |
+|      15     |            Průzkum nigerijských hudebních chutí 🎧          |         [Shlukování](5-Clustering/README.md)        | Prozkoumejte metodu shlukování K-Means                                                                                         |           [Python](5-Clustering/2-K-Means/README.md) • [R](../../5-Clustering/2-K-Means/solution/R/lesson_15.html)           |        Jen • Eric Wanjau       |
+|      16     |         Úvod do zpracování přirozeného jazyka ☕️            |   [Zpracování přirozeného jazyka](6-NLP/README.md)  | Naučte se základy NLP vytvořením jednoduchého bota                                                                             |                                             [Python](6-NLP/1-Introduction-to-NLP/README.md)                                              |                       Stephen                        |
+|      17     |                     Běžné úlohy NLP ☕️                      |   [Zpracování přirozeného jazyka](6-NLP/README.md)  | Prohlubte své znalosti NLP pochopením běžných úloh nezbytných pro práci s jazykovými strukturami                                |                                                    [Python](6-NLP/2-Tasks/README.md)                                                     |                       Stephen                        |
+|      18     |             Překlad a analýza sentimentu ♥️                  |   [Zpracování přirozeného jazyka](6-NLP/README.md)  | Překlad a analýza sentimentu s Jane Austen                                                                                    |                                            [Python](6-NLP/3-Translation-Sentiment/README.md)                                             |                       Stephen                        |
+|      19     |                 Romantické hotely Evropy ♥️                  |   [Zpracování přirozeného jazyka](6-NLP/README.md)  | Analýza sentimentu na recenzích hotelů 1                                                                                       |                                               [Python](6-NLP/4-Hotel-Reviews-1/README.md)                                                |                       Stephen                        |
+|      20     |                 Romantické hotely Evropy ♥️                  |   [Zpracování přirozeného jazyka](6-NLP/README.md)  | Analýza sentimentu na recenzích hotelů 2                                                                                       |                                               [Python](6-NLP/5-Hotel-Reviews-2/README.md)                                                |                       Stephen                        |
+|      21     |             Úvod do predikce časových řad                    |        [Časové řady](7-TimeSeries/README.md)        | Úvod do předpovídání časových řad                                                                                              |                                             [Python](7-TimeSeries/1-Introduction/README.md)                                              |                      Francesca                       |
+|      22     | ⚡️ Světová spotřeba energie ⚡️ - předpovídání časových řad s ARIMA |        [Časové řady](7-TimeSeries/README.md)        | Předpovídání časových řad s ARIMA                                                                                              |                                                 [Python](7-TimeSeries/2-ARIMA/README.md)                                                 |                      Francesca                       |
+|      23     |  ⚡️ Světová spotřeba energie ⚡️ - předpovídání časových řad s SVR  |        [Časové řady](7-TimeSeries/README.md)        | Předpovídání časových řad pomocí Support Vector Regressor                                                                      |                                                  [Python](7-TimeSeries/3-SVR/README.md)                                                  |                       Anirban                        |
+|      24     |             Úvod do posilovaného učení                       | [Posilované učení](8-Reinforcement/README.md)       | Úvod do posilovaného učení s Q-Learning                                                                                        |                                             [Python](8-Reinforcement/1-QLearning/README.md)                                              |                        Dmitry                        |
+|      25     |                  Pomozte Peterovi vyhnout se vlkovi! 🐺     | [Posilované učení](8-Reinforcement/README.md)       | Posilované učení Gym                                                                                                           |                                                [Python](8-Reinforcement/2-Gym/README.md)                                                 |                        Dmitry                        |
+|   Posloupnost |         Reálné scénáře a aplikace ML v praxi                |       [ML v praxi](9-Real-World/README.md)           | Zajímavé a poučné reálné aplikace klasického ML                                                                                |                                             [Lekce](9-Real-World/1-Applications/README.md)                                              |                         Tým                          |
+|   Posloupnost |        Ladění modelů ML pomocí RAI dashboardu               |       [ML v praxi](9-Real-World/README.md)           | Ladění modelů ve strojovém učení pomocí komponent dashboardu Responsible AI                                                  |                                            [Lekce](9-Real-World/2-Debugging-ML-Models/README.md)                                              |                         Ruth Yakubu                       |
 
 > [najděte všechny další zdroje k tomuto kurzu v naší kolekci Microsoft Learn](https://learn.microsoft.com/en-us/collections/qrqzamz1nn2wx3?WT.mc_id=academic-77952-bethanycheum)
 
 ## Offline přístup
 
-Tuto dokumentaci můžete spustit offline pomocí [Docsify](https://docsify.js.org/#/). Zforkujte si tento repozitář, [nainstalujte Docsify](https://docsify.js.org/#/quickstart) na svůj počítač a potom v kořenové složce tohoto repozitáře zadejte příkaz `docsify serve`. Webová stránka poběží na portu 3000 na vašem localhostu: `localhost:3000`.
+Tuto dokumentaci můžete spouštět offline pomocí [Docsify](https://docsify.js.org/#/). Naklonujte si tento repozitář, [nainstalujte Docsify](https://docsify.js.org/#/quickstart) na místní počítač a pak v kořenové složce repozitáře zadejte `docsify serve`. Webová stránka bude dostupná na portu 3000 na vaší lokální adrese: `localhost:3000`.
 
 ## PDF
 
-Najdete zde PDF osnovy s odkazy [zde](https://microsoft.github.io/ML-For-Beginners/pdf/readme.pdf).
+Najděte pdf osnovy s odkazy [zde](https://microsoft.github.io/ML-For-Beginners/pdf/readme.pdf).
 
 
-## 🎒 Další kurzy 
+## 🎒 Další kurzy
 
-Náš tým vytváří i další kurzy! Podívejte se na:
+Náš tým vytváří i další kurzy! Podívejte se:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
 ### LangChain
@@ -181,25 +182,25 @@ Náš tým vytváří i další kurzy! Podívejte se na:
 [![LangChain pro začátečníky](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
 ---
 
-### Azure / Edge / MCP / Agenti
+### Azure / Edge / MCP / Agents
 [![AZD pro začátečníky](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI pro začátečníky](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![MCP pro začátečníky](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI Agenti pro začátečníky](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agent pro začátečníky](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
-### Série generativní AI
-[![Generative AI pro začátečníky](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+### Série Generativní AI
+[![Generativní AI pro začátečníky](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generativní AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generativní AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generativní AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### Základní učení
 [![ML pro začátečníky](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-[![Datová věda pro začátečníky](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science pro začátečníky](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![AI pro začátečníky](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 [![Kybernetická bezpečnost pro začátečníky](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
 [![Webový vývoj pro začátečníky](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
@@ -216,22 +217,22 @@ Náš tým vytváří i další kurzy! Podívejte se na:
 
 ## Získání pomoci
 
-Pokud uvíznete nebo máte jakékoli otázky ohledně vytváření AI aplikací. Připojte se k ostatním studentům a zkušeným vývojářům k diskuzím o MCP. Je to podpůrná komunita, kde jsou otázky vítány a znalosti jsou sdíleny volně.
+Pokud se zaseknete nebo máte otázky ohledně vývoje AI aplikací. Připojte se k ostatním studentům a zkušeným vývojářům v diskuzích o MCP. Je to podpůrná komunita, kde jsou otázky vítány a znalosti se sdílejí volně.
 
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-Pokud máte zpětnou vazbu k produktu nebo narazíte na chyby během vývoje, navštivte:
+Pokud máte zpětnou vazbu k produktu nebo zaznamenáte chyby při vývoji, navštivte:
 
 [![Microsoft Foundry Developer Forum](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
 ## Další tipy pro učení
 
-- Po každé lekci si projděte zápisky pro lepší porozumění.
-- Procvičujte si implementaci algoritmů samostatně.
-- Prozkoumávejte reálné datasety pomocí naučených konceptů.
+- Projděte si bloky poznámek po každé lekci pro lepší pochopení.
+- Procvičujte implementaci algoritmů sami.
+- Prozkoumejte reálné datové sady pomocí naučených konceptů.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Prohlášení o vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro zásadní informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
