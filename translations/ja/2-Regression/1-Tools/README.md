@@ -53,9 +53,9 @@
 
 ### 演習 - ノートブックを操作する
 
-このフォルダには、_notebook.ipynb_というファイルがあります。
+このフォルダには、_notebook.ipynb_ というファイルがあります。
 
-1. Visual Studio Codeで_notebook.ipynb_を開きます。
+1. Visual Studio Codeで _notebook.ipynb_ を開きます。
 
    JupyterサーバーがPython 3+で起動します。ノートブック内には`run`できるコード部分があります。コードブロックを実行するには、再生ボタンのようなアイコンを選択します。
 
@@ -63,7 +63,7 @@
 
    次に、Pythonコードを追加します。
 
-3. コードブロックに**print('hello notebook')**と入力します。
+3. コードブロックに **print('hello notebook')** と入力します。
 4. 矢印を選択してコードを実行します。
 
    以下の出力が表示されるはずです:

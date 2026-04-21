@@ -1,29 +1,29 @@
-# മെഷീൻ ലേണിങ്ങിലേക്ക് പരിചയം
+# മെഷീൻ ലേണിംഗിലേക്ക് പരിചയം
 
-പാഠ്യപദ്ധതിയുടെ ഈ ഭാഗത്തിൽ, മെഷീൻ ലേണിങ്ങ് എന്ന മേഖലയെ അടിസ്ഥാനമാക്കിയുള്ള ആശയങ്ങൾ, അതെന്താണെന്ന്, അതിന്റെ ചരിത്രം, ഗവേഷകർ അതുമായി പ്രവർത്തിക്കാൻ ഉപയോഗിക്കുന്ന സാങ്കേതിക വിദ്യകൾ എന്നിവയെക്കുറിച്ച് നിങ്ങൾക്ക് പരിചയപ്പെടുത്തും. ഈ പുതിയ ML ലോകത്തെ നമുക്ക് ഒരുമിച്ച് അന്വേഷിക്കാം!
+പഠന ക്രമീകരണത്തിന്റെ ഈ വകുപ്പിൽ, നിങ്ങൾ മെഷീൻ ലേണിംഗിന്റെ അടിസ്ഥാന ആശയങ്ങൾക്കു പരിചയപ്പെടും, അതാണ് എന്തെന്ന്, അതിന്റെ ചരിത്രം, ഗവേഷകർ യഥാർത്ഥ ലോക ദൃശ്യങ്ങളിലേക്കിത് പ്രയോഗിക്കാൻ ഉപയോഗിക്കുന്ന സാങ്കേതിക വിദ്യകൾ ഉൾപ്പെടെ. നമുക്ക് MLന്റെ ഈ ആവേശകരമായ പ്രപഞ്ചം ചേർന്ന് അന്വേഷിക്കാം!
 
 ![globe](../../../translated_images/ml/globe.59f26379ceb40428.webp)
-> ഫോട്ടോ <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">ബിൽ ഓക്സ്ഫോർഡ്</a> എന്നവരിൽ നിന്നാണ് <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">അൺസ്പ്ലാഷിൽ</a>
+> Photo by <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Bill Oxford</a> on <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
 ### പാഠങ്ങൾ
 
-1. [മെഷീൻ ലേണിങ്ങിലേക്ക് പരിചയം](1-intro-to-ML/README.md)
-1. [മെഷീൻ ലേണിങ്ങിന്റെയും AI യുടെയും ചരിത്രം](2-history-of-ML/README.md)
-1. [ന്യായത്വവും മെഷീൻ ലേണിങ്ങും](3-fairness/README.md)
-1. [മെഷീൻ ലേണിങ്ങിന്റെ സാങ്കേതിക വിദ്യകൾ](4-techniques-of-ML/README.md)
+1. [മെഷീൻ ലേണിങ്ങിൽ പരിചയം](1-intro-to-ML/README.md)
+1. [മെഷീൻ ലേണിങ്ങിന്റെയും AI-യുടെയും ചരിത്രം](2-history-of-ML/README.md)
+1. [നീതിയും മെഷീൻ ലേണിംഗും](3-fairness/README.md)
+1. [മെഷീൻ ലേണിങ്ങ് സാങ്കേതിക വിദ്യകൾ](4-techniques-of-ML/README.md)
 ### ക്രെഡിറ്റുകൾ
 
-"Introduction to Machine Learning" എന്നത് ♥️ ഉള്ളടക്കത്തോടെ [Muhammad Sakib Khan Inan](https://twitter.com/Sakibinan), [Ornella Altunyan](https://twitter.com/ornelladotcom) എന്നിവരടങ്ങിയ സംഘത്താൽ എഴുതപ്പെട്ടതാണ്.
+"മെഷീൻ ലേണിങ്ങിലേക്ക് പരിചയം" എന്ന പുസ്തകം ♥️ ഉള്ളടക്കം നൽകിയത് [Muhammad Sakib Khan Inan](https://twitter.com/Sakibinan), [Ornella Altunyan](https://twitter.com/ornelladotcom) , [Jen Looper](https://twitter.com/jenlooper) എന്നിവരുടെ സംഘത്താൽ ആണ്.
 
-"The History of Machine Learning" ♥️ ഉള്ളടക്കത്തോടെ [Jen Looper](https://twitter.com/jenlooper)യും [Amy Boyd](https://twitter.com/AmyKateNicho)യും ചേർന്ന് എഴുതിയതാണ്.
+"മെഷീൻ ലേണിങ്ങിന്റെ ചരിത്രം" ♥️ ഉള്ളടക്കം നൽകിയിരിക്കുന്നത് [Jen Looper](https://twitter.com/jenlooper) , [Amy Boyd](https://twitter.com/AmyKateNicho) എന്നിവരാണ്.
 
-"Fairness and Machine Learning" ♥️ ഉള്ളടക്കത്തോടെ [Tomomi Imura](https://twitter.com/girliemac) എഴുതിയതാണ്.
+"നീതിയും മെഷീൻ ലേണിങ്ങും" ♥️ ഉള്ളടക്കം നൽകിയിരിക്കുന്നത് [Tomomi Imura](https://twitter.com/girliemac) ആണ്.
 
-"Techniques of Machine Learning" ♥️ ഉള്ളടക്കത്തോടെ [Jen Looper](https://twitter.com/jenlooper)യും [Chris Noring](https://twitter.com/softchris)യും ചേർന്ന് എഴുതിയതാണ്.
+"മെഷീൻ ലേണിങ്ങ് സാങ്കേതിക വിദ്യകൾ" ♥️ ഉള്ളടക്കം നൽകിയിരിക്കുന്നത് [Jen Looper](https://twitter.com/jenlooper) , [Chris Noring](https://twitter.com/softchris) എന്നിവരാണ്.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**അസൂയാപത്രം**:  
-ഈ രേഖ AI വിവർത്തന സേവനം [Co-op Translator](https://github.com/Azure/co-op-translator) ഉപയോഗിച്ച് വിവർത്തനം ചെയ്തതാണ്. നാം കൃത്യതയ്ക്ക് ശ്രമിച്ചിട്ടുണ്ടെങ്കിലും, യന്ത്രം ചെയ്ത വിവർത്തനങ്ങളിൽ പിശകുകൾ അല്ലെങ്കിൽ തെറ്റുകൾ ഉണ്ടാകാമെന്ന് ദയവായി ശ്രദ്ധിക്കുക. അതിന്റെ മാതൃഭാഷയിലുള്ള യഥാർത്ഥ രേഖ അധികാരപരമായ ഉറവിടമായി കണക്കാക്കപ്പെടണം. നിർണായക വിവരങ്ങൾക്ക്, പ്രൊഫഷണൽ മനുഷ്യ വിവർത്തനം ശുപാർശ ചെയ്യപ്പെടുന്നു. ഈ വിവർത്തനം ഉപയോഗിക്കുന്നതിൽ നിന്നുണ്ടാകുന്ന ഏതെങ്കിലും തെറ്റിദ്ധാരണകൾക്കോ തെറ്റായ വ്യാഖ്യാനങ്ങൾക്കോ ഞങ്ങൾ ഉത്തരവാദികളല്ല.
+**ഡിസ്ക്ലെയിമർ**:  
+ഈ ഡോക്യുമെന്റ് AI പരിഭാഷാ സേവനം [Co-op Translator](https://github.com/Azure/co-op-translator) ഉപയോഗിച്ച് പരിഭാഷപ്പെടുത്തിയതാണ്. ഞങ്ങൾ സുതാര്യതയ്ക്കായി ശ്രമിച്ചിരിക്കുമ്പോൾ, സ്വയംചാലിതമായ പരിഭാഷകളിൽ പിശകുകളോ തെറ്റുകളോ ഉണ്ടാകാവുന്നുണ്ട് എന്നത് कृപയോടെ മനസ്സിലാക്കുക. അതിന്റെ മാതൃഭാഷയിലെ അടിസ്ഥാന ഡോക്യുമെന്റ് ആണ് പ്രാമാണികമായ ഉറവിടം. നിർണായക വിവരങ്ങൾക്കായി, പ്രൊഫഷണൽ മാനവ പരിഭാഷ సిఫാരിശ് ചെയ്യപ്പെടുന്നു. ഈ പരിഭാഷ ഉപയോഗിച്ച് ഉണ്ടായ任何 അര്‍ത്ഥപറഞ്ഞു വായ്പ്പുവരുന്നോ തെറ്റിദ്ധാരണകൾക്ക് ഞങ്ങൾ ഉത്തരവാദികളല്ല.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

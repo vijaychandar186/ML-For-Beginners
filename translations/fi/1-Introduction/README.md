@@ -1,9 +1,9 @@
 # Johdatus koneoppimiseen
 
-Tässä opintokokonaisuuden osassa tutustut koneoppimisen peruskäsitteisiin, siihen mitä se on, sen historiaan sekä tekniikoihin, joita tutkijat käyttävät sen parissa työskennellessään. Tutkitaan yhdessä tätä uutta koneoppimisen maailmaa!
+Tässä opetussuunnitelman osiossa sinut tutustutetaan koneoppimisen peruskäsitteisiin, mukaan lukien mitä se on, sen historia ja tekniikat, joita tutkijat käyttävät soveltaessaan sitä käytännön tilanteissa. Tutkitaan yhdessä tätä jännittävää koneoppimisen maailmaa!
 
-![globe](../../../1-Introduction/images/globe.jpg)
-> Kuva: <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Bill Oxford</a> palvelussa <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+![globe](../../../translated_images/fi/globe.59f26379ceb40428.webp)
+> Kuvaaja <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Bill Oxford</a> lähteestä <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
 ### Oppitunnit
 
@@ -11,18 +11,19 @@ Tässä opintokokonaisuuden osassa tutustut koneoppimisen peruskäsitteisiin, si
 1. [Koneoppimisen ja tekoälyn historia](2-history-of-ML/README.md)
 1. [Oikeudenmukaisuus ja koneoppiminen](3-fairness/README.md)
 1. [Koneoppimisen tekniikat](4-techniques-of-ML/README.md)
-
 ### Tekijät
 
-"Johdatus koneoppimiseen" on kirjoitettu ♥️ tiimin toimesta, johon kuuluvat [Muhammad Sakib Khan Inan](https://twitter.com/Sakibinan), [Ornella Altunyan](https://twitter.com/ornelladotcom) ja [Jen Looper](https://twitter.com/jenlooper)
+"Johdatus koneoppimiseen" on kirjoitettu ♥️ tiimin voimin, johon kuuluvat [Muhammad Sakib Khan Inan](https://twitter.com/Sakibinan), [Ornella Altunyan](https://twitter.com/ornelladotcom) ja [Jen Looper](https://twitter.com/jenlooper)
 
-"Koneoppimisen historia" on kirjoitettu ♥️ [Jen Looper](https://twitter.com/jenlooper) ja [Amy Boyd](https://twitter.com/AmyKateNicho)
+"Koneoppimisen historia" on kirjoitettu ♥️ [Jen Looperin](https://twitter.com/jenlooper) ja [Amy Boydin](https://twitter.com/AmyKateNicho) toimesta
 
-"Oikeudenmukaisuus ja koneoppiminen" on kirjoitettu ♥️ [Tomomi Imura](https://twitter.com/girliemac)
+"Oikeudenmukaisuus ja koneoppiminen" on kirjoitettu ♥️ [Tomomi Imuran](https://twitter.com/girliemac) toimesta
 
-"Koneoppimisen tekniikat" on kirjoitettu ♥️ [Jen Looper](https://twitter.com/jenlooper) ja [Chris Noring](https://twitter.com/softchris)
+"Koneoppimisen tekniikat" on kirjoitettu ♥️ [Jen Looperin](https://twitter.com/jenlooper) ja [Chris Noringin](https://twitter.com/softchris) voimin
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomaathan, että automaattikäännöksissä voi esiintyä virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on authoritative lähde. Tärkeissä tiedoissa suositellaan ammattilaisen tekemää ihmiskäännöstä. Emme ole vastuussa käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

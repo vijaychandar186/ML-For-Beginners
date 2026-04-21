@@ -1,27 +1,29 @@
-# Introduction au machine learning
+# Introduction à l'apprentissage automatique
 
-Dans cette section du programme, vous serez initié aux concepts de base qui sous-tendent le domaine du machine learning, ce qu'il est, et vous découvrirez son histoire ainsi que les techniques utilisées par les chercheurs pour travailler avec lui. Explorons ensemble ce nouvel univers du ML !
+Dans cette section du programme, vous serez initié aux concepts fondamentaux de l'apprentissage automatique, y compris ce que c'est, son histoire, et les techniques que les chercheurs utilisent pour l'appliquer dans des scénarios réels. Explorons ensemble ce monde passionnant de l'apprentissage automatique !
 
 ![globe](../../../translated_images/fr/globe.59f26379ceb40428.webp)
 > Photo par <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Bill Oxford</a> sur <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
 ### Leçons
 
-1. [Introduction au machine learning](1-intro-to-ML/README.md)
-1. [L'histoire du machine learning et de l'IA](2-history-of-ML/README.md)
-1. [Équité et machine learning](3-fairness/README.md)
-1. [Techniques du machine learning](4-techniques-of-ML/README.md)
+1. [Introduction à l'apprentissage automatique](1-intro-to-ML/README.md)
+1. [L'histoire de l'apprentissage automatique et de l'IA](2-history-of-ML/README.md)
+1. [L'équité et l'apprentissage automatique](3-fairness/README.md)
+1. [Techniques de l'apprentissage automatique](4-techniques-of-ML/README.md)
 ### Crédits
 
-"L'introduction au Machine Learning" a été écrite avec ♥️ par une équipe composée de [Muhammad Sakib Khan Inan](https://twitter.com/Sakibinan), [Ornella Altunyan](https://twitter.com/ornelladotcom) et [Jen Looper](https://twitter.com/jenlooper)
+"Introduction à l'apprentissage automatique" a été écrit avec ♥️ par une équipe comprenant [Muhammad Sakib Khan Inan](https://twitter.com/Sakibinan), [Ornella Altunyan](https://twitter.com/ornelladotcom) et [Jen Looper](https://twitter.com/jenlooper)
 
-"L'histoire du Machine Learning" a été écrite avec ♥️ par [Jen Looper](https://twitter.com/jenlooper) et [Amy Boyd](https://twitter.com/AmyKateNicho)
+"L'histoire de l'apprentissage automatique" a été écrit avec ♥️ par [Jen Looper](https://twitter.com/jenlooper) et [Amy Boyd](https://twitter.com/AmyKateNicho)
 
-"Équité et Machine Learning" a été écrit avec ♥️ par [Tomomi Imura](https://twitter.com/girliemac) 
+"L'équité et l'apprentissage automatique" a été écrit avec ♥️ par [Tomomi Imura](https://twitter.com/girliemac)
 
-"Techniques du Machine Learning" a été écrit avec ♥️ par [Jen Looper](https://twitter.com/jenlooper) et [Chris Noring](https://twitter.com/softchris)
+"Techniques de l'apprentissage automatique" a été écrit avec ♥️ par [Jen Looper](https://twitter.com/jenlooper) et [Chris Noring](https://twitter.com/softchris)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction professionnelle humaine. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l’aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous fassions de notre mieux pour garantir l’exactitude, veuillez noter que les traductions automatiques peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant foi. Pour les informations critiques, une traduction professionnelle humaine est recommandée. Nous déclinons toute responsabilité en cas de malentendus ou de mauvaises interprétations résultant de l’utilisation de cette traduction.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

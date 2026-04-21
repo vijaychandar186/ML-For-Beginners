@@ -1,28 +1,29 @@
 # Увод у машинско учење
 
-У овом делу курикулума, упознаћете се са основним концептима који чине основу области машинског учења, шта је то, и сазнаћете више о његовој историји и техникама које истраживачи користе за рад у овој области. Хајде да заједно истражимо овај нови свет машинског учења!
+У овој секцији наставног плана и програма бићете упознати са основним појмовима машинског учења, укључујући шта је то, његову историју и технике које истраживачи користе да га примене у стварним ситуацијама. Хајде да заједно истражимо овај узбудљиви свет МЛ-а!
 
-![глобус](../../../1-Introduction/images/globe.jpg)
-> Фотографија од <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Била Оксфорда</a> на <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+![globe](../../../translated_images/sr/globe.59f26379ceb40428.webp)
+> Фото од <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Бил Оксфорд</a> на <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
 ### Лекције
 
 1. [Увод у машинско учење](1-intro-to-ML/README.md)
 1. [Историја машинског учења и вештачке интелигенције](2-history-of-ML/README.md)
-1. [Праведност и машинско учење](3-fairness/README.md)
+1. [Правичност и машинско учење](3-fairness/README.md)
 1. [Технике машинског учења](4-techniques-of-ML/README.md)
+### Захвалности
 
-### Аутори
+"Увод у машинско учење" написан је са ♥️ од стране тима који укључује [Muhammad Sakib Khan Inan](https://twitter.com/Sakibinan), [Ornella Altunyan](https://twitter.com/ornelladotcom) и [Jen Looper](https://twitter.com/jenlooper)
 
-"Увод у машинско учење" написан је са ♥️ од стране тима који укључује [Мухамеда Сакиба Кана Инана](https://twitter.com/Sakibinan), [Орнелу Алтуњан](https://twitter.com/ornelladotcom) и [Џен Лупер](https://twitter.com/jenlooper)
+"Историја машинског учења" написана је са ♥️ од стране [Jen Looper](https://twitter.com/jenlooper) и [Amy Boyd](https://twitter.com/AmyKateNicho)
 
-"Историја машинског учења" написана је са ♥️ од стране [Џен Лупер](https://twitter.com/jenlooper) и [Ејми Бојд](https://twitter.com/AmyKateNicho)
+"Правичност и машинско учење" написана је са ♥️ од стране [Tomomi Imura](https://twitter.com/girliemac) 
 
-"Праведност и машинско учење" написана је са ♥️ од стране [Томоми Имуре](https://twitter.com/girliemac)
-
-"Технике машинског учења" написане су са ♥️ од стране [Џен Лупер](https://twitter.com/jenlooper) и [Криса Норинга](https://twitter.com/softchris)
+"Технике машинског учења" написане су са ♥️ од стране [Jen Looper](https://twitter.com/jenlooper) и [Chris Noring](https://twitter.com/softchris)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Одрицање од одговорности**:  
-Овај документ је преведен коришћењем услуге за превођење помоћу вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако настојимо да обезбедимо тачност, молимо вас да имате у виду да аутоматизовани преводи могу садржати грешке или нетачности. Оригинални документ на изворном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални превод од стране људи. Не сносимо одговорност за било каква погрешна тумачења или неспоразуме који могу произаћи из коришћења овог превода.
+Овај документ је преведен уз коришћење AI преводилачке услуге [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да превод буде тачан, имајте на уму да аутоматизовани преводи могу садржати грешке или нетачности. Изворни документ на његовом оригиналном језику треба сматрати ауторитетом. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква непоразумевања или погрешне интерпретације које проистекну из коришћења овог превода.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

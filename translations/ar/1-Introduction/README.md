@@ -1,28 +1,29 @@
 # مقدمة في تعلم الآلة
 
-في هذا القسم من المنهج الدراسي، ستتعرف على المفاهيم الأساسية التي تشكل مجال تعلم الآلة، ما هو، وتتعرف على تاريخه والتقنيات التي يستخدمها الباحثون للعمل معه. دعونا نستكشف هذا العالم الجديد من تعلم الآلة معًا!
+في هذا القسم من المنهج الدراسي، سيتم تعريفك بالمفاهيم الأساسية لتعلم الآلة، بما في ذلك ما هو، تاريخه، والتقنيات التي يستخدمها الباحثون لتطبيقه في سيناريوهات العالم الحقيقي. هيا نستكشف هذا العالم المثير لتعلم الآلة معًا!
 
 ![globe](../../../translated_images/ar/globe.59f26379ceb40428.webp)
-> صورة بواسطة <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Bill Oxford</a> على <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+> صورة بواسطة <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">بيل أوكسفورد</a> على <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">أنسبلاش</a>
   
 ### الدروس
 
 1. [مقدمة في تعلم الآلة](1-intro-to-ML/README.md)
 1. [تاريخ تعلم الآلة والذكاء الاصطناعي](2-history-of-ML/README.md)
-1. [الإنصاف وتعلم الآلة](3-fairness/README.md)
+1. [العدالة وتعلم الآلة](3-fairness/README.md)
 1. [تقنيات تعلم الآلة](4-techniques-of-ML/README.md)
+### الاعتمادات
 
-### الشكر والتقدير
+"مقدمة في تعلم الآلة" كتبها بفاء ♥️ فريق من الأشخاص بما في ذلك [محمد صكيب خان إينان](https://twitter.com/Sakibinan)، [أورنيلا ألتونيان](https://twitter.com/ornelladotcom) و[جين لوبير](https://twitter.com/jenlooper)
 
-تم كتابة "مقدمة في تعلم الآلة" بحب ♥️ من قبل فريق من الأشخاص بما في ذلك [محمد ساكيب خان إنان](https://twitter.com/Sakibinan)، [أورنيلا ألتونيان](https://twitter.com/ornelladotcom) و[جين لوبر](https://twitter.com/jenlooper)
+"تاريخ تعلم الآلة" كتبها بفاء ♥️ [جين لوبير](https://twitter.com/jenlooper) و[آمي بوييد](https://twitter.com/AmyKateNicho)
 
-تم كتابة "تاريخ تعلم الآلة" بحب ♥️ من قبل [جين لوبر](https://twitter.com/jenlooper) و[إيمي بويد](https://twitter.com/AmyKateNicho)
+"العدالة وتعلم الآلة" كتبها بفاء ♥️ [تومومي إيمورا](https://twitter.com/girliemac)
 
-تم كتابة "الإنصاف وتعلم الآلة" بحب ♥️ من قبل [تومومي إيمورا](https://twitter.com/girliemac)
-
-تم كتابة "تقنيات تعلم الآلة" بحب ♥️ من قبل [جين لوبر](https://twitter.com/jenlooper) و[كريس نورينغ](https://twitter.com/softchris)
+"تقنيات تعلم الآلة" كتبها بفاء ♥️ [جين لوبير](https://twitter.com/jenlooper) و[كريس نورينج](https://twitter.com/softchris)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى جاهدين لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحساسة، يُنصح بالترجمة البشرية المهنية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
