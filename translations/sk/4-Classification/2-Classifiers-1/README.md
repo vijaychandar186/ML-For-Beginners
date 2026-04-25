@@ -1,17 +1,17 @@
-# Klasifikátory kuchýň 1
+# Klasifikátory kuchyne 1
 
-V tejto lekcii použijete dataset, ktorý ste si uložili z predchádzajúcej lekcie, plný vyvážených a čistých údajov o kuchyniach.
+V tejto lekcii použijete dataset, ktorý ste si uložili z predchádzajúcej lekcie, plný vyvážených, čistých údajov o kuchyniach.
 
-Tento dataset použijete s rôznymi klasifikátormi na _predpovedanie národnej kuchyne na základe skupiny ingrediencií_. Pri tom sa dozviete viac o tom, ako môžu byť algoritmy využívané na klasifikačné úlohy.
+Tento dataset použijete s rôznymi klasifikátormi na _predpoveď danej národnej kuchyne na základe skupiny ingrediencií_. Počas toho sa dozviete viac o niektorých spôsoboch, ako možno algoritmy využiť na klasifikačné úlohy.
 
-## [Kvíz pred prednáškou](https://ff-quizzes.netlify.app/en/ml/)
+## [Prednáškový kvíz](https://ff-quizzes.netlify.app/en/ml/)
 # Príprava
 
-Za predpokladu, že ste dokončili [Lekciu 1](../1-Introduction/README.md), uistite sa, že súbor _cleaned_cuisines.csv_ existuje v koreňovom priečinku `/data` pre tieto štyri lekcie.
+Ak ste dokončili [Lekciu 1](../1-Introduction/README.md), uistite sa, že súbor _cleaned_cuisines.csv_ existuje v koreňovej priečinok `/data` pre tieto štyri lekcie.
 
-## Cvičenie - predpovedanie národnej kuchyne
+## Cvičenie - predpovedať národnú kuchyňu
 
-1. Pracujte v priečinku _notebook.ipynb_ tejto lekcie, importujte tento súbor spolu s knižnicou Pandas:
+1. V priečinku _notebook.ipynb_ tejto lekcie importujte tento súbor spolu s knižnicou Pandas:
 
     ```python
     import pandas as pd
@@ -21,13 +21,13 @@ Za predpokladu, že ste dokončili [Lekciu 1](../1-Introduction/README.md), uist
 
     Údaje vyzerajú takto:
 
-|     | Unnamed: 0 | kuchyňa | mandľa | angelika | aníz | anízové semeno | jablko | jablkový brandy | marhuľa | armagnac | ... | whiskey | biely chlieb | biele víno | celozrnná pšeničná múka | víno | drevo | yam | droždie | jogurt | cuketa |
+|     | Unnamed: 0 | cuisine | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood | yam | yeast | yogurt | zucchini |
 | --- | ---------- | ------- | ------ | -------- | ----- | ---------- | ----- | ------------ | ------- | -------- | --- | ------- | ----------- | ---------- | ----------------------- | ---- | ---- | --- | ----- | ------ | -------- |
-| 0   | 0          | indická | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
-| 1   | 1          | indická | 1      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
-| 2   | 2          | indická | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
-| 3   | 3          | indická | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
-| 4   | 4          | indická | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 1      | 0        |
+| 0   | 0          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
+| 1   | 1          | indian  | 1      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
+| 2   | 2          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
+| 3   | 3          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
+| 4   | 4          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 1      | 0        |
   
 
 1. Teraz importujte niekoľko ďalších knižníc:
@@ -40,7 +40,7 @@ Za predpokladu, že ste dokončili [Lekciu 1](../1-Introduction/README.md), uist
     import numpy as np
     ```
 
-1. Rozdeľte X a y súradnice do dvoch dataframeov na trénovanie. `cuisine` môže byť dataframe s označeniami:
+1. Rozdeľte súradnice X a y do dvoch dataframeov na trénovanie. `cuisine` môže byť dataframe s návestiami:
 
     ```python
     cuisines_label_df = cuisines_df['cuisine']
@@ -58,7 +58,7 @@ Za predpokladu, že ste dokončili [Lekciu 1](../1-Introduction/README.md), uist
     Name: cuisine, dtype: object
     ```
 
-1. Odstráňte stĺpec `Unnamed: 0` a stĺpec `cuisine` pomocou `drop()`. Zvyšok údajov uložte ako trénovateľné vlastnosti:
+1. Odstráňte stĺpec `Unnamed: 0` a stĺpec `cuisine` pomocou funkcie `drop()`. Zvyšok dát uložte ako trénovateľné vlastnosti:
 
     ```python
     cuisines_feature_df = cuisines_df.drop(['Unnamed: 0', 'cuisine'], axis=1)
@@ -67,7 +67,7 @@ Za predpokladu, že ste dokončili [Lekciu 1](../1-Introduction/README.md), uist
 
     Vaše vlastnosti vyzerajú takto:
 
-|      | mandľa | angelika | aníz | anízové semeno | jablko | jablkový brandy | marhuľa | armagnac | artemisia | artičok |  ... | whiskey | biely chlieb | biele víno | celozrnná pšeničná múka | víno | drevo | yam | droždie | jogurt | cuketa |
+|      | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | artemisia | artichoke |  ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood |  yam | yeast | yogurt | zucchini |
 | ---: | -----: | -------: | ----: | ---------: | ----: | -----------: | ------: | -------: | --------: | --------: | ---: | ------: | ----------: | ---------: | ----------------------: | ---: | ---: | ---: | ----: | -----: | -------: |
 |    0 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
 |    1 |      1 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
@@ -75,85 +75,85 @@ Za predpokladu, že ste dokončili [Lekciu 1](../1-Introduction/README.md), uist
 |    3 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
 |    4 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      1 |        0 | 0 |
 
-Teraz ste pripravení trénovať váš model!
+Teraz ste pripravení trénovať svoj model!
 
 ## Výber klasifikátora
 
-Keď sú vaše údaje čisté a pripravené na trénovanie, musíte sa rozhodnúť, ktorý algoritmus použiť na túto úlohu.
+Keď už sú vaše dáta čisté a pripravené na trénovanie, musíte sa rozhodnúť, ktorý algoritmus použiť.
 
-Scikit-learn zaraďuje klasifikáciu pod Supervised Learning, a v tejto kategórii nájdete mnoho spôsobov klasifikácie. [Rozmanitosť](https://scikit-learn.org/stable/supervised_learning.html) je na prvý pohľad dosť zarážajúca. Nasledujúce metódy zahŕňajú techniky klasifikácie:
+Scikit-learn zaraďuje klasifikáciu do kategórie Supervised Learning a v tejto kategórii nájdete mnoho spôsobov klasifikácie. [Rozmanitosť](https://scikit-learn.org/stable/supervised_learning.html) je na prvý pohľad dosť ohromujúca. Nasledujúce metódy zahŕňajú klasifikačné techniky:
 
 - Lineárne modely
 - Support Vector Machines
-- Stochastický gradientný zostup
+- Stochastic Gradient Descent
 - Najbližší susedia
 - Gaussovské procesy
 - Rozhodovacie stromy
-- Ensemble metódy (hlasovací klasifikátor)
-- Multiclass a multioutput algoritmy (multiclass a multilabel klasifikácia, multiclass-multioutput klasifikácia)
+- Metódy ansámblov (voting Classifier)
+- Multitriedne a multivýstupové algoritmy (multitriedna a multilabel klasifikácia, multitriedna multivýstupová klasifikácia)
 
-> Na klasifikáciu údajov môžete použiť aj [neurónové siete](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), ale to je mimo rozsah tejto lekcie.
+> Môžete tiež použiť [neurónové siete na klasifikáciu dát](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), ale to presahuje rozsah tejto lekcie.
 
-### Aký klasifikátor zvoliť?
+### Ktorý klasifikátor zvoliť?
 
-Takže, ktorý klasifikátor by ste si mali vybrať? Často je dobré vyskúšať niekoľko a hľadať dobrý výsledok. Scikit-learn ponúka [porovnanie vedľa seba](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) na vytvorenom datasete, kde porovnáva KNeighbors, SVC dvoma spôsobmi, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB a QuadraticDiscriminationAnalysis, pričom výsledky vizualizuje:
+Ktorý klasifikátor by ste si teda mali vybrať? Často je spôsob, že skúsite niekoľko a hľadáte dobrý výsledok. Scikit-learn ponúka [bezprostredné porovnanie](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) na vytvorenom datasete, ktoré porovnáva KNeighbors, SVC dvoma spôsobmi, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB a QuadraticDiscrinationAnalysis a vizualizuje výsledky:
 
-![porovnanie klasifikátorov](../../../../4-Classification/2-Classifiers-1/images/comparison.png)
-> Grafy generované na dokumentácii Scikit-learn
+![porovnanie klasifikátorov](../../../../translated_images/sk/comparison.edfab56193a85e7f.webp)
+> Grafy vytvorené v dokumentácii Scikit-learn
 
-> AutoML tento problém elegantne rieši tým, že vykonáva tieto porovnania v cloude, čo vám umožňuje vybrať najlepší algoritmus pre vaše údaje. Vyskúšajte to [tu](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
+> AutoML túto úlohu elegantne rieši tým, že vykonáva tieto porovnania v cloude, čo vám umožní vybrať najlepší algoritmus pre vaše dáta. Vyskúšajte to [tu](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
 
 ### Lepší prístup
 
-Lepší spôsob ako náhodne hádať je však nasledovať nápady z tejto stiahnuteľnej [ML Cheat Sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott). Tu zistíme, že pre náš multiclass problém máme niekoľko možností:
+Lepší spôsob ako hádať naslepo, je postupovať podľa odporúčaní v tomto stiahnuteľnom [ML Cheat sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott). Tu objavujeme, že pri našom multitriednom probléme máme niekoľko možností:
 
-![cheatsheet pre multiclass problémy](../../../../4-Classification/2-Classifiers-1/images/cheatsheet.png)
-> Časť Microsoftovej Algorithm Cheat Sheet, ktorá podrobne opisuje možnosti multiclass klasifikácie
+![cheatsheet pre multitriedne problémy](../../../../translated_images/sk/cheatsheet.07a475ea444d2223.webp)
+> Časť Microsoft Algorithm Cheat Sheet, rozoberajúca možnosti multitriednej klasifikácie
 
-✅ Stiahnite si tento cheat sheet, vytlačte ho a zaveste na stenu!
+✅ Stiahnite si tento cheat sheet, vytlačte si ho a zavesíte na stenu!
 
-### Úvahy
+### Odôvodnenie
 
-Pozrime sa, či dokážeme rozumne zhodnotiť rôzne prístupy vzhľadom na obmedzenia, ktoré máme:
+Pozrime sa, či dokážeme rozumovo prejsť rôznymi prístupmi vzhľadom na dané obmedzenia:
 
-- **Neurónové siete sú príliš náročné**. Vzhľadom na náš čistý, ale minimálny dataset a fakt, že trénovanie prebieha lokálne cez notebooky, sú neurónové siete príliš náročné na túto úlohu.
-- **Žiadny dvojtriedny klasifikátor**. Nepoužívame dvojtriedny klasifikátor, takže to vylučuje one-vs-all.
-- **Rozhodovací strom alebo logistická regresia by mohli fungovať**. Rozhodovací strom by mohol fungovať, alebo logistická regresia pre multiclass údaje.
-- **Multiclass Boosted Decision Trees riešia iný problém**. Multiclass Boosted Decision Tree je najvhodnejší pre neparametrické úlohy, napr. úlohy určené na vytváranie rebríčkov, takže pre nás nie je užitočný.
+- **Neurónové siete sú príliš náročné**. Vzhľadom na náš čistý, ale minimálny dataset a fakt, že trénovanie beží lokálne cez notebooky, sú neurónové siete príliš náročné na túto úlohu.
+- **Žiadny klasifikátor pre dve triedy**. Nepoužívame klasifikátor pre dve triedy, takže možnosť "one-vs-all" vylučujeme.
+- **Decision tree alebo logická regresia môže fungovať**. Môže fungovať rozhodovací strom alebo logistická regresia pre multitriedne dáta.
+- **Multitriedne boosted rozhodovacie stromy riešia inú úlohu**. Multitriedny boosted rozhodovací strom je vhodnejší pre neparametrické úlohy, napríklad konštruovanie rebríčkov, takže pre nás nie je užitočný.
 
-### Použitie Scikit-learn 
+### Použitie Scikit-learn
 
-Budeme používať Scikit-learn na analýzu našich údajov. Existuje však mnoho spôsobov, ako použiť logistickú regresiu v Scikit-learn. Pozrite sa na [parametre na nastavenie](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).  
+Použijeme Scikit-learn na analýzu našich dát. Existuje však mnoho spôsobov, ako použiť logistickú regresiu v Scikit-learn. Pozrite si [parametre](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression), ktoré je možné odovzdať.
 
-V podstate existujú dva dôležité parametre - `multi_class` a `solver` - ktoré musíme špecifikovať, keď požiadame Scikit-learn o vykonanie logistickej regresie. Hodnota `multi_class` aplikuje určitú logiku. Hodnota solveru určuje, aký algoritmus sa použije. Nie všetky solvery môžu byť spárované so všetkými hodnotami `multi_class`.
+Podstatné sú dva parametre - `multi_class` a `solver` - ktoré musíme určiť, keď žiadame Scikit-learn o vykonanie logistickej regresie. Hodnota `multi_class` aplikuje určitý spôsob správania. Hodnota solveru je algoritmus, ktorý sa použije. Nie všetky solvery sú kompatibilné so všetkými hodnotami `multi_class`.
 
-Podľa dokumentácie, v prípade multiclass, tréningový algoritmus:
+Podľa dokumentácie, pri multitriednom prípade, tréningový algoritmus:
 
-- **Používa schému one-vs-rest (OvR)**, ak je možnosť `multi_class` nastavená na `ovr`
-- **Používa cross-entropy loss**, ak je možnosť `multi_class` nastavená na `multinomial`. (Momentálne je možnosť `multinomial` podporovaná iba solvermi ‘lbfgs’, ‘sag’, ‘saga’ a ‘newton-cg’.)
+- **Používa schému one-vs-rest (OvR),** ak je `multi_class` nastavený na `ovr`
+- **Používa cross-entropy loss**, ak je `multi_class` nastavený na `multinomial`. (Momentálne je možnosť `multinomial` podporovaná iba solvermi ‘lbfgs’, ‘sag’, ‘saga’ a ‘newton-cg’)."
 
-> 🎓 Schéma tu môže byť buď 'ovr' (one-vs-rest) alebo 'multinomial'. Keďže logistická regresia je skutočne navrhnutá na podporu binárnej klasifikácie, tieto schémy jej umožňujú lepšie zvládnuť úlohy multiclass klasifikácie. [zdroj](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
+> 🎓 'schéma' tu môže byť 'ovr' (one-vs-rest) alebo 'multinomial'. Keďže logistická regresia je navrhnutá na binárnu klasifikáciu, tieto schémy jej umožňujú lepšie zvládnuť multitriedne klasifikačné úlohy. [zdroj](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
 
-> 🎓 Solver je definovaný ako "algoritmus, ktorý sa použije na optimalizačný problém". [zdroj](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
+> 🎓 'solver' je definovaný ako "algoritmus, ktorý sa použije v optimalizačnej úlohe". [zdroj](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-Scikit-learn ponúka túto tabuľku na vysvetlenie, ako solvery zvládajú rôzne výzvy, ktoré predstavujú rôzne typy dátových štruktúr:
+Scikit-learn ponúka túto tabuľku, ktorá vysvetľuje, ako solvery spracovávajú rôzne výzvy, ktoré predstavujú rôzne štruktúry dát:
 
-![solvery](../../../../4-Classification/2-Classifiers-1/images/solvers.png)
+![solvery](../../../../translated_images/sk/solvers.5fc648618529e627.webp)
 
-## Cvičenie - rozdelenie údajov
+## Cvičenie - rozdeliť dáta
 
-Môžeme sa zamerať na logistickú regresiu pre náš prvý tréningový pokus, keďže ste sa o nej nedávno učili v predchádzajúcej lekcii.
-Rozdeľte svoje údaje na trénovacie a testovacie skupiny pomocou `train_test_split()`:
+Môžeme sa zamerať na logistickú regresiu pre náš prvý pokus o trénovanie, keďže ste o nej nedávno čítali v predchádzajúcej lekcii.
+Rozdeľte dáta na trénovacie a testovacie skupiny pomocou volania `train_test_split()`:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
 ```
 
-## Cvičenie - aplikácia logistickej regresie
+## Cvičenie - aplikovať logistickú regresiu
 
-Keďže používate prípad multiclass, musíte si vybrať, akú _schému_ použiť a aký _solver_ nastaviť. Použite LogisticRegression s nastavením multiclass a solverom **liblinear** na trénovanie.
+Keďže používate multitriedny prípad, musíte si vybrať, akú _schému_ použiť a aký _solver_ nastaviť. Použite LogisticRegression s multitriednym nastavením a **liblinear** solverom na trénovanie.
 
-1. Vytvorte logistickú regresiu s multi_class nastavenou na `ovr` a solverom nastaveným na `liblinear`:
+1. Vytvorte logistickú regresiu s `multi_class` nastaveným na `ovr` a solverom `liblinear`:
 
     ```python
     lr = LogisticRegression(multi_class='ovr',solver='liblinear')
@@ -163,27 +163,28 @@ Keďže používate prípad multiclass, musíte si vybrať, akú _schému_ použ
     print ("Accuracy is {}".format(accuracy))
     ```
 
-    ✅ Vyskúšajte iný solver, napríklad `lbfgs`, ktorý je často nastavený ako predvolený.
-> Poznámka: Použite funkciu Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) na zjednodušenie vašich údajov, keď je to potrebné.
-Presnosť je dobrá na viac ako **80%**!
+    ✅ Vyskúšajte iný solver ako `lbfgs`, ktorý je často nastavený ako predvolený
 
-1. Tento model si môžete vyskúšať na jednom riadku dát (#50):
+    > Poznámka: Použite funkciu Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) na zploštenie dát, keď je to potrebné.
+
+    Presnosť je dobrá, vyše **80%**!
+
+1. Model si môžete vyskúšať tak, že otestujete jeden riadok dát (#50):
 
     ```python
     print(f'ingredients: {X_test.iloc[50][X_test.iloc[50]!=0].keys()}')
     print(f'cuisine: {y_test.iloc[50]}')
     ```
 
-    Výsledok sa zobrazí:
+    Výsledok sa vytlačí:
 
    ```output
    ingredients: Index(['cilantro', 'onion', 'pea', 'potato', 'tomato', 'vegetable_oil'], dtype='object')
    cuisine: indian
    ```
 
-   ✅ Skúste iné číslo riadku a skontrolujte výsledky.
-
-1. Ak chcete ísť hlbšie, môžete skontrolovať presnosť tejto predikcie:
+   ✅ Vyskúšajte iné číslo riadku a skontrolujte výsledky
+1. Hlbšie preskúmajte a overte presnosť tohto predpovede:
 
     ```python
     test= X_test.iloc[50].values.reshape(-1, 1).T
@@ -195,7 +196,7 @@ Presnosť je dobrá na viac ako **80%**!
     topPrediction.head()
     ```
 
-    Výsledok sa zobrazí - indická kuchyňa je najpravdepodobnejší odhad s dobrou pravdepodobnosťou:
+    Výsledok je vytlačený – najpravdepodobnejšia je indická kuchyňa, s dobrou pravdepodobnosťou:
 
     |          |        0 |
     | -------: | -------: |
@@ -205,7 +206,7 @@ Presnosť je dobrá na viac ako **80%**!
     |   korean | 0.017277 |
     |     thai | 0.007634 |
 
-    ✅ Dokážete vysvetliť, prečo si model myslí, že ide o indickú kuchyňu?
+    ✅ Dokážete vysvetliť, prečo si model dosť iste myslí, že ide o indickú kuchyňu?
 
 1. Získajte viac detailov vytlačením klasifikačnej správy, ako ste to robili v lekciách o regresii:
 
@@ -214,31 +215,34 @@ Presnosť je dobrá na viac ako **80%**!
     print(classification_report(y_test,y_pred))
     ```
 
-    |              | presnosť | recall | f1-skóre | podpora |
-    | ------------ | -------- | ------ | -------- | ------- |
-    | chinese      | 0.73     | 0.71   | 0.72     | 229     |
-    | indian       | 0.91     | 0.93   | 0.92     | 254     |
-    | japanese     | 0.70     | 0.75   | 0.72     | 220     |
-    | korean       | 0.86     | 0.76   | 0.81     | 242     |
-    | thai         | 0.79     | 0.85   | 0.82     | 254     |
-    | presnosť     | 0.80     | 1199   |          |         |
-    | priemer makro| 0.80     | 0.80   | 0.80     | 1199    |
-    | vážený priemer| 0.80     | 0.80   | 0.80     | 1199    |
+    |              | precision | recall | f1-score | support |
+    | ------------ | --------- | ------ | -------- | ------- |
+    | chinese      | 0.73      | 0.71   | 0.72     | 229     |
+    | indian       | 0.91      | 0.93   | 0.92     | 254     |
+    | japanese     | 0.70      | 0.75   | 0.72     | 220     |
+    | korean       | 0.86      | 0.76   | 0.81     | 242     |
+    | thai         | 0.79      | 0.85   | 0.82     | 254     |
+    | accuracy     |           |        | 0.80     | 1199    |
+    | macro avg    | 0.80      | 0.80   | 0.80     | 1199    |
+    | weighted avg | 0.80      | 0.80   | 0.80     | 1199    |
 
 ## 🚀Výzva
 
-V tejto lekcii ste použili vyčistené dáta na vytvorenie modelu strojového učenia, ktorý dokáže predpovedať národnú kuchyňu na základe série ingrediencií. Venujte čas preskúmaniu mnohých možností, ktoré Scikit-learn ponúka na klasifikáciu dát. Ponorte sa hlbšie do konceptu 'solver', aby ste pochopili, čo sa deje v zákulisí.
+V tejto lekcii ste použili vyčistené dáta na vybudovanie modelu strojového učenia, ktorý dokáže predpovedať národnú kuchyňu na základe série ingrediencií. Venujte čas preštudovaniu mnohých možností, ktoré Scikit-learn poskytuje na klasifikáciu dát. Hlbšie sa oboznámte s konceptom „solver“ a pochopte, čo sa deje v pozadí.
 
 ## [Kvíz po prednáške](https://ff-quizzes.netlify.app/en/ml/)
 
-## Prehľad & Samoštúdium
+## Prehľad a samostatné štúdium
 
-Preskúmajte matematiku za logistickou regresiou v [tejto lekcii](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
-## Zadanie 
+Málo sa ponorte do matematiky za logistickou regresiou v [tejto lekcii](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
 
-[Preskúmajte solvery](assignment.md)
+## Úloha
+
+[Študujte solver-y](assignment.md)
 
 ---
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zrieknutie sa zodpovednosti**:
+Tento dokument bol preložený pomocou služby prekladov AI [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, majte prosím na pamäti, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne výklady vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

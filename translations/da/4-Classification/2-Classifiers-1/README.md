@@ -1,17 +1,17 @@
-# Klassifikatorer for køkkener 1
+# Cuisine classifiers 1
 
-I denne lektion vil du bruge det datasæt, du gemte fra den sidste lektion, fyldt med balancerede og rene data om køkkener.
+I denne lektion vil du bruge datasættet, du gemte fra sidste lektion, fyldt med balancerede, rene data om køkkener.
 
-Du vil bruge dette datasæt med en række klassifikatorer til _at forudsige et givet nationalt køkken baseret på en gruppe ingredienser_. Mens du gør dette, vil du lære mere om nogle af de måder, algoritmer kan bruges til klassifikationsopgaver.
+Du vil bruge dette datasæt med en række klassifikatorer til at _forudsige en given national køkken baseret på en gruppe ingredienser_. Mens du gør det, vil du lære mere om nogle af de måder, algoritmer kan udnyttes til klassifikationsopgaver.
 
-## [Quiz før lektionen](https://ff-quizzes.netlify.app/en/ml/)
+## [Pre-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 # Forberedelse
 
-Forudsat at du har gennemført [Lektion 1](../1-Introduction/README.md), skal du sikre dig, at en _cleaned_cuisines.csv_-fil findes i rodmappen `/data` for disse fire lektioner.
+Forudsat at du har gennemført [Lektion 1](../1-Introduction/README.md), skal du sikre dig, at en _cleaned_cuisines.csv_-fil findes i den øverste `/data`-mappe til disse fire lektioner.
 
 ## Øvelse - forudsige et nationalt køkken
 
-1. Arbejd i denne lektions _notebook.ipynb_-mappe, og importer filen sammen med Pandas-biblioteket:
+1. Arbejd i denne lektions _notebook.ipynb_ mappe, importer den fil sammen med Pandas-biblioteket:
 
     ```python
     import pandas as pd
@@ -40,7 +40,7 @@ Forudsat at du har gennemført [Lektion 1](../1-Introduction/README.md), skal du
     import numpy as np
     ```
 
-1. Del X- og y-koordinaterne op i to dataframes til træning. `cuisine` kan være labels-dataframen:
+1. Del X og y koordinaterne i to dataframes til træning. `cuisine` kan være labels dataframe:
 
     ```python
     cuisines_label_df = cuisines_df['cuisine']
@@ -58,14 +58,14 @@ Forudsat at du har gennemført [Lektion 1](../1-Introduction/README.md), skal du
     Name: cuisine, dtype: object
     ```
 
-1. Fjern kolonnen `Unnamed: 0` og kolonnen `cuisine` ved at kalde `drop()`. Gem resten af dataene som træningsfunktioner:
+1. Drop den `Unnamed: 0` kolonne og `cuisine` kolonnen ved at kalde `drop()`. Gem resten af dataene som trænbar features:
 
     ```python
     cuisines_feature_df = cuisines_df.drop(['Unnamed: 0', 'cuisine'], axis=1)
     cuisines_feature_df.head()
     ```
 
-    Dine funktioner ser sådan ud:
+    Dine features ser sådan ud:
 
 |      | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | artemisia | artichoke |  ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood |  yam | yeast | yogurt | zucchini |
 | ---: | -----: | -------: | ----: | ---------: | ----: | -----------: | ------: | -------: | --------: | --------: | ---: | ------: | ----------: | ---------: | ----------------------: | ---: | ---: | ---: | ----: | -----: | -------: |
@@ -79,71 +79,71 @@ Nu er du klar til at træne din model!
 
 ## Valg af klassifikator
 
-Nu hvor dine data er rene og klar til træning, skal du beslutte, hvilken algoritme du vil bruge til opgaven. 
+Nu hvor dine data er rene og klar til træning, skal du beslutte, hvilken algoritme der skal bruges til opgaven.
 
-Scikit-learn grupperer klassifikation under Supervised Learning, og i den kategori finder du mange måder at klassificere på. [Udvalget](https://scikit-learn.org/stable/supervised_learning.html) kan virke overvældende ved første øjekast. Følgende metoder inkluderer alle klassifikationsteknikker:
+Scikit-learn grupperer klassifikation under Superviseret læring, og i den kategori finder du mange måder at klassificere på. [Variationerne](https://scikit-learn.org/stable/supervised_learning.html) kan virke overvældende ved første øjekast. Følgende metoder indeholder alle klassifikationsteknikker:
 
 - Lineære modeller
 - Support Vector Machines
-- Stokastisk gradientnedstigning
+- Stochastic Gradient Descent
 - Nærmeste naboer
-- Gaussian-processer
+- Gaussiske processer
 - Beslutningstræer
-- Ensemble-metoder (voting Classifier)
-- Multiclass- og multioutput-algoritmer (multiclass- og multilabel-klassifikation, multiclass-multioutput-klassifikation)
+- Ensemblemetoder (votingsklassifikator)
+- Multiklasse- og multioutput-algoritmer (multiklasse- og multilabel-klassifikation, multiklasse-multioutput-klassifikation)
 
-> Du kan også bruge [neural netværk til at klassificere data](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), men det ligger uden for denne lektions omfang.
+> Du kan også bruge [neurale netværk til at klassificere data](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), men det er uden for omfanget af denne lektion.
 
-### Hvilken klassifikator skal du vælge?
+### Hvilken klassifikator skal man vælge?
 
-Så, hvilken klassifikator skal du vælge? Ofte kan det være en god idé at prøve flere og se, hvilken der giver det bedste resultat. Scikit-learn tilbyder en [side-by-side sammenligning](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) på et oprettet datasæt, hvor KNeighbors, SVC på to måder, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB og QuadraticDiscriminationAnalysis sammenlignes og visualiseres:
+Så, hvilken klassifikator skal du vælge? Det er ofte en god idé at prøve flere og se efter et godt resultat som test. Scikit-learn tilbyder en [side-om-side sammenligning](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) på et oprettet datasæt, der sammenligner KNeighbors, SVC på to måder, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB og QuadraticDiscrinationAnalysis, med visualiserede resultater:
 
-![sammenligning af klassifikatorer](../../../../4-Classification/2-Classifiers-1/images/comparison.png)
-> Diagrammer genereret fra Scikit-learns dokumentation
+![comparison of classifiers](../../../../translated_images/da/comparison.edfab56193a85e7f.webp)
+> Diagrammer genereret i Scikit-learns dokumentation
 
-> AutoML løser dette problem elegant ved at køre disse sammenligninger i skyen, så du kan vælge den bedste algoritme til dine data. Prøv det [her](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
+> AutoML løser dette problem flot ved at køre disse sammenligninger i skyen, så du kan vælge den bedste algoritme til dine data. Prøv det [her](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
 
 ### En bedre tilgang
 
-En bedre tilgang end blot at gætte er at følge ideerne på dette downloadbare [ML Cheat Sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott). Her opdager vi, at vi for vores multiclass-problem har nogle valgmuligheder:
+En bedre måde end at gætte vildt er at følge ideerne i dette downloadbare [ML Cheat sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott). Her opdager vi, at for vores multiklasse-problem har vi nogle valg:
 
-![cheatsheet for multiclass-problemer](../../../../4-Classification/2-Classifiers-1/images/cheatsheet.png)
-> En sektion af Microsofts Algorithm Cheat Sheet, der beskriver muligheder for multiclass-klassifikation
+![cheatsheet for multiclass problems](../../../../translated_images/da/cheatsheet.07a475ea444d2223.webp)
+> Et uddrag af Microsofts Algorithm Cheat Sheet, der detaljerer multiklasseklassifikationsmuligheder
 
 ✅ Download dette cheat sheet, print det ud, og hæng det op på din væg!
 
-### Overvejelser
+### Begrundelse
 
-Lad os se, om vi kan ræsonnere os frem til forskellige tilgange givet de begrænsninger, vi har:
+Lad os se, om vi kan begrunde forskellige tilgange ud fra de begrænsninger, vi har:
 
-- **Neural netværk er for tunge**. Givet vores rene, men minimale datasæt, og det faktum at vi kører træning lokalt via notebooks, er neural netværk for tunge til denne opgave.
-- **Ingen to-klassifikator**. Vi bruger ikke en to-klassifikator, så det udelukker one-vs-all.
-- **Beslutningstræ eller logistisk regression kunne fungere**. Et beslutningstræ kunne fungere, eller logistisk regression for multiclass-data.
-- **Multiclass Boosted Decision Trees løser et andet problem**. Multiclass Boosted Decision Tree er mest egnet til ikke-parametriske opgaver, f.eks. opgaver designet til at opbygge rangeringer, så det er ikke nyttigt for os.
+- **Neurale netværk er for tunge**. Givet vores rene, men minimale datasæt, og at vi kører træning lokalt via notebooks, er neurale netværk for tunge til denne opgave.
+- **Ingen to-klasse klassifikator**. Vi bruger ikke en to-klasse klassifikator, så det udelukker one-vs-all.
+- **Beslutningstræ eller logistisk regression kunne fungere**. Et beslutningstræ kunne fungere, eller logistisk regression til multiklasse data.
+- **Multiklasse Boosted Decision Trees løser et andet problem**. Det multiklasse boosted decision tree er mest egnet til ikke-parametriske opgaver, fx opgaver designet til at bygge ranglister, så det er ikke nyttigt for os.
 
-### Brug af Scikit-learn 
+### Brug af Scikit-learn
 
-Vi vil bruge Scikit-learn til at analysere vores data. Der er dog mange måder at bruge logistisk regression i Scikit-learn. Se på [parametrene, der kan angives](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).  
+Vi vil bruge Scikit-learn til at analysere vores data. Der er dog mange måder at bruge logistisk regression i Scikit-learn på. Tag et kig på [parametrene, der kan gives](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-Grundlæggende er der to vigtige parametre - `multi_class` og `solver` - som vi skal angive, når vi beder Scikit-learn om at udføre en logistisk regression. `multi_class`-værdien anvender en bestemt adfærd. Værdien af solver angiver, hvilken algoritme der skal bruges. Ikke alle solvers kan kombineres med alle `multi_class`-værdier.
+Grundlæggende er der to vigtige parametre - `multi_class` og `solver` - som vi skal specificere, når vi beder Scikit-learn om at udføre logistisk regression. `multi_class`-værdien angiver en bestemt opførsel. Værdien af solver er, hvilken algoritme der skal bruges. Ikke alle solvere kan kombineres med alle `multi_class` værdier.
 
-Ifølge dokumentationen, i multiclass-tilfældet, træningsalgoritmen:
+Ifølge dokumentationen bruger træningsalgoritmen i multiklasse tilfælde:
 
-- **Bruger one-vs-rest (OvR)-skemaet**, hvis `multi_class`-indstillingen er sat til `ovr`
-- **Bruger krydsentropitab**, hvis `multi_class`-indstillingen er sat til `multinomial`. (I øjeblikket understøttes `multinomial`-indstillingen kun af ‘lbfgs’, ‘sag’, ‘saga’ og ‘newton-cg’-solvers.)
+- **Bruger one-vs-rest (OvR) skemaet**, hvis `multi_class`-optionen sættes til `ovr`
+- **Bruger kryds-entropi-tab**, hvis `multi_class`-optionen sættes til `multinomial`. (I øjeblikket understøtter `multinomial` kun ‘lbfgs’, ‘sag’, ‘saga’ og ‘newton-cg’ solvere.)"
 
-> 🎓 'Skemaet' her kan enten være 'ovr' (one-vs-rest) eller 'multinomial'. Da logistisk regression egentlig er designet til at understøtte binær klassifikation, giver disse skemaer den mulighed for bedre at håndtere multiclass-klassifikationsopgaver. [kilde](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
+> 🎓 ‘Skemaet’ her kan enten være ‘ovr’ (one-vs-rest) eller ‘multinomial’. Da logistisk regression er designet til binær klassifikation, tillader disse skemaer den at håndtere multiklasse klassifikationsopgaver bedre. [kilde](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
 
-> 🎓 'Solveren' defineres som "den algoritme, der skal bruges i optimeringsproblemet". [kilde](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
+> 🎓 ‘Solver’ defineres som "algoritmen til brug i optimeringsproblemet". [kilde](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-Scikit-learn tilbyder denne tabel til at forklare, hvordan solvers håndterer forskellige udfordringer præsenteret af forskellige typer datastrukturer:
+Scikit-learn tilbyder denne tabel for at forklare, hvordan solvere håndterer forskellige udfordringer præsenteret af forskellige datatyper:
 
-![solvers](../../../../4-Classification/2-Classifiers-1/images/solvers.png)
+![solvers](../../../../translated_images/da/solvers.5fc648618529e627.webp)
 
 ## Øvelse - del dataene
 
-Vi kan fokusere på logistisk regression til vores første træningsforsøg, da du for nylig har lært om sidstnævnte i en tidligere lektion.
-Del dine data i trænings- og testgrupper ved at kalde `train_test_split()`:
+Vi kan fokusere på logistisk regression til vores første træningsforsøg, da du for nylig lærte om denne i en tidligere lektion.
+Del dine data op i trænings- og testgrupper ved at kalde `train_test_split()`:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
@@ -151,7 +151,7 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
 
 ## Øvelse - anvend logistisk regression
 
-Da du bruger multiclass-tilfældet, skal du vælge, hvilket _skema_ du vil bruge, og hvilken _solver_ du vil angive. Brug LogisticRegression med en multiclass-indstilling og **liblinear**-solveren til at træne.
+Da du bruger multiklasse-tilfældet, skal du vælge hvilket _skema_ der skal bruges, og hvilken _solver_ der skal sættes. Brug LogisticRegression med en multiklasse-indstilling og **liblinear** solver til træning.
 
 1. Opret en logistisk regression med multi_class sat til `ovr` og solver sat til `liblinear`:
 
@@ -163,9 +163,11 @@ Da du bruger multiclass-tilfældet, skal du vælge, hvilket _skema_ du vil bruge
     print ("Accuracy is {}".format(accuracy))
     ```
 
-    ✅ Prøv en anden solver som `lbfgs`, som ofte er angivet som standard
-> Bemærk, brug Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html)-funktionen til at flade dine data ud, når det er nødvendigt.
-Nøjagtigheden er god ved over **80%**!
+    ✅ Prøv en anden solver som `lbfgs`, som ofte sættes som standard
+
+    > Bemærk, brug Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) funktion til at flade dine data ud, når det er nødvendigt.
+
+    Præcisionen er god med over **80%**!
 
 1. Du kan se denne model i aktion ved at teste en række data (#50):
 
@@ -174,7 +176,7 @@ Nøjagtigheden er god ved over **80%**!
     print(f'cuisine: {y_test.iloc[50]}')
     ```
 
-    Resultatet bliver udskrevet:
+    Resultatet printes:
 
    ```output
    ingredients: Index(['cilantro', 'onion', 'pea', 'potato', 'tomato', 'vegetable_oil'], dtype='object')
@@ -182,8 +184,7 @@ Nøjagtigheden er god ved over **80%**!
    ```
 
    ✅ Prøv et andet rækkenummer og tjek resultaterne
-
-1. Gå dybere, og undersøg nøjagtigheden af denne forudsigelse:
+1. Hvis du graver dybere, kan du tjekke nøjagtigheden af denne forudsigelse:
 
     ```python
     test= X_test.iloc[50].values.reshape(-1, 1).T
@@ -195,7 +196,7 @@ Nøjagtigheden er god ved over **80%**!
     topPrediction.head()
     ```
 
-    Resultatet bliver udskrevet - indisk køkken er dens bedste gæt, med god sandsynlighed:
+    Resultatet bliver printet - Indisk køkken er det bedste bud, med god sandsynlighed:
 
     |          |        0 |
     | -------: | -------: |
@@ -205,9 +206,9 @@ Nøjagtigheden er god ved over **80%**!
     |   korean | 0.017277 |
     |     thai | 0.007634 |
 
-    ✅ Kan du forklare, hvorfor modellen er ret sikker på, at dette er et indisk køkken?
+    ✅ Kan du forklare, hvorfor modellen er ret sikker på, at dette er indisk køkken?
 
-1. Få flere detaljer ved at udskrive en klassifikationsrapport, som du gjorde i regression-lektionerne:
+1. Få flere detaljer ved at printe en klassifikationsrapport, som du gjorde i regressionslektionerne:
 
     ```python
     y_pred = model.predict(X_test)
@@ -221,24 +222,26 @@ Nøjagtigheden er god ved over **80%**!
     | japanese     | 0.70      | 0.75   | 0.72     | 220     |
     | korean       | 0.86      | 0.76   | 0.81     | 242     |
     | thai         | 0.79      | 0.85   | 0.82     | 254     |
-    | accuracy     | 0.80      | 1199   |          |         |
+    | accuracy     |           |        | 0.80     | 1199    |
     | macro avg    | 0.80      | 0.80   | 0.80     | 1199    |
     | weighted avg | 0.80      | 0.80   | 0.80     | 1199    |
 
 ## 🚀Udfordring
 
-I denne lektion brugte du dine rensede data til at bygge en maskinlæringsmodel, der kan forudsige en national køkkenstil baseret på en række ingredienser. Tag dig tid til at læse om de mange muligheder, Scikit-learn tilbyder til at klassificere data. Gå dybere ned i konceptet 'solver' for at forstå, hvad der sker bag kulisserne.
+I denne lektion brugte du dine rensede data til at bygge en maskinlæringsmodel, der kan forudsige en national ret baseret på en række ingredienser. Tag dig tid til at læse igennem de mange muligheder, Scikit-learn tilbyder til klassificering af data. Undersøg nærmere konceptet ’solver’ for at forstå, hvad der sker bag kulisserne.
 
 ## [Quiz efter lektionen](https://ff-quizzes.netlify.app/en/ml/)
 
 ## Gennemgang & Selvstudie
 
-Undersøg lidt mere om matematikken bag logistisk regression i [denne lektion](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
+Grav lidt dybere i matematikken bag logistisk regression i [denne lektion](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
 ## Opgave 
 
-[Undersøg solvers](assignment.md)
+[Studér solverne](assignment.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Mens vi stræber efter nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets modersmål bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger som følge af brugen af denne oversættelse.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

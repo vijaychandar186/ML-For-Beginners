@@ -1,17 +1,17 @@
-# 美食分類器 1
+# Cuisine classifiers 1
 
-在這節課中，你將使用上一節課保存的數據集，這是一個關於美食的平衡且乾淨的數據集。
+在本課程中，您將使用上一課保存的平衡且乾淨的關於不同料理類型的數據集。
 
-你將使用這個數據集和多種分類器來_根據一組食材預測特定的國家美食_。在此過程中，你將更深入了解算法如何用於分類任務。
+您將使用該數據集搭配各種分類器，_根據一組食材預測指定的國家料理_。在此過程中，您將了解更多算法如何用於分類任務的方法。
 
 ## [課前測驗](https://ff-quizzes.netlify.app/en/ml/)
 # 準備工作
 
-假設你已完成[第一課](../1-Introduction/README.md)，請確保在根目錄 `/data` 文件夾中存在一個 _cleaned_cuisines.csv_ 文件，供這四節課使用。
+假設您已完成[課程 1](../1-Introduction/README.md)，請確認在這四課的根目錄 `/data` 資料夾中存在一個名為 _cleaned_cuisines.csv_ 的檔案。
 
-## 練習 - 預測國家美食
+## 練習 - 預測一個國家料理
 
-1. 在本課的 _notebook.ipynb_ 文件夾中，導入該文件以及 Pandas 庫：
+1. 在本課的 _notebook.ipynb_ 中，導入該文件以及 Pandas 函式庫：
 
     ```python
     import pandas as pd
@@ -19,7 +19,7 @@
     cuisines_df.head()
     ```
 
-    數據看起來像這樣：
+    數據看起來如下：
 
 |     | Unnamed: 0 | cuisine | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood | yam | yeast | yogurt | zucchini |
 | --- | ---------- | ------- | ------ | -------- | ----- | ---------- | ----- | ------------ | ------- | -------- | --- | ------- | ----------- | ---------- | ----------------------- | ---- | ---- | --- | ----- | ------ | -------- |
@@ -30,7 +30,7 @@
 | 4   | 4          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 1      | 0        |
   
 
-1. 現在，導入更多的庫：
+1. 現在，導入更多函式庫：
 
     ```python
     from sklearn.linear_model import LogisticRegression
@@ -40,14 +40,14 @@
     import numpy as np
     ```
 
-1. 將 X 和 y 坐標分成兩個數據框進行訓練。`cuisine` 可以作為標籤數據框：
+1. 將 X 和 y 分別劃分成兩個資料框，用於訓練。`cuisine` 可作為標籤資料框：
 
     ```python
     cuisines_label_df = cuisines_df['cuisine']
     cuisines_label_df.head()
     ```
 
-    它看起來像這樣：
+    看起來將會是這樣：
 
     ```output
     0    indian
@@ -58,14 +58,14 @@
     Name: cuisine, dtype: object
     ```
 
-1. 使用 `drop()` 刪除 `Unnamed: 0` 列和 `cuisine` 列。將剩餘的數據保存為可訓練的特徵：
+1. 丟棄 `Unnamed: 0` 欄位和 `cuisine` 欄位，呼叫 `drop()`。將剩餘資料作為可訓練特徵：
 
     ```python
     cuisines_feature_df = cuisines_df.drop(['Unnamed: 0', 'cuisine'], axis=1)
     cuisines_feature_df.head()
     ```
 
-    你的特徵看起來像這樣：
+    您的特徵看起來像這樣：
 
 |      | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | artemisia | artichoke |  ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood |  yam | yeast | yogurt | zucchini |
 | ---: | -----: | -------: | ----: | ---------: | ----: | -----------: | ------: | -------: | --------: | --------: | ---: | ------: | ----------: | ---------: | ----------------------: | ---: | ---: | ---: | ----: | -----: | -------: |
@@ -75,85 +75,85 @@
 |    3 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
 |    4 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      1 |        0 | 0 |
 
-現在你已準備好訓練你的模型！
+現在，您已準備好訓練模型！
 
-## 選擇分類器
+## 選擇你的分類器
 
-現在你的數據已清理並準備好訓練，你需要決定使用哪種算法來完成任務。
+既然資料已乾淨且準備好做訓練，您得決定用哪個算法來執行這個任務。
 
-Scikit-learn 將分類歸類為監督學習，在這個類別中，你會發現許多分類方法。[種類繁多](https://scikit-learn.org/stable/supervised_learning.html)可能會讓人一開始感到困惑。以下方法都包括分類技術：
+Scikit-learn 將分類歸類於監督學習，您會在該類別下看到多種分類方法。[種類](https://scikit-learn.org/stable/supervised_learning.html)乍看之下令人眼花繚亂。以下方法都包含分類技術：
 
 - 線性模型
-- 支持向量機
+- 支援向量機
 - 隨機梯度下降
-- 最近鄰
+- 最近鄰居
 - 高斯過程
 - 決策樹
 - 集成方法（投票分類器）
-- 多類和多輸出算法（多類多標籤分類，多類多輸出分類）
+- 多類與多輸出算法（多類與多標籤分類，多類多輸出分類）
 
-> 你也可以使用[神經網絡來分類數據](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification)，但這超出了本課的範圍。
+> 你也可以使用[神經網絡來對數據分類](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification)，但那超出本課範圍。
 
 ### 選擇哪個分類器？
 
-那麼，應該選擇哪個分類器呢？通常，通過嘗試多種分類器並尋找良好的結果是一種測試方法。Scikit-learn 提供了一個[並排比較](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html)，在一個創建的數據集上比較 KNeighbors、SVC 兩種方式、GaussianProcessClassifier、DecisionTreeClassifier、RandomForestClassifier、MLPClassifier、AdaBoostClassifier、GaussianNB 和 QuadraticDiscrinationAnalysis，並以可視化方式展示結果：
+那麼，應該選哪個分類器呢？通常，可以嘗試多個方法，看看哪個結果最好是檢測的好方法。Scikit-learn 提供了一個對比[範例](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html)，在一個自己製作的數據集上比較 KNeighbors、SVC 兩種方式、GaussianProcessClassifier、DecisionTreeClassifier、RandomForestClassifier、MLPClassifier、AdaBoostClassifier、GaussianNB 及 QuadraticDiscrinationAnalysis，並以視覺化展示結果：
 
-![分類器比較](../../../../4-Classification/2-Classifiers-1/images/comparison.png)
-> 圖片來自 Scikit-learn 的文檔
+![comparison of classifiers](../../../../translated_images/zh-HK/comparison.edfab56193a85e7f.webp)
+> 由 Scikit-learn 文件生成的圖表
 
-> AutoML 可以通過在雲端運行這些比較來解決這個問題，幫助你選擇最適合你的數據的算法。試試看[這裡](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
+> AutoML 通過在雲端運行這些比較來巧妙解決此問題，讓您可選擇最適合自己數據的算法。試試看[這裡](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
 
-### 更好的方法
+### 一個更好的方法
 
-比隨意猜測更好的方法是遵循這份可下載的[機器學習速查表](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott)。在這裡，我們發現針對我們的多類問題，我們有一些選擇：
+比起盲目猜測，跟隨這個可下載的 [ML 速查表](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott) 的想法會更好。在這裏，我們發現針對我們的多類問題，有以下幾種選擇：
 
-![多類問題速查表](../../../../4-Classification/2-Classifiers-1/images/cheatsheet.png)
-> 微軟算法速查表的一部分，詳細介紹了多類分類選項
+![cheatsheet for multiclass problems](../../../../translated_images/zh-HK/cheatsheet.07a475ea444d2223.webp)
+> 微軟算法速查表的其中一部分，詳列多類分類的選項
 
-✅ 下載這份速查表，打印出來，掛在牆上！
+✅ 下載這張速查表，列印出來，並掛在桌旁！
 
-### 推理
+### 推理分析
 
-讓我們看看是否可以根據我們的限制推理出不同的方法：
+讓我們看看能否依照我們的限制條件，推斷出不同方法的合理性：
 
-- **神經網絡太重**。考慮到我們的數據集雖然乾淨但規模較小，以及我們通過筆記本本地運行訓練的事實，神經網絡對於這項任務來說太過繁重。
-- **不使用二類分類器**。我們不使用二類分類器，因此排除了一對多（one-vs-all）。
-- **決策樹或邏輯回歸可能有效**。決策樹可能有效，或者多類數據的邏輯回歸也可以。
-- **多類增強決策樹解決不同問題**。多類增強決策樹最適合非參數任務，例如設計排名的任務，因此對我們來說並不適用。
+- <strong>神經網絡太重</strong>。基於我們潔淨但有限的資料集，以及我們在筆記本中本地訓練的事實，神經網絡對此任務來說過於龐大。
+- <strong>沒有雙類分類器</strong>。我們沒有使用雙類分類器，因此排除 one-vs-all 的方法。
+- <strong>決策樹或邏輯迴歸可能奏效</strong>。決策樹可能有效，或者使用適合多類資料的邏輯迴歸。
+- <strong>多類提升決策樹解決不同問題</strong>。多類提升決策樹適合非參數任務，例如用來建立排序的任務，因此對我們無用。
 
-### 使用 Scikit-learn 
+### 使用 Scikit-learn
 
-我們將使用 Scikit-learn 來分析數據。然而，在 Scikit-learn 中有許多方法可以使用邏輯回歸。看看[可傳遞的參數](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression)。
+我們將使用 Scikit-learn 來分析資料。但 Scikit-learn 中有許多使用邏輯迴歸的方法。看看[必須傳入的參數](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression)。
 
-基本上有兩個重要的參數 - `multi_class` 和 `solver` - 我們需要指定，當我們要求 Scikit-learn 執行邏輯回歸時。`multi_class` 值應用某種行為。solver 的值是使用哪種算法。並非所有 solver 都可以與所有 `multi_class` 值配對。
+主要有兩個重要參數 - `multi_class` 和 `solver` - 需要指定，當您要求 Scikit-learn 執行邏輯迴歸時。`multi_class` 設定套用特定行為。`solver` 定義使用的算法。並非所有 solver 都能搭配所有 `multi_class` 參數。
 
-根據文檔，在多類情況下，訓練算法：
+根據文件，對多類情況而言，訓練算法：
 
-- **使用一對多（OvR）方案**，如果 `multi_class` 選項設置為 `ovr`
-- **使用交叉熵損失**，如果 `multi_class` 選項設置為 `multinomial`。（目前 `multinomial` 選項僅支持 ‘lbfgs’、‘sag’、‘saga’ 和 ‘newton-cg’ solver。）
+- **使用 one-vs-rest (OvR) 機制**，當 `multi_class` 選項設定為 `ovr`
+- <strong>使用交叉熵損失</strong>，當 `multi_class` 選項設定為 `multinomial`。（目前 `multinomial` 僅支援 ‘lbfgs’, ‘sag’, ‘saga’ 和 ‘newton-cg’ solver。)"
 
-> 🎓 這裡的“方案”可以是 'ovr'（一對多）或 'multinomial'。由於邏輯回歸實際上是為支持二類分類而設計的，這些方案使其能更好地處理多類分類任務。[來源](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
+> 🎓 此處的 'scheme' 可設為 'ovr'（一對多）或 'multinomial'（多項式）。因邏輯迴歸本質設計為二分類，這些機制幫助其更好地處理多類分類任務。 [來源](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
 
-> 🎓 'solver' 被定義為“用於優化問題的算法”。[來源](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression)。
+> 🎓 'solver' 定義為「優化問題中所用的算法」。[來源](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression)
 
-Scikit-learn 提供了這張表格來解釋 solver 如何處理不同數據結構帶來的挑戰：
+Scikit-learn 以此表格解釋不同 solver 如何處理不同數據結構的挑戰：
 
-![solver](../../../../4-Classification/2-Classifiers-1/images/solvers.png)
+![solvers](../../../../translated_images/zh-HK/solvers.5fc648618529e627.webp)
 
 ## 練習 - 分割數據
 
-我們可以專注於邏輯回歸作為我們的第一次訓練嘗試，因為你在上一節課中剛剛學習了它。
-通過調用 `train_test_split()` 將數據分為訓練和測試組：
+我們可聚焦於邏輯迴歸，作為首次訓練嘗試，因為您之前課程中剛學習過它。
+呼叫 `train_test_split()` 將資料分割為訓練組和測試組：
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
 ```
 
-## 練習 - 應用邏輯回歸
+## 練習 - 應用邏輯迴歸
 
-由於你正在使用多類情況，你需要選擇使用什麼_方案_以及設置什麼_solver_。使用 LogisticRegression，設置多類選項並使用 **liblinear** solver 進行訓練。
+因為您使用多類情況，您需要選擇使用的 _機制_ 與設定的 _solver_。用 multi_class 設為 `ovr` 且 solver 設為 **liblinear** 的 LogisticRegression 做訓練。
 
-1. 創建一個邏輯回歸，將 multi_class 設置為 `ovr`，solver 設置為 `liblinear`：
+1. 建立一個 multi_class 設為 `ovr` 且 solver 是 `liblinear` 的邏輯迴歸：
 
     ```python
     lr = LogisticRegression(multi_class='ovr',solver='liblinear')
@@ -163,27 +163,28 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
     print ("Accuracy is {}".format(accuracy))
     ```
 
-    ✅ 嘗試使用其他 solver，例如 `lbfgs`，它通常設置為默認值
-> 注意，當需要將數據展平時，可以使用 Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) 函數。
-準確度超過 **80%**！
+    ✅ 試試其他 solver，例如經常作為預設的 `lbfgs`
 
-1. 你可以透過測試第 50 行數據來查看此模型的效果：
+    > 注意，如有需要，請使用 Pandas 的 [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) 函式來壓平資料。
+
+    準確率相當好，超過 **80%**！
+
+1. 透過測試一筆資料（第 50 行）來看看此模型在運作時的表現：
 
     ```python
     print(f'ingredients: {X_test.iloc[50][X_test.iloc[50]!=0].keys()}')
     print(f'cuisine: {y_test.iloc[50]}')
     ```
 
-    結果會顯示如下：
+    列印輸出結果：
 
-    ```output
+   ```output
    ingredients: Index(['cilantro', 'onion', 'pea', 'potato', 'tomato', 'vegetable_oil'], dtype='object')
    cuisine: indian
    ```
 
-    ✅ 嘗試不同的行數並檢查結果
-
-1. 更深入地分析，你可以檢查此預測的準確度：
+   ✅ 更換不同的行號來檢查結果
+1. 挖得更深，你可以檢查這個預測的準確性：
 
     ```python
     test= X_test.iloc[50].values.reshape(-1, 1).T
@@ -195,7 +196,7 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
     topPrediction.head()
     ```
 
-    結果顯示 - 印度菜是模型的最佳猜測，且概率相當高：
+    結果列印出來 - 印度料理是其最佳猜測，且機率相當高：
 
     |          |        0 |
     | -------: | -------: |
@@ -205,9 +206,9 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
     |   korean | 0.017277 |
     |     thai | 0.007634 |
 
-    ✅ 你能解釋為什麼模型非常確定這是印度菜嗎？
+    ✅ 你能解釋為什麼模型相當確定這是印度料理嗎？
 
-1. 通過打印分類報告獲取更多細節，就像你在回歸課程中所做的一樣：
+1. 如同迴歸課程一樣，透過列印分類報告取得更多細節：
 
     ```python
     y_pred = model.predict(X_test)
@@ -221,24 +222,26 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
     | japanese     | 0.70      | 0.75   | 0.72     | 220     |
     | korean       | 0.86      | 0.76   | 0.81     | 242     |
     | thai         | 0.79      | 0.85   | 0.82     | 254     |
-    | accuracy     | 0.80      | 1199   |          |         |
+    | accuracy     |           |        | 0.80     | 1199    |
     | macro avg    | 0.80      | 0.80   | 0.80     | 1199    |
     | weighted avg | 0.80      | 0.80   | 0.80     | 1199    |
 
 ## 🚀挑戰
 
-在本課中，你使用清理過的數據建立了一個機器學習模型，該模型可以根據一系列食材預測國家菜系。花些時間閱讀 Scikit-learn 提供的多種分類數據選項。深入了解 "solver" 的概念，理解其背後的運作原理。
+在本課程中，你使用清理過的資料建構了一個機器學習模型，可以根據一系列的食材預測國家料理。花點時間閱讀 Scikit-learn 提供的多種資料分類選項。深入了解「solver」的概念，以理解幕後的運作原理。
 
-## [課後測驗](https://ff-quizzes.netlify.app/en/ml/)
+## [課後小測驗](https://ff-quizzes.netlify.app/en/ml/)
 
-## 回顧與自學
+## 複習與自學
 
-深入了解邏輯回歸背後的數學原理：[這篇課程](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
-## 作業
+深入探究邏輯斯迴歸背後的數學原理，請參閱[此課程](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
+## 作業 
 
-[研究 solvers](assignment.md)
+[研究 solver](assignment.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責聲明**：  
-此文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻譯。我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。應以原文文件作為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應視為權威來源。對於重要資訊，建議採用專業人工翻譯。我們不承擔因使用此翻譯而引起的任何誤解或曲解之責任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

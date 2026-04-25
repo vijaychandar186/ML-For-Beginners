@@ -1,17 +1,17 @@
-# ਖਾਣੇ ਦੇ ਵਰਗ 1
+# Cuisine classifiers 1
 
-ਇਸ ਪਾਠ ਵਿੱਚ, ਤੁਸੀਂ ਪਿਛਲੇ ਪਾਠ ਵਿੱਚ ਸੇਵ ਕੀਤੇ ਡਾਟਾਸੈਟ ਨੂੰ ਵਰਤੋਂਗੇ, ਜੋ ਖਾਣੇ ਬਾਰੇ ਸੰਤੁਲਿਤ ਅਤੇ ਸਾਫ ਡਾਟਾ ਨਾਲ ਭਰਿਆ ਹੋਇਆ ਹੈ।
+ਇਸ ਪਾਠ ਵਿੱਚ, ਤੁਸੀਂ ਉਹ ਡੇਟਾਸੇਟ ਵਰਤੋਂਗੇ ਜੋ ਤੁਸੀਂ ਪਿਛਲੇ ਪਾਠ ਤੋਂ ਸੰਭਾਲਿਆ ਸੀ, ਜਿਸ ਵਿੱਚ ਕਿਊਜ਼ੀਨਾਂ ਬਾਰੇ ਸੰਤੁਲਿਤ, ਸਾਫ਼ ਡੇਟਾ ਹੈ।
 
-ਤੁਸੀਂ ਇਸ ਡਾਟਾਸੈਟ ਨੂੰ ਵੱਖ-ਵੱਖ ਵਰਗਬੱਧ ਕਰਨ ਵਾਲੇ ਤਰੀਕਿਆਂ ਨਾਲ ਵਰਤੋਂਗੇ ਤਾਂ ਜੋ _ਸਮੂਹ ਦੇ ਸਮੱਗਰੀ ਦੇ ਆਧਾਰ 'ਤੇ ਦਿੱਤੇ ਗਏ ਰਾਸ਼ਟਰੀ ਖਾਣੇ ਦੀ ਪੇਸ਼ਗੂਈ ਕੀਤੀ ਜਾ ਸਕੇ_। ਇਸ ਦੌਰਾਨ, ਤੁਸੀਂ ਇਹ ਵੀ ਸਿੱਖੋਗੇ ਕਿ ਵਰਗਬੱਧ ਕਰਨ ਵਾਲੇ ਕੰਮਾਂ ਲਈ ਅਲਗੋਰਿਥਮ ਨੂੰ ਕਿਵੇਂ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।
+ਤੁਸੀਂ ਇਸ ਡੇਟਾਸੇਟ ਨੂੰ ਵੱਖ-ਵੱਖ ਕਲਾਸੀਫਾਇਰਾਂ ਨਾਲ ਵਰਤੋਂਗੇ ਤਾਂ ਜੋ _ਦਿੱਤੇ ਗਏ ਸਮੱਗਰੀਆਂ ਦੇ ਸਮੂਹ ਦੇ ਆਧਾਰ 'ਤੇ ਰਾਸ਼ਟਰੀ ਰਸੋਈ ਦੀ ਭਵਿੱਖਬਾਣੀ ਕੀਤੀ ਜਾ ਸਕੇ_। ਇਸ ਦੌਰਾਨ, ਤੁਸੀਂ ਜਾਣੋਗੇ ਕਿ ਕਿਵੇਂ ਅਲਗੋਰਿਦਮ ਕਲਾਸੀਫਿਕੇਸ਼ਨ ਕੰਮਾਂ ਲਈ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ।
 
-## [ਪ੍ਰੀ-ਪਾਠ ਕਵਿਜ਼](https://ff-quizzes.netlify.app/en/ml/)
+## [ਪ੍ਰੀ-ਲੈਕਚਰ ਕਵਿਜ਼](https://ff-quizzes.netlify.app/en/ml/)
 # ਤਿਆਰੀ
 
-ਜੇਕਰ ਤੁਸੀਂ [ਪਾਠ 1](../1-Introduction/README.md) ਪੂਰਾ ਕੀਤਾ ਹੈ, ਤਾਂ ਯਕੀਨੀ ਬਣਾਓ ਕਿ _cleaned_cuisines.csv_ ਫਾਈਲ `/data` ਫੋਲਡਰ ਦੇ ਰੂਟ ਵਿੱਚ ਮੌਜੂਦ ਹੈ, ਜੋ ਕਿ ਇਹਨਾਂ ਚਾਰ ਪਾਠਾਂ ਲਈ ਹੈ।
+ਮੰਨ ਲਓ ਕਿ ਤੁਸੀਂ [Lesson 1](../1-Introduction/README.md) ਪੂਰਾ ਕਰ ਲਿਆ ਹੈ, ਤਾਂ ਇਹ ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਇੱਕ _cleaned_cuisines.csv_ ਫਾਈਲ ਰੂਟ `/data` ਫੋਲਡਰ ਵਿੱਚ ਮੌਜੂਦ ਹੈ ਇਹਨਾਂ ਚਾਰ ਪਾਠਾਂ ਲਈ।
 
-## ਅਭਿਆਸ - ਰਾਸ਼ਟਰੀ ਖਾਣੇ ਦੀ ਪੇਸ਼ਗੂਈ ਕਰੋ
+## ਅਭਿਆਸ - ਇੱਕ ਰਾਸ਼ਟਰੀ ਰਸੋਈ ਦੀ ਭਵਿੱਖਬਾਣੀ ਕਰੋ
 
-1. ਇਸ ਪਾਠ ਦੇ _notebook.ipynb_ ਫੋਲਡਰ ਵਿੱਚ ਕੰਮ ਕਰਦੇ ਹੋਏ, ਉਸ ਫਾਈਲ ਨੂੰ Pandas ਲਾਇਬ੍ਰੇਰੀ ਦੇ ਨਾਲ ਇੰਪੋਰਟ ਕਰੋ:
+1. ਇਸ ਪਾਠ ਦੇ _notebook.ipynb_ ਫੋਲਡਰ ਵਿੱਚ ਕੰਮ ਕਰਦੇ ਹੋਏ, ਉਸ ਫਾਈਲ ਨੂੰ ਅਤੇ Pandas ਲਾਇਬ੍ਰੇਰੀ ਨੂੰ ਇੰਪੋਰਟ ਕਰੋ:
 
     ```python
     import pandas as pd
@@ -19,7 +19,7 @@
     cuisines_df.head()
     ```
 
-    ਡਾਟਾ ਇਸ ਤਰ੍ਹਾਂ ਦਿਖਾਈ ਦਿੰਦਾ ਹੈ:
+    ਡੇਟਾ ਇਸ ਤਰ੍ਹਾਂ ਦਿੱਸਦਾ ਹੈ:
 
 |     | Unnamed: 0 | cuisine | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood | yam | yeast | yogurt | zucchini |
 | --- | ---------- | ------- | ------ | -------- | ----- | ---------- | ----- | ------------ | ------- | -------- | --- | ------- | ----------- | ---------- | ----------------------- | ---- | ---- | --- | ----- | ------ | -------- |
@@ -30,7 +30,7 @@
 | 4   | 4          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 1      | 0        |
   
 
-1. ਹੁਣ, ਹੋਰ ਕਈ ਲਾਇਬ੍ਰੇਰੀਆਂ ਇੰਪੋਰਟ ਕਰੋ:
+1. ਹੁਣ, ਕੁਝ ਹੋਰ ਲਾਇਬ੍ਰੇਰੀਆਂ ਇੰਪੋਰਟ ਕਰੋ:
 
     ```python
     from sklearn.linear_model import LogisticRegression
@@ -40,14 +40,14 @@
     import numpy as np
     ```
 
-1. X ਅਤੇ y ਕੋਆਰਡੀਨੇਟ ਨੂੰ ਦੋ ਡਾਟਾਫਰੇਮ ਵਿੱਚ ਵੰਡੋ। `cuisine` ਲੇਬਲ ਡਾਟਾਫਰੇਮ ਹੋ ਸਕਦਾ ਹੈ:
+1. X ਅਤੇ y ਕੋਆਰਡੀਨੇਟਾਂ ਨੂੰ ਦੋ ਡੇਟਾ ਫ੍ਰੇਮਾਂ ਵਿੱਚ ਵੰਡੋ। `cuisine` ਲੇਬਲ ਡੇਟਾ ਫ੍ਰੇਮ ਹੋ ਸਕਦਾ ਹੈ:
 
     ```python
     cuisines_label_df = cuisines_df['cuisine']
     cuisines_label_df.head()
     ```
 
-    ਇਹ ਇਸ ਤਰ੍ਹਾਂ ਦਿਖਾਈ ਦੇਵੇਗਾ:
+    ਇਹ ਇਸ ਤਰ੍ਹਾਂ ਲੱਗੇਗਾ:
 
     ```output
     0    indian
@@ -58,14 +58,14 @@
     Name: cuisine, dtype: object
     ```
 
-1. `Unnamed: 0` ਕਾਲਮ ਅਤੇ `cuisine` ਕਾਲਮ ਨੂੰ ਹਟਾਓ, `drop()` ਕਾਲ ਕਰਕੇ। ਬਾਕੀ ਡਾਟਾ ਨੂੰ ਟ੍ਰੇਨਿੰਗ ਫੀਚਰ ਵਜੋਂ ਸੇਵ ਕਰੋ:
+1. `Unnamed: 0` ਕਾਲਮ ਅਤੇ `cuisine` ਕਾਲਮ ਨੂੰ `drop()` ਕਾਲ ਕਰਕੇ ਹਟਾਓ। ਬਾਕੀ ਡੇਟਾ ਨੂੰ ਟ੍ਰੇnable ਫੀਚਰਾਂ ਵਜੋਂ ਸੁਰੱਖਿਅਤ ਕਰੋ:
 
     ```python
     cuisines_feature_df = cuisines_df.drop(['Unnamed: 0', 'cuisine'], axis=1)
     cuisines_feature_df.head()
     ```
 
-    ਤੁਹਾਡੇ ਫੀਚਰ ਇਸ ਤਰ੍ਹਾਂ ਦਿਖਾਈ ਦਿੰਦੇ ਹਨ:
+    ਤੁਹਾਡੇ ਫੀਚਰ ਏਵੇਂ ਦਿੱਸਦੇ ਹਨ:
 
 |      | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | artemisia | artichoke |  ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood |  yam | yeast | yogurt | zucchini |
 | ---: | -----: | -------: | ----: | ---------: | ----: | -----------: | ------: | -------: | --------: | --------: | ---: | ------: | ----------: | ---------: | ----------------------: | ---: | ---: | ---: | ----: | -----: | -------: |
@@ -75,85 +75,85 @@
 |    3 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
 |    4 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      1 |        0 | 0 |
 
-ਹੁਣ ਤੁਸੀਂ ਆਪਣੇ ਮਾਡਲ ਨੂੰ ਟ੍ਰੇਨ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ!
+ਹੁਣ ਤੁਸੀਂ ਆਪਣਾ ਮਾਡਲ ਟ੍ਰੇਨ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ!
 
-## ਆਪਣੇ ਵਰਗਬੱਧ ਕਰਨ ਵਾਲੇ ਤਰੀਕੇ ਦੀ ਚੋਣ
+## ਆਪਣੇ ਕਲਾਸੀਫਾਇਰ ਦੀ ਚੋਣ
 
-ਹੁਣ ਜਦੋਂ ਤੁਹਾਡਾ ਡਾਟਾ ਸਾਫ ਅਤੇ ਟ੍ਰੇਨਿੰਗ ਲਈ ਤਿਆਰ ਹੈ, ਤੁਹਾਨੂੰ ਇਹ ਫੈਸਲਾ ਕਰਨਾ ਪਵੇਗਾ ਕਿ ਇਸ ਕੰਮ ਲਈ ਕਿਹੜਾ ਅਲਗੋਰਿਥਮ ਵਰਤਣਾ ਹੈ।
+ਹੁਣ ਜਦੋਂ ਕਿ ਤੁਹਾਡੇ ਡੇਟਾ ਨੂੰ ਸਾਫ਼ ਅਤੇ ਟ੍ਰੇਨਿੰਗ ਲਈ ਤਿਆਰ ਕੀਤਾ ਗਿਆ ਹੈ, ਤੁਹਾਨੂੰ ਇਹ ਫੈਸਲਾ ਕਰਨਾ ਹੈ ਕਿ ਕੰਮ ਲਈ ਕਿਹੜਾ ਅਲਗੋਰਿਦਮ ਵਰਤਣਾ ਹੈ।
 
-Scikit-learn ਵਰਗਬੱਧ ਕਰਨ ਨੂੰ Supervised Learning ਦੇ ਅਧੀਨ ਰੱਖਦਾ ਹੈ, ਅਤੇ ਇਸ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਤੁਹਾਨੂੰ ਵਰਗਬੱਧ ਕਰਨ ਦੇ ਕਈ ਤਰੀਕੇ ਮਿਲਣਗੇ। [ਵੱਖ-ਵੱਖ ਤਰੀਕੇ](https://scikit-learn.org/stable/supervised_learning.html) ਪਹਿਲਾਂ ਦ੍ਰਿਸ਼ਟੀ ਵਿੱਚ ਬਹੁਤ ਹੀ ਹੈਰਾਨ ਕਰਨ ਵਾਲੇ ਲੱਗਦੇ ਹਨ। ਹੇਠਾਂ ਦਿੱਤੇ ਤਰੀਕੇ ਸਾਰੇ ਵਰਗਬੱਧ ਕਰਨ ਦੇ ਤਕਨੀਕੀ ਤਰੀਕੇ ਸ਼ਾਮਲ ਕਰਦੇ ਹਨ:
+Scikit-learn ਵਿੱਚ ਕਲਾਸੀਫਿਕੇਸ਼ਨ ਨੂੰ Supervised Learning ਦੇ ਅੰਦਰ ਰੱਖਿਆ ਗਿਆ ਹੈ, ਅਤੇ ਇਸ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਤੁਸੀਂ ਕਈ ਤਰੀਕੇ ਲੱਭੋਗੇ। [ਇਸ ਦੀ ਵੱਧਤਰੀ](https://scikit-learn.org/stable/supervised_learning.html) ਪਹਿਲੀ ਨਜ਼ਰ ਵਿੱਚ ਕਾਫ਼ੀ ਉਲਝਣ ਵਾਲੀ ਹੈ। ਹੇਠਾਂ ਦਿੱਤੇ ਤਰੀਕੇ ਸਾਰਿਆਂ ਕਲਾਸੀਫਿਕੇਸ਼ਨ ਤਕਨੀਕਾਂ ਵਿੱਚ ਸ਼ਾਮਲ ਹਨ:
 
 - ਲੀਨੀਅਰ ਮਾਡਲ
-- Support Vector Machines
-- Stochastic Gradient Descent
-- Nearest Neighbors
-- Gaussian Processes
-- Decision Trees
-- Ensemble methods (voting Classifier)
-- Multiclass and multioutput algorithms (multiclass and multilabel classification, multiclass-multioutput classification)
+- ਸਪੋਰਟ ਵੇਕਟਰ ਮਸ਼ੀਨਜ਼
+- ਸਟੋਕਾਸਟਿਕ ਗਰੇਡੀਐਂਟ ਡੈਸੈਂਟ
+- ਨੇਰੇਸਟ ਨੇਬਰਸ
+- ਗਾਊਸਿਅਨ ਪ੍ਰਕਿਰਿਆਵਾਂ
+- ਫੈਸਲਾ ਟ੍ਰੀਜ਼
+- ਐਂਸੇਮਬਲ ਤਰੀਕੇ (ਵੋਟਿੰਗ ਕਲਾਸੀਫਾਇਰ)
+- ਮਲਟੀਕਲਾਸ ਅਤੇ ਮਲਟੀਆਉਟਪੁੱਟ ਅਲਗੋਰਿਦਮ (ਮਲਟੀਕਲਾਸ ਅਤੇ ਮਲਟੀਲੈਬਲ ਕਲਾਸੀਫਿਕੇਸ਼ਨ, ਮਲਟੀਕਲਾਸ-ਮਲਟੀਆਉਟਪੁੱਟ ਕਲਾਸੀਫਿਕੇਸ਼ਨ)
 
-> ਤੁਸੀਂ [neural networks ਨੂੰ ਵਰਗਬੱਧ ਕਰਨ ਲਈ](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification) ਵੀ ਵਰਤ ਸਕਦੇ ਹੋ, ਪਰ ਇਹ ਪਾਠ ਦੇ ਦਾਇਰੇ ਤੋਂ ਬਾਹਰ ਹੈ।
+> ਤੁਸੀਂ [ਨਿਊਰਲ ਨੈੱਟਵਰਕਾਂ ਦੇ ਨਾਲ ਡੇਟਾ ਕਲਾਸੀਫਾਈ ਕਰ ਸਕਦੇ ਹੋ](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), ਪਰ ਉਹ ਇਸ ਪਾਠ ਦੇ ਦਾਇਰੇ ਤੋਂ ਬਾਹਰ ਹੈ।
 
-### ਕਿਹੜਾ ਵਰਗਬੱਧ ਕਰਨ ਵਾਲਾ ਤਰੀਕਾ ਚੁਣਨਾ ਹੈ?
+### ਕਿਹੜਾ ਕਲਾਸੀਫਾਇਰ ਚੁਣਨਾ ਚਾਹੀਦਾ ਹੈ?
 
-ਤਾਂ, ਤੁਸੀਂ ਕਿਹੜਾ ਤਰੀਕਾ ਚੁਣਨਾ ਚਾਹੁੰਦੇ ਹੋ? ਅਕਸਰ, ਕਈ ਤਰੀਕਿਆਂ ਨੂੰ ਚਲਾਉਣਾ ਅਤੇ ਚੰਗੇ ਨਤੀਜੇ ਦੀ ਭਾਲ ਕਰਨਾ ਇੱਕ ਤਰੀਕਾ ਹੁੰਦਾ ਹੈ। Scikit-learn ਇੱਕ [ਸਾਈਡ-ਬਾਈ-ਸਾਈਡ ਤੁਲਨਾ](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) ਪੇਸ਼ ਕਰਦਾ ਹੈ, ਜੋ ਕਿ KNeighbors, SVC ਦੋ ਤਰੀਕੇ, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB ਅਤੇ QuadraticDiscrinationAnalysis ਦੀ ਤੁਲਨਾ ਦਿਖਾਉਂਦਾ ਹੈ:
+ਤਾਂ, ਤੁਸੀਂ ਕਿਹੜਾ ਕਲਾਸੀਫਾਇਰ ਚੁਣੋਗੇ? ਅਕਸਰ ਕਈ ਕਲਾਸੀਫਾਇਰ ਚਲਾ ਕੇ ਅਤੇ ਵਧੀਆ ਨਤੀਜੇ ਦੀ ਤਲਾਸ਼ ਕਰ ਕੇ ਟੈਸਟ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। Scikit-learn ਇੱਕ [ਸਾਈਡ-ਬਾਈ-ਸਾਈਡ ਤੁਲਨਾ](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) ਦਿੰਦਾ ਹੈ ਇੱਕ ਬਣਾਏ ਗਏ ਡੇਟਾਸੇਟ 'ਤੇ, KNeighbors, SVC ਦੋ ਤਰੀਕਿਆਂ ਨਾਲ, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB ਅਤੇ QuadraticDiscrinationAnalysis ਨੂੰ ਤੁਲਨਾ ਕਰਕੇ ਨਤੀਜੇ ਵਿਜ਼ੂਅਲਾਈਜ਼ ਕੀਤੇ ਹਨ:
 
-![ਵਰਗਬੱਧ ਕਰਨ ਵਾਲਿਆਂ ਦੀ ਤੁਲਨਾ](../../../../4-Classification/2-Classifiers-1/images/comparison.png)
-> Plots Scikit-learn ਦੇ ਦਸਤਾਵੇਜ਼ਾਂ 'ਤੇ ਬਣਾਏ ਗਏ
+![comparison of classifiers](../../../../translated_images/pa/comparison.edfab56193a85e7f.webp)
+> Scikit-learn ਦੀ ਡੌਕਯੂਮੈਂਟੇਸ਼ਨ ਵਿੱਚ ਬਣਾਏ ਗਏ ਪਲਾਟ
 
-> AutoML ਇਸ ਸਮੱਸਿਆ ਨੂੰ ਬਹੁਤ ਹੀ ਸੌਖੇ ਤਰੀਕੇ ਨਾਲ ਹੱਲ ਕਰਦਾ ਹੈ, ਕਲਾਉਡ ਵਿੱਚ ਇਹ ਤੁਲਨਾਵਾਂ ਚਲਾਉਂਦਾ ਹੈ, ਅਤੇ ਤੁਹਾਨੂੰ ਤੁਹਾਡੇ ਡਾਟਾ ਲਈ ਸਭ ਤੋਂ ਵਧੀਆ ਅਲਗੋਰਿਥਮ ਚੁਣਨ ਦੀ ਆਗਿਆ ਦਿੰਦਾ ਹੈ। ਇਸਨੂੰ [ਇੱਥੇ](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott) ਅਜ਼ਮਾਓ।
+> AutoML ਇਹ ਸਮੱਸਿਆ ਕਲਾਊਡ ਵਿੱਚ ਚੱਲਾ ਕੇ ਸੁਚੱਜੇ ਤਰੀਕੇ ਨਾਲ ਹੱਲ ਕਰਦਾ ਹੈ, ਜਿਸ ਨਾਲ ਤੁਸੀਂ ਆਪਣੇ ਡੇਟਾ ਲਈ ਸਭ ਤੋਂ ਵਧੀਆ ਅਲਗੋਰਿਦਮ ਚੁਣ ਸਕਦੇ ਹੋ। [ਇੱਥੇ ਕੋਸ਼ਿਸ਼ ਕਰੋ](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
 
 ### ਇੱਕ ਵਧੀਆ ਤਰੀਕਾ
 
-ਅੰਧੇਵਾਹ ਚੋਣ ਕਰਨ ਦੇ ਬਦਲੇ, ਇੱਕ ਵਧੀਆ ਤਰੀਕਾ ਇਹ ਹੈ ਕਿ ਇਸ ਡਾਊਨਲੋਡ ਕਰਨ ਯੋਗ [ML Cheat sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott) ਦੇ ਵਿਚਾਰਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਇੱਥੇ, ਅਸੀਂ ਪਤਾ ਲਗਾਉਂਦੇ ਹਾਂ ਕਿ ਸਾਡੇ multiclass ਸਮੱਸਿਆ ਲਈ ਸਾਡੇ ਕੋਲ ਕੁਝ ਚੋਣਾਂ ਹਨ:
+ਅਣਪਛਾਤੇ ਅਨੁਮਾਨ ਲਗਾਉਣ ਨਾਲ ਵਧੀਆ ਤਰੀਕਾ ਹੈ ਇਸ ਡਾਉਨਲੋਡ ਯੋਗ [ML ਚੀਟਸ਼ੀਟ](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott) ਦੇ ਵਿਚਾਰਾਂ ਦੀ ਪਾਲਣਾ ਕਰਨੀ। ਇੱਥੇ, ਅਸੀਂ ਪਤਾ ਲਾਉਂਦੇ ਹਾਂ ਕਿ ਸਾਡੇ ਮਲਟੀਕਲਾਸ ਸਮੱਸਿਆ ਲਈ ਸਾਡੇ ਕੋਲ ਕੁਝ ਚੋਣਾਂ ਹਨ:
 
-![multiclass ਸਮੱਸਿਆਵਾਂ ਲਈ cheatsheet](../../../../4-Classification/2-Classifiers-1/images/cheatsheet.png)
-> Microsoft's Algorithm Cheat Sheet ਦਾ ਇੱਕ ਹਿੱਸਾ, ਜੋ multiclass ਵਰਗਬੱਧ ਕਰਨ ਦੇ ਵਿਕਲਪਾਂ ਨੂੰ ਵੇਖਾਉਂਦਾ ਹੈ
+![cheatsheet for multiclass problems](../../../../translated_images/pa/cheatsheet.07a475ea444d2223.webp)
+> Microsoft ਦੇ Algorithm Cheat Sheet ਦਾ ਇੱਕ ਹਿੱਸਾ, ਮਲਟੀਕਲਾਸ ਕਲਾਸੀਫਿਕੇਸ਼ਨ ਵਿਕਲਪਾਂ ਦਾ ਵੇਰਵਾ
 
-✅ ਇਸ cheatsheet ਨੂੰ ਡਾਊਨਲੋਡ ਕਰੋ, ਪ੍ਰਿੰਟ ਕਰੋ, ਅਤੇ ਇਸਨੂੰ ਆਪਣੀ ਕੰਮ ਵਾਲੀ ਜਗ੍ਹਾ 'ਤੇ ਲਟਕਾਓ!
+✅ ਇਸ ਚੀਟਸ਼ੀਟ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰੋ, ਛਾਪੋ, ਅਤੇ ਆਪਣੀ ਦਿਵਾਰ ਤੇ ਲਗਾਓ!
 
 ### ਤਰਕ
 
-ਆਓ ਵੇਖੀਏ ਕਿ ਕੀ ਅਸੀਂ ਆਪਣੇ ਪਾਬੰਦੀਆਂ ਦੇ ਆਧਾਰ 'ਤੇ ਵੱਖ-ਵੱਖ ਤਰੀਕਿਆਂ ਨੂੰ ਸਮਝ ਸਕਦੇ ਹਾਂ:
+ਆਓ ਵੇਖੀਏ ਕਿ ਅਸੀਂ ਵੱਖ-ਵੱਖ ਪਹਲੂਆਂ ਨੂੰ ਲੈਕੇ ਸਾਡੇ ਪਾਸ ਜਿੰਨੇ ਸੀਮਤੀਆਂ ਹਨ, ਆਪਣੇ ਤਰਕ ਨਾਲ ਕਿਵੇਂ ਜਾ ਸਕਦੇ ਹਾਂ:
 
-- **Neural networks ਬਹੁਤ ਭਾਰੀ ਹਨ**। ਸਾਡੇ ਸਾਫ, ਪਰ ਘੱਟ ਡਾਟਾਸੈਟ ਨੂੰ ਦੇਖਦੇ ਹੋਏ, ਅਤੇ ਇਹ ਹਕੀਕਤ ਕਿ ਅਸੀਂ ਟ੍ਰੇਨਿੰਗ ਨੂੰ ਸਥਾਨਕ ਤੌਰ 'ਤੇ notebooks ਰਾਹੀਂ ਚਲਾ ਰਹੇ ਹਾਂ, neural networks ਇਸ ਕੰਮ ਲਈ ਬਹੁਤ ਭਾਰੀ ਹਨ।
-- **ਕੋਈ ਦੋ-ਵਰਗਬੱਧ ਕਰਨ ਵਾਲਾ ਤਰੀਕਾ ਨਹੀਂ**। ਅਸੀਂ ਦੋ-ਵਰਗਬੱਧ ਕਰਨ ਵਾਲਾ ਤਰੀਕਾ ਨਹੀਂ ਵਰਤਦੇ, ਇਸ ਲਈ ਇਹ one-vs-all ਨੂੰ ਰੱਦ ਕਰਦਾ ਹੈ।
-- **Decision tree ਜਾਂ logistic regression ਕੰਮ ਕਰ ਸਕਦੇ ਹਨ**। ਇੱਕ decision tree ਕੰਮ ਕਰ ਸਕਦਾ ਹੈ, ਜਾਂ multiclass ਡਾਟਾ ਲਈ logistic regression।
-- **Multiclass Boosted Decision Trees ਵੱਖਰੀ ਸਮੱਸਿਆ ਹੱਲ ਕਰਦੇ ਹਨ**। Multiclass Boosted Decision Trees ਜ਼ਿਆਦਾਤਰ nonparametric ਕੰਮਾਂ ਲਈ ਉਚਿਤ ਹਨ, ਜਿਵੇਂ ਕਿ ਰੈਂਕਿੰਗ ਬਣਾਉਣ ਲਈ ਕੰਮ, ਇਸ ਲਈ ਇਹ ਸਾਡੇ ਲਈ ਲਾਭਕਾਰੀ ਨਹੀਂ ਹੈ।
+- **ਨਿਊਰਲ ਨੈੱਟਵਰਕ ਬਹੁਤ ਭਾਰੀ ਹਨ।** ਸਾਡੇ ਸਾਫ਼, ਪਰ ਘੱਟ ਡੇਟਾਸੇਟ ਦੇ ਮਦਨਜ਼ਰ ਅਤੇ ਇਹ ਗੱਲ ਕਿ ਅਸੀਂ ਟ੍ਰੇਨਿੰਗ ਲੋਕਲ ਨੋਟਬੁੱਕਾਂ ਵਿੱਚ ਕਰ ਰਹੇ ਹਾਂ, ਨਿਊਰਲ ਨੈੱਟਵਰਕ ਇਸ ਕੰਮ ਲਈ ਬਹੁਤ ਭਾਰੀ ਹਨ।
+- **ਕੋਈ ਦੋ-ਕਲਾਸ ਕਲਾਸੀਫਾਇਰ ਨਹੀਂ।** ਅਸੀਂ ਦੋ-ਕਲਾਸ ਕਲਾਸੀਫਾਇਰ ਵਰਤਦੇ ਨਹੀਂ, ਇਸ ਲਈ ਇੱਕ-ਵਰਸਸ-ਆਲ ਖਤਮ ਹੋ ਜਾਂਦਾ ਹੈ।
+- **ਡਿਸਿਜ਼ਨ ਟ੍ਰੀ ਜਾਂ ਲੌਜਿਸਟਿਕ ਰਿਗ੍ਰੈਸ਼ਨ ਕੰਮ ਕਰ ਸਕਦੇ ਹਨ।** ਇੱਕ ਫੈਸਲਾ ਟ੍ਰੀ ਜਾਂ ਲੌਜਿਸਟਿਕ ਰਿਗ੍ਰੈਸ਼ਨ ਮਲਟੀਕਲਾਸ ਡੇਟਾ ਲਈ ਕੰਮ ਕਰ ਸਕਦਾ ਹੈ।
+- **ਮਲਟੀਕਲਾਸ ਬੂਸਟਡ ਡਿਸਿਜ਼ਨ ਟ੍ਰੀਜ਼ ਇਕ ਹੋਰ ਸਮੱਸਿਆ ਹੱਲ ਕਰਦੇ ਹਨ।** ਮਲਟੀਕਲਾਸ ਬੂਸਟਡ ਡਿਸਿਜ਼ਨ ਟ੍ਰੀ ਨਾਂਪੈਰਾਮੈਟ੍ਰਿਕ ਕਾਰਜਾਂ ਲਈ ਸਭ ਤੋਂ ਉਚਿਤ ਹੈ, ਜਿਵੇਂ ਕਿ ਰੈਂਕਿੰਗ ਬਣਾਉਣ ਦੇ ਕਾਰਜ, ਇਸ ਲਈ ਸਾਡੇ ਲਈ ਇਹ ਲਾਭਦਾਇਕ ਨਹੀਂ ਹੈ।
 
-### Scikit-learn ਦੀ ਵਰਤੋਂ
+### Scikit-learn ਵਰਤੋਂ
 
-ਅਸੀਂ Scikit-learn ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਡਾਟਾ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰਾਂਗੇ। ਹਾਲਾਂਕਿ, Scikit-learn ਵਿੱਚ logistic regression ਦੀ ਵਰਤੋਂ ਕਰਨ ਦੇ ਕਈ ਤਰੀਕੇ ਹਨ। [ਪਾਸ ਕਰਨ ਲਈ ਪੈਰਾਮੀਟਰਾਂ](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression) 'ਤੇ ਇੱਕ ਨਜ਼ਰ ਮਾਰੋ।
+ਅਸੀਂ ਆਪਣਾ ਡੇਟਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰਨ ਲਈ Scikit-learn ਵਰਤਾਂਗੇ। ਹਾਲਾਂਕਿ, Scikit-learn ਵਿੱਚ ਲੌਜਿਸਟਿਕ ਰਿਗ੍ਰੈਸ਼ਨ ਨੂੰ ਵਰਤਣ ਦੇ ਕਾਫੀ ਤਰੀਕੇ ਹਨ। [ਪੈਰਾਮੀਟਰਾਂ ਦੇਖੋ](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression) ਜੋ ਤੁਸੀਂ ਪਾਸ ਕਰ ਸਕਦੇ ਹੋ।  
 
-ਅਸਲ ਵਿੱਚ, ਦੋ ਮਹੱਤਵਪੂਰਨ ਪੈਰਾਮੀਟਰ ਹਨ - `multi_class` ਅਤੇ `solver` - ਜਿਨ੍ਹਾਂ ਨੂੰ ਸਪਸ਼ਟ ਕਰਨ ਦੀ ਲੋੜ ਹੈ, ਜਦੋਂ ਅਸੀਂ Scikit-learn ਨੂੰ logistic regression ਕਰਨ ਲਈ ਕਹਿੰਦੇ ਹਾਂ। `multi_class` ਦਾ ਮੁੱਲ ਇੱਕ ਨਿਰਧਾਰਿਤ ਵਿਹਾਰ ਲਾਗੂ ਕਰਦਾ ਹੈ। solver ਦਾ ਮੁੱਲ ਇਹ ਹੈ ਕਿ ਕਿਹੜਾ ਅਲਗੋਰਿਥਮ ਵਰਤਣਾ ਹੈ। ਸਾਰੇ solvers ਨੂੰ ਸਾਰੇ `multi_class` ਮੁੱਲਾਂ ਨਾਲ ਜੋੜਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ।
+ਅਸਲ ਵਿੱਚ, ਦੋ ਮੁੱਖ ਪੈਰਾਮੀਟਰ ਹਨ - `multi_class` ਅਤੇ `solver` - ਜਿਨ੍ਹਾਂ ਨੂੰ ਅਸੀਂ Scikit-learn ਵਿੱਚ ਲੌਜਿਸਟਿਕ ਰਿਗ੍ਰੈਸ਼ਨ ਕਰਵਾਉਣ ਦੇ ਸਮੇਂ ਸੈੱਟ ਕਰਨਾ ਪੈਂਦਾ ਹੈ। `multi_class` ਦਾ ਕੀਮਤ ਇੱਕ ਵਿਸ਼ੇਸ਼ ਵਰਤੋਂ ਲਾਉਂਦਾ ਹੈ। solver ਦਾ ਕੀਮਤ ਇਹ ਦੱਸਦਾ ਹੈ ਕਿ ਅਲਗੋਰਿਦਮ ਕਿਹੜਾ ਵਰਤਣਾ ਹੈ। ਸਾਰੇ solver ਸਾਰੇ `multi_class` ਵੈਲਿਊਜ਼ ਨਾਲ ਜੋੜੇ ਨਹੀਂ ਜਾ ਸਕਦੇ।
 
-ਦਸਤਾਵੇਜ਼ਾਂ ਦੇ ਅਨੁਸਾਰ, multiclass ਕੇਸ ਵਿੱਚ, ਟ੍ਰੇਨਿੰਗ ਅਲਗੋਰਿਥਮ:
+ਡਾਕਯੂਮੈਂਟਸ ਦੇ ਅਨੁਸਾਰ, ਮਲਟੀਕਲਾਸ ਵਿੱਚ, ਟ੍ਰੇਨਿੰਗ ਅਲਗੋਰਿਦਮ:
 
-- **Uses the one-vs-rest (OvR) scheme**, ਜੇ `multi_class` ਵਿਕਲਪ `ovr` 'ਤੇ ਸੈਟ ਕੀਤਾ ਗਿਆ ਹੈ।
-- **Uses the cross-entropy loss**, ਜੇ `multi_class` ਵਿਕਲਪ `multinomial` 'ਤੇ ਸੈਟ ਕੀਤਾ ਗਿਆ ਹੈ। (ਵਰਤਮਾਨ ਵਿੱਚ `multinomial` ਵਿਕਲਪ ਸਿਰਫ ‘lbfgs’, ‘sag’, ‘saga’ ਅਤੇ ‘newton-cg’ solvers ਦੁਆਰਾ ਸਮਰਥਿਤ ਹੈ।)
+- **one-vs-rest (OvR) ਸਕੀਮ ਵਰਤਦਾ ਹੈ**, ਜੇ `multi_class` ਵਿਕਲਪ `ovr` ਤੇ ਸੈੱਟ ਹੈ
+- **ਕ੍ਰਾਸ-ਐਂਟਰੋਪੀ ਲਾਸ ਵਰਤਦਾ ਹੈ**, ਜੇ `multi_class` ਵਿਕਲਪ `multinomial` ਤੇ ਸੈੱਟ ਹੈ। (ਹੁਣੇ ਲਈ `multinomial` ਵਿਕਲਪ ਸਿਰਫ਼ ‘lbfgs’, ‘sag’, ‘saga’ ਅਤੇ ‘newton-cg’ solvers ਦੁਆਰਾ ਸਮਰਥਿਤ ਹੈ.)"
 
-> 🎓 'scheme' ਇੱਥੇ 'ovr' (one-vs-rest) ਜਾਂ 'multinomial' ਹੋ ਸਕਦਾ ਹੈ। ਕਿਉਂਕਿ logistic regression ਅਸਲ ਵਿੱਚ binary classification ਨੂੰ ਸਮਰਥਨ ਕਰਨ ਲਈ ਡਿਜ਼ਾਈਨ ਕੀਤਾ ਗਿਆ ਹੈ, ਇਹ schemes ਇਸਨੂੰ multiclass classification ਕੰਮਾਂ ਨੂੰ ਬਿਹਤਰ ਢੰਗ ਨਾਲ ਸੰਭਾਲਣ ਵਿੱਚ ਮਦਦ ਕਰਦੇ ਹਨ। [source](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
+> 🎓 ਇੱਥੇ 'ਸਕੀਮ' ਜਾ ਤਾਂ 'ovr' (one-vs-rest) ਜਾਂ 'multinomial' ਹੋ ਸਕਦਾ ਹੈ। ਕਿਉਂਕਿ ਲੌਜਿਸਟਿਕ ਰਿਗ੍ਰੈਸ਼ਨ ਅਸਲ ਵਿੱਚ ਬਾਈਨਰੀ ਕਲਾਸੀਫਿਕੇਸ਼ਨ ਲਈ ਬਣਾਇਆ ਗਿਆ ਹੈ, ਇਨ੍ਹਾਂ ਸਕੀਮਾਂ ਨਾਲ ਇਹ ਮਲਟੀਕਲਾਸ ਕਲਾਸੀਫਿਕੇਸ਼ਨ ਕੰਮਾਂ ਨੂੰ ਬਿਹਤਰ ਸੰਭਾਲਦਾ ਹੈ। [ਸਰੋਤ](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
 
-> 🎓 'solver' ਨੂੰ "optimization ਸਮੱਸਿਆ ਵਿੱਚ ਵਰਤਣ ਲਈ algorithm" ਵਜੋਂ ਪਰਿਭਾਸ਼ਿਤ ਕੀਤਾ ਗਿਆ ਹੈ। [source](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
+> 🎓 'solver' ਨੂੰ "ਆਪਟਿਮਾਈਜ਼ੇਸ਼ਨ ਸਮੱਸਿਆ ਵਿੱਚ ਵਰਤਿਆ ਜਾਣ ਵਾਲਾ ਅਲਗੋਰਿਦਮ" ਵਜੋਂ ਪਰਿਭਾਸ਼ਿਤ ਕੀਤਾ ਗਿਆ ਹੈ। [ਸਰੋਤ](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-Scikit-learn ਇਹ ਟੇਬਲ ਪੇਸ਼ ਕਰਦਾ ਹੈ ਜੋ ਦਿਖਾਉਂਦਾ ਹੈ ਕਿ solvers ਵੱਖ-ਵੱਖ ਡਾਟਾ ਸਟ੍ਰਕਚਰਾਂ ਦੁਆਰਾ ਪੇਸ਼ ਕੀਤੀਆਂ ਚੁਣੌਤੀਆਂ ਨੂੰ ਕਿਵੇਂ ਸੰਭਾਲਦੇ ਹਨ:
+Scikit-learn ਇਹ ਟੇਬਲ ਦਿੰਦਾ ਹੈ ਕਿ ਕਿਵੇਂ ਸਾਲਵਰ ਵੱਖਰੇ ਤਰ੍ਹਾਂ ਦੇ ਡੇਟਾ ਸਟ੍ਰਕਚਰਾਂ ਦੀਆਂ ਸਮੱਸਿਆਵਾਂ ਨੂੰ ਹੱਲ ਕਰਦੇ ਹਨ:
 
-![solvers](../../../../4-Classification/2-Classifiers-1/images/solvers.png)
+![solvers](../../../../translated_images/pa/solvers.5fc648618529e627.webp)
 
-## ਅਭਿਆਸ - ਡਾਟਾ ਨੂੰ ਵੰਡੋ
+## ਅਭਿਆਸ - ਡੇਟਾ ਵੰਡੋ
 
-ਅਸੀਂ ਆਪਣੇ ਪਹਿਲੇ ਟ੍ਰੇਨਿੰਗ ਟ੍ਰਾਇਲ ਲਈ logistic regression 'ਤੇ ਧਿਆਨ ਦੇ ਸਕਦੇ ਹਾਂ ਕਿਉਂਕਿ ਤੁਸੀਂ ਪਿਛਲੇ ਪਾਠ ਵਿੱਚ ਇਸ ਬਾਰੇ ਸਿੱਖਿਆ ਹੈ।
-ਆਪਣੇ ਡਾਟਾ ਨੂੰ ਟ੍ਰੇਨਿੰਗ ਅਤੇ ਟੈਸਟਿੰਗ ਸਮੂਹਾਂ ਵਿੱਚ ਵੰਡੋ, `train_test_split()` ਕਾਲ ਕਰਕੇ:
+ਅਸੀਂ ਆਪਣੀ ਪਹਿਲੀ ਟ੍ਰੇਨਿੰਗ ਕੋਸ਼ਿਸ਼ ਲਈ ਲੌਜਿਸਟਿਕ ਰਿਗ੍ਰੈਸ਼ਨ ‘ਤੇ ਧਿਆਨ ਕੇਂਦਰਿਤ ਕਰ ਸਕਦੇ ਹਾਂ ਕਿਉਂਕਿ ਤੁਸੀਂ ਇਹ ਪਹਿਲਾ ਪਾਠ ਵਿੱਚ ਹਾਲ-ਹਾਲੇ ਸਿੱਖਿਆ ਸੀ।  
+`train_test_split()` ਕਾਲ ਕਰਕੇ ਆਪਣੇ ਡੇਟਾ ਨੂੰ ਟ੍ਰੇਨਿੰਗ ਅਤੇ ਟੈਸਟਿੰਗ ਗਰੁੱਪਾਂ ਵਿੱਚ ਵੰਡੋ:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
 ```
 
-## ਅਭਿਆਸ - logistic regression ਲਾਗੂ ਕਰੋ
+## ਅਭਿਆਸ - ਲੌਜਿਸਟਿਕ ਰਿਗ੍ਰੈਸ਼ਨ ਲਾਗੂ ਕਰੋ
 
-ਕਿਉਂਕਿ ਤੁਸੀਂ multiclass ਕੇਸ ਦੀ ਵਰਤੋਂ ਕਰ ਰਹੇ ਹੋ, ਤੁਹਾਨੂੰ ਇਹ ਚੁਣਨਾ ਪਵੇਗਾ ਕਿ ਕਿਹੜਾ _scheme_ ਵਰਤਣਾ ਹੈ ਅਤੇ ਕਿਹੜਾ _solver_ ਸੈਟ ਕਰਨਾ ਹੈ। LogisticRegression ਦੀ ਵਰਤੋਂ ਕਰੋ ਜਿਸ ਵਿੱਚ multi_class ਸੈਟ `ovr` 'ਤੇ ਹੈ ਅਤੇ solver **liblinear** 'ਤੇ ਸੈਟ ਹੈ।
+ਕਿਉਂਕਿ ਤੁਸੀਂ ਮਲਟੀਕਲਾਸ ਕੇਸ ਵਰਤ ਰਹੇ ਹੋ, ਤੁਹਾਨੂੰ ਇਹ ਚੁਣਨਾ ਹੈ ਕਿ ਕਿਸ _ਸਕੀਮ_ ਨੂੰ ਵਰਤਣਾ ਹੈ ਅਤੇ ਕਿਹੜਾ _solver_ ਸੈੱਟ ਕਰਨਾ ਹੈ। LogisticRegression ਨੂੰ ਮਲਟੀਕਲਾਸ ਸੈਟਿੰਗ ਅਤੇ **liblinear** solver ਨਾਲ ਟ੍ਰੇਨ ਕਰੋ।
 
-1. ਇੱਕ logistic regression ਬਣਾਓ ਜਿਸ ਵਿੱਚ multi_class `ovr` 'ਤੇ ਸੈਟ ਹੈ ਅਤੇ solver `liblinear` 'ਤੇ ਸੈਟ ਹੈ:
+1. multi_class `ovr` ਤੇ ਅਤੇ solver `liblinear` ਤੇ ਸੈੱਟ ਕਰਕੇ ਇੱਕ ਲੌਜਿਸਟਿਕ ਰਿਗ੍ਰੈਸ਼ਨ ਬਣਾਓ:
 
     ```python
     lr = LogisticRegression(multi_class='ovr',solver='liblinear')
@@ -163,11 +163,13 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
     print ("Accuracy is {}".format(accuracy))
     ```
 
-    ✅ ਇੱਕ ਵੱਖਰਾ solver ਜਿਵੇਂ `lbfgs` ਅਜ਼ਮਾਓ, ਜੋ ਅਕਸਰ default ਵਜੋਂ ਸੈਟ ਹੁੰਦਾ ਹੈ
-ਨੋਟ ਕਰੋ, ਜਦੋਂ ਲੋੜ ਹੋਵੇ ਤਾਂ ਆਪਣੇ ਡਾਟਾ ਨੂੰ ਸਮਤਲ ਕਰਨ ਲਈ Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) ਫੰਕਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ।
-ਸਹੀਤਾ **80%** ਤੋਂ ਵੱਧ ਹੈ!
+    ✅ ਇੱਕ ਹੋਰ solver `lbfgs` ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ, ਜੋ ਅਕਸਰ ਡਿਫਾਲਟ ਹੁੰਦਾ ਹੈ
 
-1. ਤੁਸੀਂ ਇਸ ਮਾਡਲ ਨੂੰ ਇੱਕ ਡਾਟਾ ਦੀ ਲਾਈਨ (#50) ਦੀ ਜਾਂਚ ਕਰਕੇ ਕੰਮ ਕਰਦੇ ਵੇਖ ਸਕਦੇ ਹੋ:
+    > ਨੋਟ ਕਰੋ, ਜਦੋਂ ਜ਼ਰੂਰਤ ਹੋਵੇ ਤਾਂ ਆਪਣਾ ਡੇਟਾ ਫਲੈੱਟ ਕਰਨ ਲਈ Pandas ਦੀ [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) ਫੰਕਸ਼ਨ ਵਰਤੋਂ।
+
+    ਸਹੀਤਾ 80% ਤੋਂ ਉਪਰ ਚੰਗੀ ਹੈ!
+
+1. ਤੁਸੀਂ ਇਹ ਮਾਡਲ ਕਾਰਗੁਜ਼ਾਰੀ ਨੂੰ ਇੱਕ ਡੇਟਾ ਦੀ ਲਾਈਨ (#50) ਦੀ ਜਾਂਚ ਕਰਕੇ ਵੇਖ ਸਕਦੇ ਹੋ:
 
     ```python
     print(f'ingredients: {X_test.iloc[50][X_test.iloc[50]!=0].keys()}')
@@ -181,9 +183,8 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
    cuisine: indian
    ```
 
-   ✅ ਇੱਕ ਵੱਖਰੀ ਲਾਈਨ ਨੰਬਰ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਅਤੇ ਨਤੀਜੇ ਚੈੱਕ ਕਰੋ
-
-1. ਹੋਰ ਗਹਿਰਾਈ ਵਿੱਚ ਜਾਣ ਲਈ, ਤੁਸੀਂ ਇਸ ਪੇਸ਼ਗੂਈ ਦੀ ਸਹੀਤਾ ਦੀ ਜਾਂਚ ਕਰ ਸਕਦੇ ਹੋ:
+   ✅ ਇੱਕ ਵੱਖਰਾ ਕਤਾਰ ਨੰਬਰ ਚੁਣੋ ਅਤੇ ਨਤੀਜੇ ਚੈੱਕ ਕਰੋ
+1. Digging deeper, you can check for the accuracy of this prediction:
 
     ```python
     test= X_test.iloc[50].values.reshape(-1, 1).T
@@ -195,7 +196,7 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
     topPrediction.head()
     ```
 
-    ਨਤੀਜਾ ਪ੍ਰਿੰਟ ਕੀਤਾ ਜਾਂਦਾ ਹੈ - ਭਾਰਤੀ ਖਾਣਾ ਇਸਦਾ ਸਭ ਤੋਂ ਵਧੀਆ ਅਨੁਮਾਨ ਹੈ, ਚੰਗੀ ਸੰਭਾਵਨਾ ਨਾਲ:
+    The result is printed - Indian cuisine is its best guess, with good probability:
 
     |          |        0 |
     | -------: | -------: |
@@ -205,9 +206,9 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
     |   korean | 0.017277 |
     |     thai | 0.007634 |
 
-    ✅ ਕੀ ਤੁਸੀਂ ਸਮਝਾ ਸਕਦੇ ਹੋ ਕਿ ਮਾਡਲ ਕਿਉਂ ਇਹ ਭਾਰਤੀ ਖਾਣਾ ਹੋਣ 'ਤੇ ਕਾਫ਼ੀ ਯਕੀਨ ਹੈ?
+    ✅ Can you explain why the model is pretty sure this is an Indian cuisine?
 
-1. ਹੋਰ ਵਿਸਥਾਰ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ, ਜਿਵੇਂ ਤੁਸੀਂ ਰਿਗ੍ਰੈਸ਼ਨ ਪਾਠਾਂ ਵਿੱਚ ਕੀਤਾ ਸੀ, ਇੱਕ ਕਲਾਸੀਫਿਕੇਸ਼ਨ ਰਿਪੋਰਟ ਪ੍ਰਿੰਟ ਕਰੋ:
+1. Get more detail by printing a classification report, as you did in the regression lessons:
 
     ```python
     y_pred = model.predict(X_test)
@@ -221,24 +222,27 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
     | japanese     | 0.70      | 0.75   | 0.72     | 220     |
     | korean       | 0.86      | 0.76   | 0.81     | 242     |
     | thai         | 0.79      | 0.85   | 0.82     | 254     |
-    | accuracy     | 0.80      | 1199   |          |         |
+    | accuracy     |           |        | 0.80     | 1199    |
     | macro avg    | 0.80      | 0.80   | 0.80     | 1199    |
     | weighted avg | 0.80      | 0.80   | 0.80     | 1199    |
 
 ## 🚀ਚੁਣੌਤੀ
 
-ਇਸ ਪਾਠ ਵਿੱਚ, ਤੁਸੀਂ ਆਪਣੇ ਸਾਫ ਕੀਤੇ ਡਾਟਾ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਮਸ਼ੀਨ ਲਰਨਿੰਗ ਮਾਡਲ ਬਣਾਇਆ ਜੋ ਸਾਮਗਰੀਆਂ ਦੇ ਇੱਕ ਸੈਟ ਦੇ ਆਧਾਰ 'ਤੇ ਰਾਸ਼ਟਰੀ ਖਾਣੇ ਦੀ ਪੇਸ਼ਗੂਈ ਕਰ ਸਕਦਾ ਹੈ। Scikit-learn ਦੁਆਰਾ ਡਾਟਾ ਨੂੰ ਕਲਾਸੀਫਾਈ ਕਰਨ ਲਈ ਦਿੱਤੇ ਗਏ ਕਈ ਵਿਕਲਪਾਂ ਨੂੰ ਪੜ੍ਹਨ ਲਈ ਕੁਝ ਸਮਾਂ ਲਓ। 'solver' ਦੇ ਸੰਕਲਪ ਵਿੱਚ ਹੋਰ ਗਹਿਰਾਈ ਵਿੱਚ ਜਾਓ ਤਾਂ ਜੋ ਪਿੱਛੇ ਚੱਲ ਰਹੇ ਪ੍ਰਕਿਰਿਆ ਨੂੰ ਸਮਝ ਸਕੋ।
+ਇਸ ਪਾਠ ਵਿੱਚ, ਤੁਸੀਂ ਆਪਣਾ ਸਾਫ ਕੀਤਾ ਡਾਟਾ ਇਸਤੇਮਾਲ ਕਰਕੇ ਇੱਕ ਮਸ਼ੀਨ ਲਰਨਿੰਗ ਮਾਡਲ ਬਣਾਇਆ ਜੋ ਕਿ ਸਮੱਗਰੀਆਂ ਦੀ ਇੱਕ ਸੀਰੀਜ਼ ਦੇ ਅਧਾਰ 'ਤੇ ਰਾਸ਼ਟਰੀ ਖਾਣਾ ਭਣਾ ਕਰਨ ਦੀ ਭਵਿੱਖਬਾਣੀ ਕਰ ਸਕਦਾ ਹੈ। ਡਾਟਾ ਨੂੰ ਵਰਗੀਕ੍ਰਿਤ ਕਰਨ ਲਈ ਸਕਾਈਕਿਟ-ਲਰਨ ਦੁਆਰਾ ਦਿੱਤੀਆਂ ਕਈ ਵਿਕਲਪਾਂ ਨੂੰ ਪੜ੍ਹਨ ਲਈ ਕੁਝ ਸਮਾਂ ਲਓ। 'solver' ਦੀ ਸੰਕਲਪਨਾ ਵਿੱਚ ਹੋਰ ਗਹਿਰਾਈ ਨਾਲ ਜਾਓ ਤਾਂ ਜੋ ਇਹ ਸਮਝਿਆ ਜਾ ਸਕੇ ਕਿ ਹੀਨਦੋੜੇ ਪਿੱਛੇ ਕੀ ਹੁੰਦਾ ਹੈ।
 
-## [ਪਾਠ-ਬਾਅਦ ਕਵਿਜ਼](https://ff-quizzes.netlify.app/en/ml/)
+## [ਪੋਸਟ-ਲੇਕਚਰ ਕੁਇਜ਼](https://ff-quizzes.netlify.app/en/ml/)
 
-## ਸਮੀਖਿਆ ਅਤੇ ਸਵੈ ਅਧਿਐਨ
+## ਸਮੀਖਿਆ ਅਤੇ ਸਵੈ-ਅਧਿਐਨ
 
-ਲੌਜਿਸਟਿਕ ਰਿਗ੍ਰੈਸ਼ਨ ਦੇ ਗਣਿਤ ਵਿੱਚ ਹੋਰ ਗਹਿਰਾਈ ਵਿੱਚ ਜਾਓ [ਇਸ ਪਾਠ](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf) ਵਿੱਚ
+ਲੋਜਿਸਟਿਕ ਰਿਗ੍ਰੈਸ਼ਨ ਦੇ ਪਿਛੋਕੜ ਵਿਚ ਗਣਿਤ ਨੂੰ ਹੋਰ ਵਧੀਕ ਸਮਝਣ ਲਈ [ਇਸ ਪਾਠ](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf) ਵਿੱਚ ਖੋਜ ਕਰੋ।
+
 ## ਅਸਾਈਨਮੈਂਟ 
 
 [ਸੋਲਵਰਾਂ ਦਾ ਅਧਿਐਨ ਕਰੋ](assignment.md)
 
 ---
 
-**ਅਸਵੀਕਰਤੀ**:  
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁਚਤਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ਅਸਵੀਕਰਣ**:  
+ਇਹ ਦਸਤਾਵੇਜ਼ ਆਈਏਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਿਵੇਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾ ਲਈ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਆਟੋਮੇਟਿਡ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਮਰਥਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਇਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਸਲੀ ਦਸਤਾਵੇਜ਼ ਤਕੜਾ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਣ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

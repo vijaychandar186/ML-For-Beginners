@@ -1,136 +1,136 @@
-# Izgradite regresijski model koristeći Scikit-learn: regresija na četiri načina
+# Izgradnja regresijskog modela pomoću Scikit-learn: četiri načina regresije
 
-## Bilješka za početnike
+## Napomena za početnike
 
-Linearna regresija se koristi kada želimo predvidjeti **numeričku vrijednost** (na primjer, cijenu kuće, temperaturu ili prodaju).
-Radi tako da pronalazi pravu liniju koja najbolje predstavlja odnos između ulaznih značajki i izlaza.
+Linearna regresija se koristi kada želimo predvidjeti **numeričku vrijednost** (na primjer, cijenu kuće, temperaturu ili prodaju).  
+Funkcionira tako da pronalazi pravu koja najbolje predstavlja odnos između ulaznih značajki i izlaza.
 
-U ovom dijelu fokusiramo se na razumijevanje koncepta prije nego što istražimo naprednije tehnike regresije.
-![Infografika linearne nasuprot polinomnoj regresiji](../../../../translated_images/hr/linear-polynomial.5523c7cb6576ccab.webp)
-> Infografika od [Dasani Madipalli](https://twitter.com/dasani_decoded)
-## [Kviz prije predavanja](https://ff-quizzes.netlify.app/en/ml/)
+U ovoj lekciji se fokusiramo na razumijevanje koncepta prije nego što istražimo naprednije tehnike regresije.  
+![Linear vs polynomial regression infographic](../../../../translated_images/hr/linear-polynomial.5523c7cb6576ccab.webp)  
+> Infografika autora [Dasani Madipalli](https://twitter.com/dasani_decoded)  
+## [Kviz prije lekcije](https://ff-quizzes.netlify.app/en/ml/)
 
-> ### [Ovaj je lekciju dostupan i u R-u!](../../../../2-Regression/3-Linear/solution/R/lesson_3.html)
-### Uvod 
+> ### [Ova je lekcija dostupna i u R-u!](../../../../2-Regression/3-Linear/solution/R/lesson_3.html)  
+### Uvod
 
-Do sada ste istraživali što je regresija koristeći uzorak podataka prikupljenih iz skupa podataka o cijenama bundeva kojeg koristimo kroz cijelu ovu lekciju. Također ste ga vizualizirali koristeći Matplotlib.
+Do sada ste istraživali što je regresija koristeći uzorke podataka prikupljenih iz skupa podataka o cijenama bundeva koje ćemo koristiti kroz cijelu ovu lekciju. Također ste ih vizualizirali pomoću Matplotlib.
 
-Sada ste spremni dublje zaroniti u regresiju za ML. Dok vizualizacija omogućuje razumijevanje podataka, prava moć strojnog učenja dolazi iz _treniranja modela_. Modeli se treniraju na povijesnim podacima kako bi automatski uhvatili ovisnosti podataka, i omogućuju vam da predviđate ishode za nove podatke koje model ranije nije vidio.
+Sada ste spremni dublje zaroniti u regresiju za ML. Dok vizualizacija omogućuje razumijevanje podataka, prava snaga strojnog učenja dolazi iz _treninga modela_. Modeli se treniraju na povijesnim podacima kako bi automatski uhvatili ovisnosti u podacima i omogućuju predviđanje ishoda za nove podatke koje model prije nije vidio.
 
-U ovoj lekciji naučit ćete više o dvije vrste regresije: _osnovna linearna regresija_ i _polinomna regresija_, zajedno s dijelom matematike koja stoji iza ovih tehnika. Ti modeli će nam omogućiti predviđanje cijene bundeva ovisno o različitim ulaznim podacima.
+U ovoj lekciji ćete naučiti više o dvije vrste regresije: _osnovna linearna regresija_ i _polinomijalna regresija_, zajedno s dijelom matematike koja stoji iza tih tehnika. Ti modeli će nam omogućiti predviđanje cijena bundeva ovisno o različitim ulaznim podacima.
 
-[![ML za početnike - Razumijevanje linearne regresije](https://img.youtube.com/vi/CRxFT8oTDMg/0.jpg)](https://youtu.be/CRxFT8oTDMg "ML for beginners - Understanding Linear Regression")
+[![ML for beginners - Understanding Linear Regression](https://img.youtube.com/vi/CRxFT8oTDMg/0.jpg)](https://youtu.be/CRxFT8oTDMg "ML for beginners - Understanding Linear Regression")
 
-> 🎥 Kliknite na slikovnu poveznicu za kratki video pregled linearne regresije.
+> 🎥 Kliknite na sliku gore za kratak video pregled linearne regresije.
 
-> Kroz ovaj kurikulum pretpostavljamo minimalno matematičko znanje i nastojimo ga učiniti pristupačnim studentima iz drugih područja, pa pripazite na napomene, 🧮 objašnjenja, dijagrame i druge alate za učenje koji pomažu razumijevanju.
+> Kroz ovaj kurikulum pretpostavljamo minimalno znanje iz matematike i nastojimo ga učiniti dostupnim studentima iz drugih područja, stoga obratite pažnju na bilješke, 🧮 oznake, dijagrame i druge nastavne alate koji pomažu u razumijevanju.
 
 ### Preduvjeti
 
-Do sada biste trebali biti upoznati sa strukturom podataka o bundevama koje proučavamo. Možete ih pronaći predinstalirane i predobrijeđene u _notebook.ipynb_ datoteci ove lekcije. U datoteci se prikazuje cijena bundeve po bushelu u novom okviru podataka. Provjerite da možete pokrenuti ove bilježnice u Visual Studio Code kernelima.
+Sada biste trebali biti upoznati sa strukturom podataka o bundevama koje promatramo. One su unaprijed učitane i očišćene u datoteci _notebook.ipynb_ ove lekcije. U datoteci je cijena bundeve prikazana po košari. Provjerite da možete pokretati ove bilježnice u kernelima u Visual Studio Codeu.
 
 ### Priprema
 
-Kao podsjetnik, učitavate ove podatke kako biste ih mogli ispitivati.
+Kao podsjetnik, učitavate ove podatke kako biste mogli postavljati pitanja o njima.
 
-- Kada je najbolje vrijeme za kupnju bundeva? 
-- Koju cijenu mogu očekivati za paket minijaturnih bundeva?
-- Trebam li ih kupiti u košarama od pola bushela ili u kutiji od 1 1/9 bushela?
-Nastavimo s ispitivanjem ovih podataka.
+- Kada je najbolje vrijeme za kupnju bundeva?  
+- Koju cijenu mogu očekivati za kutiju mini bundeva?  
+- Trebam li ih kupovati u košarama od pola bushela ili u kutiji od 1 1/9 bushela?  
+Nastavimo dalje kopati u ove podatke.
 
-U prethodnoj ste lekciji kreirali Pandas okvir podataka i ispunili ga dijelom izvornog skupa podataka, standardizirajući cijene po bushelu. Međutim, učinili ste to samo za oko 400 podataka i samo za jesenske mjesece.
+U prethodnoj lekciji ste napravili Pandas DataFrame i popunili ga dijelom izvornog skupa podataka, standardizirajući cijene po bushelu. Time ste uspjeli prikupiti oko 400 podataka samo za jesenske mjesece.
 
-Pogledajte podatke koje smo predinstalirali u bilježnici ove lekcije. Podaci su učitani, a prikazan je početni scatterplot koji prikazuje podatke mjeseci. Možemo li možda dobiti malo više detalja o prirodi podataka čišćenjem?
+Pogledajte podatke koje smo unaprijed učitali u pratećoj bilježnici za ovu lekciju. Podaci su unaprijed učitani i nacrtan je početni scatterplot koji prikazuje podatke po mjesecima. Možda možemo dobiti malo više detalja o prirodi podataka dodatnim čišćenjem.
 
-## Linija linearne regresije
+## Linearna regresijska crta
 
-Kao što ste naučili u Lekciji 1, cilj linearne regresije je biti u stanju nacrtati liniju koja:
+Kao što ste naučili u Lekciji 1, cilj linearne regresije je moći nacrtati liniju da:
 
-- **Prikazuje odnose među varijablama**. Prikazuje odnos između varijabli
-- **Daje predviđanja**. Točno predviđa gdje bi novi podatak pao u odnosu na tu liniju.
+- **Prikaže odnose varijabli**. Prikaže odnos između varijabli  
+- **Napraviti predviđanja**. Precizno predvidjeti gdje će se novi podatak smjestiti u odnosu na tu liniju.
 
-Tipično je za **metodu najmanjih kvadrata** crtanje takve linije. Pojam "najmanjih kvadrata" odnosi se na proces minimiziranja ukupne greške u našem modelu. Za svaku točku mjerimo vertikalnu udaljenost (nazvanu residuum) između stvarne točke i naše regresijske linije.
+Tipično za **regresiju najmanjih kvadrata** je crtanje takve linije. Termin "najmanjih kvadrata" odnosi se na proces minimiziranja ukupne pogreške u našem modelu. Za svaku točku mjerimo vertikalnu udaljenost (zvanu rezidual) između stvarne točke i naše regresijske linije.
 
-Te udaljenosti kvadriramo zbog dva glavna razloga:
+Te udaljenosti kvadriramo iz dva glavna razloga:
 
-1. **Magnitude nad smjerom:** Želimo tretirati grešku -5 isto kao i grešku +5. Kvadriranje sve vrijednosti čini pozitivnima.
+1. **Veličina nasuprot smjeru:** Želimo tretirati pogrešku od -5 isto kao i pogrešku od +5. Kvadriranjem sve vrijednosti postaju pozitivne.  
 
-2. **Kaznjavanje odmetnika:** Kvadriranje daje veću težinu većim greškama, prisiljavajući liniju da ostane bliže udaljenim točkama.
+2. **Kazna za odstupanja:** Kvadriranjem se daje veća težina većim pogreškama, tjerajući liniju da bude bliža točkama koje su daleko.  
 
-Zatim zbrojimo sve te kvadrirane vrijednosti. Naš cilj je pronaći točnu liniju gdje je taj konačni zbroj najmanji (najmanja moguća vrijednost)—otuda naziv "najmanjih kvadrata."
+Zatim zbrojimo sve te kvadrirane vrijednosti. Cilj je pronaći specifičnu liniju za koju je taj konačni zbroj najmanji (najmanja moguća vrijednost)—otuda i naziv "najmanjih kvadrata".
 
-> **🧮 Pokaži mi matematiku** 
-> 
-> Ta linija, nazvana _linija najboljeg pristajanja_, može se izraziti [jednadžbom](https://en.wikipedia.org/wiki/Simple_linear_regression): 
-> 
+> **🧮 Pokaži mi matematiku**  
+>  
+> Ova linija, nazvana _linijom najboljeg pristajanja_, može se izraziti [jednadžbom](https://en.wikipedia.org/wiki/Simple_linear_regression):  
+>  
 > ```
 > Y = a + bX
 > ```
->
-> `X` je 'objašnjavajuća varijabla'. `Y` je 'ovisna varijabla'. Nagib linije je `b`, a `a` je odsječak na y-osi, što se odnosi na vrijednost `Y` kada je `X = 0`. 
->
->![izračunaj nagib](../../../../translated_images/hr/slope.f3c9d5910ddbfcf9.webp)
->
-> Prvo, izračunajte nagib `b`. Infografika od [Jen Looper](https://twitter.com/jenlooper)
->
-> Drugim riječima, i referirajući se na naše izvornog pitanje o bundevama: "predvidjeti cijenu bundeve po bushelu prema mjesecu", `X` bi se odnosilo na cijenu, a `Y` na mjesec prodaje.
->
->![dovrši jednadžbu](../../../../translated_images/hr/calculation.a209813050a1ddb1.webp)
->
-> Izračunajte vrijednost Y. Ako plaćate oko 4 dolara, mora biti travanj! Infografika od [Jen Looper](https://twitter.com/jenlooper)
->
-> Matematika koja izračunava liniju mora pokazati nagib linije, koji također ovisi o odsječku ili gdje se `Y` nalazi kada je `X = 0`.
->
-> Metodu izračuna ovih vrijednosti možete promatrati na web stranici [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html). Također posjetite [ovaj kalkulator najmanjih kvadrata](https://www.mathsisfun.com/data/least-squares-calculator.html) da vidite kako vrijednosti brojeva utječu na liniju.
+>  
+> `X` je 'objašnjavajuća varijabla'. `Y` je 'ovisna varijabla'. Nagib linije je `b` a `a` je y-presjek, što je vrijednost `Y` kad je `X = 0`.  
+>  
+>![izračun nagiba](../../../../translated_images/hr/slope.f3c9d5910ddbfcf9.webp)  
+>  
+> Prvo, izračunajte nagib `b`. Infografika autora [Jen Looper](https://twitter.com/jenlooper)  
+>  
+> Drugim riječima, i referirajući se na originalno pitanje naših podataka o bundevama: "predvidjeti cijenu bundeve po bushelu po mjesecu", `X` bi označavalo cijenu a `Y` mjesec prodaje.  
+>  
+>![dovršavanje jednadžbe](../../../../translated_images/hr/calculation.a209813050a1ddb1.webp)  
+>  
+> Izračunajte vrijednost Y. Ako plaćate oko 4 dolara, mora biti travanj! Infografika autora [Jen Looper](https://twitter.com/jenlooper)  
+>  
+> Matematika koja izračunava liniju mora pokazati nagib linije, koji također ovisi o presjeku, odnosno gdje se `Y` nalazi kada je `X = 0`.  
+>  
+> Metodu izračuna ovih vrijednosti možete proučiti na stranici [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html). Posjetite i [ovaj kalkulator najmanjih kvadrata](https://www.mathsisfun.com/data/least-squares-calculator.html) da vidite kako vrijednosti brojeva utječu na liniju.
 
 ## Korelacija
 
-Još jedan pojam koji treba razumjeti jest **koeficijent korelacije** između zadanih X i Y varijabli. Koristeći scatterplot, brzo možete vizualizirati ovaj koeficijent. Grafikon s točkama raspoređenim uredno u liniji ima visoku korelaciju, dok grafikon s točkama raštrkanima posvuda između X i Y ima nisku korelaciju.
+Još jedan pojam koji treba razumjeti je **koeficijent korelacije** između zadanih X i Y varijabli. Pomoću scatterplota možete brzo vizualizirati ovaj koeficijent. Grafikon s točkama razbacanim u lijepoj liniji ima visoku korelaciju, dok graf s točkama razbacanim posvuda između X i Y ima nisku korelaciju.
 
-Dobar model linearne regresije bit će onaj koji ima visok (bliži 1 nego 0) koeficijent korelacije koristeći metodu najmanjih kvadrata s regresijskom linijom.
+Dobar linearni regresijski model će imati visok koeficijent korelacije (bliži 1 nego 0) koristeći metodu najmanjih kvadrata s regresijskom linijom.
 
-✅ Pokrenite bilježnicu uz ovu lekciju i pogledajte scatterplot Mjesec prema Cijeni. Ima li podataka koji povezuju mjesec s cijenom prodaje bundeva visoku ili nisku korelaciju, prema vašoj vizualnoj interpretaciji scatterplota? Mijenja li se to ako koristite finiju mjeru umjesto `Month`, npr. *dan u godini* (broj dana od početka godine)?
+✅ Pokrenite bilježnicu koja prati ovu lekciju i pogledajte scatterplot Mjeseca prema Cijeni. Ima li podataka koji povezuju Mjesec i Cijenu kod prodaje bundeva visoku ili nisku korelaciju prema vašoj vizualnoj interpretaciji scatterplota? Mijenja li se to ako koristite finiju mjeru umjesto `Month`, npr. *dan u godini* (tj. broj dana od početka godine)?
 
-U sljedećem kodu pretpostavit ćemo da smo očistili podatke i dobili okvir podataka nazvan `new_pumpkins`, sličan sljedećem:
+U sljedećem kodu pretpostavit ćemo da smo očistili podatke i dobili DataFrame nazvan `new_pumpkins`, sličan sljedećem:
 
-ID | Month | DayOfYear | Variety | City | Package | Low Price | High Price | Price
----|-------|-----------|---------|------|---------|-----------|------------|-------
-70 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364
-71 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636
-72 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636
-73 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 17.0 | 17.0 | 15.454545
-74 | 10 | 281 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364
+ID | Month | DayOfYear | Variety | City | Package | Low Price | High Price | Price  
+---|-------|-----------|---------|------|---------|-----------|------------|-------  
+70 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364  
+71 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636  
+72 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636  
+73 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 17.0 | 17.0 | 15.454545  
+74 | 10 | 281 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364  
 
-> Kod za čišćenje podataka nalazi se u [`notebook.ipynb`](notebook.ipynb). Izveli smo iste korake čišćenja kao u prethodnoj lekciji te izračunali stupac `DayOfYear` koristeći sljedeći izraz:
+> Kod za čišćenje podataka dostupan je u [`notebook.ipynb`](notebook.ipynb). Izveli smo iste korake čišćenja kao u prethodnoj lekciji i izračunali stupac `DayOfYear` koristeći sljedeći izraz:
 
 ```python
 day_of_year = pd.to_datetime(pumpkins['Date']).apply(lambda dt: (dt-datetime(dt.year,1,1)).days)
 ```
-
-Sada kad imate razumijevanje matematike iza linearne regresije, kreirajmo regresijski model da vidimo možemo li predvidjeti koji paket bundeva će imati najbolje cijene. Netko tko kupuje bundeve za blagdanski prikaz bundeva može htjeti ovu informaciju kako bi optimizirao kupnju paketa bundeva za prikaz.
+  
+Sada, kad imate razumijevanje matematike iza linearne regresije, stvorimo regresijski model da vidimo možemo li predvidjeti koja će pakiranja bundeva imati najbolje cijene. Netko tko kupuje bundeve za natjecanje ili ukrasnu parcelu možda želi ove informacije kako bi optimizirao svoje kupovine pakiranja bundeva.
 
 ## Traženje korelacije
 
-[![ML za početnike - Traženje korelacije: Ključ za linearnu regresiju](https://img.youtube.com/vi/uoRq-lW2eQo/0.jpg)](https://youtu.be/uoRq-lW2eQo "ML for beginners - Looking for Correlation: The Key to Linear Regression")
+[![ML for beginners - Looking for Correlation: The Key to Linear Regression](https://img.youtube.com/vi/uoRq-lW2eQo/0.jpg)](https://youtu.be/uoRq-lW2eQo "ML for beginners - Looking for Correlation: The Key to Linear Regression")
 
-> 🎥 Kliknite na slikovnu poveznicu za kratki video pregled korelacije.
+> 🎥 Kliknite na sliku gore za kratak video pregled korelacije.
 
-Iz prethodne lekcije vjerojatno ste vidjeli da prosječna cijena za različite mjesece izgleda ovako:
+Iz prethodne lekcije vjerojatno ste vidjeli da prosječna cijena po mjesecima izgleda ovako:
 
-<img alt="Prosječna cijena po mjesecu" src="../../../../translated_images/hr/barchart.a833ea9194346d76.webp" width="50%"/>
+<img alt="Average price by month" src="../../../../translated_images/hr/barchart.a833ea9194346d76.webp" width="50%"/>
 
-To sugerira da bi trebala postojati neka korelacija, i možemo pokušati trenirati linearni regresijski model da predvidi odnos između `Month` i `Price`, ili između `DayOfYear` i `Price`. Evo scatterplota koji prikazuje ovaj zadnji odnos:
+Ovo sugerira da bi trebala postojati neka korelacija, i možemo pokušati trenirati linearni regresijski model koji predviđa odnos između `Month` i `Price`, ili između `DayOfYear` i `Price`. Slijedi scatter plot koji prikazuje posljednji odnos:
 
-<img alt="Scatter plot cijena u odnosu na dan u godini" src="../../../../translated_images/hr/scatter-dayofyear.bc171c189c9fd553.webp" width="50%" /> 
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/hr/scatter-dayofyear.bc171c189c9fd553.webp" width="50%" /> 
 
-Pogledajmo ima li korelacije koristeći funkciju `corr`:
+Pogledajmo je li korelacija prisutna uz pomoć funkcije `corr`:
 
 ```python
 print(new_pumpkins['Month'].corr(new_pumpkins['Price']))
 print(new_pumpkins['DayOfYear'].corr(new_pumpkins['Price']))
 ```
-
-Izgleda da je korelacija prilično mala, -0.15 prema `Month` i -0.17 prema `DayOfMonth`, ali moglo bi postojati još neki važan odnos. Čini se da postoje različiti klasteri cijena koji odgovaraju različitim vrstama bundeva. Da bismo potvrdili ovu hipotezu, nacrtajmo svaku kategoriju bundeva različitom bojom. Prosljeđivanjem parametra `ax` funkciji `scatter` možemo nacrtati sve točke na istom grafikonu:
+  
+Izgleda da je korelacija prilično mala, -0.15 po `Month` i -0.17 po `DayOfMonth`, ali može postojati još neki važan odnos. Izgleda da postoje različite skupine cijena koje odgovaraju različitim sortama bundeva. Da bismo potvrdili ovu hipotezu, prikažimo svaku kategoriju bundeva različitom bojom. Prosljeđivanjem parametra `ax` funkciji za crtanje `scatter` možemo nacrtati sve točke na istom grafikonu:
 
 ```python
 ax=None
@@ -139,92 +139,93 @@ for i,var in enumerate(new_pumpkins['Variety'].unique()):
     df = new_pumpkins[new_pumpkins['Variety']==var]
     ax = df.plot.scatter('DayOfYear','Price',ax=ax,c=colors[i],label=var)
 ```
+  
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/hr/scatter-dayofyear-color.65790faefbb9d54f.webp" width="50%" /> 
 
-<img alt="Scatter plot cijena u odnosu na dan u godini s bojama" src="../../../../translated_images/hr/scatter-dayofyear-color.65790faefbb9d54f.webp" width="50%" /> 
-
-Naša istraga sugerira da sorta ima veći utjecaj na ukupnu cijenu nego stvarni datum prodaje. To možemo vidjeti na stupčastom grafikonu:
+Naša istraga pokazuje da sorta ima veći utjecaj na ukupnu cijenu nego stvarni datum prodaje. Ovo vidimo i na stupčastom grafikonu:
 
 ```python
 new_pumpkins.groupby('Variety')['Price'].mean().plot(kind='bar')
 ```
+  
+<img alt="Bar graph of price vs variety" src="../../../../translated_images/hr/price-by-variety.744a2f9925d9bcb4.webp" width="50%" /> 
 
-<img alt="Stupčasti grafikon cijene po vrstama" src="../../../../translated_images/hr/price-by-variety.744a2f9925d9bcb4.webp" width="50%" /> 
-
-Usredotočimo se na trenutak samo na jednu vrstu bundeve, 'pie type', i vidimo kakav utjecaj datum ima na cijenu:
+Za sada se usredotočimo samo na jednu sortu bundeve, 'pie type', i pogledajmo kako datum utječe na cijenu:
 
 ```python
 pie_pumpkins = new_pumpkins[new_pumpkins['Variety']=='PIE TYPE']
 pie_pumpkins.plot.scatter('DayOfYear','Price') 
 ```
-<img alt="Scatter plot cijena u odnosu na dan u godini za pie vrste bundeva" src="../../../../translated_images/hr/pie-pumpkins-scatter.d14f9804a53f927e.webp" width="50%" /> 
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/hr/pie-pumpkins-scatter.d14f9804a53f927e.webp" width="50%" /> 
 
-Ako sad izračunamo korelaciju između `Price` i `DayOfYear` koristeći funkciju `corr`, dobit ćemo nešto oko `-0.27` - što znači da ima smisla trenirati prediktivni model.
+Ako sada izračunamo korelaciju između `Price` i `DayOfYear` pomoću funkcije `corr`, dobit ćemo nešto poput `-0.27` - što znači da je treniranje prediktivnog modela smisleno.
 
-> Prije treniranja modela linearne regresije važno je osigurati da su naši podaci čisti. Linearna regresija ne funkcionira dobro s nedostajućim vrijednostima, stoga ima smisla ukloniti sve prazne ćelije:
+> Prije nego treniramo linearni regresijski model, važno je osigurati da su naši podaci čisti. Linearna regresija ne radi dobro s nedostajućim vrijednostima, stoga ima smisla ukloniti sve prazne ćelije:
 
 ```python
 pie_pumpkins.dropna(inplace=True)
 pie_pumpkins.info()
 ```
-
-Drugi pristup bio bi popuniti prazne vrijednosti prosječnim vrijednostima iz odgovarajućeg stupca.
+  
+Drugi pristup bi bio popuniti prazne vrijednosti prosječnim vrijednostima iz odgovarajućeg stupca.
 
 ## Jednostavna linearna regresija
 
-[![ML za početnike - Linearna i polinomna regresija koristeći Scikit-learn](https://img.youtube.com/vi/e4c_UP2fSjg/0.jpg)](https://youtu.be/e4c_UP2fSjg "ML for beginners - Linear and Polynomial Regression using Scikit-learn")
+[![ML for beginners - Linear and Polynomial Regression using Scikit-learn](https://img.youtube.com/vi/e4c_UP2fSjg/0.jpg)](https://youtu.be/e4c_UP2fSjg "ML for beginners - Linear and Polynomial Regression using Scikit-learn")
 
-> 🎥 Kliknite na slikovnu poveznicu za kratki video pregled linearne i polinomne regresije.
+> 🎥 Kliknite na sliku gore za kratak video pregled linearne i polinomijalne regresije.
 
-Za treniranje našeg modela linearne regresije koristit ćemo **Scikit-learn** biblioteku.
+Za treniranje našeg linearno regresijskog modela koristit ćemo biblioteku **Scikit-learn**.
 
 ```python
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 ```
-
-Započinjemo razdvajanjem ulaznih vrijednosti (značajki) i očekivanog izlaza (oznake) u zasebne numpy nizove:
+  
+Počinjemo odvajajući ulazne vrijednosti (značajke) i očekivane izlazne vrijednosti (etikete) u zasebne numpy nizove:
 
 ```python
 X = pie_pumpkins['DayOfYear'].to_numpy().reshape(-1,1)
 y = pie_pumpkins['Price']
 ```
+  
+> Primijetite da smo morali izvršiti `reshape` na ulaznim podacima da bi Linear Regression paket pravilno razumio ulaz. Linearna regresija očekuje 2D niz kao ulaz, gdje svaki redak niza predstavlja vektor ulaznih značajki. U našem slučaju, budući da imamo samo jednu ulaznu varijablu, treba nam niz oblika N&times;1, gdje je N veličina skupa podataka.
 
-> Primijetite da smo morali napraviti `reshape` ulaznih podataka kako bi Linear Regression paket ispravno razumio podatke. Linearna regresija očekuje 2D niz kao ulaz, gdje svaki redak niza odgovara vektoru ulaznih značajki. U našem slučaju, budući da imamo samo jedan ulaz, potrebna nam je matrica dimenzija N&times;1, gdje je N veličina skupa podataka.
-
-Zatim trebamo podijeliti podatke na trening i test skupove, kako bismo mogli validirati naš model nakon treniranja:
+Zatim trebamo podijeliti podatke u skupove za treniranje i testiranje, kako bismo mogli validirati naš model nakon treninga:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 ```
-
-Na kraju, treniranje stvarnog modela linearne regresije traje samo dvije linije koda. Definiramo objekt `LinearRegression` i prilagođavamo ga našim podacima korištenjem metode `fit`:
+  
+Na kraju, treniranje samog modela linearne regresije traje samo dvije linije koda. Definiramo objekt `LinearRegression` i prilagođavamo ga naša podacima pomoću metode `fit`:
 
 ```python
 lin_reg = LinearRegression()
 lin_reg.fit(X_train,y_train)
 ```
 
-Objekt `LinearRegression` nakon `fit`-iranja sadrži sve koeficijente regresije, kojima se može pristupiti pomoću `.coef_` svojstva. U našem slučaju postoji samo jedan koeficijent, koji bi trebao biti oko `-0.017`. To znači da cijene izgledaju kao da malo padaju s vremenom, ali ne previše, oko 2 centa dnevno. Također možemo pristupiti sjecištu regresije s Y-osi pomoću `lin_reg.intercept_` - ono će biti oko `21` u našem slučaju, što označava cijenu na početku godine.
+Objekt `LinearRegression` nakon treniranja (`fit`) sadrži sve koeficijente regresije, do kojih se može pristupiti putem svojstva `.coef_`. U našem slučaju postoji samo jedan koeficijent, koji bi trebao biti oko `-0.017`. To znači da cijene djeluju kao da nešto padaju s vremenom, ali ne previše, oko 2 centa dnevno. Također možemo pristupiti točki presjeka regresije s Y-osi koristeći `lin_reg.intercept_` - u našem slučaju bit će oko `21`, što označava cijenu na početku godine.
 
-Da bismo vidjeli koliko je naš model točan, možemo predvidjeti cijene na testnom skupu podataka, a zatim izmjeriti koliko su naša predviđanja bliska očekivanim vrijednostima. To se može učiniti pomoću metrike srednje kvadratne pogreške (MSE), što je srednja vrijednost svih kvadratnih razlika između očekivane i predviđene vrijednosti.
+Da bismo vidjeli koliko je naš model točan, možemo predvidjeti cijene na testnom skupu podataka i zatim izmjeriti koliko su naša predviđanja bliska očekivanim vrijednostima. To se može napraviti koristeći metriku korijen srednje kvadratne pogreške (RMSE), što je korijen sredine svih kvadrata razlika između očekivane i predviđene vrijednosti.
 
 ```python
 pred = lin_reg.predict(X_test)
 
-mse = np.sqrt(mean_squared_error(y_test,pred))
-print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
+rmse = np.sqrt(mean_squared_error(y_test,pred))
+print(f'RMSE: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
 ```
 
-Naša pogreška izgleda da je oko 2 boda, što je ~17%. Nije baš dobro. Još jedan pokazatelj kvalitete modela je **koeficijent determinacije**, koji se može dobiti ovako:
+Naša pogreška je otprilike oko 2 boda, što je ~17%. Nije baš dobro. Još jedan pokazatelj kvalitete modela je **koeficijent determinacije**, koji se može dobiti ovako:
 
 ```python
 score = lin_reg.score(X_train,y_train)
 print('Model determination: ', score)
 ```
-Ako je vrijednost 0, to znači da model ne uzima u obzir ulazne podatke i djeluje kao *najgori linearni prediktor*, što je jednostavno srednja vrijednost rezultata. Vrijednost 1 znači da možemo savršeno predvidjeti sve očekivane izlaze. U našem slučaju, koeficijent je oko 0.06, što je prilično nisko.
 
-Također možemo prikazati testne podatke zajedno s regresijskom linijom kako bismo bolje vidjeli kako regresija radi u našem slučaju:
+Ako je vrijednost 0, to znači da model ne uzima u obzir ulazne podatke i djeluje kao *najgori linearni prediktor*, što je jednostavno srednja vrijednost rezultata. Vrijednost 1 znači da možemo savršeno predvidjeti sve očekivane izlaze. U našem slučaju koeficijent je oko 0.06, što je prilično nisko.
+
+Također možemo prikazati testne podatke zajedno s regresijskom linijom da bolje vidimo kako regresija funkcionira u našem slučaju:
 
 ```python
 plt.scatter(X_test,y_test)
@@ -233,19 +234,19 @@ plt.plot(X_test,pred)
 
 <img alt="Linear regression" src="../../../../translated_images/hr/linear-results.f7c3552c85b0ed1c.webp" width="50%" />
 
-## Polinomska regresija
+## Polinomijalna regresija
 
-Druga vrsta linearne regresije je polinomska regresija. Dok ponekad postoji linearna veza između varijabli - što je bundeva veća po volumenu, to je viša cijena - ponekad ove veze ne mogu biti prikazane kao ravnina ili ravna linija.
+Još jedna vrsta linearne regresije je polinomijalna regresija. Iako ponekad postoji linearna veza između varijabli - što je veća bundeva po volumenu, to je veća cijena - ponekad te veze nije moguće prikazati kao ravninu ili pravu liniju.
 
-✅ Evo [još nekoliko primjera](https://online.stat.psu.edu/stat501/lesson/9/9.8) podataka koji bi mogli koristiti polinomsku regresiju
+✅ Evo [još nekoliko primjera](https://online.stat.psu.edu/stat501/lesson/9/9.8) podataka za koje bi se mogla koristiti polinomijalna regresija.
 
-Pogledajte ponovno odnos između Datuma i Cijene. Izgleda li ovaj scatterplot kao da ga nužno treba analizirati ravnom linijom? Ne mogu li cijene varirati? U tom slučaju možete pokušati polinomsku regresiju.
+Ponovno pogledajte odnos između Datuma i Cijene. Izgleda li ovaj scatterplot kao da bi ga nužno trebalo analizirati linijom? Zar cijene ne mogu varirati? U tom slučaju možete pokušati polinomijalnu regresiju.
 
 ✅ Polinomi su matematički izrazi koji mogu sadržavati jednu ili više varijabli i koeficijenata.
 
-Polinomska regresija stvara zakrivljenu liniju koja bolje pristaje nelinearnim podacima. U našem slučaju, ako u ulazne podatke uključimo kvadratnu varijablu `DayOfYear`, trebali bismo moći modelirati podatke parabolom koja će imati minimum u nekoj točki tijekom godine.
+Polinomijalna regresija stvara zakrivljenu liniju kako bi bolje pristajala nelinearnim podacima. U našem slučaju, ako uključimo kvadratnu varijablu `DayOfYear` u ulazne podatke, trebali bismo biti u mogućnosti uklopiti podatke parabolom, koja će imati minimum u nekoj točki tijekom godine.
 
-Scikit-learn uključuje korisno [pipeline API](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) za kombiniranje različitih koraka obrade podataka zajedno. **Pipeline** je lanac **procjenitelja**. U našem slučaju, stvorit ćemo pipeline koji prvo dodaje polinomske značajke našem modelu, a zatim trenira regresiju:
+Scikit-learn uključuje korisni [pipeline API](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) za spajanje različitih koraka obrade podataka zajedno. **Pipeline** je niz **estimatora**. U našem slučaju ćemo napraviti pipeline koji prvo dodaje polinomijalne značajke našem modelu, a zatim trenira regresiju:
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures
@@ -256,36 +257,36 @@ pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
 pipeline.fit(X_train,y_train)
 ```
 
-Korištenje `PolynomialFeatures(2)` znači da ćemo uključiti sve polinome drugog stupnja iz ulaznih podataka. U našem slučaju to će jednostavno značiti `DayOfYear`<sup>2</sup>, ali s dvije ulazne varijable X i Y, to će dodati X<sup>2</sup>, XY i Y<sup>2</sup>. Također možemo koristiti polinome višeg stupnja ako želimo.
+Korištenjem `PolynomialFeatures(2)` znači da će se uključiti svi polinomi drugog stupnja iz ulaznih podataka. U našem slučaju to će biti samo `DayOfYear`<sup>2</sup>, ali ako imamo dvije ulazne varijable X i Y, to će uključiti X<sup>2</sup>, XY i Y<sup>2</sup>. Također možemo koristiti i polinome višeg stupnja ako želimo.
 
-Pipelinove se mogu koristiti na isti način kao izvorni objekt `LinearRegression`, tj. možemo `fit`-ati pipeline, a zatim koristiti `predict` za dobivanje predviđanja. Evo grafikona koji prikazuje testne podatke i aproksimacijsku krivulju:
+Pipeline-ovi se mogu koristiti na isti način kao i originalni objekt `LinearRegression`, tj. možemo `fit` pipeline, a zatim koristiti `predict` za dobivanje rezultata predviđanja. Evo grafa koji prikazuje testne podatke i aproksimacijsku krivulju:
 
 <img alt="Polynomial regression" src="../../../../translated_images/hr/poly-results.ee587348f0f1f60b.webp" width="50%" />
 
-Korištenjem polinomske regresije možemo dobiti nešto nižu MSE i viši koeficijent determinacije, ali ne značajno. Moramo uzeti u obzir i druge značajke!
+Upotrebom polinomijalne regresije možemo dobiti nešto niži MSE i viši koeficijent determinacije, ali ne značajno. Moramo uzeti u obzir i druge značajke!
 
-> Možete vidjeti da su minimalne cijene bundeva opažene negdje oko Noći vještica. Kako to možete objasniti?
+> Možete primijetiti da su minimalne cijene bundeva zabilježene negdje oko Noći vještica. Kako to možete objasniti?
 
-🎃 Čestitamo, upravo ste stvorili model koji može pomoći u predviđanju cijene pita od bundeva. Vjerojatno možete ponoviti isti postupak za sve vrste bundeva, ali to bi bilo zamorno. Naučimo sada kako u model uključiti vrstu bundeve!
+🎃 Čestitamo, upravo ste kreirali model koji može pomoći u predviđanju cijene bundeva za pite. Vjerojatno možete ponoviti isti postupak za sve vrste bundeva, ali to bi bilo zamorno. Sada ćemo naučiti kako u našem modelu uzeti u obzir sortu bundeve!
 
-## Kategorijske značajke
+## Kategorizirane značajke
 
-U idealnom svijetu želimo moći predvidjeti cijene za različite sorte bundeva koristeći isti model. Međutim, stupac `Variety` se razlikuje od stupaca poput `Month`, jer sadrži nenumeričke vrijednosti. Takvi se stupci nazivaju **kategorijskim**.
+U idealnom svijetu želimo moći predvidjeti cijene za različite sorte bundeva koristeći isti model. Međutim, stupac `Variety` se donekle razlikuje od stupaca poput `Month`, jer sadrži nenumeričke vrijednosti. Takvi se stupci nazivaju **kategorizirani**.
 
-[![ML za početnike - Predviđanja kategorijskih značajki linearnom regresijom](https://img.youtube.com/vi/DYGliioIAE0/0.jpg)](https://youtu.be/DYGliioIAE0 "ML za početnike - Predviđanja kategorijskih značajki linearnom regresijom")
+[![ML for beginners - Kategorizirano predviđanje s linearnom regresijom](https://img.youtube.com/vi/DYGliioIAE0/0.jpg)](https://youtu.be/DYGliioIAE0 "ML for beginners - Kategorizirano predviđanje s linearnom regresijom")
 
-> 🎥 Kliknite gornju sliku za kratak video pregled korištenja kategorijskih značajki.
+> 🎥 Kliknite na sliku iznad za kratki video pregled korištenja kategoriziranih značajki.
 
-Ovdje možete vidjeti kako prosječna cijena ovisi o sorti:
+Ovdje možete vidjeti kako se prosječna cijena razlikuje po sorti:
 
 <img alt="Average price by variety" src="../../../../translated_images/hr/price-by-variety.744a2f9925d9bcb4.webp" width="50%" />
 
-Da bismo uzeli sortu u obzir, prvo je moramo pretvoriti u numerički oblik, ili je **enkodirati**. Postoji nekoliko načina kako to možemo učiniti:
+Da bismo uzeli sortu u obzir, prvo je moramo pretvoriti u numerički oblik, odnosno **enkodirati**. Postoji nekoliko načina kako to možemo napraviti:
 
-* Jednostavna **numerička enkodiranja** će napraviti tablicu različitih sorti, a zatim zamijeniti ime sorte indeksom u toj tablici. To nije najbolja ideja za linearnu regresiju, jer linearna regresija uzima stvarnu numeričku vrijednost indeksa i dodaje je rezultatu množeći s nekim koeficijentom. U našem slučaju, veza između broja indeksa i cijene je jasno nelinearna, čak i ako osiguramo da su indeksi uređeni na neki specifičan način.
-* **One-hot enkodiranje** zamijenit će stupac `Variety` s 4 različita stupca, po jedan za svaku sortu. Svaki stupac će sadržavati `1` ako je odgovarajući redak određene sorte, a `0` inače. To znači da će postojati četiri koeficijenta u linearnoj regresiji, po jedan za svaku sortu bundeve, koji će biti odgovorni za "početnu cijenu" (ili bolje rečeno "dodatnu cijenu") za tu određenu sortu.
+* Jednostavna **numerička enkodiranja** izgradi će tablicu različitih sorti, a zatim zamijeni ime sorte njezinim indeksom u toj tablici. To nije najbolja ideja za linearnu regresiju, jer linearna regresija uzima stvarnu numeričku vrijednost indeksa i dodaje je rezultatu, množeći koeficijentom. U našem slučaju odnos između broja indeksa i cijene je jasno nelinearan, čak i ako osiguramo da su indeksi sortirani na neki specifičan način.
+* **One-hot enkodiranje** će zamijeniti stupac `Variety` sa 4 različita stupca, po jedan za svaku sortu. Svaki stupac će imati vrijednost `1` ako je odgovarajući redak te sorte, i `0` inače. To znači da će u linearnoj regresiji biti četiri koeficijenta, jedan za svaku sortu bundeve, koji su odgovorni za "početnu cijenu" (ili bolje rečeno "dodatnu cijenu") za tu sortu.
 
-Donji kôd pokazuje kako možemo one-hot enkodirati sortu:
+Sljedeći kod pokazuje kako možemo napraviti one-hot enkodiranje sorte:
 
 ```python
 pd.get_dummies(new_pumpkins['Variety'])
@@ -302,14 +303,14 @@ pd.get_dummies(new_pumpkins['Variety'])
 1741 | 0 | 1 | 0 | 0
 1742 | 0 | 1 | 0 | 0
 
-Da bismo trenirali linearnu regresiju koristeći one-hot enkodiranu sortu kao ulaz, samo trebamo pravilno inicijalizirati podatke `X` i `y`:
+Za treniranje linearne regresije koristeći one-hot enkodiranu sortu kao ulaz, samo trebamo ispravno inicijalizirati podatke `X` i `y`:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety'])
 y = new_pumpkins['Price']
 ```
 
-Ostatak koda je isti kao što smo gore koristili za treniranje Linearne Regresije. Ako to probate, vidjet ćete da je srednja kvadratna pogreška približno ista, ali dobivamo puno veći koeficijent determinacije (~77%). Da bismo dobili još točnija predviđanja, možemo uzeti u obzir još kategorijskih značajki, kao i numeričkih značajki, poput `Month` ili `DayOfYear`. Da bismo dobili jedan veliki niz značajki, možemo koristiti `join`:
+Ostatak koda je isti kao onaj koji smo koristili gore za treniranje linearne regresije. Ako probate, vidjet ćete da je srednja kvadratna pogreška otprilike ista, ali koeficijent determinacije je znatno veći (~77%). Da bismo dobili još točnija predviđanja, možemo uzeti u obzir i više kategoriziranih značajki, kao i numeričke kao što su `Month` ili `DayOfYear`. Da bismo dobili jedan veliki niz značajki, možemo koristiti `join`:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety']) \
@@ -319,11 +320,11 @@ X = pd.get_dummies(new_pumpkins['Variety']) \
 y = new_pumpkins['Price']
 ```
 
-Ovdje također uzimamo u obzir `City` i tip `Package`, što nam daje MSE 2.84 (10%), i determinaciju 0.94!
+Ovdje također uzimamo u obzir grad i tip pakiranja, što nam daje MSE 2.84 (10%) i determinaciju 0.94!
 
-## Sve spojeno
+## Sve zajedno
 
-Da bismo napravili najbolji model, možemo koristiti kombinirane (one-hot enkodirane kategorijske + numeričke) podatke iz prethodnog primjera zajedno s polinomskom regresijom. Evo kompletnog koda radi vaše udobnosti:
+Da bismo napravili najbolji model, možemo koristiti kombinirane (one-hot enkodirane kategorizirane + numeričke) podatke iz gornjeg primjera zajedno s polinomijalnom regresijom. Evo kompletnog koda radi vaše udobnosti:
 
 ```python
 # postavi podatke za trening
@@ -333,17 +334,17 @@ X = pd.get_dummies(new_pumpkins['Variety']) \
         .join(pd.get_dummies(new_pumpkins['Package']))
 y = new_pumpkins['Price']
 
-# napravi podjelu podataka na trening i test
+# napravi podjelu na trening i test
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 # postavi i treniraj pipeline
 pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
 pipeline.fit(X_train,y_train)
 
-# predvidi rezultate za testne podatke
+# predvidi rezultate za test podatke
 pred = pipeline.predict(X_test)
 
-# izračunaj MSE i koeficijent determinacije
+# izračunaj MSE i determinaciju
 mse = np.sqrt(mean_squared_error(y_test,pred))
 print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
 
@@ -351,36 +352,36 @@ score = pipeline.score(X_train,y_train)
 print('Model determination: ', score)
 ```
 
-To bi nam trebalo dati najbolji koeficijent determinacije od gotovo 97%, i MSE=2.23 (~8% pogreška predviđanja).
+To bi nam trebalo dati najbolji koeficijent determinacije od gotovo 97% i MSE=2.23 (~8% pogreške u predviđanju).
 
 | Model | MSE | Determinacija |
-|-------|-----|--------------|
-| Linearni `DayOfYear` | 2.77 (17.2%) | 0.07 |
-| Polinomski `DayOfYear` | 2.73 (17.0%) | 0.08 |
-| Linearna `Variety` | 5.24 (19.7%) | 0.77 |
-| Sve značajke Linearno | 2.84 (10.5%) | 0.94 |
-| Sve značajke Polinomski | 2.23 (8.25%) | 0.97 |
+|-------|-----|---------------|
+| Linearni model na `DayOfYear` | 2.77 (17.2%) | 0.07 |
+| Polinomijalni model na `DayOfYear` | 2.73 (17.0%) | 0.08 |
+| Linearni model na `Variety` | 5.24 (19.7%) | 0.77 |
+| Linearni model na svim značajkama | 2.84 (10.5%) | 0.94 |
+| Polinomijalni model na svim značajkama | 2.23 (8.25%) | 0.97 |
 
-🏆 Svaka čast! Stvorili ste četiri modela regresije u jednoj lekciji i poboljšali kvalitetu modela na 97%. U završnom dijelu o regresiji naučit ćete o logističkoj regresiji za određivanje kategorija.
+🏆 Odlično! Kreirali ste četiri modela regresije u jednoj lekciji i poboljšali kvalitetu modela do 97%. U završnom dijelu o regresiji naučit ćete o logističkoj regresiji za određivanje kategorija.
 
 ---
 ## 🚀Izazov
 
-Testirajte nekoliko različitih varijabli u ovom bilježniku da vidite kako korelacija odgovara točnosti modela.
+Isprobajte nekoliko različitih varijabli u ovoj bilježnici kako biste vidjeli kako korelacija odgovara točnosti modela.
 
 ## [Kviz nakon predavanja](https://ff-quizzes.netlify.app/en/ml/)
 
-## Pregled i samostalan rad
+## Pregled i samostalno učenje
 
-U ovoj lekciji smo naučili o linearnoj regresiji. Postoje i druge važne vrste regresije. Pročitajte o tehnikama Stepwise, Ridge, Lasso i Elasticnet. Dobar tečaj za daljnje proučavanje je [Stanford Statistical Learning course](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)
+U ovoj lekciji smo naučili o linearnoj regresiji. Postoje i druge važne vrste regresija. Pročitajte o tehnikama Stepwise, Ridge, Lasso i Elasticnet. Dobar tečaj koji vrijedi proučiti je [Stanford tečaj statističkog učenja](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)
 
 ## Zadatak
 
-[Izradi model](assignment.md)
+[Izgradi model](assignment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Odricanje od odgovornosti**:
-Ovaj je dokument preveden pomoću AI usluge prevođenja [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati greške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporuča se profesionalni prijevod ljudskog prevoditelja. Ne snosimo odgovornost za bilo kakva nesporazumevanja ili pogrešne interpretacije nastale korištenjem ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge prevođenja [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo postići točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku trebao bi se smatrati službenim izvorom. Za ključne informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakve nesporazume ili kriva tumačenja proizašla iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

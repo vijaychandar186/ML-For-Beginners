@@ -1,17 +1,17 @@
-# Ruokakulttuuriluokittelijat 1
+# Ruokakulttuurien luokittelijat 1
 
-Tässä oppitunnissa käytät edellisessä oppitunnissa tallentamaasi tasapainoista ja siistiä datasettiä, joka käsittelee ruokakulttuureja.
+Tässä oppitunnissa käytät viimeiseltä oppitunnilta tallentamaasi tasapainoista, siistiä ruokakulttuureja käsittelevää aineistoa.
 
-Käytät tätä datasettiä eri luokittelijoiden kanssa _ennustaaksesi tietyn kansallisen ruokakulttuurin ainesosaryhmän perusteella_. Samalla opit lisää tavoista, joilla algoritmeja voidaan hyödyntää luokittelutehtävissä.
+Käytät tätä aineistoa erilaisten luokittelijoiden kanssa _ennustaaksesi tietyn kansallisen ruokakulttuurin perustuen joukkoon ainesosia_. Samalla opit lisää erilaisista tavoista, joilla algoritmeja voidaan hyödyntää luokittelutehtävissä.
 
-## [Esiluennon kysely](https://ff-quizzes.netlify.app/en/ml/)
-# Valmistelu
+## [Luennon ennakkotentti](https://ff-quizzes.netlify.app/en/ml/)
+# Valmistautuminen
 
-Jos olet suorittanut [Oppitunnin 1](../1-Introduction/README.md), varmista, että _cleaned_cuisines.csv_-tiedosto on olemassa juurihakemistossa `/data` näitä neljää oppituntia varten.
+Oletetaan, että olet suorittanut [Oppitunti 1](../1-Introduction/README.md), varmista että _cleaned_cuisines.csv_ -tiedosto on olemassa `/data`-kansion juuressa näitä neljää oppituntia varten.
 
 ## Harjoitus - ennusta kansallinen ruokakulttuuri
 
-1. Työskentele tämän oppitunnin _notebook.ipynb_-kansiossa ja tuo tiedosto sekä Pandas-kirjasto:
+1. Työskentele tässä oppitunnin _notebook.ipynb_-kansiossa ja tuo tiedosto yhdessä Pandas-kirjaston kanssa:
 
     ```python
     import pandas as pd
@@ -30,7 +30,7 @@ Jos olet suorittanut [Oppitunnin 1](../1-Introduction/README.md), varmista, ett�
 | 4   | 4          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 1      | 0        |
   
 
-1. Tuo nyt lisää kirjastoja:
+1. Tuo nyt useita muita kirjastoja:
 
     ```python
     from sklearn.linear_model import LogisticRegression
@@ -40,7 +40,7 @@ Jos olet suorittanut [Oppitunnin 1](../1-Introduction/README.md), varmista, ett�
     import numpy as np
     ```
 
-1. Jaa X- ja y-koordinaatit kahteen datafreimiin koulutusta varten. `cuisine` voi olla labelien datafreimi:
+1. Jaa X- ja y-koordinaatit kahdeksi dataframeksi koulutusta varten. `cuisine` voi olla labelien dataframe:
 
     ```python
     cuisines_label_df = cuisines_df['cuisine']
@@ -58,14 +58,14 @@ Jos olet suorittanut [Oppitunnin 1](../1-Introduction/README.md), varmista, ett�
     Name: cuisine, dtype: object
     ```
 
-1. Poista `Unnamed: 0`-sarake ja `cuisine`-sarake käyttämällä `drop()`. Tallenna loput tiedot koulutettaviksi ominaisuuksiksi:
+1. Pudota `Unnamed: 0`-sarake ja `cuisine`-sarake kutsumalla `drop()`. Tallenna loput datasta koulutettaviksi ominaisuuksiksi:
 
     ```python
     cuisines_feature_df = cuisines_df.drop(['Unnamed: 0', 'cuisine'], axis=1)
     cuisines_feature_df.head()
     ```
 
-    Ominaisuudet näyttävät tältä:
+    Ominaisuutesi näyttävät tältä:
 
 |      | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | artemisia | artichoke |  ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood |  yam | yeast | yogurt | zucchini |
 | ---: | -----: | -------: | ----: | ---------: | ----: | -----------: | ------: | -------: | --------: | --------: | ---: | ------: | ----------: | ---------: | ----------------------: | ---: | ---: | ---: | ----: | -----: | -------: |
@@ -79,81 +79,81 @@ Nyt olet valmis kouluttamaan mallisi!
 
 ## Luokittelijan valinta
 
-Kun datasi on puhdas ja valmis koulutukseen, sinun täytyy päättää, mitä algoritmia käytät tehtävään.
+Nyt kun data on puhdas ja valmis koulutukseen, sinun täytyy päättää, mitä algoritmia käyttää.
 
-Scikit-learn ryhmittelee luokittelun ohjatun oppimisen alle, ja tässä kategoriassa on monia tapoja luokitella. [Vaihtoehtojen määrä](https://scikit-learn.org/stable/supervised_learning.html) voi aluksi tuntua hämmentävältä. Seuraavat menetelmät sisältävät luokittelutekniikoita:
+Scikit-learn ryhmittelee luokittelun ohjattuun oppimiseen, ja tässä kategoriassa on monia tapoja luokitella. [Monipuolisuus](https://scikit-learn.org/stable/supervised_learning.html) voi ensi näkemältä olla hämmentävää. Seuraavat menetelmät sisältävät kaikki luokittelutekniikoita:
 
 - Lineaariset mallit
 - Tukivektorikoneet
 - Stokastinen gradienttilaskenta
 - Lähimmät naapurit
-- Gaussin prosessit
+- Gaussiset prosessit
 - Päätöspuut
-- Yhdistelmämallit (äänestysluokittelija)
-- Moniluokka- ja monitulostusalgoritmit (moniluokka- ja monilabel-luokittelu, moniluokka-monitulostusluokittelu)
+- Kokonaismenetelmät (äänestävä luokittelija)
+- Moniluokka- ja usean ulostulon algoritmit (moniluokkainen ja monimerkintäinen luokittelu, moniluokkainen usean ulostulon luokittelu)
 
-> Voit myös käyttää [neuroverkkoja datan luokitteluun](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), mutta se ei kuulu tämän oppitunnin aihepiiriin.
+> Voit myös käyttää [neuroverkkoja datan luokitteluun](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), mutta se on tämän oppitunnin ulkopuolella.
 
-### Minkä luokittelijan valita?
+### Mikä luokittelija valitaan?
 
-Minkä luokittelijan siis valitset? Usein useiden kokeileminen ja hyvän tuloksen etsiminen on tapa testata. Scikit-learn tarjoaa [vertailun rinnakkain](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) luodulla datasetillä, jossa verrataan KNeighbors, SVC kahdella tavalla, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB ja QuadraticDiscriminationAnalysis, ja tulokset visualisoidaan:
+Joten, minkä luokittelijan valitset? Usein on järkevää kokeilla useampaa ja etsiä hyvää tulosta. Scikit-learn tarjoaa [rinnakkaisvertailun](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) luodulla datalla vertaillen KNeighborsia, kahta SVC-versiota, GaussianProcessClassifieria, DecisionTreeClassifieria, RandomForestClassifieria, MLPClassifieria, AdaBoostClassifieria, GaussianNB:tä ja QuadraticDiscrinationAnalysistä tuloksineen visuaalisesti:
 
-![luokittelijoiden vertailu](../../../../4-Classification/2-Classifiers-1/images/comparison.png)
-> Kuva Scikit-learnin dokumentaatiosta
+![luokittelijoiden vertailu](../../../../translated_images/fi/comparison.edfab56193a85e7f.webp)
+> Kaaviot luotu Scikit-learnin dokumentaatiossa
 
-> AutoML ratkaisee tämän ongelman kätevästi suorittamalla nämä vertailut pilvessä, jolloin voit valita parhaan algoritmin datallesi. Kokeile [täällä](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
+> AutoML ratkaisee tämän ongelman siististi ajamalla nämä vertailut pilvessä, jolloin voit valita parhaan algoritmin datallesi. Kokeile sitä [tässä](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
 
 ### Parempi lähestymistapa
 
-Parempi tapa kuin arvaaminen on seurata ladattavaa [ML Cheat Sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott). Tässä huomataan, että moniluokkaongelmaamme varten meillä on joitakin vaihtoehtoja:
+Parempi tapa kuin arvailla villeinä on seurata tämän ladattavan [ML Cheat sheetin](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott) vinkkejä. Sieltä löydämme, että moniluokkaiseen ongelmaamme on muutama vaihtoehto:
 
-![moniluokkaongelmien huijauslista](../../../../4-Classification/2-Classifiers-1/images/cheatsheet.png)
-> Osa Microsoftin algoritmien huijauslistasta, joka käsittelee moniluokkaluokitteluvaihtoehtoja
+![moniluokkaisten ongelmien vinkkilista](../../../../translated_images/fi/cheatsheet.07a475ea444d2223.webp)
+> Ote Microsoftin algoritmivinkkilistasta, joka kuvaa moniluokkalun luokitteluvaihtoehtoja
 
-✅ Lataa tämä huijauslista, tulosta se ja ripusta seinällesi!
+✅ Lataa tämä vinkkilista, tulosta se ja laita seinällesi roikkumaan!
 
-### Perustelu
+### Päättely
 
-Katsotaan, voimmeko perustella eri lähestymistapoja annettujen rajoitusten perusteella:
+Katsotaan, voimmeko perustella eri lähestymistavat annetuin rajoituksin:
 
-- **Neuroverkot ovat liian raskaita**. Puhdas mutta minimaalinen datasetti ja se, että koulutus tapahtuu paikallisesti notebookien kautta, tekevät neuroverkoista liian raskaita tähän tehtävään.
-- **Ei kaksiluokkaista luokittelijaa**. Emme käytä kaksiluokkaista luokittelijaa, joten se sulkee pois one-vs-all-menetelmän.
-- **Päätöspuu tai logistinen regressio voisi toimia**. Päätöspuu voisi toimia, tai logistinen regressio moniluokkaiselle datalle.
-- **Moniluokkaiset Boosted Decision Trees ratkaisevat eri ongelman**. Moniluokkainen Boosted Decision Tree sopii parhaiten ei-parametrisiin tehtäviin, kuten tehtäviin, jotka on suunniteltu luomaan sijoituksia, joten se ei ole hyödyllinen meille.
+- **Neuroverkot ovat liian raskaita**. Ottaen huomioon puhtaan, mutta pienen datasetimme ja että koulutus tapahtuu paikallisesti muistikirjojen kautta, neuroverkot ovat liian raskaita tähän tehtävään.
+- **Ei kaksiluokkaista luokittelijaa**. Emme käytä kaksiluokkaista luokittelijaa, joten one-vs-all suljetaan pois.
+- **Päätöspuu tai logistinen regressio voisi toimia**. Päätöspuu voisi toimia, samoin logistinen regressio moniluokkaiseen dataan.
+- **Moniluokkainen Boosted Decision Trees ratkaisee eri ongelman**. Moniluokkainen vahvistettu päätöspuu soveltuu paremmin parametrisiin tehtäviin, kuten rankingien rakentamiseen, joten se ei ole meille käyttökelpoinen.
 
 ### Scikit-learnin käyttö
 
-Käytämme Scikit-learnia datan analysointiin. On kuitenkin monia tapoja käyttää logistista regressiota Scikit-learnissa. Katso [parametrit, jotka voit asettaa](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).  
+Käytämme Scikit-learnia datan analysointiin. Kuitenkin logistiikkaregressiota on monia erilaisia tapoja käyttää Scikit-learnissa. Tutustu [parametreihin](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).  
 
-Käytännössä on kaksi tärkeää parametria - `multi_class` ja `solver` - jotka meidän täytyy määrittää, kun pyydämme Scikit-learnia suorittamaan logistisen regression. `multi_class`-arvo soveltaa tiettyä käyttäytymistä. Solverin arvo määrittää, mitä algoritmia käytetään. Kaikkia solvereita ei voi yhdistää kaikkiin `multi_class`-arvoihin.
+Käytännössä tärkeimmät parametrit ovat `multi_class` ja `solver` - joita tarvitsee määrittää pyytäessämme Scikit-learnia suorittamaan logistisen regression. `multi_class` määrittää tietyn käyttäytymisen. `solver` on käytettävä algoritmi. Kaikki solverit eivät sovi yhteen kaikkien `multi_class` -arvojen kanssa.
 
-Dokumentaation mukaan moniluokkaisessa tapauksessa koulutusalgoritmi:
+Dokumenttien mukaan moniluokkaisessa tapauksessa koulutusalgoritmi:
 
-- **Käyttää one-vs-rest (OvR) -menetelmää**, jos `multi_class`-vaihtoehto on asetettu `ovr`
-- **Käyttää ristientropiahäviötä**, jos `multi_class`-vaihtoehto on asetettu `multinomial`. (Tällä hetkellä `multinomial`-vaihtoehto on tuettu vain ‘lbfgs’, ‘sag’, ‘saga’ ja ‘newton-cg’ solvereilla.)
+- **Käyttää one-vs-rest (OvR) -metodia**, jos `multi_class` on asetettu arvoksi `ovr`
+- **Käyttää ristientropiahäviötä**, jos `multi_class` on asetettu arvoksi `multinomial`. (Tällä hetkellä `multinomial` on tuettu vain `lbfgs`, `sag`, `saga` ja `newton-cg` -solverien kanssa.)
 
-> 🎓 'Menetelmä' voi olla joko 'ovr' (one-vs-rest) tai 'multinomial'. Koska logistinen regressio on suunniteltu tukemaan binääriluokittelua, nämä menetelmät auttavat sitä käsittelemään paremmin moniluokkaluokittelutehtäviä. [lähde](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
+> 🎓 'Skenaario' voi olla 'ovr' (one-vs-rest) tai 'multinomial'. Koska logistinen regressio on suunniteltu binääriluokitteluun, nämä skenaariot mahdollistavat paremman tuen moniluokkaluille luokittelutehtäville. [lähde](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
 
-> 🎓 'Solver' määritellään "algoritmiksi, jota käytetään optimointiongelmassa". [lähde](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
+> 🎓 'Solveri' on määritelty algoritmiksi, jota käytetään optimointiongelmassa. [lähde](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-Scikit-learn tarjoaa tämän taulukon selittämään, miten solverit käsittelevät eri haasteita, joita eri datarakenteet esittävät:
+Scikit-learn tarjoaa tämän taulukon selittämään, miten solverit käsittelevät erilaisia datarakenteiden haasteita:
 
-![solverit](../../../../4-Classification/2-Classifiers-1/images/solvers.png)
+![solverit](../../../../translated_images/fi/solvers.5fc648618529e627.webp)
 
 ## Harjoitus - jaa data
 
-Voimme keskittyä logistiseen regressioon ensimmäisessä koulutuskokeilussamme, koska opit siitä äskettäin edellisessä oppitunnissa.
-Jaa datasi koulutus- ja testiryhmiin kutsumalla `train_test_split()`:
+Voimme keskittyä logistiseen regressioon ensimmäisen koulutusyrityksenä, kun opit siitä hiljattain edellisellä tunnilla.  
+Jaa data koulutus- ja testiryhmiin kutsumalla `train_test_split()`:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
 ```
 
-## Harjoitus - sovella logistista regressiota
+## Harjoitus - käytä logistista regressiota
 
-Koska käytät moniluokkaista tapausta, sinun täytyy valita, mitä _menetelmää_ käytät ja mitä _solveria_ asetat. Käytä LogisticRegressionia moniluokka-asetuksella ja **liblinear**-solveria koulutukseen.
+Koska käytät moniluokkaista tapausta, sinun täytyy valita, mitä _skenaariota_ ja _solveria_ käytetään. Käytä LogisticRegressionia moniluokkaisella asetuksella ja **liblinear**-solveria kouluttaaksesi.
 
-1. Luo logistinen regressio, jossa multi_class on asetettu `ovr` ja solver asetettu `liblinear`:
+1. Luo logistinen regressio, jossa `multi_class` on asetettu `ovr`:ksi ja `solver` `liblinear`iksi:
 
     ```python
     lr = LogisticRegression(multi_class='ovr',solver='liblinear')
@@ -163,18 +163,20 @@ Koska käytät moniluokkaista tapausta, sinun täytyy valita, mitä _menetelmä�
     print ("Accuracy is {}".format(accuracy))
     ```
 
-    ✅ Kokeile eri solveria, kuten `lbfgs`, joka on usein asetettu oletusarvoksi
-> Huomaa, käytä Pandasin [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) -funktiota litistääksesi datasi tarvittaessa.
-Tarkkuus on hyvä, yli **80%**!
+    ✅ Kokeile eri solveria, esimerkiksi `lbfgs`, joka usein on oletus
 
-1. Voit nähdä tämän mallin toiminnassa testaamalla yhtä riviä (#50):
+    > Huomaa, käytä Pandasin [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) -funktiota, kun haluat tasoittaa dataasi tarvittaessa.
+
+    Tarkkuus on hyvä, yli **80%**!
+
+1. Voit nähdä tämän mallin toiminnassa testaamalla yhden datarivin (#50):
 
     ```python
     print(f'ingredients: {X_test.iloc[50][X_test.iloc[50]!=0].keys()}')
     print(f'cuisine: {y_test.iloc[50]}')
     ```
 
-    Tulos tulostetaan:
+    Tuloste on:
 
    ```output
    ingredients: Index(['cilantro', 'onion', 'pea', 'potato', 'tomato', 'vegetable_oil'], dtype='object')
@@ -182,8 +184,7 @@ Tarkkuus on hyvä, yli **80%**!
    ```
 
    ✅ Kokeile eri rivinumeroa ja tarkista tulokset
-
-1. Syvemmälle mentäessä voit tarkistaa tämän ennusteen tarkkuuden:
+1. Digging deeper, you can check for the accuracy of this prediction:
 
     ```python
     test= X_test.iloc[50].values.reshape(-1, 1).T
@@ -195,7 +196,7 @@ Tarkkuus on hyvä, yli **80%**!
     topPrediction.head()
     ```
 
-    Tulos tulostetaan - Intialainen keittiö on paras arvaus, hyvällä todennäköisyydellä:
+    The result is printed - Indian cuisine is its best guess, with good probability:
 
     |          |        0 |
     | -------: | -------: |
@@ -207,38 +208,40 @@ Tarkkuus on hyvä, yli **80%**!
 
     ✅ Voitko selittää, miksi malli on melko varma, että kyseessä on intialainen keittiö?
 
-1. Saat lisää yksityiskohtia tulostamalla luokitteluraportin, kuten teit regressio-opetuksissa:
+1. Get more detail by printing a classification report, as you did in the regression lessons:
 
     ```python
     y_pred = model.predict(X_test)
     print(classification_report(y_test,y_pred))
     ```
 
-    |              | tarkkuus | recall | f1-score | tuki    |
-    | ------------ | -------- | ------ | -------- | ------- |
-    | chinese      | 0.73     | 0.71   | 0.72     | 229     |
-    | indian       | 0.91     | 0.93   | 0.92     | 254     |
-    | japanese     | 0.70     | 0.75   | 0.72     | 220     |
-    | korean       | 0.86     | 0.76   | 0.81     | 242     |
-    | thai         | 0.79     | 0.85   | 0.82     | 254     |
-    | tarkkuus     | 0.80     | 1199   |          |         |
-    | keskiarvo    | 0.80     | 0.80   | 0.80     | 1199    |
-    | painotettu   | 0.80     | 0.80   | 0.80     | 1199    |
+    |              | precision | recall | f1-score | support |
+    | ------------ | --------- | ------ | -------- | ------- |
+    | chinese      | 0.73      | 0.71   | 0.72     | 229     |
+    | indian       | 0.91      | 0.93   | 0.92     | 254     |
+    | japanese     | 0.70      | 0.75   | 0.72     | 220     |
+    | korean       | 0.86      | 0.76   | 0.81     | 242     |
+    | thai         | 0.79      | 0.85   | 0.82     | 254     |
+    | accuracy     |           |        | 0.80     | 1199    |
+    | macro avg    | 0.80      | 0.80   | 0.80     | 1199    |
+    | weighted avg | 0.80      | 0.80   | 0.80     | 1199    |
 
-## 🚀Haaste
+## 🚀Challenge
 
-Tässä oppitunnissa käytit siivottua dataasi rakentaaksesi koneoppimismallin, joka voi ennustaa kansallisen keittiön ainesosien perusteella. Käytä aikaa tutkiaksesi Scikit-learnin tarjoamia monia vaihtoehtoja datan luokitteluun. Syvenny tarkemmin 'solver'-käsitteeseen ymmärtääksesi, mitä kulissien takana tapahtuu.
+In this lesson, you used your cleaned data to build a machine learning model that can predict a national cuisine based on a series of ingredients. Take some time to read through the many options Scikit-learn provides to classify data. Dig deeper into the concept of 'solver' to understand what goes on behind the scenes.
 
-## [Luennon jälkeinen kysely](https://ff-quizzes.netlify.app/en/ml/)
+## [Post-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 
-## Kertaus & Itseopiskelu
+## Review & Self Study
 
-Tutustu hieman tarkemmin logistisen regression matematiikkaan [tässä oppitunnissa](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
-## Tehtävä 
+Dig a little more into the math behind logistic regression in [this lesson](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
+## Assignment 
 
-[Tutki solvereita](assignment.md)
+[Study the solvers](assignment.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ole hyvä ja huomioi, että automatisoiduissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä tulee pitää auktoriteettisena lähteenä. Tärkeiden tietojen kohdalla suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinkäsityksistä tai virheellisistä tulkinnoista.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

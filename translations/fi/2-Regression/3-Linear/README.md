@@ -1,136 +1,137 @@
-# Rakenna regressiomalli Scikit-learnillä: regressio neljällä tavalla
+# Rakennetaan regressiomalli Scikit-learnillä: regressio neljällä tavalla
 
 ## Aloittelijan huomautus
 
-Lineaarista regressiota käytetään, kun haluamme ennustaa **numeraalisen arvon** (esimerkiksi talon hinta, lämpötila tai myynti).
-Se toimii löytämällä suoran viivan, joka parhaiten kuvaa syötteen ominaisuuksien ja tulosteen välisen suhteen.
+Lineaarista regressiota käytetään, kun haluamme ennustaa **numeraalista arvoa** (esimerkiksi talon hinta, lämpötila tai myynti).
+Se toimii etsimällä suoran viivan, joka parhaiten kuvaa syöteominaisuuksien ja tuloksen välistä suhdetta.
 
-Tässä oppitunnissa keskitymme käsitteen ymmärtämiseen ennen kuin tutustumme edistyneempiin regressiotekniikoihin.
-![Lineaarinen vs polynominen regressio infograafi](../../../../translated_images/fi/linear-polynomial.5523c7cb6576ccab.webp)
-> Infograafi tekijältä [Dasani Madipalli](https://twitter.com/dasani_decoded)
-## [Esiluentokysely](https://ff-quizzes.netlify.app/en/ml/)
+Tässä oppitunnissa keskitymme käsitteen ymmärtämiseen ennen kuin tutustumme edistyneempiin regressiomenetelmiin.
+![Linear vs polynomial regression infographic](../../../../translated_images/fi/linear-polynomial.5523c7cb6576ccab.webp)
+> Infografiikka tekijältä [Dasani Madipalli](https://twitter.com/dasani_decoded)
+## [Esiluento-testi](https://ff-quizzes.netlify.app/en/ml/)
 
-> ### [Tämä oppitunti on saatavilla R:llä!](../../../../2-Regression/3-Linear/solution/R/lesson_3.html)
+> ### [Tämä oppitunti saatavilla R:llä!](../../../../2-Regression/3-Linear/solution/R/lesson_3.html)
 ### Johdanto 
 
-Tähän mennessä olet tutustunut regressioon näyteaineiston avulla, joka on poimittu kurpitsan hinnoitteluaineistosta ja jota käytämme koko oppitunnin ajan. Olet myös visualisoinut aineistoa Matplotlibillä.
+Tähän mennessä olet tutustunut regressioon esimerkkidatan avulla, joka on kerätty kurpitsahintojen aineistosta, jota käytämme koko tämän oppitunnin ajan. Olet myös visualisoinut sen käyttäen Matplotlibia.
 
-Nyt olet valmis sukeltamaan syvemmälle ML:n regressioon. Visualisointi auttaa sinua ymmärtämään dataa, mutta todellinen koneoppimisen voima tulee _mallien opettamisesta_. Mallit opetetaan historiatiedolla, jotta ne automaattisesti tunnistavat datariippuvuuksia, ja ne mahdollistavat uusien, aiemmin näkemättömien tietojen tulosten ennustamisen.
+Nyt olet valmis sukeltamaan syvemmälle koneoppimisen regressioon. Vaikka visualisointi auttaa sinua hahmottamaan dataa, koneoppimisen todellinen voima tulee _mallien harjoittamisesta_. Mallit koulutetaan historiallisella datalla kaappaamaan automaattisesti datan riippuvuuksia, ja niiden avulla voit ennustaa tuloksia uudelle datalle, jota malli ei ole aiemmin nähnyt.
 
-Tässä oppitunnissa opit lisää kahdesta regressiotyypistä: _perus lineaarisesta regressiosta_ ja _polynomiregressiosta_, sekä joistakin näiden tekniikoiden taustalla olevasta matematiikasta. Nämä mallit mahdollistavat kurpitsahintojen ennustamisen eri syötetietojen perusteella.
+Tässä oppitunnissa opit lisää kahdesta regressiotyypistä: _perus lineaarisesta regressiosta_ ja _polynomiregressiosta_, sekä joistakin näiden tekniikoiden taustalla olevista matematiikoista. Näillä malleilla voimme ennustaa kurpitsahintoja eri lähtötietojen perusteella.
 
 [![ML for beginners - Understanding Linear Regression](https://img.youtube.com/vi/CRxFT8oTDMg/0.jpg)](https://youtu.be/CRxFT8oTDMg "ML for beginners - Understanding Linear Regression")
 
-> 🎥 Klikkaa yllä olevaa kuvaa nähdäksesi lyhyen videokatsauksen lineaarisesta regressiosta.
+> 🎥 Klikkaa yllä olevaa kuvaa katsomaan lyhyt videoyhteenveto lineaarisesta regressiosta.
 
-> Tämän opetussuunnitelman aikana oletamme hyvin vähäisiä matemaattisia ennakkotietoja ja pyrimme tekemään sisällöstä saavutettavaa eri alojen opiskelijoille, joten kiinnitä huomiota huomautuksiin, 🧮 kutsuihin, kaavioihin ja muihin oppimistyökaluihin, jotka tukevat ymmärrystä.
+> Koko tämän opetussuunnitelman aikana oletamme vähäisen matematiikan osaamisen ja pyrimme tekemään sisällöstä saavutettavaa muilta aloilta tuleville opiskelijoille, joten pidä silmällä huomautuksia, 🧮 merkintöjä, kaavioita ja muita oppimistyökaluja, jotka auttavat ymmärtämisessä.
 
-### Esivaatimus
+### Esivaatimukset
 
-Sinun tulisi nyt olla perehtynyt tutkimamme kurpitsadatan rakenteeseen. Sen löydät ennakkoladattuna ja esipuhdistettuna tämän oppitunnin _notebook.ipynb_-tiedostosta. Tiedostossa kurpitsan hinta esitetään busheliltä uudessa dataframessa. Varmista, että voit ajaa nämä notebookit Visual Studio Coden kernoissa.
+Sinun tulisi nyt olla tuttu kurpitsadatan rakenteen kanssa, jota tarkastelemme. Sen löydät valmiiksi ladattuna ja siistittynä tämän oppitunnin _notebook.ipynb_-tiedostosta. Tiedostossa kurpitsan hinta näytetään per hehtolitran (bushel) uutena dataframenä. Varmista, että voit ajaa näitä muistikirjoja Visual Studio Code -ympäristössä.
 
 ### Valmistelu
 
-Muistutuksena, lataat tätä dataa voidaksesi esittää sille kysymyksiä.
+Muistutuksena, lataat tätä dataa, jotta voit esittää sille kysymyksiä.
 
-- Milloin on paras aika ostaa kurpitsoja? 
-- Minkä hintaisen laatikon minikurpitsoja voin odottaa?
-- Kannattaako ostaa puoli-bushelin koreissa vai 1 1/9 bushelin laatikoissa?
-Tutkitaanpa dataa lisää.
+- Milloin on paras aika ostaa kurpitsoja?
+- Minkä hinnan voin odottaa pikkukurpitsalaatikosta?
+- Kannattaako ostaa ne puolen hehtolitran koreissa vai 1 1/9 hehtolitran laatikossa?
 
-Edellisessä oppitunnissa loit Pandas-dataframen ja täytit sen osalla alkuperäisestä aineistosta, standardoiden hinnat bushelin mukaan. Näin teit, mutta keräsit vain noin 400 datapistettä ja vain syys- ja loka-kuukausilta.
+Jatketaan tämän datan tutkimista.
 
-Katso tässä oppitunnissa mukana olevasta notebookista esiladattu data. Data on esiladattu ja alkuperäinen hajontakaavio on piirretty, joka näyttää kuukaustiedot. Voimme ehkä saada tarkemman kuvan datan luonteesta puhdistamalla sitä lisää.
+Edellisessä oppitunnissa loit Pandas-dataframen ja täytit sen osalla alkuperäisestä aineistosta, vakioimalla hinnat hehtolitran mukaan. Tällä tavoin onnistuimme keräämään noin 400 datapistettä ja vain syksyn kuukausilta.
 
-## Lineaarinen regressioviiva
+Katso data, jonka olemme ladanneet valmiiksi tämän oppitunnin mukanaolevaan muistikirjaan. Data on esiladattu ja ensimmäinen hajontakaavio piirretty kuukausidatan näyttämiseksi. Ehkä voimme saada hieman tarkempaa tietoa datan luonteesta puhdistamalla sitä vielä lisää.
 
-Kuten opit Oppitunnissa 1, lineaarisen regression tavoitteena on piirtää viiva, joka:
+## Lineaarisen regression suora
 
-- **Näyttää muuttujien suhteet**. Näyttää muuttujien välisen suhteen
-- **Tekee ennusteita**. Tekee tarkkoja ennusteita siitä, mihin uusi datapiste asettuu suhteessa viivaan.
+Kuten opit oppitunnissa 1, lineaarisen regression harjoituksen tavoite on pystyä piirtämään suora, joka:
 
-On tyypillistä, että **vähintään neliöiden menetelmää** käytetään tämän tyyppisen viivan piirtämiseen. Termi "vähintään neliöiden menetelmä" viittaa mallin virheen kokonaismäärän minimointiin. Jokaisen datapisteen pystysuora etäisyys (jota kutsutaan residuaaliksi) mitataan todellisen pisteen ja regressioviivan välillä.
+- **Näyttää muuttujien väliset suhteet:** Havainnollistaa muuttujien välisen yhteyden
+- **Tekee ennusteita:** Tekee tarkkoja ennusteita siitä, mihin uusi datapiste sijoittuu verrattuna tähän viivaan.
+
+On tavallista käyttää **vähimmän neliösumman regressiota** (Least-Squares Regression) tällaisten suorien piirtämiseen. Termi "vähimmän neliösumman" viittaa prosessiin, jossa minimoidaan mallimme kokonaisvirhe. Jokaiselle datapisteelle mittaamme pystysuoran etäisyyden (jota kutsutaan jäännökseksi) todellisen pisteen ja regressiosuoran välillä.
 
 Neliöimme nämä etäisyydet kahdesta pääsyystä:
 
-1. **Suuruus ilman suuntaa:** Haluamme käsitellä -5 virheen kuten +5 virhettä. Neliöiminen tekee kaikista arvoista positiivisia.
+1. **Suuruus, ei suunta:** Haluamme kohdata virheen -5 samalla tavalla kuin virheen +5. Neliöiminen muuttaa kaikki arvot positiivisiksi.
 
-2. **Poikkeamien rankaisu:** Neliöiminen antaa suuremman painon suurille virheille, pakottaen viivan pysymään lähempänä kaukana olevia pisteitä.
+2. **Poikkeamien rankaisu:** Neliöinti antaa suuremman painon suuremmille virheille, pakottaen viivan pysymään lähempänä kauempana olevia pisteitä.
 
-Lisäämme sitten kaikki nämä neliöidyt arvot yhteen. Tavoitteemme on löytää tarkka viiva, jossa tämä summa on pienin mahdollinen – siksi nimi "vähintään neliöiden menetelmä".
+Lisäämme sitten kaikki nämä neliöt yhteen. Tavoitteemme on löytää juuri se viiva, jossa tämä loppusumma on mahdollisimman pieni – tästä nimi "vähimmän neliösumman" regressio.
 
 > **🧮 Näytä matematiikka** 
 > 
-> Tämä viiva, jota kutsutaan _paras sovitusviivaksi_, voidaan esittää [yhtälöllä](https://en.wikipedia.org/wiki/Simple_linear_regression): 
+> Tätä viivaa, jota kutsutaan _sopivaksi suoraksi_, voidaan ilmaista [kaavalla](https://en.wikipedia.org/wiki/Simple_linear_regression):
 > 
 > ```
 > Y = a + bX
 > ```
 >
-> `X` on 'selittävä muuttuja'. `Y` on 'riippuva muuttuja'. Viivan kulmakerroin on `b` ja `a` on y-akselin leikkauspiste, joka kuvaa `Y`:n arvoa kun `X = 0`.
+> `X` on selittävä muuttuja. `Y` on selitettävä muuttuja. Viivan kulmakerroin on `b` ja `a` on y-leikkauspiste, joka tarkoittaa arvoa `Y`, kun `X = 0`.
 >
 >![laske kulmakerroin](../../../../translated_images/fi/slope.f3c9d5910ddbfcf9.webp)
 >
-> Lasketaan ensin kulmakerroin `b`. Infograafi tekijältä [Jen Looper](https://twitter.com/jenlooper)
+> Laske ensin kulmakerroin `b`. Infografiikka tekijältä [Jen Looper](https://twitter.com/jenlooper)
 >
-> Toisin sanoen ja viitaten kurpitsadatan alkuperäiseen kysymykseen: "ennustetaan kurpitsan hinta per bushel kuukauden mukaan", `X` viittaa hintaan ja `Y` myyntikuukauteen.
+> Toisin sanoen ja viitaten kurpitsadatan alkuperäiseen kysymykseen: "ennustetaan kurpitsan hinta per hehtolitran myyntikuukauden mukaan", `X` viittaa aikaan (kuukauteen) ja `Y` hintaan.
 >
->![täydennä yhtälö](../../../../translated_images/fi/calculation.a209813050a1ddb1.webp)
+>![täydennä kaava](../../../../translated_images/fi/calculation.a209813050a1ddb1.webp)
 >
-> Lasketaan Y:n arvo. Jos maksat noin 4 dollaria, täytyy olla huhtikuu! Infograafi tekijältä [Jen Looper](https://twitter.com/jenlooper)
+> Laske Y:n arvo. Jos maksat noin 4 dollaria, sen täytyy olla huhtikuu! Infografiikka tekijältä [Jen Looper](https://twitter.com/jenlooper)
 >
-> Viivan laskennassa on näytettävä sen kaltevuus, joka riippuu myös leikkauskohdasta, eli siitä missä `Y` sijaitsee, kun `X = 0`.
+> Laskelmassa viivan kulman täytyy myös ottaa huomioon leikkauspiste, eli missä `Y` sijaitsee, kun `X = 0`.
 >
-> Voit tarkastella näiden arvojen laskennan menetelmää verkkosivulta [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html). Käy myös [tällä vähintään neliöiden laskimella](https://www.mathsisfun.com/data/least-squares-calculator.html) nähdäksesi kuinka lukuarvot vaikuttavat viivaan.
+> Voit tutustua laskentamenetelmään arvonlaskennasta [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html) -sivustolla. Käy myös [vähimmän neliösumman laskurilla](https://www.mathsisfun.com/data/least-squares-calculator.html) nähdäksesi, miten numeroarvot vaikuttavat viivaan.
 
-## Korrelatiivisuus
+## Korrelaatio
 
-Yksi termi, joka on syytä ymmärtää, on **korrelaatiokerroin** tietyille X- ja Y-muuttujille. Hajontakuvion avulla voit nopeasti havaita tämän kertoimen. Kuvio, jossa datapisteet ovat siistissä viivassa, on korkea korrelaatio, mutta kun pisteet ovat hajallaan kaikkialla X:n ja Y:n välillä, korrelaatio on matala.
+Yksi termi, jonka ymmärtäminen on tärkeää, on **korrelaatiokerroin** annetuille X- ja Y-muuttujille. Hajontakaaviolla voit nopeasti havainnollistaa tämän kertoimen. Jos pisteet ovat kauniissa rivissä, korrelaatio on korkea, mutta jos pisteet ovat hajallaan kaikkialla X:n ja Y:n välillä, korrelaatio on matala.
 
-Hyvä lineaarinen regressiomalli on sellainen, jolla on korkea (lähellä 1:tä eikä 0:aa) korrelaatiokerroin, käytettäessä vähintään neliöiden menetelmää ja regressioviivaa.
+Hyvä lineaarinen regressiomalli on sellainen, jonka korrelaatiokerroin on korkea (lähellä 1 eikä 0) vähimmän neliösumman regressiomallissa.
 
-✅ Suorita tämän oppitunnin mukana oleva notebook ja tarkastele Kuukausi vs. Hinta hajontakaaviota. Vaikuttaako kurpitsamyynnin Kuukauden ja Hinnan yhdistelmä korkealta vai matalalta korrelaatiolta, silmämääräisen tulkintasi perusteella? Muuttuuko tulos, jos käytät kuukauden sijaan yksityiskohtaisempaa mittaria, esim. *vuorokauden numeroa* (eli kuinka mones päivä vuodesta)?
+✅ Aja tämän oppitunnin mukana tuleva muistikirja ja tutki 'Kuukausi – Hinta' -hajontakaaviota. Vaikuttaako kurpitsan myyntimäärän kuukausien ja hintojen data korkean vai matalan korrelaation omaavalta, visuaalisen tulkintasi perusteella? Muuttuuko tämä, jos käytät hienojakoisempaa mittaria kuin `Kuukausi`, esim. *vuoden päivä* (eli päivien määrä vuodenvaihteesta lähtien)?
 
-Alla koodissa oletamme, että olemme puhdistaneet datan ja saaneet dataframen nimeltä `new_pumpkins`, joka muistuttaa seuraavaa:
+Alla olevassa koodissa oletamme, että data on puhdistettu ja saatu data frame nimeltä `new_pumpkins`, joka on samanlainen kuin seuraava:
 
-ID | Month | DayOfYear | Variety | City | Package | Low Price | High Price | Price
----|-------|-----------|---------|------|---------|-----------|------------|-------
-70 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364
-71 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636
-72 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636
-73 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 17.0 | 17.0 | 15.454545
-74 | 10 | 281 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364
+ID | Kuukausi | PäiväVuodessa | Lajike | Kaupunki | Pakkaus | Alhainen hinta | Korkea hinta | Hinta
+---|----------|---------------|--------|----------|---------|----------------|--------------|--------
+70 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 hehtolitran laatikot | 15.0 | 15.0 | 13.636364
+71 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 hehtolitran laatikot | 18.0 | 18.0 | 16.363636
+72 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 hehtolitran laatikot | 18.0 | 18.0 | 16.363636
+73 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 hehtolitran laatikot | 17.0 | 17.0 | 15.454545
+74 | 10 | 281 | PIE TYPE | BALTIMORE | 1 1/9 hehtolitran laatikot | 15.0 | 15.0 | 13.636364
 
-> Koodin dataa puhdistavista toimenpiteistä löydät tiedostosta [`notebook.ipynb`](notebook.ipynb). Olemme suorittaneet samat puhdistusvaiheet kuin edellisessä oppitunnissa, ja laskeneet `DayOfYear`-sarakkeen seuraavalla lausekkeella:
+> Koodin datan puhdistamiseen löydät [`notebook.ipynb`](notebook.ipynb)-tiedostosta. Olemme tehneet samat puhdistusvaiheet kuin edellisessä oppitunnissa ja laskeneet `DayOfYear`-sarakkeen seuraavan lausekkeen avulla:
 
 ```python
 day_of_year = pd.to_datetime(pumpkins['Date']).apply(lambda dt: (dt-datetime(dt.year,1,1)).days)
 ```
 
-Nyt kun ymmärrät lineaarisen regression matematiikan taustalla, luokaamme regressiomalli nähdäksesi, voimmeko ennustaa, mikä kurpitsapakkaus tarjoaa parhaat kurpitsahinnat. Joku, joka ostaa kurpitsoja juhlapuutarhaa varten, haluaa tämän tiedon optimoidakseen kurpitsapakkaustensa ostot.
+Koska sinulla on nyt käsitys lineaarisen regression taustalla olevasta matematiikasta, luodaan regressiomalli nähdäksesi, voimmeko ennustaa, mikä kurpitsapakkaus tarjoaa parhaat kurpitsanhinnat. Joulun kurpitsatilaisuutta varten ostava saattaa haluta tämän tiedon optimoidakseen ostoksensa.
 
-## Etsimässä korrelaatiota
+## Korrelatorin etsiminen
 
 [![ML for beginners - Looking for Correlation: The Key to Linear Regression](https://img.youtube.com/vi/uoRq-lW2eQo/0.jpg)](https://youtu.be/uoRq-lW2eQo "ML for beginners - Looking for Correlation: The Key to Linear Regression")
 
-> 🎥 Klikkaa yllä olevaa kuvaa nähdäksesi lyhyen videokatsauksen korrelaatiosta.
+> 🎥 Klikkaa yllä olevaa kuvaa katsomaan lyhyt videoyhteenveto korrelaatiosta.
 
-Edellisestä oppitunnista olet todennäköisesti nähnyt, että eri kuukausien keskimääräinen hinta näyttää tältä:
+Viimeisestä oppitunnista olet varmaankin nähnyt, että eri kuukausien hintojen keskiarvot näyttävät tältä:
 
-<img alt="Keskiarvo hinta kuukauden mukaan" src="../../../../translated_images/fi/barchart.a833ea9194346d76.webp" width="50%"/>
+<img alt="Average price by month" src="../../../../translated_images/fi/barchart.a833ea9194346d76.webp" width="50%"/>
 
-Tämä viittaa siihen, että jonkinlaista korrelaatiota pitäisi olla, ja voimme yrittää opettaa lineaarisen regressiomallin ennustamaan suhdetta `Month` ja `Price` välillä, tai `DayOfYear` ja `Price` välillä. Tässä on hajontakaavio jälkimmäisestä suhteesta:
+Tämä viittaa siihen, että jonkinlainen korrelaatio on olemassa, ja voimme yrittää kouluttaa lineaarisen regressiomallin ennustamaan suhdetta `Kuukausi` ja `Hinta` tai `PäiväVuodessa` ja `Hinta` välillä. Tässä on hajontakaavio, joka näyttää jälkimmäisen suhteen:
 
-<img alt="Hajontakaavio hinta vs. vuorokauden numero" src="../../../../translated_images/fi/scatter-dayofyear.bc171c189c9fd553.webp" width="50%" /> 
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/fi/scatter-dayofyear.bc171c189c9fd553.webp" width="50%" /> 
 
-Katsotaan onko korrelaatiota käyttäen `corr`-funktiota:
+Katsotaan, onko korrelaatiota `corr`-funktion avulla:
 
 ```python
 print(new_pumpkins['Month'].corr(new_pumpkins['Price']))
 print(new_pumpkins['DayOfYear'].corr(new_pumpkins['Price']))
 ```
 
-Korrelaation näyttää olevan melko pieni, -0.15 kuukauden mukaan ja -0.17 vuorokauden numeron mukaan, mutta voi olla toinen tärkeä suhde. Näyttää siltä, että hintoja on eri ryhmiä eri kurpitsalajikkeille. Vahvistaaksemme tätä hypoteesia piirretään kukin kurpitsakategoria eri värillä. Käyttämällä `ax` parametria `scatter`-funktiossa voimme piirtää kaikki pisteet samaan kuvaan:
+Näyttää siltä, että korrelaatio on melko pieni, -0.15 kuukauden mukaan ja -0.17 päivän mukaan, mutta voi olla jokin toinen tärkeä suhde. Näyttää siltä, että hinnat muodostavat eri klustereita eri kurpitsalajien mukaan. Vahvistaaksemme tämän hypoteesin piirretään jokainen kurpitsakategoria omalla värillään. Antamalla `ax`-parametri `scatter`-piirtotoiminnolle voimme piirtää kaikki pisteet samaan kuvaajaan:
 
 ```python
 ax=None
@@ -140,42 +141,42 @@ for i,var in enumerate(new_pumpkins['Variety'].unique()):
     ax = df.plot.scatter('DayOfYear','Price',ax=ax,c=colors[i],label=var)
 ```
 
-<img alt="Hajontakaavio hinta vs. vuorokauden numero värikoodattu" src="../../../../translated_images/fi/scatter-dayofyear-color.65790faefbb9d54f.webp" width="50%" /> 
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/fi/scatter-dayofyear-color.65790faefbb9d54f.webp" width="50%" /> 
 
-Tutkimuksemme viittaa siihen, että lajikkeella on suurempi vaikutus kokonaishintaan kuin varsinaisella myyntipäivällä. Näemme tämän pylväskaaviosta:
+Tutkimuksemme viittaa siihen, että lajike vaikuttaa enemmän hintaan kuin myyntipäivämäärä. Näin näkyy myös palkkikaaviosta:
 
 ```python
 new_pumpkins.groupby('Variety')['Price'].mean().plot(kind='bar')
 ```
 
-<img alt="Pylväskaavio hinta vs. lajike" src="../../../../translated_images/fi/price-by-variety.744a2f9925d9bcb4.webp" width="50%" /> 
+<img alt="Bar graph of price vs variety" src="../../../../translated_images/fi/price-by-variety.744a2f9925d9bcb4.webp" width="50%" /> 
 
-Keskitytään hetkeksi vain yhteen kurpitsalajikkeeseen, 'pie type', ja katsotaan mikä vaikutus päivällä on hintaan:
+Keskitymme tällä hetkellä vain yhteen kurpitsalajikkeeseen, 'pie type' -lajikkeeseen, ja katsotaan, mitä vaikutusta päivämäärällä on hintaan:
 
 ```python
 pie_pumpkins = new_pumpkins[new_pumpkins['Variety']=='PIE TYPE']
 pie_pumpkins.plot.scatter('DayOfYear','Price') 
 ```
-<img alt="Hajontakaavio Hinta vs Vuorokauden Numero" src="../../../../translated_images/fi/pie-pumpkins-scatter.d14f9804a53f927e.webp" width="50%" /> 
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/fi/pie-pumpkins-scatter.d14f9804a53f927e.webp" width="50%" /> 
 
-Jos nyt lasketaan korrelaatio `Price` ja `DayOfYear` välillä `corr`-funktiolla, saamme noin `-0.27`, mikä tarkoittaa, että ennustemallin opettaminen on järkevää.
+Jos nyt lasket korrelaation `Hinnan` ja `PäiväVuodessa`-arvon välillä `corr`-funktiolla, saat jotain -0.27:n tienoilla – mikä tarkoittaa, että ennustemallin kouluttaminen on järkevää.
 
-> Ennen lineaarisen regressiomallin opettamista on tärkeää varmistaa, että datamme on puhdasta. Lineaarinen regressio ei toimi hyvin puuttuvien arvojen kanssa, joten on järkevää poistaa kaikki tyhjät solut:
+> Ennen lineaarisen regressiomallin kouluttamista on tärkeää varmistaa, että data on puhdasta. Lineaarinen regressio ei toimi hyvin puuttuvien arvojen kanssa, joten on järkevää poistaa kaikki tyhjät solut:
 
 ```python
 pie_pumpkins.dropna(inplace=True)
 pie_pumpkins.info()
 ```
 
-Toinen lähestymistapa voisi olla täyttää tyhjät arvot vastaavien sarakkeiden keskiarvoilla.
+Toinen lähestymistapa olisi täyttää tyhjät arvot vastaavan sarakkeen keskiarvolla.
 
 ## Yksinkertainen lineaarinen regressio
 
 [![ML for beginners - Linear and Polynomial Regression using Scikit-learn](https://img.youtube.com/vi/e4c_UP2fSjg/0.jpg)](https://youtu.be/e4c_UP2fSjg "ML for beginners - Linear and Polynomial Regression using Scikit-learn")
 
-> 🎥 Klikkaa yllä olevaa kuvaa nähdäksesi lyhyen videokatsauksen lineaarisesta ja polynomisesta regressiosta.
+> 🎥 Klikkaa yllä olevaa kuvaa katsomaan lyhyt videoyhteenveto lineaarisesta ja polynomiregressiosta.
 
-Lineaarisen regressiomallin opettamiseen käytämme **Scikit-learn** kirjastoa.
+Kouluttaaksemme lineaarisen regressiomallimme käytämme **Scikit-learn**-kirjastoa.
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -183,69 +184,68 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 ```
 
-Aloitamme erottamalla syötearvot (ominaisuudet) ja odotetun tuloksen (label) eri numpy-taulukoihin:
+Aloitamme erottelemalla syötearvot (ominaisuudet) ja odotetun tuloksen (label) omiin numpy-taulukoihinsa:
 
 ```python
 X = pie_pumpkins['DayOfYear'].to_numpy().reshape(-1,1)
 y = pie_pumpkins['Price']
 ```
 
-> Huomaa, että jouduimme käyttämään `reshape`-toimintoa syötteessä, jotta LinearRegression kirjasto ymmärtää sen oikein. Lineaarinen regressio odottaa 2-ulotteista taulukkoa syötteenä, jossa jokainen rivi on yksi ominaisuusvektori. Koska meillä on vain yksi syöte, tarvitsemme N×1 muotoisen taulukon, jossa N on aineiston koko.
+> Huomaa, että jouduimme tekemään `reshape`-muunnoksen syötteisiin, jotta Linear Regression -paketti ymmärtää ne oikein. Lineaarinen regressio odottaa 2-ulotteista taulukkoa syötteeksi, jossa jokainen taulukon rivi vastaa ominaisuusvektoria. Meillä on vain yksi syöte, joten tarvitaan N&times;1-muotoinen taulukko, missä N on datan koko.
 
-Seuraavaksi jaamme aineiston harjoitus- ja testidatoihin, jotta voimme validoida mallimme opettamisen jälkeen:
+Seuraavaksi jaamme datan koulutus- ja testidatasettiin, jotta voimme validoida mallimme koulutuksen jälkeen:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 ```
 
-Viimein, mallin opettaminen tapahtuu kahdella rivillä koodia. Määrittelemme `LinearRegression`-olion ja sovitamme sen dataamme metodilla `fit`:
+Lopuksi lineaarisen regressiomallin kouluttaminen tapahtuu kahdella koodirivillä. Määrittelemme `LinearRegression`-olion ja sovitamme sen dataan `fit`-metodilla:
 
 ```python
 lin_reg = LinearRegression()
 lin_reg.fit(X_train,y_train)
 ```
 
-`LinearRegression`-objekti sovittamisen (`fit`) jälkeen sisältää kaikki regressiokertoimet, joihin pääsee käsiksi `.coef_`-ominaisuudella. Tapauksessamme on vain yksi kerroin, joka on noin `-0.017`. Tämä tarkoittaa, että hinnat näyttävät laskevan hieman ajan myötä, mutta ei liikaa, noin 2 senttiä päivässä. Voimme myös päästä käsiksi regressioviivan leikkauspisteeseen Y-akselilla käyttämällä `lin_reg.intercept_` -arvoa – se on tapauksessamme noin `21`, mikä osoittaa hinnan vuoden alussa.
+LinearRegression-objekti fitauksen jälkeen sisältää kaikki regressiokertoimet, joihin pääsee käsiksi .coef_-ominaisuuden kautta. Meidän tapauksessamme on vain yksi kerroin, jonka tulisi olla noin -0,017. Tämä tarkoittaa, että hinnat näyttävät laskevan hieman ajan myötä, mutta ei paljoa, noin 2 senttiä päivässä. Pääsemme käsiksi myös regressiokäyrän leikkauspisteeseen Y-akselin kanssa käyttämällä lin_reg.intercept_ -ominaisuutta - se on meidän tapauksessamme noin 21, mikä ilmaisee hinnan vuoden alussa.
 
-Nähdäksemme, kuinka tarkka mallimme on, voimme ennustaa hintoja testiaineistolla ja mitata, kuinka lähellä ennusteet ovat odotettuja arvoja. Tämä voidaan tehdä käyttäen keskineliövirheen (MSE) metriikkaa, joka on kaikkien odotettujen ja ennustettujen arvojen neliöllisten erotusten keskiarvo.
+Nähdäksemme, kuinka tarkka mallimme on, voimme ennustaa testidatan hinnat ja mitata sitten, kuinka lähellä ennusteemme ovat odotettuja arvoja. Tämä voidaan tehdä käyttäen neliöllisen keskiarvon neliöjuurivirhettä (RMSE), joka on kaikkien odotetun ja ennustetun arvon neliöllisten erotusten keskiarvon neliöjuuri.
 
 ```python
 pred = lin_reg.predict(X_test)
 
-mse = np.sqrt(mean_squared_error(y_test,pred))
-print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
+rmse = np.sqrt(mean_squared_error(y_test,pred))
+print(f'RMSE: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
 ```
-
-Virheemme näyttää olevan noin 2 pistettä, mikä on ~17%. Ei kovin hyvä. Toinen mallin laadun mittari on **selitysaste** (coefficient of determination), joka saadaan seuraavasti:
+ Virheemme näyttää olevan noin 2 pistettä, eli ~17%. Ei kovin hyvä. Toinen mallin laadun mittari on **määrityskerroin**, joka voidaan saada näin:
 
 ```python
 score = lin_reg.score(X_train,y_train)
 print('Model determination: ', score)
 ```
-Jos arvo on 0, se tarkoittaa, että malli ei ota syötteitä huomioon ja toimii *huonoimpana lineaarisena ennustajana*, joka on yksinkertaisesti tuloksen keskiarvo. Arvo 1 tarkoittaa, että voimme täydellisesti ennustaa kaikki odotetut tulokset. Meidän tapauksessamme kerroin on noin 0.06, mikä on melko matala.
+Jos arvo on 0, se tarkoittaa, että malli ei huomioi syötteitä ja toimii *huonoimpana lineaarisena ennustajana*, joka on yksinkertaisesti tuloksen keskiarvo. Arvo 1 tarkoittaa, että pystymme täydellisesti ennustamaan kaikki odotetut arvot. Meillä kerroin on noin 0,06, mikä on melko alhainen.
 
-Voimme myös piirtää testidatan yhdessä regressioviivan kanssa nähdäksesi paremmin, miten regressio toimii tapauksessamme:
+Voimme myös piirtää testidatan ja regressiokäyrän samaan kuvaajaan, jotta näemme paremmin, miten regressio toimii tapauksessamme:
 
 ```python
 plt.scatter(X_test,y_test)
 plt.plot(X_test,pred)
 ```
 
-<img alt="Lineaarinen regressio" src="../../../../translated_images/fi/linear-results.f7c3552c85b0ed1c.webp" width="50%" />
+<img alt="Linear regression" src="../../../../translated_images/fi/linear-results.f7c3552c85b0ed1c.webp" width="50%" />
 
-## Polynomiregressio
+## Polynominen regressio
 
-Toinen lineaarisen regression muoto on polynomiregressio. Vaikka joskus muuttujien välillä on lineaarinen suhde – mitä suurempi kurpitsan tilavuus, sitä korkeampi hinta – joskus näitä suhteita ei voi kuvata tasaisena tasona tai suorana viivana.
+Toinen lineaarisen regression tyyppi on polynominen regressio. Vaikka joskus muuttujien välillä on lineaarinen suhde - mitä suurempi kurpitsa tilavuudeltaan, sitä korkeampi hinta - joskus näitä suhteita ei voi esittää tasona tai suorana viivana.
 
-✅ Tässä on [lisää esimerkkejä](https://online.stat.psu.edu/stat501/lesson/9/9.8) aineistosta, johon voisi soveltaa polynomiregressiota
+✅ Tässä on [joitakin lisää esimerkkejä](https://online.stat.psu.edu/stat501/lesson/9/9.8) aineistosta, johon polynominen regressio sopii
 
-Katso uudelleen suhdetta Päivämäärän ja Hinnan välillä. Näyttääkö tämä hajontakuvio siltä, että sitä tulisi välttämättä analysoida suoralla viivalla? Eikö hinnat voi heilahdella? Tässä tapauksessa voit kokeilla polynomiregressiota.
+Katso uudelleen suhdetta Päivämäärän ja Hinnan välillä. Näyttääkö tämä hajontakuvio siltä, että se pitäisi välttämättä analysoida suoralla viivalla? Eikö hinnat voi vaihdella? Tässä tapauksessa voit kokeilla polynomista regressiota.
 
-✅ Polynomit ovat matemaattisia lausekkeita, jotka voivat sisältää yhden tai useamman muuttujan ja kertoimia
+✅ Polynomit ovat matemaattisia lausekkeita, jotka voivat sisältää yhden tai useamman muuttujan ja kertoimen
 
-Polynomiregressio luo kaarevan käyrän sovittamaan paremmin epälineaarista dataa. Jos mukaan otetaan toisen asteen `DayOfYear`-muuttuja syöttötietoihin, pystymme sovittamaan dataamme paraabelin muotoisen käyrän, jolla on minimi tietyn pisteen kohdalla vuoden aikana.
+Polynominen regressio luo käyrän, joka istuu paremmin epälineaariseen dataan. Meidän tapauksessamme, jos lisäämme syötteisiin itseisarvoltaan neliöidyn DayOfYear-muuttujan, pystymme sovittamaan dataa parabolisella käyrällä, jolla on minimi tietyssä vuoden kohdassa.
 
-Scikit-learn sisältää hyödyllisen [pipeline-rajapinnan](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) yhdistämään erilaiset data-analyysin vaiheet. **Pipeline** on ketju **estimaattoreita**. Tapauksessamme luomme pipeline:n, joka ensin lisää polynomiset ominaisuudet malliin ja sitten kouluttaa regression:
+Scikit-learn sisältää hyödyllisen [pipeline API:n](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) eri datankäsittelyvaiheiden yhdistämistä varten. **Pipeline** on ketju **estimaattoreita**. Meidän tapauksessamme luomme pipelineketjun, joka ensin lisää polynomiset piirteet malliin, ja sen jälkeen opettaa regression:
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures
@@ -255,37 +255,36 @@ pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
 
 pipeline.fit(X_train,y_train)
 ```
+ Käyttäen PolynomialFeatures(2) tarkoittaa, että otamme mukaan kaikki toisen asteen polynomit syötteestä. Meidän tapauksessamme se tarkoittaa vain DayOfYear<sup>2</sup>, mutta jos on kaksi syötemuuttujaa X ja Y, tämä lisää X<sup>2</sup>, XY ja Y<sup>2</sup>. Voimme myös käyttää korkeampiasteisia polynomeja, jos haluamme.
 
-`PolynomialFeatures(2)` tarkoittaa, että mukaan otetaan kaikki toisen asteen polynomit syötedatasta. Meidän tapauksessamme se tarkoittaa vain `DayOfYear`<sup>2</sup>, mutta jos meillä olisi kaksi syöte muuttujaa X ja Y, mukaan tulisi X<sup>2</sup>, XY ja Y<sup>2</sup>. Voimme myös käyttää korkeampiasteisia polynomeja, jos haluamme.
+Pipelinetä voi käyttää samoin kuin alkuperäistä LinearRegression-objektia, eli voimme fitata pipelinen ja sitten predictata saadaksemme ennusteita. Tässä kuvaaja, jossa testidata ja likimääräinen käyrä:
 
-Pipelinetä voi käyttää samalla tavalla kuin alkuperäistä `LinearRegression`-objektia, eli voimme `fit`-metodilla sovittaa ja `predict`-metodilla ennustaa tuloksia. Tässä on kuvaaja, joka näyttää testidatan ja approksimaatiokäyrän:
+<img alt="Polynomial regression" src="../../../../translated_images/fi/poly-results.ee587348f0f1f60b.webp" width="50%" />
 
-<img alt="Polynomiregressio" src="../../../../translated_images/fi/poly-results.ee587348f0f1f60b.webp" width="50%" />
+Polynomista regressiota käyttäen saamme hieman pienemmän MSE:n ja korkeamman määrityskertoimen, mutta ei merkittävästi. Tarvitsemme mukaan muita piirteitä!
 
-Polynomiregressiolla saamme hieman pienemmän MSE:n ja korkeamman selitysasteen, mutta ei merkittävästi. Meidän täytyy ottaa mukaan muitakin piirteitä!
+> Näet, että kurpitsan pienimmät hinnat ovat havaittavissa jossakin Halloweenin tienoilla. Miten selität tämän? 
 
-> Voit nähdä, että minimihinnat kurpitsoille ovat jossain halloweenin tienoilla. Miten tätä voisi selittää?
+🎃 Onneksi olkoon, olet juuri luonut mallin, joka voi auttaa ennustamaan piirakkakurpitsojen hintaa. Voit todennäköisesti toistaa saman menetelmän kaikille kurpistyyppilajikkeille, mutta se olisi työlästä. Opitaan nyt, miten kurpislajike otetaan mallissa huomioon!
 
-🎃 Onneksi olkoon, loit juuri mallin, joka auttaa ennustamaan kurpitsapiirakan hintoja. Voisit luultavasti toistaa saman prosessin kaikille kurpitsatyypeille, mutta se olisi työlästä. Opitaan nyt, miten ottaa kurpitsan lajike huomioon mallissa!
+## Kategorialliset piirteet
 
-## Kategoriset ominaisuudet
+Ihanteellisessa maailmassa haluamme pystyä ennustamaan eri kurpislajikkeiden hinnat samalla mallilla. Kuitenkin Variety-sarake on hieman erilainen kuin esimerkiksi Month, koska se sisältää ei-numeerisia arvoja. Tällaisia sarakkeita kutsutaan **kategoriallisiksi**.
 
-Ihannetilanteessa haluamme pystyä ennustamaan eri kurpitsalajikkeiden hintoja samalla mallilla. Kuitenkin `Variety`-sarake eroaa esimerkiksi `Month`-sarakkeesta, koska se sisältää ei-numeerisia arvoja. Tällaisia sarakkeita kutsutaan **kategorisiksi**.
+[![ML for beginners - Categorical Feature Predictions with Linear Regression](https://img.youtube.com/vi/DYGliioIAE0/0.jpg)](https://youtu.be/DYGliioIAE0 "ML for beginners - Categorical Feature Predictions with Linear Regression")
 
-[![ML aloittelijoille - Kategoriset ominaisuudet ja lineaarinen regressio](https://img.youtube.com/vi/DYGliioIAE0/0.jpg)](https://youtu.be/DYGliioIAE0 "ML aloittelijoille - Kategoriset ominaisuudet ja lineaarinen regressio")
+> 🎥 Klikkaa yllä olevaa kuvaa nähdäksesi lyhyen videon kategoriapiirteiden käytöstä.
 
-> 🎥 Klikkaa yllä olevaa kuvaa nähdäksesi lyhyen videokatsauksen kategoristen ominaisuuksien käytöstä.
+Tässä voit nähdä, miten keskihinta riippuu lajikkeesta:
 
-Tässä näet, miten keskimääräinen hinta riippuu lajikkeesta:
+<img alt="Average price by variety" src="../../../../translated_images/fi/price-by-variety.744a2f9925d9bcb4.webp" width="50%" />
 
-<img alt="Keskiarvohinta lajikkeittain" src="../../../../translated_images/fi/price-by-variety.744a2f9925d9bcb4.webp" width="50%" />
+Ottaksemme lajikkeen huomioon, meidän tulee ensin muuntaa se numeeriseksi eli **enkoodata**. On useita tapoja tehdä tämä:
 
-Ottaaksemme lajikkeen huomioon, meidän täytyy ensin muuntaa se numeromuotoon eli **koodata** se. On olemassa muutamia tapoja tehdä tämä:
+* Yksinkertainen **numeraalinen enkoodaus** rakentaa taulukon eri lajikkeista ja korvaa lajikenimen taulukon indeksillä. Tämä ei ole paras idea lineaarisessa regressiossa, koska lineaarinen regressio ottaa indeksin numeerisen arvon ja lisää sen tulokseen kertoimen kanssa kerrottuna. Meidän tapauksessamme suhde indeksiluvun ja hinnan välillä on selvästi epälineaarinen, vaikka indeksit järjestettäisiin tietyllä tavalla.
+* **One-hot-enkoodaus** korvaa Variety-sarakkeen neljällä eri sarakkeella, yksi kullekin lajikkeelle. Jokainen sarake sisältää arvon 1 jos rivi kuuluu kyseiseen lajikkeeseen, ja muuten 0. Tämä tarkoittaa, että lineaarisessa regressiossa on neljä kerrointa, yksi kullekin kurpislajikkeelle, jotka vastaavat "aloitushintaa" (tai pikemminkin "lisähintaa") kyseiselle lajikkeelle.
 
-* Yksinkertainen **numeroarvokoodaus** luo taulukon eri lajikkeista ja korvaa lajikenimen kyseisen taulukon indeksillä. Tämä ei ole paras idea lineaarisessa regressiossa, koska lineaariregressio ottaa indeksin numeerisen arvon eikä huomioi, että indeksin numeerinen arvo ei välttämättä ole lineaarisesti yhteydessä hintaan. Toisin sanoen, lineaarisessa mallissa kerroin kerrotaan indeksiluvulla, mikä ei vastaa todellista hintasuhdetta.
-* **One-hot-koodaus** korvaa `Variety`-sarakkeen neljällä eri sarakkeella, yhden kullekin lajikkeelle. Kukin sarake sisältää `1`, jos rivi vastaa kyseistä lajiketta, ja `0` muuten. Tämä tarkoittaa, että lineaariregressiossa on neljä kerrointa, yksi jokaiselle kurpitsalajikkeelle, jotka kuvaavat kunkin lajikkeen "aloitushintaa" (tai pikemminkin "lisähintaa").
-
-Alla oleva koodi näyttää, miten lajike voidaan one-hot-koodata:
+Alla on koodi, jolla voimme one-hot enkoodata lajikkeen:
 
 ```python
 pd.get_dummies(new_pumpkins['Variety'])
@@ -302,14 +301,13 @@ pd.get_dummies(new_pumpkins['Variety'])
 1741 | 0 | 1 | 0 | 0
 1742 | 0 | 1 | 0 | 0
 
-Jotta voimme kouluttaa lineaariregression käyttäen one-hot-koodattua lajiketta syötteenä, meidän pitää vain alustaa `X` ja `y` oikein:
+Kouluttaaksemme lineaarisen regression käyttäen one-hot enkoodattua lajiketta syötteenä, meidän tarvitsee vain alustaa X ja y -data oikein:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety'])
 y = new_pumpkins['Price']
 ```
-
-Muu koodi on sama kuin aiemmin käyttämämme lineaarisen regression koulutuksessa. Kun kokeilet, huomaat, että keskineliövirhe on suunnilleen sama, mutta selitysaste nousee huomattavasti (~77%). Tarkempia ennusteita saamme ottamalla huomioon lisää kategorisia piirteitä sekä numeerisia ominaisuuksia, kuten `Month` tai `DayOfYear`. Yhden suuren ominaisuustaulukon saamiseksi voimme käyttää `join`:
+ Loput koodista on sama kuin mitä käytimme aiemmin LinearRegressionin opettamiseen. Jos kokeilet, näet, että keskimääräinen neliövirhe on suunnilleen sama, mutta saamme paljon korkeamman määrityskertoimen (~77%). Saadaksemme vieläkin tarkempia ennusteita voimme ottaa huomioon enemmän kategoriallisia piirteitä sekä numeerisia piirteitä, kuten Month tai DayOfYear. Saadaksemme yhden suuren piirteiden taulukon, voimme käyttää join-metodia:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety']) \
@@ -318,12 +316,11 @@ X = pd.get_dummies(new_pumpkins['Variety']) \
         .join(pd.get_dummies(new_pumpkins['Package']))
 y = new_pumpkins['Price']
 ```
+ Tässä otamme lisäksi huomioon Cityn ja Package-tyypin, jolloin MSE on 2,84 (10%) ja määrityskerroin 0,94!
 
-Tässä otamme myös huomioon `City`- ja `Package`-tyypin, mikä antaa meille MSE-arvoksi 2.84 (10%) ja selitysasteeksi 0.94!
+## Yhdistetään kaikki
 
-## Kaiken yhdistäminen
-
-Parhaan mallin saamiseksi voimme käyttää yhdistettyä (one-hot-koodattua kategorista + numeerista) dataa ylläolevasta esimerkistä yhdessä polynomiregression kanssa. Tässä on koko koodi vaivattomuutta varten:
+Tehdäksemme parhaan mallin voimme käyttää yhdistettyä (one-hot enkoodattu kategoriallinen + numeerinen) dataa yllä olevasta esimerkistä yhdessä polynomisen regression kanssa. Tässä on koko koodi käyttöösi:
 
 ```python
 # aseta harjoitusdata
@@ -333,10 +330,10 @@ X = pd.get_dummies(new_pumpkins['Variety']) \
         .join(pd.get_dummies(new_pumpkins['Package']))
 y = new_pumpkins['Price']
 
-# tee opetus- ja testijako
+# tee harjoitus-testaus-jako
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-# määritä ja kouluta putkisto
+# asenna ja kouluta putkisto
 pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
 pipeline.fit(X_train,y_train)
 
@@ -350,29 +347,28 @@ print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
 score = pipeline.score(X_train,y_train)
 print('Model determination: ', score)
 ```
+ Tämä antaa meille parhaan määrityskertoimen lähes 97 %, ja MSE=2,23 (~8 % ennustvirhe).
 
-Tämä antaa meille parhaan selitysasteen lähes 97 % ja MSE:n 2.23 (~8 % ennustevirhe).
+| Malli | MSE | Määrityskerroin |
+|-------|-----|---------------|
+| `DayOfYear` Lineaarinen | 2.77 (17.2%) | 0.07 |
+| `DayOfYear` Polynominen | 2.73 (17.0%) | 0.08 |
+| `Variety` Lineaarinen | 5.24 (19.7%) | 0.77 |
+| Kaikki piirteet Lineaarinen | 2.84 (10.5%) | 0.94 |
+| Kaikki piirteet Polynominen | 2.23 (8.25%) | 0.97 |
 
-| Malli | MSE | Selitysaste |
-|-------|-----|-------------|
-| `DayOfYear` lineaarinen | 2.77 (17.2%) | 0.07 |
-| `DayOfYear` polynomi | 2.73 (17.0%) | 0.08 |
-| `Variety` lineaarinen | 5.24 (19.7%) | 0.77 |
-| Kaikki ominaisuudet lineaarinen | 2.84 (10.5%) | 0.94 |
-| Kaikki ominaisuudet polynomi | 2.23 (8.25%) | 0.97 |
-
-🏆 Hienoa työtä! Loit neljä regressiomallia yhdessä oppitunnissa ja paransit mallin laatua 97 prosenttiin. Regressio-aiheen lopussa opit logistisesta regressiosta luokitteluja varten.
+🏆 Hienoa työtä! Loit neljä regressiomallia yhdessä oppitunnissa ja paransit mallin laatua 97 %:iin. Regressio-osan lopussa opit logistisesta regressiosta luokitusten määrittämiseksi.
 
 ---
 ## 🚀Haaste
 
-Testaa eri muuttujia tässä muistikirjassa nähdäksesi, miten korrelaatio vastaa mallin tarkkuutta.
+Testaa tässä muistikirjassa useampaa eri muuttujaa nähdäksesi, miten korrelaatio vastaa mallin tarkkuutta.
 
-## [Luentojälkeinen tietovisa](https://ff-quizzes.netlify.app/en/ml/)
+## [Luentotentin jälkeinen tietovisa](https://ff-quizzes.netlify.app/en/ml/)
 
-## Kertaus & Itsenäinen opiskelu
+## Kertaus & Itsestä opiskelua
 
-Tässä oppitunnissa opimme lineaarisesta regressiosta. On olemassa myös muita tärkeitä regressiotyyppejä. Lue lisää Stepwise-, Ridge-, Lasso- ja Elasticnet-menetelmistä. Hyvä kurssi opinnoille on [Stanfordin tilastollisen oppimisen kurssi](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)
+Tässä oppitunnissa opimme lineaarisesta regression mallinnuksesta. On olemassa myös muita tärkeitä regressiotyyppejä. Lue Stepwise-, Ridge-, Lasso- ja Elasticnet-teknikoista. Hyvä kurssi syventymiseen on [Stanfordin statistiikan oppimisjakso](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)
 
 ## Tehtävä
 
@@ -381,6 +377,6 @@ Tässä oppitunnissa opimme lineaarisesta regressiosta. On olemassa myös muita 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Pyrimme tarkkuuteen, mutta huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suosittelemme ammattimaista ihmiskäännöstä. Emme ota vastuuta tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
+**Vastuuvapauslauseke**:  
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ole ystävällinen ja huomioi, että automatisoiduissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen omalla kielellä tulee pitää ensisijaisena lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa mahdollisista väärinymmärryksistä tai virhetulkingoista, jotka johtuvat tämän käännöksen käytöstä.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

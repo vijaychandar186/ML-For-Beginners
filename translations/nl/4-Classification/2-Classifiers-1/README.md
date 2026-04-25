@@ -1,17 +1,17 @@
-# Categorieën van keukens 1
+# Cuisine classifiers 1
 
-In deze les gebruik je de dataset die je in de vorige les hebt opgeslagen, vol met gebalanceerde, schone gegevens over keukens.
+In deze les ga je de dataset gebruiken die je hebt opgeslagen van de vorige les, vol met evenwichtige, schone data over keukens.
 
-Je zult deze dataset gebruiken met verschillende classificatiemethoden om _een nationale keuken te voorspellen op basis van een groep ingrediënten_. Terwijl je dit doet, leer je meer over enkele manieren waarop algoritmen kunnen worden ingezet voor classificatietaken.
+Je zult deze dataset gebruiken met verschillende classifiers om _een bepaalde nationale keuken te voorspellen op basis van een groep ingrediënten_. Terwijl je dit doet, leer je meer over enkele manieren waarop algoritmen kunnen worden ingezet voor classificatietaken.
 
-## [Quiz voorafgaand aan de les](https://ff-quizzes.netlify.app/en/ml/)
+## [Pre-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 # Voorbereiding
 
-Als je [Les 1](../1-Introduction/README.md) hebt voltooid, zorg er dan voor dat een bestand genaamd _cleaned_cuisines.csv_ zich bevindt in de root `/data` map voor deze vier lessen.
+Als je [Les 1](../1-Introduction/README.md) hebt afgerond, zorg er dan voor dat er een _cleaned_cuisines.csv_ bestand bestaat in de hoofdmap `/data` voor deze vier lessen.
 
 ## Oefening - voorspel een nationale keuken
 
-1. Werk in de map _notebook.ipynb_ van deze les en importeer dat bestand samen met de Pandas-bibliotheek:
+1. Werk in deze les in de _notebook.ipynb_-map en importeer dat bestand samen met de Pandas-bibliotheek:
 
     ```python
     import pandas as pd
@@ -19,7 +19,7 @@ Als je [Les 1](../1-Introduction/README.md) hebt voltooid, zorg er dan voor dat 
     cuisines_df.head()
     ```
 
-    De gegevens zien er als volgt uit:
+    De data ziet er zo uit:
 
 |     | Unnamed: 0 | cuisine | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood | yam | yeast | yogurt | zucchini |
 | --- | ---------- | ------- | ------ | -------- | ----- | ---------- | ----- | ------------ | ------- | -------- | --- | ------- | ----------- | ---------- | ----------------------- | ---- | ---- | --- | ----- | ------ | -------- |
@@ -30,7 +30,7 @@ Als je [Les 1](../1-Introduction/README.md) hebt voltooid, zorg er dan voor dat 
 | 4   | 4          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 1      | 0        |
   
 
-1. Importeer nu nog enkele andere bibliotheken:
+1. Importeer nu nog enkele bibliotheken:
 
     ```python
     from sklearn.linear_model import LogisticRegression
@@ -40,14 +40,14 @@ Als je [Les 1](../1-Introduction/README.md) hebt voltooid, zorg er dan voor dat 
     import numpy as np
     ```
 
-1. Verdeel de X- en y-coördinaten in twee dataframes voor training. `cuisine` kan de labels-dataset zijn:
+1. Verdeel de X- en y-coördinaten in twee dataframes voor training. `cuisine` kan het labels-dataframe zijn:
 
     ```python
     cuisines_label_df = cuisines_df['cuisine']
     cuisines_label_df.head()
     ```
 
-    Het ziet er als volgt uit:
+    Het zal er zo uitzien:
 
     ```output
     0    indian
@@ -58,14 +58,14 @@ Als je [Les 1](../1-Introduction/README.md) hebt voltooid, zorg er dan voor dat 
     Name: cuisine, dtype: object
     ```
 
-1. Laat die `Unnamed: 0`-kolom en de `cuisine`-kolom vallen door `drop()` aan te roepen. Sla de rest van de gegevens op als trainbare kenmerken:
+1. Verwijder die `Unnamed: 0` kolom en de `cuisine` kolom door `drop()` aan te roepen. Bewaar de rest van de data als trainbare features:
 
     ```python
     cuisines_feature_df = cuisines_df.drop(['Unnamed: 0', 'cuisine'], axis=1)
     cuisines_feature_df.head()
     ```
 
-    Je kenmerken zien er als volgt uit:
+    Je features zien er zo uit:
 
 |      | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | artemisia | artichoke |  ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood |  yam | yeast | yogurt | zucchini |
 | ---: | -----: | -------: | ----: | ---------: | ----: | -----------: | ------: | -------: | --------: | --------: | ---: | ------: | ----------: | ---------: | ----------------------: | ---: | ---: | ---: | ----: | -----: | -------: |
@@ -75,75 +75,75 @@ Als je [Les 1](../1-Introduction/README.md) hebt voltooid, zorg er dan voor dat 
 |    3 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
 |    4 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      1 |        0 | 0 |
 
-Nu ben je klaar om je model te trainen!
+Je bent nu klaar om je model te trainen!
 
-## Het kiezen van je classifier
+## Kies je classifier
 
-Nu je gegevens schoon en klaar zijn voor training, moet je beslissen welk algoritme je voor de taak wilt gebruiken.
+Nu je data schoon en klaar is voor training, moet je beslissen welk algoritme je voor de klus gaat gebruiken.
 
-Scikit-learn groepeert classificatie onder Gecontroleerd Leren, en in die categorie vind je veel manieren om te classificeren. [De variëteit](https://scikit-learn.org/stable/supervised_learning.html) kan in eerste instantie overweldigend lijken. De volgende methoden bevatten allemaal technieken voor classificatie:
+Scikit-learn groepeert classificatie onder Supervised Learning, en in die categorie vind je vele manieren om te classificeren. [De variëteit](https://scikit-learn.org/stable/supervised_learning.html) kan in het begin nogal verwarrend zijn. De volgende methoden bevatten allemaal classificatietechnieken:
 
 - Lineaire modellen
 - Support Vector Machines
-- Stochastic Gradient Descent
-- Nabijheid van buren
-- Gaussiaanse processen
+- Stochastische Gradient Descent
+- Dichtstbijzijnde buren
+- Gaussian Processes
 - Beslissingsbomen
-- Ensemble-methoden (stemmen Classifier)
-- Multiclass- en multioutput-algoritmen (multiclass- en multilabel-classificatie, multiclass-multioutput-classificatie)
+- Ensemble-methoden (voting Classifier)
+- Multiclass en multioutput algoritmes (multiclass en multilabel classificatie, multiclass-multioutput classificatie)
 
-> Je kunt ook [neurale netwerken gebruiken om gegevens te classificeren](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), maar dat valt buiten de scope van deze les.
+> Je kunt ook [neurale netwerken gebruiken om data te classificeren](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), maar dat valt buiten de reikwijdte van deze les.
 
-### Welke classifier moet je kiezen?
+### Welke classifier te kiezen?
 
-Dus, welke classifier moet je kiezen? Vaak is het testen van verschillende classifiers en kijken naar een goed resultaat een manier om te testen. Scikit-learn biedt een [vergelijking naast elkaar](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) op een gecreëerde dataset, waarbij KNeighbors, SVC op twee manieren, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB en QuadraticDiscriminationAnalysis worden vergeleken, en de resultaten worden gevisualiseerd:
+Dus, welke classifier moet je kiezen? Vaak is het doorlopen van meerdere en zoeken naar een goed resultaat een manier om te testen. Scikit-learn biedt een [side-by-side vergelijking](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) op een gemaakte dataset, waarbij KNeighbors, SVC op twee manieren, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB en QuadraticDiscrinationAnalysis worden vergeleken, met de resultaten visueel weergegeven:
 
-![vergelijking van classifiers](../../../../4-Classification/2-Classifiers-1/images/comparison.png)
-> Plots gegenereerd in de documentatie van Scikit-learn
+![comparison of classifiers](../../../../translated_images/nl/comparison.edfab56193a85e7f.webp)
+> Grafieken gegenereerd op de documentatie van Scikit-learn
 
-> AutoML lost dit probleem handig op door deze vergelijkingen in de cloud uit te voeren, zodat je het beste algoritme voor je gegevens kunt kiezen. Probeer het [hier](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
+> AutoML lost dit probleem netjes op door deze vergelijkingen in de cloud uit te voeren, waardoor je het beste algoritme voor je data kunt kiezen. Probeer het [hier](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
 
-### Een betere aanpak
+### Een betere benadering
 
-Een betere manier dan willekeurig gokken is echter om de ideeën te volgen op dit downloadbare [ML Cheat sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott). Hier ontdekken we dat we voor ons multiclass-probleem enkele keuzes hebben:
+Een betere manier dan wild raden, is echter om de ideeën op dit downloadbare [ML Cheat sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott) te volgen. Hier ontdekken we dat we bij ons multiclass-probleem enkele keuzes hebben:
 
-![cheatsheet voor multiclass-problemen](../../../../4-Classification/2-Classifiers-1/images/cheatsheet.png)
-> Een sectie van Microsoft's Algorithm Cheat Sheet, met opties voor multiclass-classificatie
+![cheatsheet for multiclass problems](../../../../translated_images/nl/cheatsheet.07a475ea444d2223.webp)
+> Een gedeelte van Microsoft's Algorithm Cheat Sheet, met details over multiclass classificatie-opties
 
-✅ Download dit cheat sheet, print het uit en hang het aan je muur!
+✅ Download deze cheat sheet, print hem uit en hang hem op je muur!
 
 ### Redenering
 
-Laten we kijken of we verschillende benaderingen kunnen beredeneren, gegeven de beperkingen die we hebben:
+Laten we eens kijken of we met redeneren tot verschillende benaderingen kunnen komen, gezien de beperkingen die we hebben:
 
-- **Neurale netwerken zijn te zwaar**. Gezien onze schone, maar minimale dataset, en het feit dat we lokaal trainen via notebooks, zijn neurale netwerken te zwaar voor deze taak.
-- **Geen tweeklassen-classifier**. We gebruiken geen tweeklassen-classifier, dus dat sluit one-vs-all uit.
-- **Beslissingsboom of logistische regressie zou kunnen werken**. Een beslissingsboom zou kunnen werken, of logistische regressie voor multiclass-gegevens.
-- **Multiclass Boosted Decision Trees lossen een ander probleem op**. De multiclass boosted decision tree is het meest geschikt voor niet-parametrische taken, bijvoorbeeld taken die zijn ontworpen om ranglijsten te maken, dus het is niet nuttig voor ons.
+- **Neurale netwerken zijn te zwaar**. Gezien onze schone, maar minimale dataset, en het feit dat we lokaal via notebooks trainen, zijn neurale netwerken te zwaar voor deze taak.
+- **Geen tweeklassen-classifier**. We gebruiken geen tweeklassen-classifier, dus one-vs-all valt af.
+- **Beslissingsboom of logistische regressie kan werken**. Een beslissingsboom kan werken, of logistische regressie voor multiclass data.
+- **Multiclass Boosted Decision Trees lossen een ander probleem op**. De multiclass boosted decision tree is het meest geschikt voor niet-parametrische taken, bijvoorbeeld taken die rankings bouwen, dus is niet bruikbaar voor ons.
 
-### Gebruik van Scikit-learn 
+### Gebruik van Scikit-learn
 
-We zullen Scikit-learn gebruiken om onze gegevens te analyseren. Er zijn echter veel manieren om logistische regressie te gebruiken in Scikit-learn. Bekijk de [parameters om door te geven](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).  
+We gaan Scikit-learn gebruiken om onze data te analyseren. Er zijn echter veel manieren om logistische regressie in Scikit-learn te gebruiken. Bekijk de [parameters die je moet meegeven](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-In wezen zijn er twee belangrijke parameters - `multi_class` en `solver` - die we moeten specificeren wanneer we Scikit-learn vragen om een logistische regressie uit te voeren. De waarde van `multi_class` past een bepaald gedrag toe. De waarde van de solver bepaalt welk algoritme wordt gebruikt. Niet alle solvers kunnen worden gecombineerd met alle `multi_class`-waarden.
+In wezen zijn er twee belangrijke parameters - `multi_class` en `solver` - die we moeten specificeren wanneer we Scikit-learn om logistische regressie vragen. De waarde van `multi_class` bepaalt een bepaald gedrag. De waarde van `solver` bepaalt welk algoritme wordt gebruikt. Niet alle solvers kunnen gecombineerd worden met alle `multi_class` waarden.
 
-Volgens de documentatie, in het multiclass-geval, gebruikt het trainingsalgoritme:
+Volgens de docs gebruikt het trainingsalgoritme in het multiclass-geval:
 
 - **Het one-vs-rest (OvR) schema**, als de `multi_class` optie is ingesteld op `ovr`
-- **De cross-entropy loss**, als de `multi_class` optie is ingesteld op `multinomial`. (Momenteel wordt de `multinomial` optie alleen ondersteund door de ‘lbfgs’, ‘sag’, ‘saga’ en ‘newton-cg’ solvers.)"
+- **De cross-entropy verliesfunctie**, als de `multi_class` optie is ingesteld op `multinomial`. (Momenteel wordt de `multinomial` optie alleen ondersteund door de ‘lbfgs’, ‘sag’, ‘saga’ en ‘newton-cg’ solvers.)"
 
-> 🎓 Het 'schema' hier kan 'ovr' (one-vs-rest) of 'multinomial' zijn. Aangezien logistische regressie eigenlijk is ontworpen om binaire classificatie te ondersteunen, stellen deze schema's het in staat om beter om te gaan met multiclass-classificatietaken. [bron](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
+> 🎓 Het 'schema' hier kan 'ovr' (one-vs-rest) of 'multinomial' zijn. Omdat logistische regressie eigenlijk is ontworpen voor binaire classificatie, stellen deze schema's het beter in staat om multiclass-classificatieproblemen aan te pakken. [bron](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
 
 > 🎓 De 'solver' wordt gedefinieerd als "het algoritme dat wordt gebruikt in het optimalisatieprobleem". [bron](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-Scikit-learn biedt deze tabel om uit te leggen hoe solvers omgaan met verschillende uitdagingen die worden gepresenteerd door verschillende soorten datastructuren:
+Scikit-learn biedt deze tabel om uit te leggen hoe solvers verschillende uitdagingen van verschillende soorten datastructuren aanpakken:
 
-![solvers](../../../../4-Classification/2-Classifiers-1/images/solvers.png)
+![solvers](../../../../translated_images/nl/solvers.5fc648618529e627.webp)
 
-## Oefening - splits de gegevens
+## Oefening - split de data
 
-We kunnen ons richten op logistische regressie voor onze eerste trainingspoging, aangezien je onlangs over de laatste hebt geleerd in een vorige les.
-Splits je gegevens in trainings- en testgroepen door `train_test_split()` aan te roepen:
+We kunnen ons richten op logistische regressie voor onze eerste trainingsexperiment omdat je daar onlangs over hebt geleerd in een vorige les.
+Splits je data in trainings- en testgroepen door `train_test_split()` aan te roepen:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
@@ -151,9 +151,9 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
 
 ## Oefening - pas logistische regressie toe
 
-Aangezien je het multiclass-geval gebruikt, moet je kiezen welk _schema_ je wilt gebruiken en welke _solver_ je wilt instellen. Gebruik LogisticRegression met een multiclass-instelling en de **liblinear** solver om te trainen.
+Omdat je de multiclass-variant gebruikt, moet je kiezen welk _schema_ je gebruikt en welke _solver_ je instelt. Gebruik LogisticRegression met een multiclass-instelling en de **liblinear** solver om te trainen.
 
-1. Maak een logistische regressie met multi_class ingesteld op `ovr` en de solver ingesteld op `liblinear`:
+1. Maak een logistische regressie met multi_class ingesteld op `ovr` en de solver op `liblinear`:
 
     ```python
     lr = LogisticRegression(multi_class='ovr',solver='liblinear')
@@ -163,11 +163,13 @@ Aangezien je het multiclass-geval gebruikt, moet je kiezen welk _schema_ je wilt
     print ("Accuracy is {}".format(accuracy))
     ```
 
-    ✅ Probeer een andere solver zoals `lbfgs`, die vaak als standaard wordt ingesteld
-> Let op, gebruik de Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) functie om je data te flatten wanneer nodig.
-De nauwkeurigheid is goed bij meer dan **80%**!
+    ✅ Probeer een andere solver zoals `lbfgs`, die vaak als standaard is ingesteld
 
-1. Je kunt dit model in actie zien door één rij gegevens te testen (#50):
+    > Let op: gebruik de Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) functie om je data af te vlakken wanneer nodig.
+
+    De nauwkeurigheid is goed, ruim boven de **80%**!
+
+1. Je kunt dit model in actie zien door één regel data te testen (#50):
 
     ```python
     print(f'ingredients: {X_test.iloc[50][X_test.iloc[50]!=0].keys()}')
@@ -181,9 +183,8 @@ De nauwkeurigheid is goed bij meer dan **80%**!
    cuisine: indian
    ```
 
-   ✅ Probeer een ander rijnummer en controleer de resultaten.
-
-1. Door dieper te graven, kun je de nauwkeurigheid van deze voorspelling controleren:
+   ✅ Probeer een ander rij-nummer en controleer de resultaten
+1. Dieper graven, je kunt de nauwkeurigheid van deze voorspelling controleren:
 
     ```python
     test= X_test.iloc[50].values.reshape(-1, 1).T
@@ -207,29 +208,29 @@ De nauwkeurigheid is goed bij meer dan **80%**!
 
     ✅ Kun je uitleggen waarom het model er vrij zeker van is dat dit een Indiase keuken is?
 
-1. Krijg meer details door een classificatierapport af te drukken, zoals je deed in de lessen over regressie:
+1. Krijg meer detail door een classificatierapport af te drukken, zoals je deed in de regressielessen:
 
     ```python
     y_pred = model.predict(X_test)
     print(classification_report(y_test,y_pred))
     ```
 
-    |              | precisie | recall | f1-score | support |
-    | ------------ | -------- | ------ | -------- | ------- |
-    | chinese      | 0.73     | 0.71   | 0.72     | 229     |
-    | indian       | 0.91     | 0.93   | 0.92     | 254     |
-    | japanese     | 0.70     | 0.75   | 0.72     | 220     |
-    | korean       | 0.86     | 0.76   | 0.81     | 242     |
-    | thai         | 0.79     | 0.85   | 0.82     | 254     |
-    | nauwkeurigheid| 0.80     | 1199   |          |         |
-    | macro gem.   | 0.80     | 0.80   | 0.80     | 1199    |
-    | gewogen gem. | 0.80     | 0.80   | 0.80     | 1199    |
+    |              | precision | recall | f1-score | support |
+    | ------------ | --------- | ------ | -------- | ------- |
+    | chinese      | 0.73      | 0.71   | 0.72     | 229     |
+    | indian       | 0.91      | 0.93   | 0.92     | 254     |
+    | japanese     | 0.70      | 0.75   | 0.72     | 220     |
+    | korean       | 0.86      | 0.76   | 0.81     | 242     |
+    | thai         | 0.79      | 0.85   | 0.82     | 254     |
+    | accuracy     |           |        | 0.80     | 1199    |
+    | macro avg    | 0.80      | 0.80   | 0.80     | 1199    |
+    | weighted avg | 0.80      | 0.80   | 0.80     | 1199    |
 
 ## 🚀Uitdaging
 
-In deze les heb je je schoongemaakte gegevens gebruikt om een machine learning-model te bouwen dat een nationale keuken kan voorspellen op basis van een reeks ingrediënten. Neem de tijd om de vele opties te bekijken die Scikit-learn biedt om gegevens te classificeren. Verdiep je in het concept van 'solver' om te begrijpen wat er achter de schermen gebeurt.
+In deze les heb je je opgeschoonde data gebruikt om een machine learning-model te bouwen dat een nationale keuken kan voorspellen op basis van een reeks ingrediënten. Neem de tijd om de vele opties die Scikit-learn biedt om data te classificeren door te lezen. Duik dieper in het concept van 'solver' om te begrijpen wat er achter de schermen gebeurt.
 
-## [Quiz na de les](https://ff-quizzes.netlify.app/en/ml/)
+## [Post-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 
 ## Review & Zelfstudie
 
@@ -240,5 +241,7 @@ Verdiep je wat meer in de wiskunde achter logistische regressie in [deze les](ht
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor belangrijke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

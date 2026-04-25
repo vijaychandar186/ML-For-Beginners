@@ -1,17 +1,17 @@
 # Cuisine classifiers 1
 
-For dis lesson, you go use di dataset wey you save from di last lesson wey get balanced, clean data about cuisines.
+For dis lesson, you go use di dataset wey you save from di last lesson wey full wit balanced, clean data wey dey all about cuisines.
 
-You go use dis dataset with different classifiers to _predict one national cuisine based on di group of ingredients_. As you dey do am, you go learn more about di ways wey algorithms fit help for classification tasks.
+You go use dis dataset wit plenty classifiers dem to _predict one kain national cuisine based on one group of ingredients_. While you dey do am, you go learn more about some of di ways wey algorithms fit take help for classification tasks.
 
 ## [Pre-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 # Preparation
 
-If you don finish [Lesson 1](../1-Introduction/README.md), make sure say _cleaned_cuisines.csv_ file dey inside di root `/data` folder for dis four lessons.
+Assuming say you don finish [Lesson 1](../1-Introduction/README.md), make sure say one _cleaned_cuisines.csv_ file dey for di root `/data` folder for dis four lessons.
 
 ## Exercise - predict one national cuisine
 
-1. For dis lesson _notebook.ipynb_ folder, import di file plus di Pandas library:
+1. For dis lesson's _notebook.ipynb_ folder, import dat file plus di Pandas library:
 
     ```python
     import pandas as pd
@@ -19,7 +19,7 @@ If you don finish [Lesson 1](../1-Introduction/README.md), make sure say _cleane
     cuisines_df.head()
     ```
 
-    Di data go look like dis:
+    Di data look like dis:
 
 |     | Unnamed: 0 | cuisine | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood | yam | yeast | yogurt | zucchini |
 | --- | ---------- | ------- | ------ | -------- | ----- | ---------- | ----- | ------------ | ------- | -------- | --- | ------- | ----------- | ---------- | ----------------------- | ---- | ---- | --- | ----- | ------ | -------- |
@@ -40,7 +40,7 @@ If you don finish [Lesson 1](../1-Introduction/README.md), make sure say _cleane
     import numpy as np
     ```
 
-1. Divide di X and y coordinates into two dataframes for training. `cuisine` fit be di labels dataframe:
+1. Divide X and y coordinates into two dataframes for training. `cuisine` fit be labels dataframe:
 
     ```python
     cuisines_label_df = cuisines_df['cuisine']
@@ -58,7 +58,7 @@ If you don finish [Lesson 1](../1-Introduction/README.md), make sure say _cleane
     Name: cuisine, dtype: object
     ```
 
-1. Drop di `Unnamed: 0` column plus di `cuisine` column, use `drop()`. Save di rest of di data as trainable features:
+1. Drop dat `Unnamed: 0` column and di `cuisine` column by using `drop()`. Save di rest data as trainable features:
 
     ```python
     cuisines_feature_df = cuisines_df.drop(['Unnamed: 0', 'cuisine'], axis=1)
@@ -75,13 +75,13 @@ If you don finish [Lesson 1](../1-Introduction/README.md), make sure say _cleane
 |    3 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
 |    4 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      1 |        0 | 0 |
 
-Now you fit train your model!
+Now you ready to train your model!
 
 ## Choosing your classifier
 
-Now wey your data don clean and e dey ready for training, you go need decide which algorithm you go use for di work.
+Now wey your data clean and don ready for training, you gats make decision which algorithm you go use for di work. 
 
-Scikit-learn dey group classification under Supervised Learning, and for dat category you go find plenty ways to classify. [Di variety](https://scikit-learn.org/stable/supervised_learning.html) fit dey confusing for first sight. Di methods wey dey include classification techniques na:
+Scikit-learn put classification under Supervised Learning, and for dat category you go find plenty ways to classify. [Di variety](https://scikit-learn.org/stable/supervised_learning.html) dey confuse small for first look. Di methods wey follow dey include classification techniques:
 
 - Linear Models
 - Support Vector Machines
@@ -92,68 +92,68 @@ Scikit-learn dey group classification under Supervised Learning, and for dat cat
 - Ensemble methods (voting Classifier)
 - Multiclass and multioutput algorithms (multiclass and multilabel classification, multiclass-multioutput classification)
 
-> You fit also use [neural networks to classify data](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), but dat one no dey inside dis lesson.
+> You fit also use [neural networks to classify data](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), but dat one no dey inside dis lesson scope.
 
-### Which classifier you go choose?
+### Which classifier to choose?
 
-So, which classifier you go use? Sometimes, to try different ones and check di result na one way to test. Scikit-learn dey offer [side-by-side comparison](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) for one created dataset, wey compare KNeighbors, SVC two ways, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB and QuadraticDiscrinationAnalysis, wey show di results visualized:
+So, which classifier you go choose? Most times, you fit run several classifiers and see wey one get better result. Scikit-learn get [side-by-side comparison](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) for one created dataset, wey compare KNeighbors, SVC two ways, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB and QuadraticDiscrinationAnalysis, and dem show di results as visual:
 
 ![comparison of classifiers](../../../../translated_images/pcm/comparison.edfab56193a85e7f.webp)
-> Plots wey dem generate for Scikit-learn documentation
+> Charts wey Scikit-learn documentation generate
 
-> AutoML dey solve dis problem well by running dis comparisons for di cloud, e go allow you choose di best algorithm for your data. Try am [here](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
+> AutoML fit solve dis kind wahala well well by to run these comparisons for cloud, so dat you fit choose di best algorithm for your data. Try am [here](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
 
-### Better way
+### Better approach
 
-Better way wey pass to dey guess anyhow na to follow di ideas wey dey dis downloadable [ML Cheat sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott). Here, we go see say for our multiclass problem, we get some options:
+Better pass just guess work na to follow di ideas wey dey inside dis downloadable [ML Cheat sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott). For here, we see sey for our multiclass problem, we get some choices:
 
 ![cheatsheet for multiclass problems](../../../../translated_images/pcm/cheatsheet.07a475ea444d2223.webp)
-> Part of Microsoft's Algorithm Cheat Sheet, wey show multiclass classification options
+> One part of Microsoft Algorithm Cheat Sheet, wey show multiclass classification options
 
-✅ Download dis cheat sheet, print am, and hang am for your wall!
+✅ Download dis cheat sheet, print am come hang am for wall!
 
 ### Reasoning
 
-Make we try reason di different approaches wey we fit use based on di constraints wey we get:
+Make we try reason our way through different approaches based on wetin we get:
 
-- **Neural networks dey too heavy**. Based on our clean but small dataset, and di fact say we dey run training locally for notebooks, neural networks dey too much for dis task.
-- **No two-class classifier**. We no go use two-class classifier, so dat one rule out one-vs-all.
-- **Decision tree or logistic regression fit work**. Decision tree fit work, or logistic regression for multiclass data.
-- **Multiclass Boosted Decision Trees dey solve different problem**. Di multiclass boosted decision tree dey best for nonparametric tasks, e.g. tasks wey dey build rankings, so e no go help us.
+- **Neural networks too heavy**. Based on our clean but small dataset, plus the fact say we dey run training local for notebooks, neural networks too heavy for dis task.
+- **No two-class classifier**. We no dey use two-class classifier, so we no go use one-vs-all. 
+- **Decision tree or logistic regression fit work**. Decision tree fit work, or logistic regression for multiclass data. 
+- **Multiclass Boosted Decision Trees solve other kinds problem**. Dis multiclass boosted decision tree best for nonparametric tasks, e.g. tasks wey dey build rankings, so e no concern us.
 
 ### Using Scikit-learn 
 
-We go use Scikit-learn to analyze our data. But, plenty ways dey to use logistic regression for Scikit-learn. Check di [parameters to pass](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).  
+We go use Scikit-learn analyze our data. But, many ways dey to use logistic regression for Scikit-learn. Look di [parameters wey you fit pass](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).  
 
-Di two important parameters na `multi_class` and `solver` wey we need to set when we dey ask Scikit-learn to do logistic regression. Di `multi_class` value dey apply certain behavior. Di value of di solver na di algorithm wey e go use. No be all solvers fit pair with all `multi_class` values.
+Basically, two parameters matter - `multi_class` and `solver` - we need to specify when we ask Scikit-learn to do logistic regression. Di value of `multi_class` determine how e go behave. Di solver na wetin algorithm to use be dat. No all solvers fit with all `multi_class` values.
 
-According to di docs, for di multiclass case, di training algorithm:
+According to docs, for multiclass case, di training algorithm:
 
-- **Dey use di one-vs-rest (OvR) scheme**, if di `multi_class` option dey set to `ovr`
-- **Dey use di cross-entropy loss**, if di `multi_class` option dey set to `multinomial`. (Currently di `multinomial` option dey supported only by di ‘lbfgs’, ‘sag’, ‘saga’ and ‘newton-cg’ solvers.)"
+- **Use one-vs-rest (OvR) scheme**, if `multi_class` option set to `ovr`
+- **Use cross-entropy loss**, if `multi_class` option set to `multinomial`. (Currently `multinomial` option dey supported only by ‘lbfgs’, ‘sag’, ‘saga’ and ‘newton-cg’ solvers.)"
 
-> 🎓 Di 'scheme' here fit be 'ovr' (one-vs-rest) or 'multinomial'. Since logistic regression dey really designed to support binary classification, dis schemes dey help am handle multiclass classification tasks better. [source](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
+> 🎓 Di 'scheme' fit be 'ovr' (one-vs-rest) or 'multinomial'. Because logistic regression na to support binary classification, these schemes help am better handle multiclass classification tasks. [source](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
 
-> 🎓 Di 'solver' dey defined as "di algorithm wey e go use for di optimization problem". [source](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
+> 🎓 Di 'solver' na "di algorithm to use inside di optimization problem". [source](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-Scikit-learn dey offer dis table to explain how solvers dey handle different challenges wey different kinds of data structures dey bring:
+Scikit-learn get table to explain how solvers dey handle different challenges from many kinds data structures:
 
 ![solvers](../../../../translated_images/pcm/solvers.5fc648618529e627.webp)
 
 ## Exercise - split di data
 
-Make we focus on logistic regression for our first training trial since you don learn about am for di previous lesson.
+We fit focus on logistic regression for our first training because you just learn am for previous lesson.
 Split your data into training and testing groups by calling `train_test_split()`:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
 ```
 
-## Exercise - apply logistic regression
+## Exercise - use logistic regression
 
-Since you dey use di multiclass case, you need choose wetin _scheme_ to use and wetin _solver_ to set. Use LogisticRegression with multiclass setting and di **liblinear** solver to train.
+Since you dey use multiclass case, you gats choose which _scheme_ to use and which _solver_ to set. Use LogisticRegression with multiclass setting and **liblinear** solver for train.
 
-1. Create logistic regression with multi_class set to `ovr` and di solver set to `liblinear`:
+1. Create logistic regression wit multi_class set to `ovr` and solver set to `liblinear`:
 
     ```python
     lr = LogisticRegression(multi_class='ovr',solver='liblinear')
@@ -163,29 +163,28 @@ Since you dey use di multiclass case, you need choose wetin _scheme_ to use and 
     print ("Accuracy is {}".format(accuracy))
     ```
 
-    ✅ Try different solver like `lbfgs`, wey dem dey often set as default
+    ✅ Try different solver like `lbfgs`, wey dem dey use as default many times
 
-    > Note, use Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) function to flatten your data when e dey needed.
+    > Note, use Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) function to flatten your data when e needed.
 
-    Di accuracy dey good at over **80%**!
+    Di accuracy good pass **80%**!
 
-1. You fit see dis model for action by testing one row of data (#50):
+1. You fit see dis model dey work by testing one row of data (#50):
 
     ```python
     print(f'ingredients: {X_test.iloc[50][X_test.iloc[50]!=0].keys()}')
     print(f'cuisine: {y_test.iloc[50]}')
     ```
 
-    Di result go show:
+    Di result go print:
 
    ```output
    ingredients: Index(['cilantro', 'onion', 'pea', 'potato', 'tomato', 'vegetable_oil'], dtype='object')
    cuisine: indian
    ```
 
-✅ Try use different row number and check wetin e go show
-
-1. If you wan sabi more, you fit check how correct dis prediction be:
+   ✅ Try different row number come check di results
+1. Diggin deep, you fit check the accuracy of dis prediction:
 
     ```python
     test= X_test.iloc[50].values.reshape(-1, 1).T
@@ -197,7 +196,7 @@ Since you dey use di multiclass case, you need choose wetin _scheme_ to use and 
     topPrediction.head()
     ```
 
-    Di result wey e print - Indian food na di best guess, and e get beta chance:
+    Di result e print - Indian cuisine na di best guess, wit good probability:
 
     |          |        0 |
     | -------: | -------: |
@@ -207,9 +206,9 @@ Since you dey use di multiclass case, you need choose wetin _scheme_ to use and 
     |   korean | 0.017277 |
     |     thai | 0.007634 |
 
-    ✅ You fit explain why di model sure say na Indian food?
+    ✅ You fit explain why di model sure sey na Indian cuisine dis be?
 
-1. Get more info by printing classification report, like you do for regression lessons:
+1. Get more detail by printing classification report, like how you do for regression lessons:
 
     ```python
     y_pred = model.predict(X_test)
@@ -223,26 +222,26 @@ Since you dey use di multiclass case, you need choose wetin _scheme_ to use and 
     | japanese     | 0.70      | 0.75   | 0.72     | 220     |
     | korean       | 0.86      | 0.76   | 0.81     | 242     |
     | thai         | 0.79      | 0.85   | 0.82     | 254     |
-    | accuracy     | 0.80      | 1199   |          |         |
+    | accuracy     |           |        | 0.80     | 1199    |
     | macro avg    | 0.80      | 0.80   | 0.80     | 1199    |
     | weighted avg | 0.80      | 0.80   | 0.80     | 1199    |
 
 ## 🚀Challenge
 
-For dis lesson, you use di clean data take build machine learning model wey fit predict national food based on di ingredients wey dem use. Take time read di plenty options wey Scikit-learn get to classify data. Try sabi di concept of 'solver' well to understand wetin dey happen for di background.
+For dis lesson, you use your clean data to build machine learning model wey fit predict national cuisine based on series of ingredients dem. Take some time read through all di options wey Scikit-learn provide to classify data. Dig deep inside di concept of 'solver' to understand wetin dey happen behind di scenes.
 
 ## [Post-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 
 ## Review & Self Study
 
-Try sabi di mathematics wey dey behind logistic regression for [dis lesson](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
+Dig small more inside di math behind logistic regression inside [this lesson](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
 ## Assignment 
 
-[Study di solvers](assignment.md)
+[Study the solvers](assignment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don use AI transleto service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translation. Even as we dey try make am correct, abeg sabi say machine translation fit get mistake or no dey accurate well. Di original dokyument for im native language na di main correct source. For important mata, e good make una use professional human translation. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because una use dis translation.
+**Disclaimer**:
+Dis document dem don translate am wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg sabi say automated translations fit get errors or mistakes. Di original document for im own language na di correct source. For important matter, e better make person wey sabi do professional translation handle am. We no go take responsibility for any misunderstanding or wrong meaning wey fit show from dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

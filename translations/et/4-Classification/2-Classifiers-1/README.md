@@ -1,17 +1,17 @@
-# Köögi klassifikaatorid 1
+# Köökide klassifikaatorid 1
 
-Selles tunnis kasutad eelmises tunnis salvestatud andmestikku, mis sisaldab tasakaalustatud ja puhastatud andmeid erinevate köökide kohta.
+Selles õppetükis kasutad andmekogumit, mille salvestasid eelmisest õppetükist, täis tasakaalustatud, puhast infot kõikide köökide kohta.
 
-Seda andmestikku kasutatakse mitmesuguste klassifikaatoritega, et _ennustada rahvuslikku kööki, lähtudes koostisosade grupist_. Samal ajal õpid rohkem algoritmide kasutamise kohta klassifitseerimisülesannetes.
+Sa kasutad seda andmekogumit mitmesuguste klassifikaatoritega, et _ennustada kindlat rahvuskööki koostisosade grupi põhjal_. Selle käigus õpid rohkem meetodite kohta, kuidas algoritme saab kasutada klassifitseerimisülesannetes.
 
-## [Eelloengu viktoriin](https://ff-quizzes.netlify.app/en/ml/)
+## [Loengu eelne viktoriin](https://ff-quizzes.netlify.app/en/ml/)
 # Ettevalmistus
 
-Eeldades, et oled lõpetanud [1. tunni](../1-Introduction/README.md), veendu, et _cleaned_cuisines.csv_ fail asub juurkataloogi `/data` kaustas, mis on mõeldud nende nelja tunni jaoks.
+Eeldades, et oled lõpetanud [Õppetüki 1](../1-Introduction/README.md), veendu, et puhastatud fail _cleaned_cuisines.csv_ on olemas juurkaustas `/data` selleks neljaks õppetükiks.
 
-## Harjutus - rahvusliku köögi ennustamine
+## Harjutus - rahvusköögi ennustamine
 
-1. Töötades selle tunni _notebook.ipynb_ kaustas, impordi fail koos Pandas teegiga:
+1. Töötades selle õppetüki kaustas _notebook.ipynb_, impordi see fail koos Pandas teegiga:
 
     ```python
     import pandas as pd
@@ -21,16 +21,15 @@ Eeldades, et oled lõpetanud [1. tunni](../1-Introduction/README.md), veendu, et
 
     Andmed näevad välja sellised:
 
-|     | Unnamed: 0 | cuisine | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood | yam | yeast | yogurt | zucchini |
-| --- | ---------- | ------- | ------ | -------- | ----- | ---------- | ----- | ------------ | ------- | -------- | --- | ------- | ----------- | ---------- | ----------------------- | ---- | ---- | --- | ----- | ------ | -------- |
-| 0   | 0          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
-| 1   | 1          | indian  | 1      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
-| 2   | 2          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
-| 3   | 3          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 0      | 0        |
-| 4   | 4          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 1      | 0        |
-  
+|     | Unnamed: 0 | köök   | mandel | angelika | aniis | aniisi_seeme | õun   | õunabrandy   | aprikoos | armagnac | ... | viski | valge_leib | valge_vein | täistera_nisu_jahu | vein | puit | bataat | pärm  | jogurt | suvikõrvits |
+| --- | ---------- | ------ | ------ | -------- | ----- | ------------ | ----- | ------------ | -------- | -------- | --- | ------ | ---------- | ---------- | ------------------ | ---- | ---- | ------ | ----- | ------ | ----------- |
+| 0   | 0          | india   | 0      | 0        | 0     | 0            | 0     | 0            | 0        | 0        | ... | 0      | 0          | 0          | 0                  | 0    | 0    | 0      | 0     | 0      | 0           |
+| 1   | 1          | india   | 1      | 0        | 0     | 0            | 0     | 0            | 0        | 0        | ... | 0      | 0          | 0          | 0                  | 0    | 0    | 0      | 0     | 0      | 0           |
+| 2   | 2          | india   | 0      | 0        | 0     | 0            | 0     | 0            | 0        | 0        | ... | 0      | 0          | 0          | 0                  | 0    | 0    | 0      | 0     | 0      | 0           |
+| 3   | 3          | india   | 0      | 0        | 0     | 0            | 0     | 0            | 0        | 0        | ... | 0      | 0          | 0          | 0                  | 0    | 0    | 0      | 0     | 0      | 0           |
+| 4   | 4          | india   | 0      | 0        | 0     | 0            | 0     | 0            | 0        | 0        | ... | 0      | 0          | 0          | 0                  | 0    | 0    | 0      | 0     | 1      | 0           |
 
-1. Nüüd impordi veel mõned teegid:
+1. Nüüd impordi veel mõningaid teeke:
 
     ```python
     from sklearn.linear_model import LogisticRegression
@@ -40,7 +39,7 @@ Eeldades, et oled lõpetanud [1. tunni](../1-Introduction/README.md), veendu, et
     import numpy as np
     ```
 
-1. Jaga X ja y koordinaadid kaheks andmeraamiks treenimiseks. `cuisine` võib olla siltide andmeraam:
+1. Jaga X ja y koordinaadid kaheks DataFrame’iks treenimiseks. `küök` võib olla sildi DataFrame:
 
     ```python
     cuisines_label_df = cuisines_df['cuisine']
@@ -58,92 +57,92 @@ Eeldades, et oled lõpetanud [1. tunni](../1-Introduction/README.md), veendu, et
     Name: cuisine, dtype: object
     ```
 
-1. Eemalda `Unnamed: 0` ja `cuisine` veerud, kasutades `drop()` funktsiooni. Salvesta ülejäänud andmed treenitavate omadustena:
+1. Eemalda sarjad `Unnamed: 0` ja `küök` `drop()` abil. Salvestage ülejäänud andmed treenimiseks sobivate tunnustena:
 
     ```python
     cuisines_feature_df = cuisines_df.drop(['Unnamed: 0', 'cuisine'], axis=1)
     cuisines_feature_df.head()
     ```
 
-    Sinu omadused näevad välja sellised:
+    Sinu tunnused näevad välja sellised:
 
-|      | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | artemisia | artichoke |  ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood |  yam | yeast | yogurt | zucchini |
-| ---: | -----: | -------: | ----: | ---------: | ----: | -----------: | ------: | -------: | --------: | --------: | ---: | ------: | ----------: | ---------: | ----------------------: | ---: | ---: | ---: | ----: | -----: | -------: |
-|    0 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
-|    1 |      1 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
-|    2 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
-|    3 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
-|    4 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      1 |        0 | 0 |
+|      | mandel | angelika | aniis | aniisi_seeme | õun | õunabrandy | aprikoos | armagnac | artemisia | artišokk |  ... | viski | valge_leib | valge_vein | täistera_nisu_jahu | vein | puit | bataat | pärm | jogurt | suvikõrvits |
+| ---: | ------: | -------: | -----: | -----------: | ---: | ----------: | --------: | -------: | ---------: | ---------: | ---: | -----: | ---------: | ---------: | -----------------: | ----: | ----: | ------: | ----: | ------: | ----------: |
+|    0 |       0 |        0 |      0 |            0 |   0 |           0 |         0 |        0 |          0 |          0 |  ... |      0 |          0 |          0 |                  0 |    0 |    0 |       0 |     0 |       0 |           0 | 0 |
+|    1 |       1 |        0 |      0 |            0 |   0 |           0 |         0 |        0 |          0 |          0 |  ... |      0 |          0 |          0 |                  0 |    0 |    0 |       0 |     0 |       0 |           0 | 0 |
+|    2 |       0 |        0 |      0 |            0 |   0 |           0 |         0 |        0 |          0 |          0 |  ... |      0 |          0 |          0 |                  0 |    0 |    0 |       0 |     0 |       0 |           0 | 0 |
+|    3 |       0 |        0 |      0 |            0 |   0 |           0 |         0 |        0 |          0 |          0 |  ... |      0 |          0 |          0 |                  0 |    0 |    0 |       0 |     0 |       0 |           0 | 0 |
+|    4 |       0 |        0 |      0 |            0 |   0 |           0 |         0 |        0 |          0 |          0 |  ... |      0 |          0 |          0 |                  0 |    0 |    0 |       0 |     0 |       1 |           0 | 0 |
 
 Nüüd oled valmis oma mudelit treenima!
 
 ## Klassifikaatori valimine
 
-Nüüd, kui andmed on puhastatud ja treenimiseks valmis, pead otsustama, millist algoritmi kasutada.
+Nüüd, kui sinu andmed on puhtad ja treenimiseks valmis, pead otsustama, millist algoritmi kasutada.
 
-Scikit-learn liigitab klassifitseerimise juhendatud õppimise alla, ja selles kategoorias on palju erinevaid viise klassifitseerimiseks. [Valik](https://scikit-learn.org/stable/supervised_learning.html) võib esmapilgul tunduda üsna segadusttekitav. Järgnevad meetodid sisaldavad kõik klassifitseerimistehnikaid:
+Scikit-learn ühendab klassifikatsioonid Juhendatud Õppimise alla ning selles kategoorias leiad palju võimalusi klassifikatsiooniks. [Valik](https://scikit-learn.org/stable/supervised_learning.html) on esmapilgul üsna segadusttekitav. Järgmised meetodid sisaldavad kõik klassifikatsioonitehnikaid:
 
 - Lineaarsed mudelid
-- Toetavate vektorite masinad
-- Stohhastiline gradientide langus
-- Lähimate naabrite meetod
+- Tugivektormasinad
+- Stohhastiline gradientlangus
+- Lähimad naabrid
 - Gaussi protsessid
 - Otsustuspuud
-- Ansamblimeetodid (hääletav klassifikaator)
-- Mitmeklassi ja mitme väljundi algoritmid (mitmeklassi ja mitmesildi klassifikatsioon, mitmeklassi-mitmeväljundi klassifikatsioon)
+- Ansamblimeetodid (hääletuskassifikaator)
+- Multiklasse ja multiväljundiga algoritmid (multiklasse ja multilabel klassifikatsioon, multiklasse-multiväljundiga klassifikatsioon)
 
-> Võid kasutada ka [närvivõrke andmete klassifitseerimiseks](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), kuid see jääb selle tunni teemast välja.
+> Võid kasutada ka [neurvõrke andmete klassifitseerimiseks](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), kuid see jääb selle õppetüki teemast väljapoole.
 
-### Millist klassifikaatorit valida?
+### Millise klassifikaatori valida?
 
-Millist klassifikaatorit valida? Sageli on hea katsetada mitmeid ja otsida parimat tulemust. Scikit-learn pakub [kõrvutavat võrdlust](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) loodud andmestikul, võrreldes KNeighbors, SVC kahte viisi, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB ja QuadraticDiscriminationAnalysis, näidates tulemusi visualiseeritult:
+Millise klassifikaatori valida? Sageli testitakse ennast läbi erinevate variantide ja otsitakse head tulemust. Scikit-learn pakub [kõrvuti võrdlust](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) loodud andmestikul, võrdeldes KNeighbors, kahte SVC võimalust, GaussianProcessClassifierit, DecisionTreeClassifierit, RandomForestClassifierit, MLPClassifierit, AdaBoostClassifierit, GaussianNB ja QuadraticDiscrinationAnalysist ning kuvades tulemused visuaalselt: 
 
 ![klassifikaatorite võrdlus](../../../../translated_images/et/comparison.edfab56193a85e7f.webp)
-> Graafikud on genereeritud Scikit-learn'i dokumentatsioonis
+> Graafikud on genereeritud Scikit-learn dokumentatsioonis
 
-> AutoML lahendab selle probleemi elegantselt, tehes need võrdlused pilves ja võimaldades valida parima algoritmi sinu andmete jaoks. Proovi seda [siin](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
+> AutoML lahendab selle probleemi kenasti, käivitades need võrdlused pilves, võimaldades valida parima algoritmi oma andmete jaoks. Proovi seda [siin](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
 
 ### Parem lähenemine
 
-Parem viis kui lihtsalt juhuslikult arvata, on järgida ideid selle allalaaditava [ML Cheat Sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott) abil. Siin avastame, et meie mitmeklassi probleemi jaoks on mõned valikud:
+Parem kui lihtsalt meelevaldselt arvata, on järgida mõtteid selle allalaaditava [ML petulehe](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott) põhjal. Siin saame teada, et meie mitmeklassilise probleemi puhul on mitmeid valikuid:
 
-![spikker mitmeklassi probleemide jaoks](../../../../translated_images/et/cheatsheet.07a475ea444d2223.webp)
-> Microsofti algoritmi spikri osa, mis kirjeldab mitmeklassi klassifikatsiooni valikuid
+![mitmeklassilise probleemi petuleht](../../../../translated_images/et/cheatsheet.07a475ea444d2223.webp)
+> Microsofti algoritmipetulehe osa, mis kirjeldab mitmeklassilise klassifikatsiooni võimalusi
 
-✅ Laadi see spikker alla, prindi see välja ja riputa seinale!
+✅ Laadi see petuleht alla, prindi välja ja kleebi seinale!
 
-### Põhjendamine
+### Loogika
 
-Vaatame, kas suudame erinevaid lähenemisi põhjendada, arvestades meie piiranguid:
+Vaatame, kas suudame loogiliselt läbi mõelda erinevad lähenemised antud piirangute valguses:
 
-- **Närvivõrgud on liiga rasked**. Arvestades meie puhast, kuid minimaalset andmestikku ja asjaolu, et treenime kohapeal märkmike kaudu, on närvivõrgud selle ülesande jaoks liiga rasked.
-- **Kaheklassi klassifikaator ei sobi**. Me ei kasuta kaheklassi klassifikaatorit, seega välistame one-vs-all meetodi.
-- **Otsustuspuu või logistiline regressioon võiks sobida**. Otsustuspuu võiks sobida, või logistiline regressioon mitmeklassi andmete jaoks.
-- **Mitmeklassi tõhustatud otsustuspuud lahendavad teistsuguse probleemi**. Mitmeklassi tõhustatud otsustuspuu sobib kõige paremini mitteparametriliste ülesannete jaoks, näiteks ülesannete jaoks, mis on mõeldud järjestuste loomiseks, seega ei ole see meile kasulik.
+- **Neurvõrgud on liiga mahukad**. Arvestades meie puhast, kuid minimaalseid andmeid ning asjaolu, et me treenime lokaalselt notebookide kaudu, on neurvõrgud selleks ülesandeks liiga rasked.
+- **Ühe- või kahekordse klassifikaatori puudumine**. Me ei kasuta kaheklassi klassifikaatorit, seega välistatakse one-vs-all.
+- **Otsustuspuu või logistiline regressioon võiks töötada**. Otsustuspuu võiks töötada või logistiline regressioon mitmeklassiliste andmete jaoks.
+- **Mitmeklassilised tugevdussõelad lahendavad teistsuguse probleemi**. Mitmeklassiline tugevdusotsustuspuu sobib rohkem mitteparametrilisteks ülesanneteks, näiteks järjestuse loomiseks, seega see ei ole meile kasulik.
 
-### Scikit-learn'i kasutamine
+### Scikit-learn kasutamine
 
-Kasutame Scikit-learn'i, et analüüsida oma andmeid. Siiski on palju viise, kuidas kasutada logistilist regressiooni Scikit-learn'is. Vaata [parameetreid, mida saab määrata](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).  
+Analüüsime andmeid Scikit-learniga. Siiski on logistilise regressiooni kasutamiseks Scikit-learnis palju viise. Vaata [parameetrite dokumentatsiooni](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).  
 
-Sisuliselt on kaks olulist parameetrit - `multi_class` ja `solver` -, mida peame määrama, kui palume Scikit-learn'il teha logistilist regressiooni. `multi_class` väärtus rakendab teatud käitumist. Solveri väärtus määrab, millist algoritmi kasutada. Mitte kõik solverid ei sobi kõigi `multi_class` väärtustega.
+Põhimõtteliselt on kaks olulist parameetrit - `multi_class` ja `solver` -, mida pead määrama, kui palud Scikit-learnil logistilist regressiooni kasutada. `multi_class` määrab teatud käitumise, `solver` määrab algoritmi. Kõik lahendajad ei sobi kõigi `multi_class` väärtustega.
 
-Dokumentatsiooni järgi mitmeklassi puhul treeningalgoritm:
+Dokumentatsiooni järgi, mitmeklassilises juhul kasutab treening:
 
-- **Kasutab one-vs-rest (OvR) skeemi**, kui `multi_class` valik on määratud `ovr`
-- **Kasutab ristentropia kaotust**, kui `multi_class` valik on määratud `multinomial`. (Praegu toetavad `multinomial` valikut ainult solverid ‘lbfgs’, ‘sag’, ‘saga’ ja ‘newton-cg’.)
+- **one-vs-rest (OvR) skeemi**, kui `multi_class` on `ovr`
+- **ristentropia kaotust**, kui `multi_class` on `multinomial`. (Praegu toetavad `multinomial` võimalust ainult ‘lbfgs’, ‘sag’, ‘saga’ ja ‘newton-cg’ lahendajad.)"
 
-> 🎓 'Skeem' võib olla kas 'ovr' (one-vs-rest) või 'multinomial'. Kuna logistiline regressioon on tegelikult mõeldud binaarse klassifikatsiooni toetamiseks, võimaldavad need skeemid paremini käsitleda mitmeklassi klassifikatsiooni ülesandeid. [allikas](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
+> 🎓 "Skeem" võib olla 'ovr' (üks-võrdne-kõigiga) või 'multinomial'. Kuna logistiline regressioon on mõeldud peamiselt binaarklassifikatsiooniks, võimaldavad need skeemid paremini käsitleda mitmeklassilisi klassifikatsioone. [allikas](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
 
-> 🎓 'Solver' on defineeritud kui "algoritm, mida kasutatakse optimeerimisprobleemi lahendamiseks". [allikas](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
+> 🎓 'Solver' on määratletud kui "optimeerimisprobleemis kasutatav algoritm". [allikas](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-Scikit-learn pakub seda tabelit, et selgitada, kuidas solverid käsitlevad erinevaid väljakutseid, mida esitavad erinevat tüüpi andmestruktuurid:
+Scikit-learn pakub selle tabeli, mis selgitab, kuidas erinevad lahendajad käitlevad erinevat tüüpi andmete omadusi:
 
-![solverid](../../../../translated_images/et/solvers.5fc648618529e627.webp)
+![lahendajad](../../../../translated_images/et/solvers.5fc648618529e627.webp)
 
 ## Harjutus - andmete jagamine
 
-Keskendume logistilisele regressioonile meie esimese treeningkatse jaoks, kuna sa õppisid seda hiljuti eelmises tunnis.
-Jaga oma andmed treening- ja testimisgruppideks, kutsudes `train_test_split()`:
+Võime keskenduda logistilisele regressioonile oma esimeses treeningukatsetuses, sest sa just õppisid seda eelnevas õppetükis.
+Jaga andmed treening- ja testkomplektideks, kasutades `train_test_split()`:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
@@ -151,9 +150,9 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
 
 ## Harjutus - logistilise regressiooni rakendamine
 
-Kuna kasutad mitmeklassi juhtumit, pead valima, millist _skeemi_ kasutada ja millist _solverit_ määrata. Kasuta LogisticRegression'i mitmeklassi seadistusega ja **liblinear** solverit treenimiseks.
+Kuna kasutad mitmeklassilist juhtumit, pead valima, millist _skeemi_ kasutada ja millise _lahendaja_ seada. Kasuta LogisticRegressioni mitmeklassilise seade ja lahendajaga **liblinear** treenimiseks.
 
-1. Loo logistiline regressioon, kus multi_class on määratud `ovr` ja solver määratud `liblinear`:
+1. Loo logistiline regressioon seadistusega multi_class = `ovr` ja lahendajaga `liblinear`:
 
     ```python
     lr = LogisticRegression(multi_class='ovr',solver='liblinear')
@@ -163,29 +162,28 @@ Kuna kasutad mitmeklassi juhtumit, pead valima, millist _skeemi_ kasutada ja mil
     print ("Accuracy is {}".format(accuracy))
     ```
 
-    ✅ Proovi teist solverit, näiteks `lbfgs`, mis on sageli määratud vaikimisi.
+    ✅ Proovi ka teist lahendajat nagu `lbfgs`, mis on sageli vaikimisi seatud
 
-    > Märkus: kasuta Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) funktsiooni, et vajadusel oma andmeid tasandada.
+    > Märkus, kasuta Pandas `ravel` funktsiooni andmete tasandamiseks, kui vaja.
 
     Täpsus on hea, üle **80%**!
 
-1. Näed seda mudelit tegevuses, testides ühte andmerida (#50):
+1. Sa saad seda mudelit toimimas näha, testides ühe rea (#50) andmeid:
 
     ```python
     print(f'ingredients: {X_test.iloc[50][X_test.iloc[50]!=0].keys()}')
     print(f'cuisine: {y_test.iloc[50]}')
     ```
 
-    Tulemus trükitakse:
+    Tulemus trükitakse välja:
 
    ```output
    ingredients: Index(['cilantro', 'onion', 'pea', 'potato', 'tomato', 'vegetable_oil'], dtype='object')
    cuisine: indian
    ```
 
-✅ Proovi teist rea numbrit ja kontrolli tulemusi
-
-1. Süvenedes, saad kontrollida selle ennustuse täpsust:
+   ✅ Proovi teist rea numbrit ja vaata tulemusi
+1. Süvenedes võite kontrollida selle prognoosi täpsust:
 
     ```python
     test= X_test.iloc[50].values.reshape(-1, 1).T
@@ -197,7 +195,7 @@ Kuna kasutad mitmeklassi juhtumit, pead valima, millist _skeemi_ kasutada ja mil
     topPrediction.head()
     ```
 
-    Tulemus trükitakse välja - India köök on parim oletus, üsna suure tõenäosusega:
+    Tulemused prinditakse välja - India köök on selle parim aimdus, hea tõenäosusega:
 
     |          |        0 |
     | -------: | -------: |
@@ -207,40 +205,42 @@ Kuna kasutad mitmeklassi juhtumit, pead valima, millist _skeemi_ kasutada ja mil
     |   korean | 0.017277 |
     |     thai | 0.007634 |
 
-    ✅ Kas oskad selgitada, miks mudel on üsna kindel, et tegemist on India köögiga?
+    ✅ Kas saate seletada, miks mudel on üsna kindel, et tegemist on India köögiga?
 
-1. Saad rohkem detaile, trükkides välja klassifikatsiooni aruande, nagu tegid regressiooni tundides:
+1. Saage täpsemat teavet, trükkides välja klassifikatsiooniraporti, nagu tegite regressioonitundides:
 
     ```python
     y_pred = model.predict(X_test)
     print(classification_report(y_test,y_pred))
     ```
 
-    |              | täpsus   | tagasikutsumine | f1-skoor | tugi     |
-    | ------------ | -------- | --------------- | -------- | -------- |
-    | chinese      | 0.73     | 0.71            | 0.72     | 229      |
-    | indian       | 0.91     | 0.93            | 0.92     | 254      |
-    | japanese     | 0.70     | 0.75            | 0.72     | 220      |
-    | korean       | 0.86     | 0.76            | 0.81     | 242      |
-    | thai         | 0.79     | 0.85            | 0.82     | 254      |
-    | täpsus       | 0.80     | 1199            |          |          |
-    | makro keskm. | 0.80     | 0.80            | 0.80     | 1199     |
-    | kaalutud keskm.| 0.80   | 0.80            | 0.80     | 1199     |
+    |              | precision | recall | f1-score | support |
+    | ------------ | --------- | ------ | -------- | ------- |
+    | chinese      | 0.73      | 0.71   | 0.72     | 229     |
+    | indian       | 0.91      | 0.93   | 0.92     | 254     |
+    | japanese     | 0.70      | 0.75   | 0.72     | 220     |
+    | korean       | 0.86      | 0.76   | 0.81     | 242     |
+    | thai         | 0.79      | 0.85   | 0.82     | 254     |
+    | accuracy     |           |        | 0.80     | 1199    |
+    | macro avg    | 0.80      | 0.80   | 0.80     | 1199    |
+    | weighted avg | 0.80      | 0.80   | 0.80     | 1199    |
 
 ## 🚀Väljakutse
 
-Selles tunnis kasutasid puhastatud andmeid, et luua masinõppe mudel, mis suudab ennustada rahvuskööki koostisosade põhjal. Võta aega, et tutvuda Scikit-learn'i paljude võimalustega andmete klassifitseerimiseks. Süvene 'lahendaja' (solver) kontseptsiooni, et mõista, mis toimub kulisside taga.
+Selles õppetükis kasutasite oma puhastatud andmeid masinaõppemudeli loomiseks, mis suudab prognoosida riiklikku kööki koostisosade põhjal. Võtke aega, et lugeda läbi Scikit-learni pakutavad arvukad võimalused andmete klassifitseerimiseks. Süvenege rohkem 'lahendaja' (solver) mõistetesse, et mõista, mis toimub kaadri taga.
 
-## [Loengu järgne viktoriin](https://ff-quizzes.netlify.app/en/ml/)
+## [Loengu järel võistlus](https://ff-quizzes.netlify.app/en/ml/)
 
-## Ülevaade ja iseseisev õppimine
+## Kordamine & Iseteadmine
 
-Süvene veidi rohkem logistilise regressiooni matemaatikasse [selles tunnis](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
-## Ülesanne 
+Süvenege natuke rohkem logistilise regressiooni matemaatikasse [selles õppetükis](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
+## Kodutöö
 
-[Uuri lahendajaid](assignment.md)
+[Õppige lahendajaid](assignment.md)
 
 ---
 
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vastutusest loobumine**:  
+See dokument on tõlgitud kasutades tehisintellekti tõlkimisteenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame tagada täpsust, palun pidage meeles, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument oma algkeeles tuleks pidada autoriteetseks allikaks. Kriitilise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei võta vastutust selle tõlke kasutamisest tingitud arusaamatuste ega valesti mõistmiste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,17 +1,17 @@
-# Cuisine classifiers 1
+# အစားအသောက် အမျိုးအစား ခွဲခြားသူများ ၁
 
-ဒီသင်ခန်းစာမှာ မိမိအရင်သင်ခန်းစာမှာ သိမ်းဆည်းထားတဲ့ အစားအစာအမျိုးအစားများနှင့်ပတ်သက်သော အချက်အလက်များကို အသုံးပြုပါမည်။
+ဒီသင်ခန်းစာမှာ သင်ဟာ ယင်းအစားအသောက်အမျိုးအစားတွေနဲ့ပတ်သက်ပြီး ချိန်ညှိပြီး သန့်ရှင်းသော ဒေတာတစ်ခုကို မပြီးဆုံးခင်သင်ခန်းစာကနေ သိမ်းဆည်းထားတဲ့ ဒေတာ set ကိုအသုံးပြုပါမည်။
 
-ဒီအချက်အလက်များကို အသုံးပြုပြီး _ပစ္စည်းများအုပ်စုအပေါ်မူတည်၍ အမျိုးသားအစားအစာကို ခန့်မှန်းနိုင်ရန်_ အမျိုးမျိုးသော classifiers များကို အသုံးပြုပါမည်။ ဒီလုပ်ငန်းစဉ်တွင် classification tasks များအတွက် algorithm များကို ဘယ်လိုအသုံးချနိုင်သည်ဆိုတာကို ပိုမိုလေ့လာနိုင်ပါမည်။
+အဲဒီ dataset ကို အမျိုးအစားခွဲခြားသူမျိုးစုံနဲ့ သုံးပြီး _ပေးထားတဲ့ အစားအစာပစ္စည်း အုပ်စုတစ်ခုအပေါ်အခြေခံပြီး အမျိုးအစားခွဲခြားဖော်ထုတ်ခြင်း_ ပြုလုပ်မှာဖြစ်ပါတယ်။ ဒီအလုပ်လုပ်နေစဉ်အတွင်း အပိုင်းခွဲခြားလုပ်ငန်းများအတွက် algorithm တွေကို ဘယ်လိုအသုံးချနိုင်ကြောင်း အပိုများစွာ လေ့လာနိုင်မှာဖြစ်ပါတယ်။
 
-## [Pre-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
-# ပြင်ဆင်မှု
+## [သင်ခန်းစာမတိုင်မီ စမ်းမေးပွဲ](https://ff-quizzes.netlify.app/en/ml/)
+# ပြင်ဆင်မှုပြုလုပ်ခြင်း
 
-[Lesson 1](../1-Introduction/README.md) ကို ပြီးမြောက်ထားသည်ဟု ခန့်မှန်းပါက, _cleaned_cuisines.csv_ ဖိုင်ကို `/data` folder ရဲ့ root မှာ ရှိနေဖို့ သေချာပါစေ။
+[သင်ခန်းစာ ၁](../1-Introduction/README.md) ပြီးဆုံးပြီးသားဖြစ်ကြောင်း သတ်မှတ်ပြီးသားဆိုထားပြီး၊ ဤသင်ခန်းစာလေးခုအတွက် root `/data` ဖိုလ်ဒါအတွင်း _cleaned_cuisines.csv_ ဖိုင်ရှိနေပြီးဖြစ်ကြောင်း သေချာစေပါ။
 
-## လေ့ကျင့်ခန်း - အမျိုးသားအစားအစာကို ခန့်မှန်းပါ
+## လေ့ကျင့်ခန်း - အမျိုးအစားခွဲခြားရန် ခန့်မှန်းခြင်း
 
-1. ဒီသင်ခန်းစာရဲ့ _notebook.ipynb_ folder မှာ Pandas library နဲ့အတူ ဖိုင်ကို import လုပ်ပါ:
+1. ဒီသင်ခန်းစာ၏ _notebook.ipynb_ ဖိုလ်ဒါအတွင်းမှာ အဲဒီဖိုင်နဲ့ Pandas စာကြည့်တိုက်ကို တင်သွင်းပါ။
 
     ```python
     import pandas as pd
@@ -19,7 +19,7 @@
     cuisines_df.head()
     ```
 
-    အချက်အလက်တွေက ဒီလိုပုံစံနဲ့ ရှိပါမယ်:
+    ဒေတာဟာ ဒီလိုမျိုးပုံစံရှိပါတယ် -
 
 |     | Unnamed: 0 | cuisine | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood | yam | yeast | yogurt | zucchini |
 | --- | ---------- | ------- | ------ | -------- | ----- | ---------- | ----- | ------------ | ------- | -------- | --- | ------- | ----------- | ---------- | ----------------------- | ---- | ---- | --- | ----- | ------ | -------- |
@@ -30,7 +30,7 @@
 | 4   | 4          | indian  | 0      | 0        | 0     | 0          | 0     | 0            | 0       | 0        | ... | 0       | 0           | 0          | 0                       | 0    | 0    | 0   | 0     | 1      | 0        |
   
 
-1. အခြား libraries များကို import လုပ်ပါ:
+1. ယခု အခြားစာကြည့်တိုက်များကို တင်သွင်းပါ။
 
     ```python
     from sklearn.linear_model import LogisticRegression
@@ -40,14 +40,14 @@
     import numpy as np
     ```
 
-1. X နဲ့ y coordinates ကို training အတွက် dataframes နှစ်ခုအဖြစ် ခွဲပါ။ `cuisine` ကို labels dataframe အဖြစ် သတ်မှတ်ပါ:
+1. X နှင့် y ကို သင်ကြားရေးအတွက် နှစ်ခုသော dataframe များအဖြစ် ခွဲထုတ်ပါ။ `cuisine` ကို label အဖြစ်သတ်မှတ်နိုင်သည်။
 
     ```python
     cuisines_label_df = cuisines_df['cuisine']
     cuisines_label_df.head()
     ```
 
-    ဒါဟာ ဒီလိုပုံစံနဲ့ ရှိပါမယ်:
+    ဒီလိုမျိုးရှိပါလိမ့်မယ် -
 
     ```output
     0    indian
@@ -58,14 +58,14 @@
     Name: cuisine, dtype: object
     ```
 
-1. `Unnamed: 0` column နဲ့ `cuisine` column ကို `drop()` ကိုခေါ်ပြီး ဖယ်ရှားပါ။ ကျန်တဲ့ data ကို trainable features အဖြစ် သိမ်းဆည်းပါ:
+1. `Unnamed: 0`နှင့် `cuisine` ကော်လံများကို `drop()` ဖြင့် ဖယ်ရှားပြီး training features အဖြစ် အခြားဒေတာများအား သိမ်းဆည်းပါ။
 
     ```python
     cuisines_feature_df = cuisines_df.drop(['Unnamed: 0', 'cuisine'], axis=1)
     cuisines_feature_df.head()
     ```
 
-    Features တွေက ဒီလိုပုံစံနဲ့ ရှိပါမယ်:
+    သင့် features ဟာ ဒီလိုပုံစံရှိတော့မယ် -
 
 |      | almond | angelica | anise | anise_seed | apple | apple_brandy | apricot | armagnac | artemisia | artichoke |  ... | whiskey | white_bread | white_wine | whole_grain_wheat_flour | wine | wood |  yam | yeast | yogurt | zucchini |
 | ---: | -----: | -------: | ----: | ---------: | ----: | -----------: | ------: | -------: | --------: | --------: | ---: | ------: | ----------: | ---------: | ----------------------: | ---: | ---: | ---: | ----: | -----: | -------: |
@@ -75,75 +75,75 @@
 |    3 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
 |    4 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      1 |        0 | 0 |
 
-အခုတော့ မိမိရဲ့ model ကို training လုပ်ဖို့ အဆင်သင့်ဖြစ်ပါပြီ!
+ယခု သင့်မှာ သင်တန်းပေးဖို့ အဆင်သင့်ဖြစ်ပါပြီ။
 
-## Classifier ရွေးချယ်ခြင်း
+## သင့်အတွက် အမျိုးအစားခွဲခြားသူ ရွေးချယ်ခြင်း
 
-အချက်အလက်တွေကို training လုပ်ဖို့ အဆင်သင့်ဖြစ်ပြီးနောက်, မိမိလုပ်ငန်းစဉ်အတွက် algorithm ကို ရွေးချယ်ရပါမည်။
+ဒေတာ သန့်ရှင်းပြီး သင်ကြားရန် ပြင်ဆင်ပြီး ဖြစ်တဲ့အခါ၊ အလုပ်အတွက် ဘယ် algorithm ကို သုံးမလဲ ဆိုတာဆုံးဖြတ်ရပါမယ်။
 
-Scikit-learn က classification ကို Supervised Learning အဖြစ် grouping လုပ်ပြီး, အဲဒီ category မှာ classification လုပ်နိုင်တဲ့ နည်းလမ်းများစွာကို တွေ့နိုင်ပါမည်။ [အမျိုးမျိုးသောနည်းလမ်းများ](https://scikit-learn.org/stable/supervised_learning.html) ကို ပထမဆုံးကြည့်တဲ့အခါ အတော်လေးရှုပ်ထွေးစေပါသည်။ အောက်ပါနည်းလမ်းများသည် classification techniques များပါဝင်သည်:
+Scikit-learn ဟာ Classification ကို Supervised Learning အတွင်း ထည့်သွင်းပြီး၊ အဲဒီအုပ်စုမှာ သင်တွေ့နိုင်တဲ့ အမျိုးအစားလာလားဖြစ်စေ classification နည်းလမ်းမျိုးစုံကို ရှာတွေ့နိုင်ပါတယ်။ [အမျိုးမျိုး](https://scikit-learn.org/stable/supervised_learning.html) မှာ ရှိတာက ပထမကြည့်တဲ့အခါ စိတ်မချမ်းသာ ဖြစ်စေတတ်ပါတယ်။ အောက်ပါနည်းလမ်းများတွင် classification နည်းပညာများ ပါဝင်သည် -
 
-- Linear Models
+- လိုင်းနီးယား မော်ဒယ်များ
 - Support Vector Machines
 - Stochastic Gradient Descent
-- Nearest Neighbors
+- အနီးဆုံးအိမ်နီးများ
 - Gaussian Processes
-- Decision Trees
-- Ensemble methods (voting Classifier)
-- Multiclass and multioutput algorithms (multiclass and multilabel classification, multiclass-multioutput classification)
+- ဆုံးဖြတ်ရိုက်ပုံများ
+- Ensemble နည်းလမ်းများ (voting Classifier)
+- Multiclass နှင့် multioutput algorithm များ (multiclass နှင့် multilabel classification, multiclass-multioutput classification)
 
-> [neural networks](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification) ကို data classification အတွက် အသုံးပြုနိုင်သော်လည်း, ဒီသင်ခန်းစာရဲ့ အကျိုးအာနိသင်အတွင်းမှာ မပါဝင်ပါ။
+> သင်ဟာ [နယူးရာလ်နက်ဝက်များဖြင့် ဒေတာပြုလုပ်ခြင်း](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification)ကိုပါ အသုံးပြုနိုင်သော်လည်း၊ ဒီသင်ခန်းစာ၏ ပတ်ဝန်းကျင်ဟာ အဲဒါနဲ့ မဟုတ်ပါ။
 
-### ဘယ် classifier ကို သုံးမလဲ?
+### ဘယ်အမျိုးအစားခွဲခြားသူကို ရွေးမလဲ?
 
-ဒါဆို, ဘယ် classifier ကို သုံးသင့်သလဲ? အများအားဖြင့်, အမျိုးမျိုးကို run လုပ်ပြီး ရလဒ်ကောင်းတစ်ခုကို ရှာဖွေခြင်းသည် စမ်းသပ်မှုတစ်ခုဖြစ်သည်။ Scikit-learn က [side-by-side comparison](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) ကို dataset တစ်ခုမှာ ပြုလုပ်ပြီး, KNeighbors, SVC နှစ်မျိုး, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB နဲ့ QuadraticDiscrinationAnalysis တို့ကို visualized ရလဒ်များဖြင့် နှိုင်းယှဉ်ပြထားသည်:
+ဒါဆို အမျိုးအစားခွဲခြားသူ ဘယ်အမျိုးကိုရွေးသင့်သလဲ? ပုံမှန်အားဖြင့် အမျိုးမျိုးကို တွန်းလှန် စမ်းသပ်ပြီး ရလဒ်ကောင်းလာလားကြည့်ရင် စမ်းသပ်နိုင်ပါတယ်။ Scikit-learn ဟာ [တပြိုင်နက်မှာ နှိုင်းယှဉ်ခြင်း](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) ကို dataset တစ်ခုကိုဖန်တီးပြီး နည်းလမ်းအချို့ (KNeighbors, SVC နှစ်မျိုး, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB နှင့် QuadraticDiscrinationAnalysis) နဲ့ အဆင်ပြေမှုကို မြင်ယောင် ပြထားပါတယ် -
 
-![comparison of classifiers](../../../../4-Classification/2-Classifiers-1/images/comparison.png)
-> Scikit-learn ရဲ့ documentation မှ Plots
+![comparison of classifiers](../../../../translated_images/my/comparison.edfab56193a85e7f.webp)
+> Scikit-learn မှ အထောက်အထားစာတမ်းအတွင်း ဖန်တီးထားသော ပြဇာတ်များ ဖြစ်သည်။
 
-> AutoML က ဒီပြဿနာကို cloud မှာ comparison များ run လုပ်ခြင်းဖြင့် အလွယ်တကူ ဖြေရှင်းပေးပြီး, မိမိ data အတွက် algorithm အကောင်းဆုံးကို ရွေးချယ်နိုင်စေသည်။ [ဒီမှာ](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott) စမ်းသပ်ကြည့်ပါ။
+> AutoML က ဒီပြဿနာကို သွားရောက်ပြီး ဆန်းစစ်ကာ သင့်ဒေတာအတွက် အကောင်းဆုံး algorithm ကို ရွေးနိုင်စေပါတယ်။ [ဒီမှာ ကြိုးစားကြည့်ပါ](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
 
-### ပိုမိုကောင်းမွန်တဲ့နည်းလမ်း
+### ပိုမိုကောင်းမွန်သောနည်းလမ်း
 
-အကြံပေးမှုများကို လိုက်နာခြင်းသည် wild guessing လုပ်ခြင်းထက် ပိုမိုကောင်းမွန်ပါသည်။ [ML Cheat sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott) ကို download လုပ်ပြီး, multiclass problem အတွက် ရွေးချယ်စရာများကို ရှာဖွေကြည့်ပါ:
+လွဲမှားတွေးတာထက် ပိုကောင်းသောနည်းလမ်းကတော့ ဒီ [ML Cheat sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott) ကို ဒင်းလိုက်ဒေါင်းလုတ် ယူပြီး အကြံဉာဏ်တွေကို လိုက်နာခြင်းဖြစ်ပါတယ်။ ဒီမှာ ကျွန်တော်တို့ multiclass ပြဿနာအတွက် ရွေးချယ်စရာ အတော်များများ ရှိကြောင်း တွေ့ရှိရပါသည်။
 
-![cheatsheet for multiclass problems](../../../../4-Classification/2-Classifiers-1/images/cheatsheet.png)
-> Microsoft's Algorithm Cheat Sheet ရဲ့ multiclass classification options ကို ဖော်ပြထားသော အပိုင်း
+![cheatsheet for multiclass problems](../../../../translated_images/my/cheatsheet.07a475ea444d2223.webp)
+> Microsoft ၏ Algorithm Cheat Sheet မှ အစိတ်အပိုင်းတစ်ခုဖြစ်ပြီး multiclass classification အတွက် ရွေးချယ်နည်းများ ဖော်ပြထားသည်။
 
-✅ Cheat sheet ကို download လုပ်ပြီး, print ထုတ်ထားပြီး မိမိရဲ့ နံရံမှာ တင်ထားပါ!
+✅ ဒီ cheat sheet ကို ဒေါင်းလုဒ် ယူ၍ ပုံနှိပ်ထားပြီး နံရံပေါ်တွင် ပေါ်လာအောင် တပ်ထားပါ။
 
-### Reasoning
+### အကြောင်းပြချက်များ
 
-မိမိရဲ့ constraints တွေကို အခြေခံပြီး အမျိုးမျိုးသောနည်းလမ်းများကို reasoning လုပ်ကြည့်ပါ:
+ကြည့်ကြပါစို့ မတူညီသော လမ်းစဉ်များကို ငြင်းဆိုရာတွင် ကျွန်တော်တို့ ရှိတဲ့ကန့်သတ်ချက်များအရ -
 
-- **Neural networks မလိုအပ်ပါ**။ မိမိရဲ့ clean ဖြစ်တဲ့ dataset နဲ့ local notebooks မှာ training လုပ်နေတဲ့အခြေအနေကြောင့်, neural networks က ဒီ task အတွက် မလိုအပ်ပါ။
-- **Two-class classifier မလိုအပ်ပါ**။ Two-class classifier ကို မသုံးသင့်ပါ, ဒါကြောင့် one-vs-all ကို မသုံးပါ။
-- **Decision tree သို့မဟုတ် logistic regression သုံးနိုင်ပါ**။ Decision tree သို့မဟုတ် logistic regression ကို multiclass data အတွက် အသုံးပြုနိုင်ပါသည်။
-- **Multiclass Boosted Decision Trees က အခြားပြဿနာကို ဖြေရှင်းသည်**။ Multiclass boosted decision tree က nonparametric tasks များအတွက် အကောင်းဆုံးဖြစ်ပြီး, ranking များကို ဖန်တီးရန်အတွက် အသုံးပြုသည်, ဒါကြောင့် ဒီ task အတွက် မသင့်တော်ပါ။
+- **နယူးရာလ်နက်ဝက်များသည် များစွာကြီးလွန်းသည်**။ သန့်ရှင်းပြီး သေးငယ်သည့် dataset ဖြင့်၊ သင့်က နောက်ခံနက်ဘုတ်ဖြင့် ထည့်သင်ကြားခြင်း များ ပြုလုပ်နေသောကြောင့် Neural network များသည် အလေးမတင်နိုင်သည်။
+- **နှစ်သိမ့်အမျိုးအစား ခွဲခြားသူ မရှိပါ**။ နှစ်သိမ့် classifier မသုံးတော့သောကြောင့် one-vs-all ကို မသုံးပါ။
+- **Decision tree သို့မဟုတ် logistic regression ကောင်းကောင်းလည်ပတ်နိုင်သည်**။ Decision tree သို့မဟုတ် multiclass အချက်အလက်များအတွက် logistic regression အသုံးပြုနိုင်ပါတယ်။
+- **Multiclass Boosted Decision Trees သည် အခြားပြဿနာများဖြေရှင်းသည်**။ Multiclass boosted decision tree သည် ranking ကို ဖန်တီးရန် ဒီဇိုင်းပြုလုပ်သော nonparametric task များမှသာ အသုံးပြုသင့်သည်၊ သို့င်း ကျွန်ုပ်တို့အတွက် မသင့်တော်ပါ။
 
 ### Scikit-learn ကို အသုံးပြုခြင်း
 
-Scikit-learn ကို အသုံးပြုပြီး data ကို analysis လုပ်ပါမည်။ သို့သော်, Scikit-learn မှာ logistic regression ကို အသုံးပြုနိုင်တဲ့ နည်းလမ်းများစွာ ရှိပါသည်။ [parameters to pass](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression) ကို ကြည့်ပါ။
+ကျွန်တော်တို့ Scikit-learn ကို ဒေတာအား စစ်တမ်းဖော်မြူဆောင်ရန် သုံးမှာ ဖြစ်သည်။ သို့သော် logistic regression တွင် Scikit-learn မှာ parameter များ များစွာ အသုံးပြုနိုင်ပါသည်။ [parameter များကြည့်ပါ](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression)။
 
-အဓိကအားဖြင့် `multi_class` နဲ့ `solver` ဆိုတဲ့ parameters နှစ်ခုကို သတ်မှတ်ရန်လိုအပ်ပါသည်။ Scikit-learn ကို logistic regression လုပ်ရန် တောင်းဆိုတဲ့အခါ, `multi_class` value က behavior တစ်ခုကို သတ်မှတ်ပေးပါသည်။ Solver ရဲ့ value က algorithm ကို သတ်မှတ်ပေးပါသည်။ Solvers အားလုံးကို `multi_class` values အားလုံးနဲ့ pair လုပ်လို့ မရပါ။
+အဓိကအားဖြင့် အရေးကြီးသော parameter နှစ်ခုရှိသည် - `multi_class` နှင့် `solver` - တိုင်းတာပြီး Scikit-learn ကို logistic regression လုပ်ရန် တောင်းဆိုသည့်အခါ သတ်မှတ်ရမည်။ `multi_class` သည် မတူညီသော လုပ်ဆောင်ချက်တစ်ခု လုပ်ဆောင်ပြီး၊ solver သည် ဘယ် algorithm ကို သုံးမယ်ဆိုတာ သတ်မှတ်သည်။ အားလုံးသော solver များသည် `multi_class` အားလုံးနှင့် တွဲဖက် အသုံးပြုလို့ မရပါ။
 
-Docs အရ, multiclass case မှာ training algorithm:
+စာရွက်စာတမ်းအရ၊ multiclass တွင်၊ သင်ကြားရေး algorithm သည် -
 
-- **one-vs-rest (OvR) scheme ကို အသုံးပြုသည်**, အကယ်၍ `multi_class` option ကို `ovr` အဖြစ် သတ်မှတ်ထားပါက
-- **cross-entropy loss ကို အသုံးပြုသည်**, အကယ်၍ `multi_class` option ကို `multinomial` အဖြစ် သတ်မှတ်ထားပါက။ (လက်ရှိမှာ `multinomial` option ကို ‘lbfgs’, ‘sag’, ‘saga’ နဲ့ ‘newton-cg’ solvers တွေကသာ support လုပ်ပါသည်။)
+- `multi_class` ကို `ovr` သတ်မှတ်ထားလျှင် **one-vs-rest (OvR) စနစ်ကို အသုံးပြုသည်**
+- `multi_class` ကို `multinomial` သတ်မှတ်ထားလျှင် **cross-entropy loss ကို အသုံးပြုသည်**။ (လောလောဆယ် ‘lbfgs’, ‘sag’, ‘saga’ နဲ့ ‘newton-cg’ solver တွေရဲ့ အတွက်သာ `multinomial` ကို ထောက်ပံ့သည်)"
 
-> 🎓 'scheme' ဆိုတာက 'ovr' (one-vs-rest) သို့မဟုတ် 'multinomial' ဖြစ်နိုင်ပါသည်။ Logistic regression ကို binary classification အတွက် design လုပ်ထားသော်လည်း, ဒီ schemes တွေက multiclass classification tasks များကို ပိုမိုကောင်းမွန်စွာ handle လုပ်နိုင်စေပါသည်။ [source](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
+> 🎓 'scheme' ဆိုတာဟာ 'ovr' (one-vs-rest) သို့မဟုတ် 'multinomial' ဖြစ်နိုင်သည်။ Logistic regression သည် ဒုတိယအချိုးချင်း classification အတွက် ရည်ရွယ်ထားပြီး၎င်းဖြင့် multiclass classification ပြဿနာများကို ပိုမိုကောင်းမွန်စွာ ဖြေရှင်းနိုင်စေရန် အဲဒီစနစ်တွေကို အသုံးပြုသည်။ [source](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
 
-> 🎓 'solver' ကို "optimization problem အတွက် အသုံးပြုမည့် algorithm" အဖြစ် သတ်မှတ်ထားသည်။ [source](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
+> 🎓 'solver' သည် optimization ပြဿနာတွင် အသုံးပြုသော algorithm ကို သတ်မှတ်ထားသည်။ [source](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-Scikit-learn က solvers တွေက data structure မျိုးစုံရဲ့ ပြဿနာများကို handle လုပ်ပုံကို ရှင်းပြထားသော table ကို ပေးထားပါသည်:
+Scikit-learn သည်  solver များသည် ကွာခြားသော ဒေတာဖွဲ့စည်းမှုအမျိုးအစားများကို မည်သို့ ကိုင်တွယ်သည်ဆိုတာကို ရှင်းပြရန် အောက်ပါ အတန်းဇယားကို ပေးထားသည်။
 
-![solvers](../../../../4-Classification/2-Classifiers-1/images/solvers.png)
+![solvers](../../../../translated_images/my/solvers.5fc648618529e627.webp)
 
-## လေ့ကျင့်ခန်း - data ကို ခွဲခြားပါ
+## လေ့ကျင့်ခန်း - ဒေတာခွဲခြမ်းခြားခြင်း
 
-မိမိအရင်သင်ခန်းစာမှာ logistic regression ကို လေ့လာထားပြီးဖြစ်သောကြောင့်, training trial အတွက် logistic regression ကို အဓိကထားပါမည်။
-`train_test_split()` ကို ခေါ်ပြီး data ကို training group နဲ့ testing group အဖြစ် ခွဲပါ:
+မကြာသေးခင် သင်ခန်းစာတစ်ခုမှာ logistic regression ကို သင်ယူခဲ့တာဖြစ်လို့ ပထမဆုံး သင်ကြားမှုအတွက် logistic regression ကို အဓိကထားပြီး စမ်းသပ်ပါ။
+`train_test_split()` ကို ခေါ်ဆို၍ သင်နှင့် စမ်းသပ် ဘားကိုခွဲပါ -
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
@@ -151,9 +151,9 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
 
 ## လေ့ကျင့်ခန်း - logistic regression ကို အသုံးပြုပါ
 
-Multiclass case ကို အသုံးပြုနေသောကြောင့်, မိမိသုံးမည့် _scheme_ နဲ့ _solver_ ကို ရွေးချယ်ရန်လိုအပ်ပါသည်။ LogisticRegression ကို multi_class setting နဲ့ **liblinear** solver ကို သတ်မှတ်ပြီး training လုပ်ပါ။
+မိမိသည် multiclass ဖြစ်သောကြောင့် ဘယ် _scheme_ ကို အသုံးပြုမလဲ၊ ဘယ် _solver_ ကို သတ်မှတ်မလဲ ဆိုတာ ရွေးဖို့လိုပါသည်။ LogisticRegression ကို multi_class ကို `ovr` နှင့် solver ကို **liblinear** သတ်မှတ်၍ သင်ကြားပါ။
 
-1. multi_class ကို `ovr` အဖြစ် သတ်မှတ်ပြီး solver ကို `liblinear` အဖြစ် သတ်မှတ်ထားသော logistic regression ကို ဖန်တီးပါ:
+1. multi_class ကို `ovr` သတ်မှတ်ထားပြီး solver ကို `liblinear` သတ်မှတ်ထားသော logistic regression ကို ဖန်တီးပါ။
 
     ```python
     lr = LogisticRegression(multi_class='ovr',solver='liblinear')
@@ -163,27 +163,28 @@ Multiclass case ကို အသုံးပြုနေသောကြောင
     print ("Accuracy is {}".format(accuracy))
     ```
 
-    ✅ `lbfgs` က default အဖြစ် သတ်မှတ်ထားသော solver ဖြစ်ပြီး, အဲဒီ solver ကို စမ်းသပ်ကြည့်ပါ
-> မှတ်ချက်၊ သင့်ဒေတာကိုလိုအပ်သောအခါချောမောစေရန် Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) function ကိုအသုံးပြုပါ။
-အတိအကျမှုသည် **80%** အထက်မှာကောင်းမွန်ပါသည်။
+    ✅ ပုံမှန်အားဖြင့်သတ်မှတ်ထားသော `lbfgs` ကဲ့သို့ အခြား solver ကို စမ်းသုံးကြည့်ပါ။
 
-1. ဒီမော်ဒယ်ကို စမ်းသပ်ရန်အတွက် ဒေတာတစ်တန်း (#50) ကို စမ်းကြည့်နိုင်သည်-
+    > မှတ်ချက် - လိုအပ်လျှင် Pandas ၏ [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) function အသုံးပြုပြီး ဒေတာကို တန်းစီချခြင်း။
+
+    တိကျမှုမှာ **၈၀% ကျော်** ဖြစ်ကြောင်း တွေ့နိုင်ပါသည်!
+
+1. ဒေတာ အတန်းတစ်ခု (#50) ကို စမ်းသပ်ကာ ဒီမော်ဒယ်က ဘယ်လို သွားမလဲ ကြည့်နိုင်ပါသည် -
 
     ```python
     print(f'ingredients: {X_test.iloc[50][X_test.iloc[50]!=0].keys()}')
     print(f'cuisine: {y_test.iloc[50]}')
     ```
 
-    ရလဒ်ကို ပုံနှိပ်ထားသည်-
+    ရလဒ် ကို ဤသို့ ပြသသည် -
 
    ```output
    ingredients: Index(['cilantro', 'onion', 'pea', 'potato', 'tomato', 'vegetable_oil'], dtype='object')
    cuisine: indian
    ```
 
-   ✅ အခြားတန်းနံပါတ်ကို စမ်းကြည့်ပြီး ရလဒ်များကို စစ်ဆေးပါ။
-
-1. နက်နက်ရှိုင်းရှိုင်း စစ်ဆေးလိုပါက ဒီခန့်မှန်းမှု၏ အတိအကျမှုကို စစ်ဆေးနိုင်သည်-
+   ✅ အတန်း အရေအတွက် ပြောင်းပြီး ရလဒ်တွေ စစ်ဆေးကြည့်ပါ။
+1. Digging deeper, you can check for the accuracy of this prediction:
 
     ```python
     test= X_test.iloc[50].values.reshape(-1, 1).T
@@ -195,7 +196,7 @@ Multiclass case ကို အသုံးပြုနေသောကြောင
     topPrediction.head()
     ```
 
-    ရလဒ်ကို ပုံနှိပ်ထားသည် - အိန္ဒိယအစားအစာဟာ အကောင်းဆုံးခန့်မှန်းချက်ဖြစ်ပြီး အလားအလာကောင်းများပါသည်-
+    The result is printed - Indian cuisine is its best guess, with good probability:
 
     |          |        0 |
     | -------: | -------: |
@@ -205,9 +206,9 @@ Multiclass case ကို အသုံးပြုနေသောကြောင
     |   korean | 0.017277 |
     |     thai | 0.007634 |
 
-    ✅ မော်ဒယ်က အိန္ဒိယအစားအစာဖြစ်တယ်လို့ အတော်လေးသေချာနေတာကို ရှင်းပြနိုင်ပါသလား?
+    ✅ Can you explain why the model is pretty sure this is an Indian cuisine?
 
-1. Regression သင်ခန်းစာများတွင် လုပ်ခဲ့သလို Classification Report ကို ပုံနှိပ်ပြီး အသေးစိတ်ကို ရယူပါ-
+1. Get more detail by printing a classification report, as you did in the regression lessons:
 
     ```python
     y_pred = model.predict(X_test)
@@ -221,24 +222,26 @@ Multiclass case ကို အသုံးပြုနေသောကြောင
     | japanese     | 0.70      | 0.75   | 0.72     | 220     |
     | korean       | 0.86      | 0.76   | 0.81     | 242     |
     | thai         | 0.79      | 0.85   | 0.82     | 254     |
-    | accuracy     | 0.80      | 1199   |          |         |
+    | accuracy     |           |        | 0.80     | 1199    |
     | macro avg    | 0.80      | 0.80   | 0.80     | 1199    |
     | weighted avg | 0.80      | 0.80   | 0.80     | 1199    |
 
-## 🚀စိန်ခေါ်မှု
+## 🚀Challenge
 
-ဒီသင်ခန်းစာမှာ သင်ရဲ့ သန့်စင်ထားသော ဒေတာကို အသုံးပြုပြီး အစားအစာအမျိုးအစားကို ခန့်မှန်းနိုင်တဲ့ Machine Learning မော်ဒယ်တစ်ခုကို တည်ဆောက်ခဲ့ပါတယ်။ Scikit-learn မှာ ဒေတာကို ခွဲခြားဖို့ ရရှိနိုင်တဲ့ အမျိုးမျိုးသော ရွေးချယ်မှုများကို ဖတ်ရှုရန် အချိန်ယူပါ။ 'solver' ဆိုတဲ့ အယူအဆကို နက်နက်ရှိုင်းရှိုင်း လေ့လာပြီး မော်ဒယ်အတွင်းမှာ ဘာတွေဖြစ်ပျက်နေလဲဆိုတာကို နားလည်ပါ။
+ဒီသင်ခန်းစာမှာ သင်ဟာ သန့်ရှင်းပြီးပြင်ဆင်ထားတဲ့ ဒေတာကို အသုံးပြုပြီး ပစ္စည်းများအခြေပြု၍ နိုင်ငံတစ်ကာစားနပ်ရိက္ခာမျိုးကို ခန့်မှန်းနိုင်တဲ့ စက်မှုသင်ယူမှု မော်ဒယ်ကို တည်ဆောက်ခဲ့ပါသည်။ Scikit-learn က ဒေတာကို သတ်မှတ်ဖော်ကြားဖို့ ပေးသည့် အမျိုးအစားများအတွက် ရွေးချယ်စရာများစွာကို အချိန်ယူဖတ်ရှုပါ။ 'solver' အယူအဆိုနောက်က အကြောင်းအရာကို ပိုမိုနက်နဲစွာ လေ့လာပါ။
 
-## [Post-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
+## [စာသင်ခန်း နှောင်း အကြံပေး စစ်ဆေးမှု](https://ff-quizzes.netlify.app/en/ml/)
 
 ## ပြန်လည်သုံးသပ်ခြင်းနှင့် ကိုယ်တိုင်လေ့လာခြင်း
 
-Logistic Regression ရဲ့ သင်္ချာဆိုင်ရာ အခြေခံကို နက်နက်ရှိုင်းရှိုင်း လေ့လာရန် [ဒီသင်ခန်းစာ](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf) ကို ဖတ်ရှုပါ။
-## အလုပ်ပေးစာ
+Logistic regression နောက်က ဖြစ်ပေါ်လာတဲ့ နည်းဗေဒများကို [ဒီသင်ခန်းစာ](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf) တွင် နည်းပိုမို နက်နဲစွာ လေ့လာပါ။
+## အလုပ်တာဝန်
 
-[Solvers ကို လေ့လာပါ](assignment.md)
+[Solvers များကို လေ့လာပါ](assignment.md)
 
 ---
 
-**ဝက်ဘ်ဆိုက်မှတ်ချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားနေပါသော်လည်း၊ အလိုအလျောက်ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို ကျေးဇူးပြု၍ သတိပြုပါ။ မူရင်းစာရွက်စာတမ်းကို ၎င်း၏ မူလဘာသာစကားဖြင့် အာဏာတည်သောရင်းမြစ်အဖြစ် သတ်မှတ်ရန် လိုအပ်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူကောင်းမွန်သော ပရော်ဖက်ရှင်နယ်ဘာသာပြန်ဝန်ဆောင်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုမှားများ သို့မဟုတ် အဓိပ္ပာယ်မှားများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ကန်တော့ချက်**:  
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားနေသော်လည်း စက်ရုပ်ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မှန်ကန်မှုမရှိမှုများ ဖြစ်ပေါ်နိုင်ပါသည်။ မူလစာရွက်စာတမ်းကို မူရင်းဘာသာစကားဖြင့်သာ တရားဝင်အရင်းအမြစ်အဖြစ် သတ်မှတ်ရန်လိုအပ်ပါသည်။ အရေးကြီးသောအချက်အလက်များအတွက် ကျွမ်းကျင်သော လူ့ဘာသာ ပြန်ဆိုမှုကို သုံးသင့်ပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှုကြောင့် ဖြစ်ပေါ်လာသော မနားမသာနားလည်မှုများ သို့မဟုတ် အဓိပ္ပာယ်မှားချက်များအတွက် ကျွန်ုပ်တို့ အာမခံမှု မရှိပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

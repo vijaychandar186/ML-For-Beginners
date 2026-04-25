@@ -1,136 +1,136 @@
-# Xây dựng mô hình hồi quy sử dụng Scikit-learn: hồi quy bốn cách
+# Xây dựng mô hình hồi quy sử dụng Scikit-learn: hồi quy theo bốn phương pháp
 
-## Ghi chú dành cho người mới bắt đầu
+## Ghi chú cho người mới bắt đầu
 
-Hồi quy tuyến tính được sử dụng khi chúng ta muốn dự đoán một **giá trị số** (ví dụ: giá nhà, nhiệt độ hoặc doanh số bán hàng).
+Hồi quy tuyến tính được sử dụng khi chúng ta muốn dự đoán một **giá trị số** (ví dụ, giá nhà, nhiệt độ hoặc doanh số).
 Nó hoạt động bằng cách tìm một đường thẳng đại diện tốt nhất cho mối quan hệ giữa các đặc trưng đầu vào và đầu ra.
 
 Trong bài học này, chúng ta tập trung vào việc hiểu khái niệm trước khi khám phá các kỹ thuật hồi quy nâng cao hơn.
-![Infographic so sánh hồi quy tuyến tính và đa thức](../../../../translated_images/vi/linear-polynomial.5523c7cb6576ccab.webp)
+![Linear vs polynomial regression infographic](../../../../translated_images/vi/linear-polynomial.5523c7cb6576ccab.webp)
 > Infographic bởi [Dasani Madipalli](https://twitter.com/dasani_decoded)
-## [Trắc nghiệm trước bài giảng](https://ff-quizzes.netlify.app/en/ml/)
+## [Bài kiểm tra trước bài giảng](https://ff-quizzes.netlify.app/en/ml/)
 
-> ### [Bài học này có sẵn bằng R!](../../../../2-Regression/3-Linear/solution/R/lesson_3.html)
-### Giới thiệu
+> ### [Bài học này cũng có sẵn bằng R!](../../../../2-Regression/3-Linear/solution/R/lesson_3.html)
+### Giới thiệu 
 
-Cho đến nay bạn đã khám phá hồi quy là gì với dữ liệu mẫu lấy từ bộ dữ liệu giá bí ngô mà chúng ta sẽ sử dụng xuyên suốt bài học này. Bạn cũng đã trực quan hóa nó bằng Matplotlib.
+Từ trước đến nay bạn đã khám phá khái niệm hồi quy với dữ liệu mẫu thu thập từ bộ dữ liệu giá bí ngô mà chúng ta sẽ sử dụng xuyên suốt bài học này. Bạn cũng đã hình dung dữ liệu bằng Matplotlib.
 
-Bây giờ bạn đã sẵn sàng để đi sâu hơn vào hồi quy trong ML. Trong khi việc trực quan hóa giúp bạn hiểu dữ liệu, sức mạnh thực sự của Machine Learning đến từ _việc huấn luyện mô hình_. Các mô hình được huấn luyện trên dữ liệu lịch sử để tự động nắm bắt các phụ thuộc dữ liệu, và cho phép bạn dự đoán kết quả cho dữ liệu mới mà mô hình chưa từng thấy trước đó.
+Bây giờ bạn đã sẵn sàng để đi sâu hơn vào hồi quy trong ML. Trong khi việc trực quan hóa dữ liệu giúp bạn hiểu được dữ liệu, sức mạnh thực sự của Machine Learning đến từ _việc huấn luyện mô hình_. Mô hình được huấn luyện trên dữ liệu lịch sử để tự động nắm bắt các phụ thuộc trong dữ liệu, cho phép bạn dự đoán kết quả cho dữ liệu mới mà mô hình chưa từng thấy trước đó.
 
-Trong bài học này, bạn sẽ học thêm về hai loại hồi quy: _hồi quy tuyến tính cơ bản_ và _hồi quy đa thức_, cùng với một số phép toán nền tảng của các kỹ thuật này. Những mô hình đó sẽ giúp chúng ta dự đoán giá bí ngô dựa trên các dữ liệu đầu vào khác nhau.
+Trong bài học này, bạn sẽ học thêm về hai loại hồi quy: _hồi quy tuyến tính cơ bản_ và _hồi quy đa thức_, cùng với một số toán học nền tảng của các kỹ thuật này. Những mô hình đó sẽ giúp chúng ta dự đoán giá bí ngô tùy thuộc vào các dữ liệu đầu vào khác nhau.
 
-[![Học máy cho người mới - Hiểu về hồi quy tuyến tính](https://img.youtube.com/vi/CRxFT8oTDMg/0.jpg)](https://youtu.be/CRxFT8oTDMg "Học máy cho người mới - Hiểu về hồi quy tuyến tính")
+[![ML for beginners - Understanding Linear Regression](https://img.youtube.com/vi/CRxFT8oTDMg/0.jpg)](https://youtu.be/CRxFT8oTDMg "ML for beginners - Understanding Linear Regression")
 
-> 🎥 Nhấn vào hình ảnh trên để xem video giới thiệu ngắn về hồi quy tuyến tính.
+> 🎥 Nhấn vào hình trên để xem video tóm tắt ngắn về hồi quy tuyến tính.
 
-> Xuyên suốt chương trình học này, chúng tôi giả định kiến thức toán học tối thiểu, và cố gắng làm cho nó dễ tiếp cận với học viên đến từ các lĩnh vực khác, vì vậy hãy chú ý đến các ghi chú, 🧮 phần tóm tắt, sơ đồ và các công cụ học tập khác để hỗ trợ hiểu bài.
+> Xuyên suốt chương trình học này, chúng tôi giả định kiến thức toán học tối thiểu, và cố gắng làm cho nó dễ tiếp cận cho học viên từ các lĩnh vực khác, vì vậy hãy chú ý đến các ghi chú, 🧮 cảnh báo, sơ đồ và các công cụ học tập khác để hỗ trợ tiếp thu.
 
-### Yêu cầu trước
+### Kiến thức nền tảng
 
-Bạn nên đã quen thuộc với cấu trúc dữ liệu bí ngô mà chúng ta đang xem xét. Bạn có thể tìm thấy nó được tải sẵn và đã được làm sạch trong tập _notebook.ipynb_ của bài học này. Trong tập đó, giá bí ngô được hiển thị theo từng bushel trong một bảng dữ liệu mới. Đảm bảo bạn có thể chạy các notebook này trong các kernel của Visual Studio Code.
+Bạn nên đã quen với cấu trúc dữ liệu bí ngô mà chúng ta đang xem xét. Bạn có thể tìm thấy nó được tải sẵn và đã được làm sạch trong tệp _notebook.ipynb_ của bài học này. Trong tệp, giá bí ngô được hiển thị theo mỗi bushel trong một dataframe mới. Đảm bảo bạn có thể chạy các notebook này trong môi trường kernel trên Visual Studio Code.
 
 ### Chuẩn bị
 
-Như lời nhắc nhở, bạn đang tải dữ liệu này để đặt câu hỏi cho nó.
+Như một lời nhắc, bạn đang tải dữ liệu này để đặt câu hỏi với nó.
 
 - Khi nào là thời điểm tốt nhất để mua bí ngô?
-- Tôi có thể kỳ vọng giá bao nhiêu cho một thùng bí ngô mini?
-- Tôi có nên mua chúng theo giỏ nửa bushel hay theo hộp 1 1/9 bushel?
-Hãy tiếp tục khám phá dữ liệu này.
+- Giá của một thùng bí ngô tí hon có thể kỳ vọng là bao nhiêu?
+- Tôi nên mua chúng trong giỏ nửa bushel hay theo hộp 1 1/9 bushel?
+Hãy tiếp tục khai thác dữ liệu này.
 
-Trong bài học trước, bạn đã tạo một Pandas data frame và điền dữ liệu từ một phần của bộ dữ liệu gốc, chuẩn hóa giá theo bushel. Tuy nhiên, bằng cách đó bạn chỉ có thể lấy được khoảng 400 điểm dữ liệu và chỉ cho các tháng mùa thu.
+Trong bài học trước, bạn đã tạo một Pandas dataframe và điền dữ liệu từ bộ dữ liệu gốc, chuẩn hóa giá theo bushel. Tuy nhiên, bằng cách đó bạn chỉ thu thập được khoảng 400 điểm dữ liệu và chỉ cho các tháng mùa thu.
 
-Hãy xem dữ liệu mà chúng tôi đã tải sẵn trong notebook kèm bài học này. Dữ liệu được tải sẵn và một biểu đồ phân tán ban đầu được vẽ để hiển thị dữ liệu theo tháng. Có thể chúng ta sẽ có thêm thông tin chi tiết về bản chất của dữ liệu bằng cách làm sạch nó kỹ hơn.
+Hãy xem dữ liệu được tải sẵn trong notebook đi kèm bài học này. Dữ liệu đã được tải sẵn và một biểu đồ điểm ban đầu đã được vẽ để hiển thị dữ liệu theo tháng. Có lẽ chúng ta có thể thu được nhiều chi tiết hơn về bản chất dữ liệu bằng cách làm sạch thêm.
 
 ## Đường hồi quy tuyến tính
 
-Như bạn đã học trong Bài 1, mục tiêu của bài tập hồi quy tuyến tính là có thể vẽ được một đường để:
+Như bạn đã học trong Bài 1, mục tiêu của bài tập hồi quy tuyến tính là có thể vẽ một đường để:
 
-- **Hiển thị mối quan hệ giữa các biến.** Hiển thị mối quan hệ giữa các biến
-- **Dự đoán.** Dự đoán chính xác vị trí của một điểm dữ liệu mới so với đường đó.
+- **Hiển thị quan hệ biến số**. Thể hiện mối quan hệ giữa các biến
+- **Dự đoán**. Dự đoán chính xác vị trí mà một điểm dữ liệu mới rơi vào tương quan với đường đó.
 
-Điều phổ biến trong **Hồi quy bình phương tối thiểu** là vẽ kiểu đường như thế này. Thuật ngữ "Bình phương tối thiểu" đề cập đến quá trình giảm thiểu tổng sai số trong mô hình. Với mỗi điểm dữ liệu, chúng ta đo khoảng cách theo chiều dọc (gọi là phần dư) giữa điểm thực tế và đường hồi quy của chúng ta.
+Dòng thường được sử dụng trong **Hồi quy bình phương tối thiểu**. Thuật ngữ "Bình phương tối thiểu" đề cập đến quá trình giảm thiểu tổng sai số trong mô hình. Với mỗi điểm dữ liệu, ta đo khoảng cách thẳng đứng (gọi là phần dư) giữa điểm thực tế và đường hồi quy của chúng ta.
 
-Chúng ta bình phương các khoảng cách này vì hai lý do chính:
+Chúng ta lấy bình phương các khoảng cách này vì hai lý do chính:
 
-1. **Độ lớn hơn Hướng:** Chúng ta muốn coi sai số -5 giống như sai số +5. Việc bình phương biến tất cả giá trị thành số dương.
+1. **Cường độ hơn hướng:** Chúng ta muốn xem lỗi -5 tương đương với lỗi +5. Việc bình phương làm tất cả giá trị thành số dương.
 
-2. **Phạt các ngoại lệ:** Việc bình phương làm tăng trọng số cho các sai số lớn hơn, buộc đường phải nằm gần những điểm nằm xa hơn.
+2. **Phạt các ngoại lệ:** Việc bình phương cho trọng số cao hơn với các lỗi lớn, buộc đường hồi quy phải gần hơn với các điểm dữ liệu xa.
 
-Sau đó, chúng ta cộng tất cả các giá trị bình phương này lại với nhau. Mục tiêu là tìm đường cụ thể mà tổng này đạt giá trị nhỏ nhất (giá trị nhỏ nhất có thể) — do đó gọi là "Bình phương tối thiểu".
+Sau đó chúng ta cộng tất cả các giá trị bình phương lại với nhau. Mục tiêu là tìm ra đường cụ thể nơi tổng này nhỏ nhất có thể — do đó tên gọi "Bình phương tối thiểu".
 
-> **🧮 Cho tôi xem toán học** 
+> **🧮 Cho tôi xem toán học**
 > 
-> Đường này, gọi là _đường phù hợp tốt nhất_, có thể biểu diễn bằng [một phương trình](https://en.wikipedia.org/wiki/Simple_linear_regression): 
+> Đường này, gọi là _đường khớp tốt nhất_ có thể được biểu diễn bằng [một phương trình](https://en.wikipedia.org/wiki/Simple_linear_regression):
 > 
 > ```
 > Y = a + bX
 > ```
 >
-> `X` là biến 'giải thích'. `Y` là biến 'phụ thuộc'. Độ dốc của đường là `b` và `a` là giao điểm y, tức giá trị của `Y` khi `X = 0`. 
+> `X` là 'biến giải thích'. `Y` là 'biến phụ thuộc'. Độ dốc của đường là `b` và `a` là điểm giao y, tức là giá trị của `Y` khi `X = 0`.
 >
->![tính độ dốc](../../../../translated_images/vi/slope.f3c9d5910ddbfcf9.webp)
+>![calculate the slope](../../../../translated_images/vi/slope.f3c9d5910ddbfcf9.webp)
 >
-> Đầu tiên, tính độ dốc `b`. Infographic bởi [Jen Looper](https://twitter.com/jenlooper)
+> Trước tiên, tính độ dốc `b`. Infographic bởi [Jen Looper](https://twitter.com/jenlooper)
 >
-> Nói cách khác, và liên quan đến câu hỏi gốc của dữ liệu bí ngô: "dự đoán giá bí ngô theo bushel theo tháng", `X` sẽ là giá và `Y` sẽ là tháng bán. 
+> Nói cách khác, và liên quan đến câu hỏi ban đầu về dữ liệu bí ngô của chúng ta: "dự đoán giá bí ngô theo bushel theo tháng", `X` sẽ là giá và `Y` sẽ là tháng bán.
 >
->![hoàn thành phương trình](../../../../translated_images/vi/calculation.a209813050a1ddb1.webp)
+>![complete the equation](../../../../translated_images/vi/calculation.a209813050a1ddb1.webp)
 >
-> Tính giá trị của Y. Nếu bạn trả khoảng 4 đô la, chắc chắn là tháng Tư rồi! Infographic bởi [Jen Looper](https://twitter.com/jenlooper)
+> Tính giá trị Y. Nếu bạn trả khoảng $4, chắc hẳn là tháng Tư! Infographic bởi [Jen Looper](https://twitter.com/jenlooper)
 >
-> Phép toán tính đường phải thể hiện độ dốc đường, cũng phụ thuộc vào giao điểm, hay vị trí của `Y` khi `X = 0`.
+> Toán học tính toán đường phải biểu thị độ dốc của đường, cũng phụ thuộc vào giao điểm, tức vị trí `Y` khi `X = 0`.
 >
-> Bạn có thể xem phương pháp tính các giá trị này trên trang web [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html). Cũng hãy ghé thăm [máy tính bình phương tối thiểu này](https://www.mathsisfun.com/data/least-squares-calculator.html) để xem cách các giá trị số gây ảnh hưởng cho đường như thế nào.
+> Bạn có thể quan sát phương pháp tính cho những giá trị này trên trang web [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html). Cũng hãy ghé xem [máy tính bình phương tối thiểu này](https://www.mathsisfun.com/data/least-squares-calculator.html) để xem cách giá trị số ảnh hưởng đến đường.
 
 ## Tương quan
 
-Một thuật ngữ nữa cần hiểu là **Hệ số tương quan** giữa các biến X và Y cho trước. Sử dụng biểu đồ phân tán, bạn có thể nhanh chóng hình dung hệ số này. Một biểu đồ với các điểm dữ liệu nằm gần một đường thẳng thể hiện tương quan cao, còn biểu đồ với các điểm phân tán khắp nơi giữa X và Y thì thể hiện tương quan thấp.
+Một thuật ngữ nữa cần hiểu là **Hệ số Tương quan** giữa các biến X và Y cho trước. Bằng việc sử dụng biểu đồ phân tán, bạn có thể nhanh chóng trực quan hệ số này. Một biểu đồ với các điểm dữ liệu xếp thành một đường thẳng rõ ràng có tương quan cao, còn biểu đồ với điểm dữ liệu rải rác khắp nơi giữa X và Y có tương quan thấp.
 
-Một mô hình hồi quy tuyến tính tốt sẽ có Hệ số tương quan cao (gần 1 hơn 0) sử dụng phương pháp Hồi quy bình phương tối thiểu với một đường hồi quy.
+Một mô hình hồi quy tuyến tính tốt sẽ có hệ số tương quan cao (gần 1 hơn 0) sử dụng phương pháp Hồi quy bình phương tối thiểu với đường hồi quy.
 
-✅ Hãy chạy notebook kèm theo bài học này và xem biểu đồ phân tán Tháng với Giá. Dữ liệu liên kết Tháng với Giá cho doanh số bí ngô có vẻ có tương quan cao hay thấp, theo cách bạn quan sát biểu đồ phân tán? Điều này có thay đổi nếu bạn dùng phép đo chi tiết hơn thay vì `Month`, ví dụ *ngày của năm* (tức số ngày kể từ đầu năm)?
+✅ Chạy notebook đi kèm bài học và xem biểu đồ phân tán Tháng với Giá. Theo quan sát của bạn, dữ liệu liên hệ giữa Tháng và Giá trong bán bí ngô có vẻ tương quan cao hay thấp? Liệu điều này có thay đổi nếu bạn sử dụng đo lường chi tiết hơn thay vì `Month`, ví dụ *ngày trong năm* (tức số ngày kể từ đầu năm)?
 
-Trong đoạn mã dưới đây, chúng ta giả định đã làm sạch dữ liệu, và thu được data frame gọi là `new_pumpkins`, tương tự như sau:
+Trong đoạn mã dưới đây, ta giả sử đã làm sạch dữ liệu và thu được một dataframe có tên `new_pumpkins`, tương tự như sau:
 
-ID | Month | DayOfYear | Variety | City | Package | Low Price | High Price | Price
----|-------|-----------|---------|------|---------|-----------|------------|-------
-70 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364
-71 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636
-72 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636
-73 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 17.0 | 17.0 | 15.454545
-74 | 10 | 281 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364
+ID | Tháng | NgàyTrongNăm | ChủngLoại | ThànhPhố | Gói | Giá Thấp | Giá Cao | Giá Trung Bình
+---|-------|--------------|-----------|----------|--------|---------|---------|--------------
+70 | 9 | 267 | LOẠI BÁNH | BALTIMORE | hộp 1 1/9 bushel | 15.0 | 15.0 | 13.636364
+71 | 9 | 267 | LOẠI BÁNH | BALTIMORE | hộp 1 1/9 bushel | 18.0 | 18.0 | 16.363636
+72 | 10 | 274 | LOẠI BÁNH | BALTIMORE | hộp 1 1/9 bushel | 18.0 | 18.0 | 16.363636
+73 | 10 | 274 | LOẠI BÁNH | BALTIMORE | hộp 1 1/9 bushel | 17.0 | 17.0 | 15.454545
+74 | 10 | 281 | LOẠI BÁNH | BALTIMORE | hộp 1 1/9 bushel | 15.0 | 15.0 | 13.636364
 
-> Mã để làm sạch dữ liệu có trong [`notebook.ipynb`](notebook.ipynb). Chúng tôi đã thực hiện các bước làm sạch tương tự như bài học trước, và đã tính cột `DayOfYear` bằng biểu thức sau:
+> Mã lệnh làm sạch dữ liệu có trong [`notebook.ipynb`](notebook.ipynb). Chúng ta đã tiến hành các bước làm sạch giống như bài học trước, và đã tính toán cột `DayOfYear` theo biểu thức sau:
 
 ```python
 day_of_year = pd.to_datetime(pumpkins['Date']).apply(lambda dt: (dt-datetime(dt.year,1,1)).days)
 ```
 
-Bây giờ bạn đã hiểu toán học phía sau hồi quy tuyến tính, hãy tạo một mô hình hồi quy để xem liệu chúng ta có thể dự đoán gói bí ngô nào sẽ có giá tốt nhất không. Ai đó mua bí ngô cho mùa lễ hội có thể muốn thông tin này để tối ưu hóa việc mua các gói bí ngô cho mùa lễ.
+Bây giờ bạn đã hiểu toán học nền tảng của hồi quy tuyến tính, hãy tạo mô hình Hồi quy để xem liệu chúng ta có thể dự đoán gói bí ngô nào sẽ có giá tốt nhất không. Người mua bí ngô cho khu vực trang trí lễ hội có thể muốn thông tin này để tối ưu hóa việc mua hàng.
 
 ## Tìm kiếm tương quan
 
-[![Học máy cho người mới - Tìm kiếm tương quan: Chìa khóa của hồi quy tuyến tính](https://img.youtube.com/vi/uoRq-lW2eQo/0.jpg)](https://youtu.be/uoRq-lW2eQo "Học máy cho người mới - Tìm kiếm tương quan: Chìa khóa của hồi quy tuyến tính")
+[![ML for beginners - Looking for Correlation: The Key to Linear Regression](https://img.youtube.com/vi/uoRq-lW2eQo/0.jpg)](https://youtu.be/uoRq-lW2eQo "ML for beginners - Looking for Correlation: The Key to Linear Regression")
 
-> 🎥 Nhấn vào hình ảnh trên để xem video tóm tắt về tương quan.
+> 🎥 Nhấn vào hình trên để xem video tóm tắt ngắn về tương quan.
 
-Từ bài học trước bạn có thể đã thấy giá trung bình theo các tháng trông như sau:
+Từ bài học trước, bạn có thể đã thấy rằng giá trung bình cho các tháng khác nhau trông như sau:
 
-<img alt="Giá trung bình theo tháng" src="../../../../translated_images/vi/barchart.a833ea9194346d76.webp" width="50%"/>
+<img alt="Average price by month" src="../../../../translated_images/vi/barchart.a833ea9194346d76.webp" width="50%"/>
 
-Điều này cho thấy có thể có một số tương quan, và chúng ta có thể thử huấn luyện mô hình hồi quy tuyến tính để dự đoán mối quan hệ giữa `Month` và `Price`, hoặc giữa `DayOfYear` và `Price`. Dưới đây là biểu đồ phân tán cho thấy mối quan hệ sau:
+Điều này gợi ý rằng có thể có tương quan, và chúng ta có thể thử huấn luyện mô hình hồi quy tuyến tính để dự đoán mối quan hệ giữa `Month` và `Price`, hoặc giữa `DayOfYear` và `Price`. Dưới đây là biểu đồ phân tán thể hiện mối quan hệ sau:
 
-<img alt="Biểu đồ phân tán Giá so với Ngày trong năm" src="../../../../translated_images/vi/scatter-dayofyear.bc171c189c9fd553.webp" width="50%" /> 
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/vi/scatter-dayofyear.bc171c189c9fd553.webp" width="50%" /> 
 
-Hãy xem có tương quan bằng cách sử dụng hàm `corr`:
+Hãy xem tương quan qua hàm `corr`:
 
 ```python
 print(new_pumpkins['Month'].corr(new_pumpkins['Price']))
 print(new_pumpkins['DayOfYear'].corr(new_pumpkins['Price']))
 ```
 
-Có vẻ như tương quan khá nhỏ, -0.15 theo `Month` và -0.17 theo `DayOfMonth`, nhưng có thể có mối quan hệ quan trọng khác. Có vẻ như có các cụm giá khác nhau tương ứng với các loại bí ngô khác nhau. Để xác nhận giả thuyết này, hãy vẽ từng loại bí ngô với màu khác nhau. Bằng cách truyền tham số `ax` cho hàm `scatter` chúng ta có thể vẽ tất cả điểm trên cùng một biểu đồ:
+Có vẻ hệ số tương quan khá nhỏ, -0.15 theo `Month` và -0.17 theo `DayOfYear`, nhưng rất có thể còn mối quan hệ quan trọng khác. Có vẻ như có các cụm điểm giá ứng với các chủng loại bí ngô khác nhau. Để xác nhận giả thuyết này, hãy vẽ mỗi loại bí ngô bằng màu khác nhau. Bằng cách truyền tham số `ax` vào hàm vẽ `scatter` ta có thể vẽ tất cả điểm trong cùng một biểu đồ:
 
 ```python
 ax=None
@@ -140,42 +140,42 @@ for i,var in enumerate(new_pumpkins['Variety'].unique()):
     ax = df.plot.scatter('DayOfYear','Price',ax=ax,c=colors[i],label=var)
 ```
 
-<img alt="Biểu đồ phân tán Giá so với Ngày trong năm với màu sắc" src="../../../../translated_images/vi/scatter-dayofyear-color.65790faefbb9d54f.webp" width="50%" /> 
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/vi/scatter-dayofyear-color.65790faefbb9d54f.webp" width="50%" /> 
 
-Cuộc điều tra cho thấy loại bí ngô ảnh hưởng nhiều hơn đến giá tổng thể so với ngày bán thực tế. Ta có thể thấy điều này với biểu đồ thanh:
+Cuộc điều tra cho thấy chủng loại ảnh hưởng nhiều hơn đến giá chung so với ngày bán thực tế. Ta có thể thấy điều này qua biểu đồ cột:
 
 ```python
 new_pumpkins.groupby('Variety')['Price'].mean().plot(kind='bar')
 ```
 
-<img alt="Biểu đồ thanh giá theo loại bí ngô" src="../../../../translated_images/vi/price-by-variety.744a2f9925d9bcb4.webp" width="50%" /> 
+<img alt="Bar graph of price vs variety" src="../../../../translated_images/vi/price-by-variety.744a2f9925d9bcb4.webp" width="50%" /> 
 
-Chúng ta hãy tập trung tạm thời chỉ vào một loại bí ngô, loại 'pie type', và xem tác động của ngày đến giá như thế nào:
+Tạm thời chúng ta hãy tập trung chỉ vào một chủng loại bí ngô, 'loại bánh', và xem ngày bán ảnh hưởng thế nào đến giá:
 
 ```python
 pie_pumpkins = new_pumpkins[new_pumpkins['Variety']=='PIE TYPE']
 pie_pumpkins.plot.scatter('DayOfYear','Price') 
 ```
-<img alt="Biểu đồ phân tán Giá so với Ngày trong năm - loại pie pumpkins" src="../../../../translated_images/vi/pie-pumpkins-scatter.d14f9804a53f927e.webp" width="50%" /> 
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/vi/pie-pumpkins-scatter.d14f9804a53f927e.webp" width="50%" /> 
 
-Nếu chúng ta tính tương quan giữa `Price` và `DayOfYear` sử dụng hàm `corr`, ta sẽ thu được giá trị khoảng `-0.27` - nghĩa là việc huấn luyện một mô hình dự đoán là có ý nghĩa.
+Nếu ta tính toán tương quan giữa `Price` và `DayOfYear` bằng hàm `corr`, ta sẽ thu được khoảng `-0.27` - nghĩa là việc huấn luyện mô hình dự đoán là có lý.
 
-> Trước khi huấn luyện mô hình hồi quy tuyến tính, điều quan trọng là đảm bảo dữ liệu sạch. Hồi quy tuyến tính không hoạt động tốt với các giá trị thiếu, nên nên loại bỏ tất cả ô trống:
+> Trước khi đào tạo mô hình hồi quy tuyến tính, quan trọng là phải đảm bảo dữ liệu sạch. Hồi quy tuyến tính không làm việc tốt với các giá trị thiếu, vì vậy nên loại bỏ tất cả ô trống:
 
 ```python
 pie_pumpkins.dropna(inplace=True)
 pie_pumpkins.info()
 ```
 
-Một cách khác là điền các giá trị thiếu bằng giá trị trung bình của cột tương ứng.
+Một cách tiếp cận khác là điền các giá trị thiếu bằng giá trị trung bình của cột tương ứng.
 
 ## Hồi quy tuyến tính đơn giản
 
-[![Học máy cho người mới - Hồi quy tuyến tính và đa thức sử dụng Scikit-learn](https://img.youtube.com/vi/e4c_UP2fSjg/0.jpg)](https://youtu.be/e4c_UP2fSjg "Học máy cho người mới - Hồi quy tuyến tính và đa thức sử dụng Scikit-learn")
+[![ML for beginners - Linear and Polynomial Regression using Scikit-learn](https://img.youtube.com/vi/e4c_UP2fSjg/0.jpg)](https://youtu.be/e4c_UP2fSjg "ML for beginners - Linear and Polynomial Regression using Scikit-learn")
 
-> 🎥 Nhấn vào hình ảnh trên để xem video giới thiệu ngắn về hồi quy tuyến tính và đa thức.
+> 🎥 Nhấn vào hình trên để xem video tóm tắt ngắn về hồi quy tuyến tính và đa thức.
 
-Để huấn luyện mô hình hồi quy tuyến tính, chúng ta sẽ sử dụng thư viện **Scikit-learn**.
+Để huấn luyện mô hình Hồi quy tuyến tính, chúng ta sẽ dùng thư viện **Scikit-learn**.
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -183,48 +183,49 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 ```
 
-Chúng ta bắt đầu bằng cách tách giá trị đầu vào (đặc trưng) và đầu ra dự kiến (nhãn) thành các mảng numpy riêng biệt:
+Đầu tiên ta tách các giá trị đầu vào (đặc trưng) và kết quả mong đợi (nhãn) ra thành các mảng numpy riêng biệt:
 
 ```python
 X = pie_pumpkins['DayOfYear'].to_numpy().reshape(-1,1)
 y = pie_pumpkins['Price']
 ```
 
-> Lưu ý rằng chúng ta phải thực hiện thao tác `reshape` trên dữ liệu đầu vào để gói Linear Regression hiểu đúng. Linear Regression yêu cầu đầu vào là mảng 2 chiều, trong đó mỗi hàng tương ứng với một vector đặc trưng đầu vào. Trường hợp của chúng ta chỉ có một đầu vào, nên cần mảng có kích thước N&times;1, với N là số lượng data.
+> Lưu ý chúng ta phải thực hiện `reshape` trên dữ liệu đầu vào để gói Linear Regression hiểu đúng cách. Hồi quy tuyến tính yêu cầu đầu vào là mảng 2 chiều, trong đó mỗi dòng là một vector đặc trưng. Trong trường hợp của ta, vì chỉ có một đầu vào nên cần mảng có kích thước N&times;1, với N là kích thước bộ dữ liệu.
 
-Sau đó, chúng ta cần chia dữ liệu thành tập huấn luyện và tập kiểm thử để có thể kiểm tra mô hình sau khi huấn luyện:
+Sau đó, ta phải chia dữ liệu thành tập huấn luyện và tập kiểm tra để có thể kiểm tra mô hình sau khi huấn luyện:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 ```
 
-Cuối cùng, việc huấn luyện mô hình hồi quy tuyến tính thực sự chỉ cần hai dòng lệnh. Chúng ta tạo đối tượng `LinearRegression`, rồi điều chỉnh nó với dữ liệu bằng phương pháp `fit`:
+Cuối cùng, việc huấn luyện mô hình Linear Regression thực tế chỉ mất hai dòng code. Ta định nghĩa đối tượng `LinearRegression`, và gọi phương thức `fit` để phù hợp với dữ liệu:
 
 ```python
 lin_reg = LinearRegression()
 lin_reg.fit(X_train,y_train)
 ```
 
-Đối tượng `LinearRegression` sau khi thực hiện `fit` chứa tất cả các hệ số của hồi quy, có thể được truy cập thông qua thuộc tính `.coef_`. Trong trường hợp của chúng ta, chỉ có một hệ số, khoảng `-0.017`. Điều này có nghĩa là giá cả có vẻ giảm một chút theo thời gian, nhưng không quá nhiều, khoảng 2 xu mỗi ngày. Chúng ta cũng có thể truy cập điểm cắt của đường hồi quy với trục Y bằng cách sử dụng `lin_reg.intercept_` - nó sẽ khoảng `21` trong trường hợp của chúng ta, cho thấy giá vào đầu năm.
+Đối tượng `LinearRegression` sau khi được `fit` chứa tất cả các hệ số của hồi quy, có thể truy cập thông qua thuộc tính `.coef_`. Trong trường hợp của chúng ta, chỉ có một hệ số duy nhất, khoảng `-0.017`. Điều này có nghĩa là giá cả có xu hướng giảm nhẹ theo thời gian, nhưng không nhiều, khoảng 2 cent mỗi ngày. Chúng ta cũng có thể truy cập điểm giao của hồi quy với trục Y bằng `lin_reg.intercept_` - nó sẽ khoảng `21` trong trường hợp của chúng ta, biểu thị giá vào đầu năm.
 
-Để xem mô hình của chúng ta chính xác như thế nào, ta có thể dự đoán giá trên một tập dữ liệu kiểm tra, sau đó đo lường mức độ gần với giá trị mong đợi. Điều này có thể được thực hiện bằng cách sử dụng chỉ số lỗi bình phương trung bình (MSE), là trung bình của tất cả các hiệu số bình phương giữa giá trị mong đợi và giá trị dự đoán.
+Để xem mô hình của chúng ta chính xác đến mức nào, chúng ta có thể dự đoán giá trên bộ dữ liệu test, và sau đó đo xem các dự đoán có gần với giá trị mong đợi hay không. Điều này có thể được thực hiện bằng cách sử dụng chỉ số lỗi trung bình bình phương căn (RMSE), là căn bậc hai của trung bình tất cả các sai số bình phương giữa giá trị mong đợi và giá trị dự đoán.
 
 ```python
 pred = lin_reg.predict(X_test)
 
-mse = np.sqrt(mean_squared_error(y_test,pred))
-print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
+rmse = np.sqrt(mean_squared_error(y_test,pred))
+print(f'RMSE: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
 ```
 
-Lỗi của chúng ta có vẻ khoảng 2 điểm, tức khoảng ~17%. Không quá tốt. Một chỉ số khác về chất lượng mô hình là **hệ số xác định**, có thể được lấy như sau:
+Lỗi của chúng ta có vẻ khoảng 2 điểm, tức là ~17%. Không được tốt lắm. Một chỉ số khác để đánh giá chất lượng mô hình là **hệ số xác định**, có thể lấy như sau:
 
 ```python
 score = lin_reg.score(X_train,y_train)
 print('Model determination: ', score)
 ```
-Nếu giá trị là 0, điều đó có nghĩa mô hình không xem xét dữ liệu đầu vào, và hoạt động như *bộ dự đoán tuyến tính tệ nhất*, là giá trị trung bình của kết quả. Giá trị 1 có nghĩa là chúng ta có thể dự đoán chính xác tất cả các kết quả mong đợi. Trong trường hợp của chúng ta, hệ số này khoảng 0.06, khá thấp.
 
-Chúng ta cũng có thể vẽ dữ liệu kiểm tra cùng với đường hồi quy để thấy rõ cách hồi quy hoạt động trong trường hợp này:
+Nếu giá trị là 0, nghĩa là mô hình không xem xét dữ liệu đầu vào, và hoạt động như *bộ dự đoán tuyến tính tệ nhất*, chính là giá trị trung bình của kết quả. Giá trị 1 nghĩa là chúng ta có thể dự đoán chính xác tất cả các đầu ra mong đợi. Trong trường hợp của chúng ta, hệ số khoảng 0.06, khá thấp.
+
+Chúng ta cũng có thể vẽ dữ liệu test cùng với đường hồi quy để thấy rõ hơn hồi quy hoạt động như thế nào trong trường hợp của chúng ta:
 
 ```python
 plt.scatter(X_test,y_test)
@@ -233,19 +234,19 @@ plt.plot(X_test,pred)
 
 <img alt="Linear regression" src="../../../../translated_images/vi/linear-results.f7c3552c85b0ed1c.webp" width="50%" />
 
-## Hồi Quy Đa Thức (Polynomial Regression)
+## Hồi quy đa thức
 
-Một loại khác của Hồi Quy Tuyến Tính là Hồi Quy Đa Thức. Trong khi đôi khi có mối quan hệ tuyến tính giữa các biến - quả bí ngô càng to về thể tích thì giá càng cao - đôi khi những mối quan hệ này không thể biểu diễn bằng mặt phẳng hoặc đường thẳng.
+Một loại khác của Hồi quy tuyến tính là Hồi quy đa thức. Mặc dù đôi khi có mối quan hệ tuyến tính giữa các biến - càng to thì giá càng cao - đôi khi các mối quan hệ này không thể biểu diễn bằng một mặt phẳng hoặc đường thẳng.
 
-✅ Đây là [một vài ví dụ khác](https://online.stat.psu.edu/stat501/lesson/9/9.8) về dữ liệu có thể sử dụng Hồi Quy Đa Thức
+✅ Đây là [một số ví dụ khác](https://online.stat.psu.edu/stat501/lesson/9/9.8) về dữ liệu có thể sử dụng Hồi quy đa thức
 
-Hãy nhìn lại mối quan hệ giữa Date và Price. Biểu đồ phân tán này có nhất thiết phải được phân tích bằng một đường thẳng không? Giá cả có thể dao động phải không? Trong trường hợp này, bạn có thể thử hồi quy đa thức.
+Hãy xem lại mối quan hệ giữa Ngày và Giá. Đồ thị phân tán này có thật sự nên được phân tích bằng đường thẳng không? Không thể có sự dao động về giá sao? Trong trường hợp này, bạn có thể thử hồi quy đa thức.
 
-✅ Đa thức là biểu thức toán học có thể bao gồm một hoặc nhiều biến và hệ số
+✅ Đa thức là các biểu thức toán học có thể gồm một hoặc nhiều biến và hệ số
 
-Hồi quy đa thức tạo ra một đường cong để phù hợp hơn với dữ liệu phi tuyến. Trong trường hợp của chúng ta, nếu thêm biến `DayOfYear` bình phương vào dữ liệu đầu vào, ta có thể phù hợp dữ liệu bằng một đường parabol, sẽ có điểm cực tiểu tại một thời điểm nhất định trong năm.
+Hồi quy đa thức tạo đường cong để phù hợp hơn với dữ liệu phi tuyến. Trong trường hợp của chúng ta, nếu thêm biến `DayOfYear` bình phương vào dữ liệu đầu vào, chúng ta có thể khớp dữ liệu với đường cong parabol, có điểm cực tiểu ở một thời điểm trong năm.
 
-Scikit-learn bao gồm một [pipeline API](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) hữu ích để kết hợp các bước xử lý dữ liệu khác nhau với nhau. Một **pipeline** là chuỗi các **estimator**. Trong trường hợp này, ta sẽ tạo pipeline trước tiên thêm các đặc trưng đa thức vào mô hình, sau đó đào tạo hồi quy:
+Scikit-learn có API [pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) hữu ích để kết hợp các bước xử lý dữ liệu lại với nhau. Một **pipeline** là chuỗi các **estimator**. Trong trường hợp này, chúng ta sẽ tạo pipeline đầu tiên thêm các đặc trưng đa thức vào mô hình, rồi sau đó huấn luyện hồi quy:
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures
@@ -256,36 +257,36 @@ pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
 pipeline.fit(X_train,y_train)
 ```
 
-Sử dụng `PolynomialFeatures(2)` có nghĩa là ta sẽ bao gồm tất cả các đa thức bậc hai từ dữ liệu đầu vào. Trong trường hợp của chúng ta chỉ có `DayOfYear`<sup>2</sup>, nhưng nếu có hai biến đầu vào X và Y, nó sẽ thêm X<sup>2</sup>, XY và Y<sup>2</sup>. Ta cũng có thể sử dụng đa thức bậc cao hơn nếu muốn.
+Sử dụng `PolynomialFeatures(2)` nghĩa là chúng ta sẽ bao gồm tất cả đa thức bậc hai từ dữ liệu đầu vào. Trong trường hợp này chỉ là `DayOfYear`<sup>2</sup>, nhưng với hai biến đầu vào X và Y, sẽ thêm X<sup>2</sup>, XY và Y<sup>2</sup>. Chúng ta cũng có thể dùng đa thức bậc cao hơn nếu muốn.
 
-Pipeline có thể được sử dụng giống như đối tượng `LinearRegression` gốc, tức là có thể `fit` pipeline, sau đó dùng `predict` để có kết quả dự đoán. Dưới đây là đồ thị thể hiện dữ liệu kiểm tra và đường cong xấp xỉ:
+Pipeline có thể dùng như đối tượng `LinearRegression` ban đầu, tức là ta có thể `fit` pipeline rồi sau đó dùng `predict` để lấy kết quả dự đoán. Dưới đây là đồ thị cho thấy dữ liệu test và đường cong xấp xỉ:
 
 <img alt="Polynomial regression" src="../../../../translated_images/vi/poly-results.ee587348f0f1f60b.webp" width="50%" />
 
-Sử dụng Hồi Quy Đa Thức, ta có thể thu được MSE thấp hơn một chút và hệ số xác định cao hơn, nhưng không đáng kể. Ta cần xem xét các đặc trưng khác!
+Dùng Hồi quy đa thức, ta có thể có MSE hơi thấp hơn và hệ số xác định cao hơn, nhưng không đáng kể. Ta cần xem xét các đặc trưng khác!
 
-> Bạn có thể thấy giá bí ngô thấp nhất được quan sát vào khoảng dịp Halloween. Bạn giải thích điều này như thế nào?
+> Bạn có thể thấy giá tối thiểu của bí ngô xuất hiện xung quanh Halloween. Bạn giải thích điều này thế nào?
 
-🎃 Chúc mừng, bạn vừa tạo một mô hình có thể dự đoán giá bí ngô làm bánh. Bạn có thể làm tương tự cho tất cả các loại bí ngô, nhưng điều đó sẽ khá tẻ nhạt. Bây giờ hãy học cách xem xét loại bí ngô trong mô hình của chúng ta!
+🎃 Chúc mừng, bạn vừa tạo mô hình có thể giúp dự đoán giá bí ngô làm bánh. Có thể bạn sẽ lặp lại quy trình cho các loại bí khác, nhưng sẽ rất tốn thời gian. Giờ hãy học cách đưa loại bí vào mô hình nhé!
 
-## Đặc Trưng Phân Loại (Categorical Features)
+## Đặc trưng phân loại
 
-Trong thế giới lý tưởng, chúng ta muốn dự đoán giá cho các giống bí ngô khác nhau dùng cùng một mô hình. Tuy nhiên, cột `Variety` hơi khác với các cột như `Month`, vì nó chứa các giá trị không phải số. Những cột như vậy được gọi là **categorical**.
+Trong thế giới lý tưởng, ta muốn dự đoán giá cho các loại bí khác nhau bằng cùng một mô hình. Tuy nhiên, cột `Variety` khá khác so với các cột như `Month` vì nó chứa giá trị không phải số. Các cột như vậy gọi là **phân loại**.
 
 [![ML for beginners - Categorical Feature Predictions with Linear Regression](https://img.youtube.com/vi/DYGliioIAE0/0.jpg)](https://youtu.be/DYGliioIAE0 "ML for beginners - Categorical Feature Predictions with Linear Regression")
 
-> 🎥 Nhấp vào hình ảnh trên để xem video tổng quan ngắn về cách dùng đặc trưng phân loại.
+> 🎥 Nhấn vào hình trên để xem video ngắn về cách dùng các đặc trưng phân loại.
 
-Ở đây bạn có thể thấy giá trung bình phụ thuộc vào giống:
+Bạn có thể thấy giá trung bình phụ thuộc vào loại bí như thế nào:
 
 <img alt="Average price by variety" src="../../../../translated_images/vi/price-by-variety.744a2f9925d9bcb4.webp" width="50%" />
 
-Để xem xét giống, trước tiên ta cần chuyển nó sang dạng số, hay còn gọi là **mã hóa**. Có vài cách để làm điều này:
+Để đưa loại bí vào mô hình, trước tiên cần chuyển thành dạng số, hay **mã hóa**. Có một số cách để làm điều này:
 
-* **Mã hóa số đơn giản** sẽ xây dựng bảng các giống khác nhau, rồi thay thế tên giống bằng chỉ số trong bảng đó. Đây không phải ý tưởng tốt cho hồi quy tuyến tính vì hồi quy tuyến tính lấy giá trị số của chỉ số, và cộng nó vào kết quả nhân với hệ số tương ứng. Trong trường hợp này, mối quan hệ giữa số chỉ mục và giá là phi tuyến rõ ràng, ngay cả khi chúng ta sắp xếp chỉ mục theo 1 cách cụ thể.
-* **Mã hóa one-hot** sẽ thay thế cột `Variety` bằng 4 cột khác nhau, mỗi cột dành một giống. Mỗi cột sẽ chứa `1` nếu dòng tương ứng thuộc giống đó, và `0` nếu không. Điều này có nghĩa hồi quy tuyến tính sẽ có bốn hệ số, mỗi hệ số ứng với một giống bí ngô, đại diện cho "giá khởi điểm" (hay chính xác hơn là "giá cộng thêm") của giống đó.
+* **Mã hóa số đơn giản** tạo bảng các loại khác nhau, rồi thay tên loại bằng chỉ số trong bảng đó. Đây không phải ý hay cho hồi quy tuyến tính, vì hồi quy tuyến tính dùng trực tiếp giá trị số của chỉ số và nhân với hệ số. Trong trường hợp này, mối quan hệ giữa số chỉ số và giá không phải là tuyến tính, dù ta cố sắp xếp các chỉ số theo thứ tự nào đó.
+* **Mã hóa one-hot** sẽ thay cột `Variety` bằng 4 cột khác, mỗi cột cho một loại. Mỗi cột có giá trị `1` nếu hàng tương ứng thuộc loại đó, `0` nếu không. Điều này dẫn đến 4 hệ số trong hồi quy, mỗi hệ số dành cho một loại bí, thể hiện "giá khởi đầu" (hoặc "giá thêm") cho loại đó.
 
-Đoạn mã dưới đây cho thấy cách ta mã hóa one-hot cho giống:
+Đoạn mã dưới đây cho thấy cách mã hóa one-hot cho loại bí:
 
 ```python
 pd.get_dummies(new_pumpkins['Variety'])
@@ -302,14 +303,14 @@ pd.get_dummies(new_pumpkins['Variety'])
 1741 | 0 | 1 | 0 | 0
 1742 | 0 | 1 | 0 | 0
 
-Để huấn luyện hồi quy tuyến tính sử dụng dạng one-hot mã hóa giống làm đầu vào, ta chỉ cần khởi tạo dữ liệu `X` và `y` đúng cách:
+Để huấn luyện hồi quy tuyến tính dùng kiểu mã hóa one-hot, ta chỉ cần khởi tạo dữ liệu `X` và `y` đúng cách:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety'])
 y = new_pumpkins['Price']
 ```
 
-Phần còn lại của mã giống như đã dùng trên để huấn luyện hồi quy tuyến tính. Nếu bạn thử, sẽ thấy lỗi bình phương trung bình (MSE) gần như không đổi, nhưng hệ số xác định tăng lên đáng kể (~77%). Để có dự đoán chính xác hơn nữa, ta có thể thêm các đặc trưng phân loại khác cũng như các đặc trưng số, như `Month` hay `DayOfYear`. Để có một mảng đặc trưng lớn, ta có thể dùng `join`:
+Phần còn lại của mã giống như trên dùng để huấn luyện hồi quy tuyến tính. Nếu bạn thử, sẽ thấy MSE gần như bằng nhau, nhưng hệ số xác định tăng lên khá nhiều (~77%). Để dự đoán chính xác hơn, ta có thể dùng nhiều đặc trưng phân loại hơn, cũng như các đặc trưng số, ví dụ như `Month` hoặc `DayOfYear`. Để có mảng đặc trưng lớn, dùng `join`:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety']) \
@@ -319,21 +320,21 @@ X = pd.get_dummies(new_pumpkins['Variety']) \
 y = new_pumpkins['Price']
 ```
 
-Tại đây ta cũng xem xét `City` và loại `Package`, cho kết quả MSE 2.84 (10%), và hệ số xác định 0.94!
+Ở đây ta cũng thêm vào `City` và loại `Package`, cho kết quả MSE 2.84 (10%), và hệ số xác định 0.94!
 
-## Kết Hợp Toàn Bộ
+## Tổng hợp lại
 
-Để có mô hình tốt nhất, ta có thể dùng dữ liệu kết hợp (mã hóa one-hot các đặc trưng phân loại + đặc trưng số) từ ví dụ trên cùng với Hồi Quy Đa Thức. Dưới đây là đoạn mã hoàn chỉnh để thuận tiện sử dụng:
+Để có mô hình tốt nhất, ta có thể dùng dữ liệu kết hợp (phân loại mã hóa one-hot + số) từ ví dụ trên cùng hồi quy đa thức. Dưới đây là mã đầy đủ cho bạn tiện sử dụng:
 
 ```python
-# thiết lập dữ liệu huấn luyện
+# thiết lập dữ liệu đào tạo
 X = pd.get_dummies(new_pumpkins['Variety']) \
         .join(new_pumpkins['Month']) \
         .join(pd.get_dummies(new_pumpkins['City'])) \
         .join(pd.get_dummies(new_pumpkins['Package']))
 y = new_pumpkins['Price']
 
-# thực hiện chia tập huấn luyện và kiểm tra
+# chia dữ liệu thành tập huấn luyện và kiểm tra
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 # thiết lập và huấn luyện pipeline
@@ -351,36 +352,36 @@ score = pipeline.score(X_train,y_train)
 print('Model determination: ', score)
 ```
 
-Điều này sẽ cho hệ số xác định tốt nhất gần 97%, và MSE=2.23 (~8% lỗi dự đoán).
+Mô hình này cho hệ số xác định cao nhất gần 97% và MSE=2.23 (~8% lỗi dự đoán).
 
 | Mô hình | MSE | Hệ số xác định |
-|---------|-----|----------------|
-| Hồi Quy Tuyến Tính với `DayOfYear` | 2.77 (17.2%) | 0.07 |
-| Hồi Quy Đa Thức với `DayOfYear` | 2.73 (17.0%) | 0.08 |
-| Hồi Quy Tuyến Tính với `Variety` | 5.24 (19.7%) | 0.77 |
-| Hồi Quy Tuyến Tính với tất cả đặc trưng | 2.84 (10.5%) | 0.94 |
-| Hồi Quy Đa Thức với tất cả đặc trưng | 2.23 (8.25%) | 0.97 |
+|-------|-----|---------------|
+| `DayOfYear` Tuyến tính | 2.77 (17.2%) | 0.07 |
+| `DayOfYear` Đa thức | 2.73 (17.0%) | 0.08 |
+| `Variety` Tuyến tính | 5.24 (19.7%) | 0.77 |
+| Tất cả đặc trưng Tuyến tính | 2.84 (10.5%) | 0.94 |
+| Tất cả đặc trưng Đa thức | 2.23 (8.25%) | 0.97 |
 
-🏆 Làm tốt lắm! Bạn đã tạo bốn mô hình hồi quy trong một bài học, và cải thiện chất lượng mô hình lên 97%. Trong phần cuối cùng về hồi quy, bạn sẽ học về Hồi Quy Logistic để phân loại.
+🏆 Làm tốt lắm! Bạn đã tạo bốn mô hình hồi quy trong một bài học, và cải thiện chất lượng mô hình lên 97%. Trong phần cuối về Hồi quy, bạn sẽ học về Hồi quy Logistic để phân loại.
 
 ---
-## 🚀Thách Thức
+## 🚀Thử thách
 
-Thử nghiệm nhiều biến khác nhau trong sổ tay này để xem mức độ tương quan ảnh hưởng thế nào đến độ chính xác mô hình.
+Thử nghiệm với vài biến khác nhau trong notebook này để xem yếu tố tương quan tương ứng với độ chính xác mô hình như thế nào.
 
 ## [Bài kiểm tra sau bài giảng](https://ff-quizzes.netlify.app/en/ml/)
 
 ## Ôn tập & Tự học
 
-Trong bài học này, chúng ta học về Hồi Quy Tuyến Tính. Có những loại hồi quy quan trọng khác. Hãy đọc về các kỹ thuật Stepwise, Ridge, Lasso và Elasticnet. Một khóa học tốt để học thêm là [Khóa học Học thống kê của Stanford](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)
+Trong bài học này chúng ta tìm hiểu về Hồi quy tuyến tính. Còn nhiều loại hồi quy quan trọng khác. Hãy đọc về các kỹ thuật Stepwise, Ridge, Lasso và Elasticnet. Một khóa học hay để học thêm là [khóa học Học thống kê Stanford](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)
 
 ## Bài tập
 
-[Xây dựng một Mô hình](assignment.md)
+[Xây dựng mô hình](assignment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Tuyên bố từ chối trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, vui lòng lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc sai sót. Văn bản gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, chúng tôi khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm đối với bất kỳ sự hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:  
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm đối với bất kỳ sự hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

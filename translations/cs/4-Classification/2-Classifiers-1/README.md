@@ -1,17 +1,17 @@
 # Klasifikátory kuchyní 1
 
-V této lekci použijete dataset, který jste si uložili z minulé lekce, plný vyvážených a čistých dat o kuchyních.
+V této lekci použijete dataset, který jste si uložili z minulé lekce, plný vyvážených, čistých dat o kuchyních.
 
-Tento dataset použijete s různými klasifikátory k _predikci národní kuchyně na základě skupiny ingrediencí_. Přitom se dozvíte více o některých způsobech, jak lze algoritmy využít pro klasifikační úlohy.
+Tento dataset použijete s různými klasifikátory k _predikci dané národní kuchyně na základě skupiny surovin_. Při tom se dozvíte více o některých způsobech, jak lze algoritmy využít pro klasifikační úlohy.
 
-## [Kvíz před lekcí](https://ff-quizzes.netlify.app/en/ml/)
+## [Přednáškový kvíz](https://ff-quizzes.netlify.app/en/ml/)
 # Příprava
 
-Za předpokladu, že jste dokončili [Lekci 1](../1-Introduction/README.md), ujistěte se, že soubor _cleaned_cuisines.csv_ existuje v kořenové složce `/data` pro tyto čtyři lekce.
+Pokud jste dokončili [Lekci 1](../1-Introduction/README.md), ujistěte se, že soubor _cleaned_cuisines.csv_ existuje v kořenové složce `/data` pro tyto čtyři lekce.
 
 ## Cvičení - predikce národní kuchyně
 
-1. Pracujte ve složce _notebook.ipynb_ této lekce, importujte tento soubor spolu s knihovnou Pandas:
+1. Pracujte ve složce _notebook.ipynb_ v této lekci, importujte tento soubor spolu s knihovnou Pandas:
 
     ```python
     import pandas as pd
@@ -40,14 +40,14 @@ Za předpokladu, že jste dokončili [Lekci 1](../1-Introduction/README.md), uji
     import numpy as np
     ```
 
-1. Rozdělte souřadnice X a y do dvou datových rámců pro trénování. `cuisine` může být datový rámec s označeními:
+1. Rozdělte X a y do dvou dataframe pro trénování. `cuisine` může být dataframe s popisky:
 
     ```python
     cuisines_label_df = cuisines_df['cuisine']
     cuisines_label_df.head()
     ```
 
-    Bude vypadat takto:
+    Bude to vypadat takto:
 
     ```output
     0    indian
@@ -75,75 +75,75 @@ Za předpokladu, že jste dokončili [Lekci 1](../1-Introduction/README.md), uji
 |    3 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      0 |        0 | 0 |
 |    4 |      0 |        0 |     0 |          0 |     0 |            0 |       0 |        0 |         0 |         0 |  ... |       0 |           0 |          0 |                       0 |    0 |    0 |    0 |     0 |      1 |        0 | 0 |
 
-Nyní jste připraveni trénovat svůj model!
+Nyní jste připraveni na trénování modelu!
 
-## Výběr klasifikátoru
+## Volba klasifikátoru
 
-Nyní, když jsou vaše data čistá a připravená k trénování, musíte se rozhodnout, jaký algoritmus použít.
+Nyní, když jsou data čistá a připravená k tréninku, musíte se rozhodnout, který algoritmus použít.
 
-Scikit-learn zařazuje klasifikaci pod Supervised Learning, a v této kategorii najdete mnoho způsobů klasifikace. [Rozmanitost](https://scikit-learn.org/stable/supervised_learning.html) je na první pohled docela ohromující. Následující metody zahrnují techniky klasifikace:
+Scikit-learn řadí klasifikaci pod Supervised Learning a v této kategorii najdete mnoho způsobů, jak klasifikovat. [Pestrá nabídka](https://scikit-learn.org/stable/supervised_learning.html) může být zpočátku ohromující. Následující metody zahrnují klasifikační techniky:
 
 - Lineární modely
 - Support Vector Machines
 - Stochastic Gradient Descent
 - Nejbližší sousedé
-- Gaussovské procesy
+- Gaussian procesy
 - Rozhodovací stromy
-- Ensemble metody (hlasovací klasifikátor)
-- Multiclass a multioutput algoritmy (multiclass a multilabel klasifikace, multiclass-multioutput klasifikace)
+- Ensemble metody (voting Classifier)
+- Multitřídní a vícevýstupové algoritmy (multitřídní a multilabel klasifikace, multitřídní vícevýstupová klasifikace)
 
-> Můžete také použít [neuronové sítě k klasifikaci dat](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), ale to je mimo rozsah této lekce.
+> Můžete také použít [neurální sítě k klasifikaci dat](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#classification), ale to je mimo rozsah této lekce.
 
 ### Jaký klasifikátor zvolit?
 
-Takže, jaký klasifikátor byste měli zvolit? Často je dobré vyzkoušet několik a hledat dobrý výsledek. Scikit-learn nabízí [srovnání vedle sebe](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) na vytvořeném datasetu, kde porovnává KNeighbors, SVC dvěma způsoby, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB a QuadraticDiscriminationAnalysis, a vizualizuje výsledky:
+Takže, jaký klasifikátor zvolit? Často je dobré zkusit několik a hledat dobrý výsledek. Scikit-learn nabízí [porovnání vedle sebe](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) na vytvořeném datasetu, kde porovnává KNeighbors, SVC dvěma způsoby, GaussianProcessClassifier, DecisionTreeClassifier, RandomForestClassifier, MLPClassifier, AdaBoostClassifier, GaussianNB a QuadraticDiscrinationAnalysis a výsledky vizualizuje:
 
-![srovnání klasifikátorů](../../../../4-Classification/2-Classifiers-1/images/comparison.png)
-> Grafy generované na dokumentaci Scikit-learn
+![comparison of classifiers](../../../../translated_images/cs/comparison.edfab56193a85e7f.webp)
+> Grafy vytvořené v dokumentaci Scikit-learn
 
-> AutoML tento problém elegantně řeší tím, že provádí tato srovnání v cloudu, což vám umožňuje vybrat nejlepší algoritmus pro vaše data. Vyzkoušejte to [zde](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
+> AutoML tento problém elegantně řeší tím, že tyto porovnání provádí v cloudu, což vám umožňuje vybrat nejlepší algoritmus pro vaše data. Vyzkoušejte to [zde](https://docs.microsoft.com/learn/modules/automate-model-selection-with-azure-automl/?WT.mc_id=academic-77952-leestott)
 
 ### Lepší přístup
 
-Lepší způsob než náhodné hádání je však řídit se nápady z této stahovatelné [ML Cheat Sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott). Zde zjistíme, že pro náš problém s více třídami máme několik možností:
+Lepší než hádat naslepo je sledovat nápady z tohoto stahovatelného [ML Cheat sheet](https://docs.microsoft.com/azure/machine-learning/algorithm-cheat-sheet?WT.mc_id=academic-77952-leestott). Zde zjistíte, že pro náš multitřídní problém máme několik možností:
 
-![cheatsheet pro problémy s více třídami](../../../../4-Classification/2-Classifiers-1/images/cheatsheet.png)
-> Část Microsoft Algorithm Cheat Sheet, popisující možnosti klasifikace s více třídami
+![cheatsheet for multiclass problems](../../../../translated_images/cs/cheatsheet.07a475ea444d2223.webp)
+> Úsek z Microsoft Algorithm Cheat Sheet, zobrazující možnosti multitřídní klasifikace
 
-✅ Stáhněte si tento cheat sheet, vytiskněte ho a pověste na zeď!
+✅ Stáhněte si tento cheat sheet, vytiskněte si ho a pověste na zeď!
 
-### Úvahy
+### Uvažování
 
-Podívejme se, jestli dokážeme logicky projít různé přístupy vzhledem k omezením, která máme:
+Podívejme se, zda můžeme logicky projít různými přístupy vzhledem k daným omezením:
 
-- **Neuronové sítě jsou příliš náročné**. Vzhledem k našemu čistému, ale minimálnímu datasetu a skutečnosti, že trénování provádíme lokálně pomocí notebooků, jsou neuronové sítě pro tuto úlohu příliš náročné.
-- **Žádný klasifikátor pro dvě třídy**. Nepoužíváme klasifikátor pro dvě třídy, takže to vylučuje one-vs-all.
-- **Rozhodovací strom nebo logistická regrese by mohly fungovat**. Rozhodovací strom by mohl fungovat, nebo logistická regrese pro data s více třídami.
-- **Multiclass Boosted Decision Trees řeší jiný problém**. Multiclass Boosted Decision Tree je nejvhodnější pro neparametrické úlohy, např. úlohy určené k vytváření pořadí, takže pro nás není užitečný.
+- **Neurální sítě jsou příliš náročné**. Vzhledem k našemu čistému, ale minimálnímu datasetu a tomu, že trénink probíhá lokálně přes notebooky, jsou neurální sítě příliš těžkopádné na tento úkol.
+- **Žádný klasifikátor pro dvě třídy**. Nepoužíváme klasifikátor pro dvě třídy, takže vylučujeme one-vs-all.
+- **Rozhodovací strom nebo logistická regrese by mohly fungovat**. Rozhodovací strom může fungovat, nebo logistická regrese pro multitřídní data.
+- **Multitřídní Boosted Decision Trees řeší jiný problém**. Multitřídní boosted decision tree je nejvhodnější pro neparametrické úlohy, např. úlohy navržené pro budování žebříčků, takže pro nás není užitečný.
 
-### Použití Scikit-learn 
+### Použití Scikit-learn
 
-Budeme používat Scikit-learn k analýze našich dat. Existuje však mnoho způsobů, jak použít logistickou regresi v Scikit-learn. Podívejte se na [parametry k předání](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).  
+Budeme používat Scikit-learn k analýze našich dat. Existuje však mnoho způsobů, jak v Scikit-learn použít logistickou regresi. Podívejte se na [parametry, které lze předat](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-V podstatě existují dva důležité parametry - `multi_class` a `solver` - které musíme specifikovat, když požádáme Scikit-learn o provedení logistické regrese. Hodnota `multi_class` aplikuje určité chování. Hodnota solveru určuje, jaký algoritmus použít. Ne všechny solvery lze kombinovat se všemi hodnotami `multi_class`.
+V zásadě jsou dva důležité parametry - `multi_class` a `solver` - které musíme specifikovat, když požadujeme, aby Scikit-learn provedl logistickou regresi. Hodnota `multi_class` určuje chování. Hodnota `solver` určuje, jaký algoritmus se použije. Ne všechny solvery lze použít se všemi hodnotami `multi_class`.
 
-Podle dokumentace v případě klasifikace s více třídami trénovací algoritmus:
+Podle dokumentace v případě multitřídy:
 
-- **Používá schéma one-vs-rest (OvR)**, pokud je možnost `multi_class` nastavena na `ovr`
-- **Používá ztrátu křížové entropie**, pokud je možnost `multi_class` nastavena na `multinomial`. (V současné době je možnost `multinomial` podporována pouze solvery ‘lbfgs’, ‘sag’, ‘saga’ a ‘newton-cg’.)
+- **Používá schéma one-vs-rest (OvR)**, pokud je volba `multi_class` nastavena na `ovr`
+- **Používá funkci ztráty křížové entropie**, pokud je volba `multi_class` nastavena na `multinomial`. (Momentálně jsou volby `multinomial` podporovány pouze solvery ‘lbfgs’, ‘sag’, ‘saga’ a ‘newton-cg’)."
 
-> 🎓 'Schéma' zde může být buď 'ovr' (one-vs-rest) nebo 'multinomial'. Vzhledem k tomu, že logistická regrese je skutečně navržena pro podporu binární klasifikace, tato schémata jí umožňují lépe zvládat úlohy klasifikace s více třídami. [zdroj](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
+> 🎓 ‘Schéma’ zde může být buď 'ovr' (one-vs-rest) nebo 'multinomial'. Jelikož je logistická regrese primárně navržena pro binární klasifikaci, tato schémata jí umožňují lépe zvládat multitřídní klasifikační úkoly. [zdroj](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)
 
-> 🎓 'Solver' je definován jako "algoritmus použitý v optimalizačním problému". [zdroj](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
+> 🎓 ‘Solver’ je definován jako „algoritmus použitý v optimalizačním problému“. [zdroj](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regressio#sklearn.linear_model.LogisticRegression).
 
-Scikit-learn nabízí tuto tabulku, která vysvětluje, jak solvery zvládají různé výzvy, které představují různé typy datových struktur:
+Scikit-learn nabízí tuto tabulku, která vysvětluje, jak jednotlivé solvery zvládají různé výzvy datových struktur:
 
-![solvery](../../../../4-Classification/2-Classifiers-1/images/solvers.png)
+![solvers](../../../../translated_images/cs/solvers.5fc648618529e627.webp)
 
 ## Cvičení - rozdělení dat
 
-Můžeme se zaměřit na logistickou regresi pro náš první pokus o trénování, protože jste se o ní nedávno učili v předchozí lekci.
-Rozdělte svá data na trénovací a testovací skupiny pomocí `train_test_split()`:
+Můžeme se zaměřit na logistickou regresi pro náš první tréninkový pokus, protože jste se o ní nedávno učili v předchozí lekci.
+Rozdělte svá data do tréninkových a testovacích skupin voláním funkce `train_test_split()`:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
@@ -151,9 +151,9 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
 
 ## Cvičení - aplikace logistické regrese
 
-Vzhledem k tomu, že používáte případ s více třídami, musíte si vybrat, jaké _schéma_ použít a jaký _solver_ nastavit. Použijte LogisticRegression s nastavením multi_class na `ovr` a solverem na **liblinear** pro trénování.
+Protože používáte multitřídní případ, musíte zvolit, jaké _schéma_ použít a jaký _solver_ nastavit. Použijte LogisticRegression s multitřídním nastavením a **liblinear** solverem k tréninku.
 
-1. Vytvořte logistickou regresi s multi_class nastaveným na `ovr` a solverem nastaveným na `liblinear`:
+1. Vytvořte logistickou regresi s multi_class nastaveným na `ovr` a solverem `liblinear`:
 
     ```python
     lr = LogisticRegression(multi_class='ovr',solver='liblinear')
@@ -164,26 +164,27 @@ Vzhledem k tomu, že používáte případ s více třídami, musíte si vybrat,
     ```
 
     ✅ Vyzkoušejte jiný solver, například `lbfgs`, který je často nastaven jako výchozí
-> Poznámka: Použijte funkci Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) k vyrovnání vašich dat, když je to potřeba.
-Přesnost je dobrá na více než **80 %**!
 
-1. Můžete vidět tento model v akci testováním jednoho řádku dat (#50):
+    > Poznámka: použijte funkci Pandas [`ravel`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.ravel.html) k zploštění dat v případě potřeby.
+
+    Přesnost je dobrá, přes **80 %**!
+
+1. Model si můžete vyzkoušet na jednom řádku dat (#50):
 
     ```python
     print(f'ingredients: {X_test.iloc[50][X_test.iloc[50]!=0].keys()}')
     print(f'cuisine: {y_test.iloc[50]}')
     ```
 
-    Výsledek je vytištěn:
+    Výsledek je vytisknut:
 
    ```output
    ingredients: Index(['cilantro', 'onion', 'pea', 'potato', 'tomato', 'vegetable_oil'], dtype='object')
    cuisine: indian
    ```
 
-   ✅ Vyzkoušejte jiný číslo řádku a zkontrolujte výsledky.
-
-1. Pokud se ponoříte hlouběji, můžete ověřit přesnost této predikce:
+   ✅ Vyzkoušejte jiný řádek a ověřte výsledky
+1. Pokud se do toho ponoříte hlouběji, můžete zkontrolovat přesnost tohoto předpovědního výsledku:
 
     ```python
     test= X_test.iloc[50].values.reshape(-1, 1).T
@@ -195,7 +196,7 @@ Přesnost je dobrá na více než **80 %**!
     topPrediction.head()
     ```
 
-    Výsledek je vytištěn - indická kuchyně je nejlepší odhad s dobrou pravděpodobností:
+    Výsledek je vytištěn - indická kuchyně je jeho nejlepší odhad s dobrou pravděpodobností:
 
     |          |        0 |
     | -------: | -------: |
@@ -205,9 +206,9 @@ Přesnost je dobrá na více než **80 %**!
     |   korean | 0.017277 |
     |     thai | 0.007634 |
 
-    ✅ Dokážete vysvětlit, proč si model je docela jistý, že se jedná o indickou kuchyni?
+    ✅ Můžete vysvětlit, proč je model docela jistý, že se jedná o indickou kuchyni?
 
-1. Získejte více detailů vytištěním klasifikační zprávy, stejně jako jste to udělali v lekcích o regresi:
+1. Získejte více podrobností vytištěním klasifikační zprávy, jak jste to dělali v lekcích o regresi:
 
     ```python
     y_pred = model.predict(X_test)
@@ -221,24 +222,27 @@ Přesnost je dobrá na více než **80 %**!
     | japanese     | 0.70      | 0.75   | 0.72     | 220     |
     | korean       | 0.86      | 0.76   | 0.81     | 242     |
     | thai         | 0.79      | 0.85   | 0.82     | 254     |
-    | accuracy     | 0.80      | 1199   |          |         |
+    | accuracy     |           |        | 0.80     | 1199    |
     | macro avg    | 0.80      | 0.80   | 0.80     | 1199    |
     | weighted avg | 0.80      | 0.80   | 0.80     | 1199    |
 
-## 🚀Výzva
+## 🚀 Výzva
 
-V této lekci jste použili svá vyčištěná data k vytvoření modelu strojového učení, který dokáže předpovědět národní kuchyni na základě série ingrediencí. Věnujte nějaký čas prozkoumání mnoha možností, které Scikit-learn nabízí pro klasifikaci dat. Ponořte se hlouběji do konceptu 'solver', abyste pochopili, co se děje v zákulisí.
+V této lekci jste použili vyčištěná data k vytvoření modelu strojového učení, který dokáže předpovědět národní kuchyni na základě řady ingrediencí. Věnujte čas přečtení si mnoha možností, které Scikit-learn poskytuje pro klasifikaci dat. Ponořte se hlouběji do konceptu „solver“ (řešiče), abyste pochopili, co se děje za scénou.
 
 ## [Kvíz po přednášce](https://ff-quizzes.netlify.app/en/ml/)
 
-## Přehled & Samostudium
+## Přehled a samostudium
 
-Prozkoumejte trochu více matematiku za logistickou regresí v [této lekci](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf)
-## Úkol 
+Ponořte se více do matematiky za logistickou regresí v [této lekci](https://people.eecs.berkeley.edu/~russell/classes/cs194/f11/lectures/CS194%20Fall%202011%20Lecture%2006.pdf).
 
-[Prostudujte solvery](assignment.md)
+## Zadání
+
+[Studujte řešiče](assignment.md)
 
 ---
 
-**Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Upozornění**:  
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
